@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  VoiceReminder
+
+  Created by GemCompany on 1/30/15.
+  Copyright (c) 2015 Owner. All rights reserved.
+*/
+
+"helloKey" = "xin chao";
+
+"mainScreen.Record" = "Ghi âm";
