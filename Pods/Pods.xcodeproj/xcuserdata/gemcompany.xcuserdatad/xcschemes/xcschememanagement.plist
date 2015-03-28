@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-VoiceReminder-AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-VoiceReminder-JTCalendar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-VoiceReminder-SWTableViewCell.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-VoiceReminder.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>4BE13E39C8AF7B0448CC48A3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>79E01FE1599DA84D12177A1C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>849088BA7ED4545FC9F9B535</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B51CA8DE4A98CADEED8D0E7E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
