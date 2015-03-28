@@ -37,10 +37,6 @@
                                     [UIColor redColor],NSBackgroundColorAttributeName,nil];
     [backButton setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = backButton;
-    
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(doneAction:)];
-    [doneButton setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = doneButton;
 }
 
 - (void)configureTableView {
@@ -142,8 +138,5 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)doneAction:(id)sender {
-    
-}
 
 @end
