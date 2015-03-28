@@ -4,12 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-VoiceReminder-AFNetworking.xcscheme</key>
+		<key>Pods-VoiceReminder-JTCalendar.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-VoiceReminder-JTCalendar.xcscheme</key>
+		<key>Pods-VoiceReminder-MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-VoiceReminder-MagicalRecord.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-VoiceReminder-PureLayout.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,22 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4BE13E39C8AF7B0448CC48A3</key>
+		<key>09076618A5D2E3DD6A8D2F01</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>79E01FE1599DA84D12177A1C</key>
+		<key>0D90DD61BCEDE32419780951</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>849088BA7ED4545FC9F9B535</key>
+		<key>694DBF5E5578E59E9595F12E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B51CA8DE4A98CADEED8D0E7E</key>
+		<key>9D3E35F1BC346152BA2DC3F6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B977A3E93AA66AE5A1CFD7C6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CDA75B1F7C98F5A353C1208B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -80,17 +80,9 @@
         x = (self.frame.size.width - width) / 2.;
     }
     
-    if(self.calendarManager.calendarAppearance.readFromRightToLeft){
-        for(UIView *view in [[monthsViews reverseObjectEnumerator] allObjects]){
-            view.frame = CGRectMake(x, 0, width, height);
-            x = CGRectGetMaxX(view.frame);
-        }
-    }
-    else{
-        for(UIView *view in monthsViews){
-            view.frame = CGRectMake(x, 0, width, height);
-            x = CGRectGetMaxX(view.frame);
-        }
+    for(UIView *view in monthsViews){
+        view.frame = CGRectMake(x, 0, width, height);
+        x = CGRectGetMaxX(view.frame);
     }
     
     self.contentSize = CGSizeMake(width * NUMBER_PAGES_LOADED, height);

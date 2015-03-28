@@ -2,9 +2,11 @@
 # platform :ios, ‘7.0’
 
 target 'VoiceReminder' do
-pod 'AFNetworking', '~> 2.5'
 pod 'SWTableViewCell', '~> 0.3'
 pod 'JTCalendar', '~> 1.1'
+pod 'PureLayout', '~> 2.0'
+pod 'MBProgressHUD', '~> 0.9'
+pod 'MagicalRecord', '~> 2.2'
 end
 
 target 'VoiceReminderTests' do

@@ -11,4 +11,16 @@
 @interface VRCommon : NSObject
 + (NSString*)formatDateAndTimeFromDate:(NSDate*)date;
 + (NSDate *)dateFromString:(NSString *)string;
++ (NSDate *)localDateFromUnixTime:(NSNumber *)unixTime;
++ (double)unixTimeFromDate:(NSDate *)date;
++ (double)unixTimeMiliSecondFromDate:(NSDate *)date;
++ (NSDateFormatter *)commonDateFormat;
++ (NSDateFormatter *)commonDateTimeFormat;
++ (NSString *)commonFormatFromDate:(NSDate *)date;
++ (NSString *)commonFormatTimeFromDate:(NSDate *)date;
++ (NSString *)commonFormatFromDateTime:(NSDate *)date;
++ (NSString *)commonFormatFromMonthYear:(NSDate *)date;
++ (NSString *)commonFormatFromYear:(NSDate *)date;
+
++ (NSSortDescriptor *)sortDescriptorByCreatedDate;
 @end

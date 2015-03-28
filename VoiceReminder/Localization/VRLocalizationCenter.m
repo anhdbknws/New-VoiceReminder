@@ -9,7 +9,7 @@
 #import "VRLocalizationCenter.h"
 
 @implementation VRLocalizationCenter
-+ (instancetype)shareInstance {
++ (instancetype)sharedInstance {
     static VRLocalizationCenter *share = nil;
     static dispatch_once_t once;
     
@@ -20,7 +20,7 @@
     return share;
 }
 
-- (NSString *)LocalizationForKey:(NSString *)key {
+- (NSString *)localizedStringForKey:(NSString *)key {
     return NSLocalizedString(key, nil);
 }
 

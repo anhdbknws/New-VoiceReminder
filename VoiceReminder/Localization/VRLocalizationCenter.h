@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#define VRLocalizationForKey(key) [self LocalizationForKey:(key)];
-@interface VRLocalizationCenter : NSObject
-+ (instancetype)shareInstance;;
 
-- (NSString *)LocalizationForKey:(NSString *)key;
+#define VRLocalizationString(key) [[VRLocalizationCenter sharedInstance] localizedStringForKey:(key)]
+
+@interface VRLocalizationCenter : NSObject
+
++ (instancetype)sharedInstance;
+- (NSString *)localizedStringForKey:(NSString *)key;
 @end
