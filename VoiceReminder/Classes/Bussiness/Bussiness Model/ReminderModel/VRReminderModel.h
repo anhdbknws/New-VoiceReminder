@@ -15,7 +15,8 @@
 @property (nonatomic, strong) NSString *urlSound;
 @property (nonatomic, strong) NSString *nameOfSound;
 @property (nonatomic, strong) NSString *timeReminder;
-@property (nonatomic, assign) NSMutableArray *listRepeat;
+@property (nonatomic, assign) NSMutableArray *repeats;
+@property (strong, nonatomic) NSMutableArray * photoList;
 @property (nonatomic, assign) ALERT_TYPE alertReminder;
 @property (nonatomic, assign) BOOL isActive;
 @property (nonatomic, strong) Reminder *entity;

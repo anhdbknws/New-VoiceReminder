@@ -2,7 +2,7 @@
 //  Reminder.h
 //  VoiceReminder
 //
-//  Created by GemCompany on 3/25/15.
+//  Created by GemCompany on 3/28/15.
 //  Copyright (c) 2015 Owner. All rights reserved.
 //
 
@@ -18,12 +18,11 @@
 @property (nonatomic, retain) NSNumber * isActive;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * nameSound;
-@property (nonatomic, retain) NSNumber * repeatReminder;
 @property (nonatomic, retain) NSDate * timeReminder;
 @property (nonatomic, retain) NSString * urlSound;
-@property (nonatomic, retain) Sound *sound;
 @property (nonatomic, retain) NSSet *photos;
 @property (nonatomic, retain) NSSet *repeats;
+@property (nonatomic, retain) Sound *sound;
 @end
 
 @interface Reminder (CoreDataGeneratedAccessors)

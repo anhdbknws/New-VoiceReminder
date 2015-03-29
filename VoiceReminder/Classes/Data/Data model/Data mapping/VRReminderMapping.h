@@ -8,10 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "Reminder.h"
-#import "BaseObject.h"
 #import "VRReminderModel.h"
 
 @class NSManagedObjectContext;
-@interface VRReminderMapping : BaseObject
+@interface VRReminderMapping : NSObject
 + (Reminder *)entityFromModel:(VRReminderModel *)model inContext:(NSManagedObjectContext *)context;
 @end

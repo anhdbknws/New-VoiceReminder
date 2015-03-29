@@ -27,7 +27,6 @@
     self.name           = entity.name;
     self.nameOfSound    = entity.nameSound;
     self.alertReminder  = [entity.alertReminder integerValue];
-//    self.repeatReminder = [entity.repeatReminder integerValue];
     self.timeReminder   = [[VRCommon commonDateTimeFormat] stringFromDate:entity.timeReminder];
     self.urlSound       = entity.urlSound;
     self.isActive       = entity.isActive;

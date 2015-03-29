@@ -4,10 +4,6 @@
         <attribute name="createdDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Person" representedClassName="Person" syncable="YES">
-        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
     <entity name="Photo" representedClassName="Photo" parentEntity="BaseObject" syncable="YES">
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
@@ -18,7 +14,6 @@
         <attribute name="isActive" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nameSound" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="repeatReminder" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="timeReminder" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="urlSound" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="reminder" inverseEntity="Photo" syncable="YES"/>
@@ -35,11 +30,10 @@
         <relationship name="reminder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reminder" inverseName="sound" inverseEntity="Reminder" syncable="YES"/>
     </entity>
     <elements>
-        <element name="BaseObject" positionX="-63" positionY="0" width="128" height="75"/>
-        <element name="Person" positionX="-63" positionY="-18" width="128" height="75"/>
-        <element name="Reminder" positionX="-54" positionY="18" width="128" height="193"/>
-        <element name="Photo" positionX="-54" positionY="54" width="128" height="88"/>
-        <element name="Sound" positionX="-45" positionY="63" width="128" height="88"/>
-        <element name="Repeat" positionX="-36" positionY="72" width="128" height="73"/>
+        <element name="BaseObject" positionX="-153" positionY="-99" width="128" height="75"/>
+        <element name="Photo" positionX="-153" positionY="65" width="128" height="88"/>
+        <element name="Reminder" positionX="-342" positionY="90" width="128" height="178"/>
+        <element name="Repeat" positionX="115" positionY="161" width="128" height="73"/>
+        <element name="Sound" positionX="160" positionY="-54" width="128" height="88"/>
     </elements>
 </model>
