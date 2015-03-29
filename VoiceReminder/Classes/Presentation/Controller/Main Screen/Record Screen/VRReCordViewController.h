@@ -11,7 +11,7 @@
 @interface VRReCordViewController : UIViewController
 @property (nonatomic, strong) CircleProgressView *circleView;
 @property (nonatomic, strong) UIButton *startButton;
-@property (nonatomic, strong) UIButton *doneButton;
+@property (nonatomic, strong) UIButton *stopButton;
 @property (nonatomic, strong) UIButton *reRecordButton;
 @property (nonatomic, strong) UIButton *playButton;
 @end
