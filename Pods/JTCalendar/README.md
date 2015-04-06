@@ -1,6 +1,6 @@
-JTCalendar
-==========
+# JTCalendar
 
+[![CI Status](http://img.shields.io/travis/jonathantribouharet/JTCalendar.svg)](https://travis-ci.org/jonathantribouharet/JTCalendar)
 ![Version](https://img.shields.io/cocoapods/v/JTCalendar.svg)
 ![License](https://img.shields.io/cocoapods/l/JTCalendar.svg)
 ![Platform](https://img.shields.io/cocoapods/p/JTCalendar.svg)
@@ -33,7 +33,7 @@ Your UIViewController must implement `JTCalendarDataSource`
 ```objective-c
 #import <UIKit/UIKit.h>
 
-#import "JTCalendar.h"
+#import <JTCalendar.h>
 
 @interface ViewController : UIViewController<JTCalendarDataSource>
 
@@ -59,13 +59,13 @@ Your UIViewController must implement `JTCalendarDataSource`
     [self.calendar setMenuMonthsView:self.calendarMenuView];
     [self.calendar setContentView:self.calendarContentView];
     [self.calendar setDataSource:self];
+    
+    [self.calendar reloadData];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewDidLayoutSubviews
 {
-    [super viewDidAppear:animated];
-    
-    [self.calendar reloadData]; // Must be call in viewDidAppear
+    [self.calendar repositionViews];
 }
 
 - (BOOL)calendarHaveEvent:(JTCalendar *)calendar date:(NSDate *)date
@@ -155,6 +155,15 @@ self.calendar.calendarAppearance.dayTextColorSelected = [UIColor whiteColor];
 You may also want to open your calendar on a specific date, by defaut it's `[NSDate date].`
 ```objective-c
 [self.calendar setCurrentDate:myDate];
+```
+
+### WARNING
+
+The `currentDate` is used for indicate the month and the week visible. When you change the `currentDate` the calendar move to the correct week and month.
+
+The `currentDateSelected` is the last date touched by an user. Currently the only way to set the `currentDateSelected` is by calling
+```objective-c
+[NSNotificationCenter defaultCenter] postNotificationName:@"kJTCalendarDaySelected" object:date];
 ```
 
 ### Data cache

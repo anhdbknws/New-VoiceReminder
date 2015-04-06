@@ -22,10 +22,15 @@ static NSInteger minutesLimit = 1;
 @property (nonatomic, strong) Session *session;
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic, assign) BOOL isPlaying;
+@property (nonatomic, assign) NSTimeInterval durationRecording;
+@property (nonatomic, assign) NSTimeInterval progessTimePlaying;
+
 @end
 
 @implementation VRReCordViewController
-
+{
+    int count;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Record";
@@ -103,6 +108,12 @@ static NSInteger minutesLimit = 1;
     [_stopButton autoSetDimension:ALDimensionHeight toSize:44];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.session = nil;
+    self.circleView = nil;
+}
+
 - (UIButton *)startButton {
     if (!_startButton) {
         _startButton = [[UIButton alloc] initForAutoLayout];
@@ -128,7 +139,7 @@ static NSInteger minutesLimit = 1;
     if (!_reRecordButton) {
         _reRecordButton = [[UIButton alloc] initForAutoLayout];
         [_reRecordButton setImage:[[UIImage imageNamed:@"Re-record-icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-        [_playButton addTarget:self action:@selector(reRecordAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_reRecordButton addTarget:self action:@selector(reRecordAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return _reRecordButton;
@@ -175,7 +186,7 @@ static NSInteger minutesLimit = 1;
     self.session.state = kSessionStateStart;
     
     [self settingCircleView:@"Recording" andProgressTime:0];
-    [self startTimer:minutesLimit];
+    [self startTimer];
     [self startRecordingAudio];
     
     [_stopButton setEnabled:YES];
@@ -186,6 +197,7 @@ static NSInteger minutesLimit = 1;
     self.session.finishDate = [NSDate date];
     self.session.state = kSessionStateStop;
     [self settingCircleView:@"Not recording" andProgressTime:self.session.progressTime];
+    self.durationRecording = self.session.progressTime;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -194,10 +206,10 @@ static NSInteger minutesLimit = 1;
 
 #pragma mark - timer
 
-- (void)startTimer:(NSTimeInterval)time {
+- (void)startTimer {
     if ((!self.timer) || (![self.timer isValid])) {
         
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:time
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.00
                                                       target:self
                                                     selector:@selector(poolTimer)
                                                     userInfo:nil
@@ -210,6 +222,9 @@ static NSInteger minutesLimit = 1;
     if ((self.session) && (self.session.state == kSessionStateStart))
     {
         self.circleView.elapsedTime = self.session.progressTime;
+    }
+    else if(self.session && self.session.state == kSessionStatePlay) {
+        self.circleView.elapsedTime = self.progessTimePlaying;
     }
 }
 
@@ -262,7 +277,7 @@ static NSInteger minutesLimit = 1;
                                   [NSNumber numberWithFloat:44100],AVSampleRateKey,
                                   [NSNumber numberWithInt: kAudioFormatAppleLossless],AVFormatIDKey,
                                   [NSNumber numberWithInt: 1],AVNumberOfChannelsKey,
-                                  [NSNumber numberWithInt:AVAudioQualityMedium],AVEncoderAudioQualityKey,nil];
+                                  [NSNumber numberWithInt:AVAudioQualityHigh],AVEncoderAudioQualityKey,nil];
     return audioSetting;
 }
 
@@ -274,13 +289,13 @@ static NSInteger minutesLimit = 1;
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag {
     if (flag) {
         NSLog(@"Successfully stopped the audio recording process.");
-        [self.stopButton setEnabled:YES];
-        NSError *readingError = nil;
-        NSData  *fileData = [NSData dataWithContentsOfURL:[self audioRecordingPath]
-                              options:NSDataReadingMapped
-                                error:&readingError];
-        NSLog(@"%@", fileData);
         
+        /* Let's try to retrieve the data for the recorded file */
+//        NSError *readingError = nil;
+//        NSData  *fileData = [NSData dataWithContentsOfURL:[self audioRecordingPath]
+//                                                  options:NSDataReadingMapped
+//                                                    error:&readingError];
+//        NSLog(@"%@", fileData);
     }
     else {
         NSLog(@"Stopping the audio recording failed.");
@@ -299,17 +314,23 @@ static NSInteger minutesLimit = 1;
 
 - (void)playAction:(id)sender {
     if (!self.isPlaying) {
+        
+        /* setting circle view */
+        self.session.startDate = [NSDate date];
+        self.session.finishDate = [self.session.startDate dateByAddingTimeInterval:self.durationRecording];
+        self.session.state = kSessionStatePlay;
+        
+        count = 0;
+        [self settingCircleView:@"Playing" andProgressTime:0];
+        [self startTimer];
+        
+        self.isPlaying = YES;
         [self stopRecordingOnAudioRecorder:self.audioRecorder];
         self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[self audioRecordingPath] error:nil];
         /* Did we get an instance of AVAudioPlayer? */
         if (self.audioPlayer != nil){
             /* Set the delegate and start playing */
             self.audioPlayer.delegate = self;
-            
-            /* setting circle view */
-            [self settingCircleView:@"Playing" andProgressTime:0];
-            [self startTimer:self.session.progressTime];
-            
             if ([self.audioPlayer prepareToPlay] &&
                 [self.audioPlayer play]){
                 /* Successfully started playing */
@@ -323,8 +344,22 @@ static NSInteger minutesLimit = 1;
         }
     }
     else {
+        self.isPlaying = NO;
+        [self settingCircleView:@"Playing" andProgressTime:count + 1];
+        self.session.state = kSessionStateStop;
         [self.audioPlayer stop];
     }
+}
+
+- (NSTimeInterval)progessTimePlaying {
+    if (count <= self.durationRecording) {
+        count ++;
+        return count;
+    }
+    
+    self.isPlaying = NO;
+    
+    return self.durationRecording + 1;
 }
 
 - (void)setImageForPlayButton:(UIImage *)image {

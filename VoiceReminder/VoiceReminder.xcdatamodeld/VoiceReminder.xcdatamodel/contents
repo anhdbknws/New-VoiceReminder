@@ -26,6 +26,7 @@
     </entity>
     <entity name="Sound" representedClassName="Sound" parentEntity="BaseObject" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="persistenID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="reminder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reminder" inverseName="sound" inverseEntity="Reminder" syncable="YES"/>
     </entity>
@@ -34,6 +35,6 @@
         <element name="Photo" positionX="-153" positionY="65" width="128" height="88"/>
         <element name="Reminder" positionX="-342" positionY="90" width="128" height="178"/>
         <element name="Repeat" positionX="115" positionY="161" width="128" height="73"/>
-        <element name="Sound" positionX="160" positionY="-54" width="128" height="88"/>
+        <element name="Sound" positionX="160" positionY="-54" width="128" height="103"/>
     </elements>
 </model>

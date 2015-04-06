@@ -2,7 +2,7 @@
 //  Sound.m
 //  VoiceReminder
 //
-//  Created by GemCompany on 3/25/15.
+//  Created by GemCompany on 4/5/15.
 //  Copyright (c) 2015 Owner. All rights reserved.
 //
 
@@ -14,6 +14,7 @@
 
 @dynamic name;
 @dynamic url;
+@dynamic persistenID;
 @dynamic reminder;
 
 @end

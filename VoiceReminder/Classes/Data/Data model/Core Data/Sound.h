@@ -2,7 +2,7 @@
 //  Sound.h
 //  VoiceReminder
 //
-//  Created by GemCompany on 3/25/15.
+//  Created by GemCompany on 4/5/15.
 //  Copyright (c) 2015 Owner. All rights reserved.
 //
 
@@ -16,6 +16,7 @@
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * url;
+@property (nonatomic, retain) NSNumber * persistenID;
 @property (nonatomic, retain) Reminder *reminder;
 
 @end

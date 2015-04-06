@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "VRMainScreenViewController.h"
+#import "VRLocalNotificationController.h"
 
 static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
 @interface AppDelegate ()
@@ -62,6 +63,11 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
     if (!error) {
         [self setupCoreData];
     }
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    VRLocalNotificationController *shareInstance = [VRLocalNotificationController shareInstance];
+    [shareInstance processNotification:notification];
 }
 
 - (void)configureUI {

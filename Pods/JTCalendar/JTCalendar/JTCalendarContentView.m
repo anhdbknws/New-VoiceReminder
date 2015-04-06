@@ -53,6 +53,7 @@
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
     self.pagingEnabled = YES;
+    self.clipsToBounds = YES;
     
     for(int i = 0; i < NUMBER_PAGES_LOADED; ++i){
         JTCalendarMonthView *monthView = [JTCalendarMonthView new];
@@ -76,9 +77,17 @@
     CGFloat width = self.frame.size.width;
     CGFloat height = self.frame.size.height;
     
-    for(UIView *view in monthsViews){
-        view.frame = CGRectMake(x, 0, width, height);
-        x = CGRectGetMaxX(view.frame);
+    if(self.calendarManager.calendarAppearance.readFromRightToLeft){
+        for(UIView *view in [[monthsViews reverseObjectEnumerator] allObjects]){
+            view.frame = CGRectMake(x, 0, width, height);
+            x = CGRectGetMaxX(view.frame);
+        }
+    }
+    else{
+        for(UIView *view in monthsViews){
+            view.frame = CGRectMake(x, 0, width, height);
+            x = CGRectGetMaxX(view.frame);
+        }
     }
     
     self.contentSize = CGSizeMake(width * NUMBER_PAGES_LOADED, height);

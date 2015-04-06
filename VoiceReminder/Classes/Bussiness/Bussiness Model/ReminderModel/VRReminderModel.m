@@ -8,6 +8,7 @@
 
 #import "VRReminderModel.h"
 #import "VRCommon.h"
+#import "Photo.h"
 
 @implementation VRReminderModel
 
@@ -28,9 +29,20 @@
     self.nameOfSound    = entity.nameSound;
     self.alertReminder  = [entity.alertReminder integerValue];
     self.timeReminder   = [[VRCommon commonDateTimeFormat] stringFromDate:entity.timeReminder];
-    self.urlSound       = entity.urlSound;
-    self.isActive       = entity.isActive;
+    self.isActive       = entity.isActive.boolValue;
 }
 
-
+- (NSMutableArray *)photoList
+{
+    if (!_photoList) {
+        _photoList = [NSMutableArray new];
+        NSArray * photos = _entity.photos.allObjects;
+        photos = [photos sortedArrayUsingComparator:^NSComparisonResult(Photo * obj1, Photo * obj2) {
+            return [obj1.index compare:obj2.index];
+        }];
+        for (Photo * photo in photos)
+            [_photoList addObject:photo.url];
+    }
+    return _photoList;
+}
 @end

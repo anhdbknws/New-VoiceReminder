@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-VoiceReminder-WYPopoverController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-VoiceReminder.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>09076618A5D2E3DD6A8D2F01</key>
+		<key>05946EB85737788D379B62FF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0D90DD61BCEDE32419780951</key>
+		<key>16E1C7F792515431B3258534</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>694DBF5E5578E59E9595F12E</key>
+		<key>A72A28829BF42B17488C5B5C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9D3E35F1BC346152BA2DC3F6</key>
+		<key>CF1359E88D3E897CC9F4C43C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B977A3E93AA66AE5A1CFD7C6</key>
+		<key>D0021D32D6E4F57435BC8CFD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CDA75B1F7C98F5A353C1208B</key>
+		<key>E61A3D2B45341D10428DF1A6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F827F18FB64F0F048B1CE048</key>
 		<dict>
 			<key>primary</key>
 			<true/>

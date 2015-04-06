@@ -1,5 +1,5 @@
 #include "Pods-VoiceReminder-MagicalRecord.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/MagicalRecord" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/JTCalendar" "${PODS_ROOT}/Headers/Public/MBProgressHUD" "${PODS_ROOT}/Headers/Public/MagicalRecord" "${PODS_ROOT}/Headers/Public/PureLayout" "${PODS_ROOT}/Headers/Public/SWTableViewCell"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/MagicalRecord" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/JTCalendar" "${PODS_ROOT}/Headers/Public/MBProgressHUD" "${PODS_ROOT}/Headers/Public/MagicalRecord" "${PODS_ROOT}/Headers/Public/PureLayout" "${PODS_ROOT}/Headers/Public/SWTableViewCell" "${PODS_ROOT}/Headers/Public/WYPopoverController"
 OTHER_LDFLAGS = ${PODS_VOICEREMINDER_MAGICALRECORD_OTHER_LDFLAGS} -ObjC
 PODS_ROOT = ${SRCROOT}

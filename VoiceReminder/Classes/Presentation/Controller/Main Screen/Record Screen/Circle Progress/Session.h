@@ -10,7 +10,8 @@
 
 typedef enum {
     kSessionStateStart = 0,
-    kSessionStateStop = 1
+    kSessionStateStop = 1,
+    kSessionStatePlay = 2
 } SessionState;
 
 @interface Session : NSObject

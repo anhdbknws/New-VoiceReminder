@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "09076618A5D2E3DD6A8D2F01"
+               BlueprintIdentifier = "16E1C7F792515431B3258534"
                BuildableName = "libPods-VoiceReminder-JTCalendar.a"
                BlueprintName = "Pods-VoiceReminder-JTCalendar"
                ReferencedContainer = "container:Pods.xcodeproj">

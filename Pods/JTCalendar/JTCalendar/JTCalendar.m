@@ -169,6 +169,9 @@
     NSCalendar *calendar = self.calendarAppearance.calendar;
     NSDateComponents *dayComponent = [NSDateComponents new];
     
+    dayComponent.month = 0;
+    dayComponent.day = 0;
+    
     if(!self.calendarAppearance.isWeekMode){
         dayComponent.month = currentPage - (NUMBER_PAGES_LOADED / 2);
     }
@@ -176,6 +179,11 @@
         dayComponent.day = 7 * (currentPage - (NUMBER_PAGES_LOADED / 2));
     }
     
+    if(self.calendarAppearance.readFromRightToLeft){
+        dayComponent.month *= -1;
+        dayComponent.day *= -1;
+    }
+        
     NSDate *currentDate = [calendar dateByAddingComponents:dayComponent toDate:self.currentDate options:0];
     
     [self setCurrentDate:currentDate];
@@ -209,11 +217,16 @@
 
 - (void)loadNextMonth
 {
-    if(self.calendarAppearance.isWeekMode){
-        NSLog(@"JTCalendar loadNextMonth ignored");
-        return;
-    }
-    
+    [self loadNextPage];
+}
+
+- (void)loadPreviousMonth
+{
+    [self loadPreviousPage];
+}
+
+- (void)loadNextPage
+{
     self.menuMonthsView.scrollEnabled = NO;
     
     CGRect frame = self.contentView.frame;
@@ -222,13 +235,8 @@
     [self.contentView scrollRectToVisible:frame animated:YES];
 }
 
-- (void)loadPreviousMonth
+- (void)loadPreviousPage
 {
-    if(self.calendarAppearance.isWeekMode){
-        NSLog(@"JTCalendar loadPreviousMonth ignored");
-        return;
-    }
-    
     self.menuMonthsView.scrollEnabled = NO;
     
     CGRect frame = self.contentView.frame;
