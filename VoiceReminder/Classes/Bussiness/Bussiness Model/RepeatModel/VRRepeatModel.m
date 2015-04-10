@@ -7,7 +7,14 @@
 //
 
 #import "VRRepeatModel.h"
-
+#import "Repeat.h"
 @implementation VRRepeatModel
-
+- (instancetype)initWithEntity:(Repeat *)entity {
+    self = [super init];
+    if (self) {
+        self.repeatType = entity.repeatType.integerValue;
+    }
+    
+    return self;
+}
 @end

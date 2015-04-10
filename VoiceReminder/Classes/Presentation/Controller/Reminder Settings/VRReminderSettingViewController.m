@@ -29,6 +29,7 @@
 #import "VCAssetAccessory.h"
 #import "VRPhotoPageController.h"
 #import "VRSoundModel.h"
+#import "VRRepeatModel.h"
 
 static NSString * const kImageArrow = @"icon_arrow_right";
 const NSInteger kPhotoActionSheetTag = 3249;
@@ -112,10 +113,14 @@ const NSInteger kPhotoActionSheetTag = 3249;
 }
 
 - (void)prepareData{
-    self.model.name = @"Name";
+    
     self.listRepeat = [NSMutableArray new];
+    
+    self.model.name = @"Name";
+    self.model.repeats = [NSMutableArray new];
     self.model.alertReminder = ALERT_TYPE_AT_EVENT_TIME;
     self.model.timeReminder = [VRCommon commonFormatFromDateTime:[NSDate date]];
+   
     self.model.soundModel = [[VRSoundModel alloc] init];
     self.model.soundModel.name = @"Default";
     self.model.soundModel.isDefaultObject = YES;
@@ -373,15 +378,35 @@ const NSInteger kPhotoActionSheetTag = 3249;
     __weak typeof (self)weak = self;
     VC.selectedCompleted = ^(NSMutableArray *listRepeatSelected) {
         __strong typeof (weak)strong = weak;
-        
         strong.listRepeat = listRepeatSelected;
-        
+        strong.model.repeats = [strong saveListRepeatToModel:listRepeatSelected];
         dispatch_async(dispatch_get_main_queue(), ^{
             [strong.settingTableview reloadData];
         });
     };
     
     [self.navigationController pushViewController:VC animated:YES];
+}
+
+- (NSMutableArray *)saveListRepeatToModel:(NSMutableArray *)listRepeat {
+    NSMutableArray *listEnum = [NSMutableArray new];
+    VRRepeatModel *model = [[VRRepeatModel alloc] init];
+    if (listRepeat.count == 7) {
+        model.repeatType = REPEAT_TYPE_EVERYDAY;
+        [listEnum addObject:model];
+    }
+    else if (!listRepeat.count) {
+        model.repeatType = REPEAT_TYPE_NERER;
+        [listEnum addObject:model];
+    }
+    else {
+        for (NSString *item in listRepeat) {
+            model.repeatType = [VREnumDefine repeatTypeIntegerFromString:item];
+            [listEnum addObject:model];
+        }
+    }
+    
+    return listEnum;
 }
 
 - (void)setAlertValue {

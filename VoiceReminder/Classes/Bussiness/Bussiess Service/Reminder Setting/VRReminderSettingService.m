@@ -15,7 +15,7 @@
         [VRReminderMapping entityFromModel:model inContext:localContext];
     } completion:^(BOOL success, NSError *error) {
         /*schedule notification*/
-        [self scheduleLocalNotificationWith:model];
+//        [self scheduleLocalNotificationWith:model];
         
         VRReminderModel * result;
         Reminder * entity =  [Reminder MR_findFirstByAttribute:VRUUID withValue:model.uuid];

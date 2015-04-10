@@ -77,7 +77,7 @@ static NSInteger minutesLimit = 1;
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     self.navigationController.navigationBar.translucent = NO;
-    
+    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
     // for autolayout
     
     [_reRecordButton autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:15];

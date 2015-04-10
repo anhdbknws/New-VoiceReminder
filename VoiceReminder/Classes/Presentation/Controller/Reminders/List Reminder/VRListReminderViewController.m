@@ -13,6 +13,7 @@
 #import "VRCommon.h"
 #import <SWTableViewCell.h>
 #import "VRMacro.h"
+#import "VRReminderDetailController.h"
 
 static NSString * const kImageEditBlue = @"icon_edit_blue";
 static NSString * const kImageDeleteBlue = @"icon_delete_blue";
@@ -50,6 +51,7 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
     self.listEvents.delegate = self;
     self.listEvents.dataSource = self;
     [self.listEvents registerClass:[VRReminderListCell class] forCellReuseIdentifier:NSStringFromClass([VRReminderListCell class])];
+
     [self.view addSubview:self.listEvents];
 }
 
@@ -77,13 +79,23 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VRReminderListCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderListCell class]) forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    NSLog(@"%d", indexPath.row);
+    
     VRReminderModel *model = [_service.listReminder objectAtIndex:indexPath.row];
     cell.leftUtilityButtons = [self leftButton];
     cell.name.text = model.name;
-    cell.timeReminder.text = @"23:34:22 15";
-    [cell.arrowView setImage:[UIImage imageNamed:@"icon_arrow_right"]];
+    cell.timeReminder.text = model.timeReminder;
     [cell layoutSubviews];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    VRReminderDetailController *vc = [[VRReminderDetailController alloc] initWithNibName:NSStringFromClass([VRReminderDetailController class]) bundle:nil];
+    VRReminderModel *model = [_service.listReminder objectAtIndex:indexPath.row];
+    vc.model = model;
+    [self.rootViewController.navigationController pushViewController:vc animated:YES];
 }
 
 - (NSArray *)leftButton{

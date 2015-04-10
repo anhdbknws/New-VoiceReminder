@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="13F34" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="13F34" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="BaseObject" representedClassName="BaseObject" syncable="YES">
         <attribute name="createdDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,9 +13,7 @@
         <attribute name="alertReminder" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="isActive" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="nameSound" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timeReminder" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="urlSound" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="reminder" inverseEntity="Photo" syncable="YES"/>
         <relationship name="repeats" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repeat" inverseName="reminder" inverseEntity="Repeat" syncable="YES"/>
         <relationship name="sound" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sound" inverseName="reminder" inverseEntity="Sound" syncable="YES"/>
@@ -33,7 +31,7 @@
     <elements>
         <element name="BaseObject" positionX="-153" positionY="-99" width="128" height="75"/>
         <element name="Photo" positionX="-153" positionY="65" width="128" height="88"/>
-        <element name="Reminder" positionX="-342" positionY="90" width="128" height="178"/>
+        <element name="Reminder" positionX="-342" positionY="90" width="128" height="148"/>
         <element name="Repeat" positionX="115" positionY="161" width="128" height="73"/>
         <element name="Sound" positionX="160" positionY="-54" width="128" height="103"/>
     </elements>

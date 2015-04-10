@@ -11,7 +11,7 @@
 @interface VRReminderListCell : SWTableViewCell
 @property (nonatomic, strong) UILabel *name;
 @property (nonatomic, strong) UILabel *timeReminder;
-@property (nonatomic, strong) UIImageView *arrowView;
 @property (nonatomic, strong) UIView *lineSeparate;
+@property (nonatomic, strong) UISwitch *switchButton;
 @property (nonatomic, copy) void(^pressEditButton)(id sender);
 @end

@@ -40,8 +40,14 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
     self.window.rootViewController = navi;
     [self.window makeKeyAndVisible];
     
-    
-//    [self configureUI];
+    UILocalNotification* n1 = [[UILocalNotification alloc] init];
+    n1.fireDate = [NSDate dateWithTimeIntervalSinceNow: 60];
+    n1.alertBody = @"one";
+    UILocalNotification* n2 = [[UILocalNotification alloc] init];
+    n2.fireDate = [NSDate dateWithTimeIntervalSinceNow: 90];
+    n2.alertBody = @"two";
+    [[UIApplication sharedApplication] scheduleLocalNotification: n1];
+    [[UIApplication sharedApplication] scheduleLocalNotification: n2];
     return YES;
 }
 
@@ -73,6 +79,9 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
 - (void)configureUI {
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0],NSFontAttributeName: [UIFont fontWithName:@"Arial-Bold" size:0.0]}];
 }
+
+
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

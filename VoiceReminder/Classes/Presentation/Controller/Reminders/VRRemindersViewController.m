@@ -57,6 +57,7 @@ NSString *kNotificationName1 = @"testNotification";
     
     _listReminderController = [[VRListReminderViewController alloc] init];
     _listReminderController.title = @"List";
+    _listReminderController.rootViewController = self;
     
     [self.arrayViewControllers addObject:_listReminderController];
     tabbar = [[UITabBarController alloc] init];

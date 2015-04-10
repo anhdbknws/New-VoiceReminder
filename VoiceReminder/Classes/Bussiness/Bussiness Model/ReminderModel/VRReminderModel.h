@@ -16,7 +16,7 @@
 @property (nonatomic, strong) VRSoundModel *soundModel;
 @property (nonatomic, strong) NSString *nameOfSound;
 @property (nonatomic, strong) NSString *timeReminder;
-@property (nonatomic, assign) NSMutableArray *repeats;
+@property (nonatomic, strong) NSMutableArray *repeats;
 @property (strong, nonatomic) NSMutableArray * photoList;
 @property (nonatomic, assign) ALERT_TYPE alertReminder;
 @property (nonatomic, assign) BOOL isActive;

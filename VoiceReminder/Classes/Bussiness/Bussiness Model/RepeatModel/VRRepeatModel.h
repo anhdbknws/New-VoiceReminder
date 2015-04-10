@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "BaseModel.h"
-
+@class Repeat;
 @class VRReminderModel;
 @interface VRRepeatModel : BaseModel
 @property (nonatomic, assign) REPEAT_TYPE repeatType;
 @property (nonatomic, strong) VRReminderModel *reminder;
+
+- (instancetype)initWithEntity:(Repeat *)entity;
 @end
