@@ -38,39 +38,21 @@
 
 /* register system */
 - (void)scheduleLocalNotificationWith:(VRReminderModel *)model {
-//    UILocalNotification *notification = [[UILocalNotification alloc] init];
-//    notification.fireDate = [[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder];
-//    notification.timeZone = [NSTimeZone defaultTimeZone];
-//    notification.alertBody = @"Alarm";
-//    notification.hasAction = YES;
-//    notification.soundName = model.soundModel.name;
-//    notification.applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
-//    
-//    NSDictionary *infoDict=[NSDictionary dictionaryWithObject:model.uuid forKey:@"uuid"];
-//    notification.userInfo = infoDict;
-//    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-    
-    
-    
-    
-    
         UILocalNotification *notification = [[UILocalNotification alloc] init];
     
         /* Time and timezone settings */
-        NSDate *datePlusOneMinute = [[NSDate date] dateByAddingTimeInterval:100];
-        notification.fireDate = datePlusOneMinute;
+        notification.fireDate = [[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder];
         notification.timeZone = [NSTimeZone localTimeZone];
         notification.alertBody = NSLocalizedString(@"A new item is downloaded.", nil);
-        notification.alertLaunchImage = @"bt_cancel";
+        notification.alertLaunchImage = @"icon_camera";
         /* Action settings */
         notification.hasAction = YES;
         notification.alertAction = NSLocalizedString(@"View", nil);
         /* Badge settings */
         notification.applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
-        notification.soundName = UILocalNotificationDefaultSoundName;
+        notification.soundName = @"background-music-aac.caf";
         /* Additional information, user info */
-        notification.userInfo = @{@"Key 1" : @"Value 1",
-                                  @"Key 2" : @"Value 2"};
+        notification.userInfo = @{model : @"uuid"};
         /* Schedule the notification */
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }

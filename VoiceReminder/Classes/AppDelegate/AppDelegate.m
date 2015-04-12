@@ -28,7 +28,6 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
         [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
     }
     
-    
     // Handle launching from a notification
     
     if (launchOptions[UIApplicationLaunchOptionsLocalNotificationKey] != nil){
@@ -56,42 +55,8 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
     self.window.rootViewController = navi;
     [self.window makeKeyAndVisible];
     
-    UILocalNotification* n1 = [[UILocalNotification alloc] init];
-    n1.fireDate = [NSDate dateWithTimeIntervalSinceNow: 60];
-    n1.alertBody = @"one";
-    UILocalNotification* n2 = [[UILocalNotification alloc] init];
-    n2.fireDate = [NSDate dateWithTimeIntervalSinceNow: 90];
-    n2.alertBody = @"two";
-    [[UIApplication sharedApplication] scheduleLocalNotification: n1];
-    [[UIApplication sharedApplication] scheduleLocalNotification: n2];
     return YES;
 }
-
-- (void) scheduleLocalNotification{
-//    UILocalNotification *notification = [[UILocalNotification alloc] init];
-//
-//    /* Time and timezone settings */
-//    NSDate *datePlusOneMinute = [[NSDate date] dateByAddingTimeInterval:100];
-//    notification.fireDate = datePlusOneMinute;
-//    notification.timeZone = [NSTimeZone localTimeZone];
-//    notification.alertBody = NSLocalizedString(@"A new item is downloaded.", nil);
-//    notification.alertLaunchImage = @"bt_cancel";
-//    /* Action settings */
-//    notification.hasAction = YES;
-//    notification.alertAction = NSLocalizedString(@"View", nil);
-//    /* Badge settings */
-//    notification.applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
-//    notification.soundName = UILocalNotificationDefaultSoundName;
-//    /* Additional information, user info */
-//    notification.userInfo = @{@"Key 1" : @"Value 1",
-//                              @"Key 2" : @"Value 2"};
-//    /* Schedule the notification */
-//    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-}
-
-
-
-
 
 - (void)setupCoreData {
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:kCoreDataFileName];
