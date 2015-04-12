@@ -13,8 +13,9 @@
 #import "VRPhotoListCell.h"
 #import "VRPhotoPageController.h"
 
-@interface VRReminderDetailController ()
-
+@interface VRReminderDetailController () <AVAudioPlayerDelegate, UITextFieldDelegate>
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic, assign) BOOL isPlaying;
 @end
 
 @implementation VRReminderDetailController
@@ -33,6 +34,11 @@
     [super viewDidLoad];
     [self setupTableView];
     [self configureNavigation];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.isPlaying = NO;
 }
 
 - (void)configureNavigation {
@@ -80,6 +86,8 @@
     VRReminderSettingCell *cell = [self.tableViewDetail dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderSettingCell class]) forIndexPath:indexPath];
     cell.titleLabel.text = [self titleAtIndexPath:indexPath];
     cell.textfield.text = [self valueAtIndexPath:indexPath];
+    cell.textfield.tag = indexPath.row;
+    cell.textfield.delegate = self;
     return cell;
 }
 
@@ -135,7 +143,8 @@
     return view;
 }
 
-#pragma mark - cell helper 
+
+#pragma mark - cell helper
 - (NSString *)titleAtIndexPath:(NSIndexPath *)indexPath {
     NSString *titleString = nil;
     switch (indexPath.row) {
@@ -146,7 +155,7 @@
             titleString = @"Name";
             break;
         case REMINDER_DETAIL_ROW_TYPE_REPEAT:
-            titleString = @"Repaet";
+            titleString = @"Repeat";
             break;
         case REMINDER_DETAIL_ROW_TYPE_ALERT:
             titleString = @"Alert";
@@ -198,6 +207,45 @@
 #pragma mark - Actions
 - (void)backAction:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField{
+    [self.view endEditing:YES];
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (textField.tag == REMINDER_DETAIL_ROW_TYPE_SOUND) {
+        if (!self.isPlaying) {
+            self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:_model.soundModel.url] error:nil];
+            self.isPlaying = YES;
+            /* Did we get an instance of AVAudioPlayer? */
+            if (self.audioPlayer != nil){
+                /* Set the delegate and start playing */
+                self.audioPlayer.delegate = self;
+                if ([self.audioPlayer prepareToPlay] &&
+                    [self.audioPlayer play]){
+                    /* Successfully started playing */
+                }
+                else {
+                    NSLog(@"failed to play");
+                }
+            }
+            else {
+                NSLog(@"failed to instantiate avaudioplayer");
+            }
+        }
+    }
+    
+    return NO;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.audioPlayer = nil;
+    self.isPlaying = NO;
 }
 
 - (void)dealloc {

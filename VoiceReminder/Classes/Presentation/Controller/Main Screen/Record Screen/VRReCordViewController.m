@@ -24,7 +24,7 @@ static NSInteger minutesLimit = 1;
 @property (nonatomic, assign) BOOL isPlaying;
 @property (nonatomic, assign) NSTimeInterval durationRecording;
 @property (nonatomic, assign) NSTimeInterval progessTimePlaying;
-
+@property (nonatomic, strong) NSURL * audioRecordingUrl;
 @end
 
 @implementation VRReCordViewController
@@ -231,10 +231,10 @@ static NSInteger minutesLimit = 1;
 #pragma  mark - record action
 - (void)startRecordingAudio {
     NSError *error = nil;
-    NSURL *audioRecordingURL = [self audioRecordingPath];
+    _audioRecordingUrl = [self audioRecordingPath];
     if (!self.audioRecorder) {
         self.audioRecorder = [[AVAudioRecorder alloc]
-                              initWithURL:audioRecordingURL
+                              initWithURL:_audioRecordingUrl
                               settings:[self audioRecordingSettings]
                               error:&error];
     }
@@ -313,7 +313,7 @@ static NSInteger minutesLimit = 1;
 }
 
 - (void)playAction:(id)sender {
-    if (!self.isPlaying) {
+    if (!self.isPlaying && _audioRecordingUrl) {
         
         /* setting circle view */
         self.session.startDate = [NSDate date];
@@ -326,7 +326,7 @@ static NSInteger minutesLimit = 1;
         
         self.isPlaying = YES;
         [self stopRecordingOnAudioRecorder:self.audioRecorder];
-        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[self audioRecordingPath] error:nil];
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:_audioRecordingUrl error:nil];
         /* Did we get an instance of AVAudioPlayer? */
         if (self.audioPlayer != nil){
             /* Set the delegate and start playing */
@@ -378,7 +378,7 @@ static NSInteger minutesLimit = 1;
     
     if (![self.audioRecorder isRecording]) {
         VRReminderSettingViewController *reminderSettingViewController = [[VRReminderSettingViewController alloc] initWithNibName:NSStringFromClass([VRReminderSettingViewController class]) bundle:nil];
-        reminderSettingViewController.audioRecordingURL = [self audioRecordingPath];
+        reminderSettingViewController.audioRecordingURL = _audioRecordingUrl;
         [self.navigationController pushViewController:reminderSettingViewController animated:YES];
     }
 }

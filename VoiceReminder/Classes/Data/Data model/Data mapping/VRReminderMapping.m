@@ -29,7 +29,7 @@
         [entity addRepeatsObject:[VRRepeatMapping entityFromModel:object inContext:context]];
     }
     
-    entity.sound = [VRSoundMapping entityFromModel:model.soundModel inContext:context];
+    entity.sound = [VRSoundMapping entityFromModel:model inContext:context];
     
     [entity removePhotos:entity.photos];
     for (NSString *url in model.photoList) {

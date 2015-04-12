@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "VRMainScreenViewController.h"
 #import "VRLocalNotificationController.h"
+#import "VRCommon.h"
+#import "VRAlertView.h"
 
 static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
 @interface AppDelegate ()
@@ -16,9 +18,23 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
 @end
 
 @implementation AppDelegate
-
+{
+    NSDate *currentDate;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+    }
+    
+    
+    // Handle launching from a notification
+    
+    if (launchOptions[UIApplicationLaunchOptionsLocalNotificationKey] != nil){
+        UILocalNotification *notification = launchOptions[UIApplicationLaunchOptionsLocalNotificationKey];
+        [self application:application didReceiveLocalNotification:notification];
+    }
     
     //1. setting core data
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"VRDeleteDatabaseCount1"]) {
@@ -51,6 +67,32 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
     return YES;
 }
 
+- (void) scheduleLocalNotification{
+//    UILocalNotification *notification = [[UILocalNotification alloc] init];
+//
+//    /* Time and timezone settings */
+//    NSDate *datePlusOneMinute = [[NSDate date] dateByAddingTimeInterval:100];
+//    notification.fireDate = datePlusOneMinute;
+//    notification.timeZone = [NSTimeZone localTimeZone];
+//    notification.alertBody = NSLocalizedString(@"A new item is downloaded.", nil);
+//    notification.alertLaunchImage = @"bt_cancel";
+//    /* Action settings */
+//    notification.hasAction = YES;
+//    notification.alertAction = NSLocalizedString(@"View", nil);
+//    /* Badge settings */
+//    notification.applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
+//    notification.soundName = UILocalNotificationDefaultSoundName;
+//    /* Additional information, user info */
+//    notification.userInfo = @{@"Key 1" : @"Value 1",
+//                              @"Key 2" : @"Value 2"};
+//    /* Schedule the notification */
+//    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+}
+
+
+
+
+
 - (void)setupCoreData {
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:kCoreDataFileName];
 }
@@ -72,8 +114,16 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    VRLocalNotificationController *shareInstance = [VRLocalNotificationController shareInstance];
-    [shareInstance processNotification:notification];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:@"Handling the local notification"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:@"Cancel", nil];
+    
+    VRAlertView *view = [[VRAlertView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, 100)];
+    [alert setValue:view forKey:@"accessoryView"];
+    view.backgroundColor = [UIColor redColor];
+    [alert show];
 }
 
 - (void)configureUI {
@@ -98,6 +148,8 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

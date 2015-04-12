@@ -122,8 +122,20 @@ const NSInteger kPhotoActionSheetTag = 3249;
     self.model.timeReminder = [VRCommon commonFormatFromDateTime:[NSDate date]];
    
     self.model.soundModel = [[VRSoundModel alloc] init];
-    self.model.soundModel.name = @"Default";
-    self.model.soundModel.isDefaultObject = YES;
+    
+    if (self.audioRecordingURL) {
+        self.model.soundModel.name = @"Audio recorded";
+        self.model.soundModel.url = [self.audioRecordingURL absoluteString];
+        self.model.soundModel.isDefaultObject = NO;
+    }
+    else {
+        self.model.soundModel.name = @"Default";
+        self.model.soundModel.isDefaultObject = YES;
+        
+        NSString *backgroundMusicPath = [[NSBundle mainBundle] pathForResource:@"background-music-aac" ofType:@"caf"];
+        NSURL *backgroundMusicURL = [NSURL fileURLWithPath:backgroundMusicPath];
+        self.model.soundModel.url = [NSString stringWithFormat:@"%@", backgroundMusicURL];
+    }
 }
 
 - (void)viewWillLayoutSubviews {
