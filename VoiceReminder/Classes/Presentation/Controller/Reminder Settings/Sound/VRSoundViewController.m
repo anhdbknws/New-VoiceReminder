@@ -71,10 +71,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return _service.recordArray.count;
+        return _service.recordSoundArray.count;
     }
     else
-        return _service.songArray.count;
+        return _service.mp3SoundArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -82,7 +82,7 @@
         VRRepeatCell *cell = [self.tableViewSound dequeueReusableCellWithIdentifier:NSStringFromClass([VRRepeatCell class]) forIndexPath:indexPath];
         cell.imageV.hidden = NO;
         
-        VRSoundModel *model = [_service.recordArray objectAtIndex:indexPath.row];
+        VRSoundModel *model = [_service.recordSoundArray objectAtIndex:indexPath.row];
         cell.titleLable.text = model.name;
         
         
@@ -100,7 +100,7 @@
     }
     else {
         VRRepeatCell *cell = [self.tableViewSound dequeueReusableCellWithIdentifier:NSStringFromClass([VRRepeatCell class]) forIndexPath:indexPath];
-        VRSoundModel *model = [_service.songArray objectAtIndex:indexPath.row];
+        VRSoundModel *model = [_service.mp3SoundArray objectAtIndex:indexPath.row];
         cell.titleLable.text = model.name;
         
         [cell.imageV setImage:[UIImage imageNamed:@""]];
@@ -148,7 +148,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableViewSound deselectRowAtIndexPath:indexPath animated:YES];
-    VRSoundModel *model = [_service.songArray objectAtIndex:indexPath.row];
+    VRSoundModel *model = [_service.mp3SoundArray objectAtIndex:indexPath.row];
     if (indexPath.section == 1 && model.isDefaultObject) {
         [self configureMediaPlayer];
         [self chooseSongFromLibrary];
@@ -195,24 +195,12 @@
         
         MPMediaItem *item = [mediaItemCollection.items firstObject];
         VRSoundModel *soundModel = [VRSoundModel new];
-        soundModel.persistenID = [item valueForProperty:MPMediaItemPropertyPersistentID];
-        soundModel.name = [item valueForProperty:MPMediaItemPropertyTitle];
-        soundModel.isDefaultObject = NO;
-        [_service saveSoundWithModel:soundModel toDatabaseLocalWithCompletionhandler:^(NSError *error, id result) {
-            [_service.songArray insertObject:soundModel atIndex:1];
-            _selectedSoundModel = soundModel;
-            [self.tableViewSound reloadData];
-        }];
-        
-//        NSNumber *persistenID = [item valueForProperty:MPMediaItemPropertyPersistentID];
-//        MPMediaQuery *query = [MPMediaQuery songsQuery];
-//        MPMediaPropertyPredicate *predicate = [MPMediaPropertyPredicate predicateWithValue:persistenID forProperty:MPMediaItemPropertyPersistentID];
-//        [query addFilterPredicate:predicate];
-//        NSArray *mediaItems = [query items];
-//        //this array will consist of song with given persistentId. add it to collection and play it
-//        MPMediaItemCollection *col = [[MPMediaItemCollection alloc] initWithItems:mediaItems];
-        
-        
+        soundModel.mp3Url = [item valueForKey:MPMediaItemPropertyAssetURL];
+        soundModel.name = [item valueForKey:MPMediaItemPropertyTitle];
+        soundModel.isMp3Sound = YES;
+        [_service.mp3SoundArray insertObject:soundModel atIndex:1];
+        _selectedSoundModel = soundModel;
+        [self.tableViewSound reloadData];
         
         [_musicPlayer setQueueWithItemCollection: mediaItemCollection];
         [_musicPlayer play];

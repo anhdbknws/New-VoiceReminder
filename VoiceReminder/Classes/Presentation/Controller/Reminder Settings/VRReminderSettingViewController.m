@@ -126,7 +126,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     if (self.audioRecordingURL) {
         self.model.soundModel.name = @"Audio recorded";
         self.model.soundModel.url = [self.audioRecordingURL absoluteString];
-        self.model.soundModel.isDefaultObject = NO;
+        self.model.soundModel.isRecordSound = YES;
     }
     else {
         self.model.soundModel.name = @"Default";
@@ -448,7 +448,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
             return ;
         }
         
-        strong.model.soundModel = soundModel;
+        strong.model.soundModel = [soundModel copy];
         [strong.settingTableview reloadData];
     };
     [self.navigationController pushViewController:vc animated:YES];

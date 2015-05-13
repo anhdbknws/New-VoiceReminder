@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+
+
 @class VRSoundModel;
 @interface VRSoundService : NSObject
-@property (nonatomic , strong) NSMutableArray *songArray;
-@property (nonatomic , strong) NSMutableArray *recordArray;
+@property (nonatomic , strong) NSMutableArray *mp3SoundArray;
+@property (nonatomic , strong) NSMutableArray *recordSoundArray;
+@property (nonatomic, strong) NSMutableArray *systemSoundArray;
 @property (nonatomic , strong) void (^getSoundListCompleted)();
 
-- (void)saveSoundWithModel:(VRSoundModel *)model toDatabaseLocalWithCompletionhandler:(databaseHandler)completion;
 - (void)getListSounds;
+
 @end

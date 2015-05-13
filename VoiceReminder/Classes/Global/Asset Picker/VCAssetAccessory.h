@@ -16,4 +16,5 @@
 + (BOOL)deleteImageInDocumentDirectory:(NSString *)imageName;
 + (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size;
 + (UIImage *)cropImage:(UIImage *)image toSize:(CGSize)size;
+
 @end

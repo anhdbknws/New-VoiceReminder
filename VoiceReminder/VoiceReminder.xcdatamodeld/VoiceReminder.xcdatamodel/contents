@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="13F34" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="13F34" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="BaseObject" representedClassName="BaseObject" syncable="YES">
         <attribute name="createdDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
@@ -23,8 +23,10 @@
         <relationship name="reminder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reminder" inverseName="repeats" inverseEntity="Reminder" syncable="YES"/>
     </entity>
     <entity name="Sound" representedClassName="Sound" parentEntity="BaseObject" syncable="YES">
+        <attribute name="isMp3Sound" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isRecordSound" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isSystemSound" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="persistenID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="reminder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reminder" inverseName="sound" inverseEntity="Reminder" syncable="YES"/>
     </entity>
@@ -33,6 +35,6 @@
         <element name="Photo" positionX="-153" positionY="65" width="128" height="88"/>
         <element name="Reminder" positionX="-342" positionY="90" width="128" height="148"/>
         <element name="Repeat" positionX="115" positionY="161" width="128" height="73"/>
-        <element name="Sound" positionX="160" positionY="-54" width="128" height="103"/>
+        <element name="Sound" positionX="160" positionY="-54" width="128" height="135"/>
     </elements>
 </model>

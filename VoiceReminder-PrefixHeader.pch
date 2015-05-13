@@ -16,4 +16,5 @@
 #import "VREnumDefine.h"
 #import <MBProgressHUD.h>
 #import <WYPopoverController.h>
+#import "VRCommon.h"
 #endif

@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-@class Sound, VRReminderModel, NSManagedObjectContext;
+@class Sound, VRReminderModel, VRSoundModel, NSManagedObjectContext;
 @interface VRSoundMapping : NSObject
+@property (nonatomic, copy) void(^saveAudioFileCompeted)(NSString *urrlString);
+
 + (Sound *)entityFromModel:(VRReminderModel *)model inContext:(NSManagedObjectContext *)context;
 @end

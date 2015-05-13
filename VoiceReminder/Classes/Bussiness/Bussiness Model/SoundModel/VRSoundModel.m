@@ -14,10 +14,23 @@
     if (self) {
         self.uuid = entity.uuid;
         self.url = entity.url;
-        self.persistenID = entity.persistenID;
         self.name = entity.name;
+        self.isMp3Sound = entity.isMp3Sound.boolValue;
+        self.isRecordSound = entity.isRecordSound.boolValue;
+        self.isSystemSound = entity.isSystemSound.boolValue;
     }
     
     return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    VRSoundModel *object = [VRSoundModel new];
+    object.name = [self.name copyWithZone:zone];
+    object.url = [self.url copyWithZone:zone];
+    object.mp3Url = [self.mp3Url copyWithZone:zone];
+    object.isMp3Sound = self.isMp3Sound;
+    object.isRecordSound = self.isRecordSound;
+    object.isSystemSound = self.isSystemSound;
+    return object;
 }
 @end

@@ -67,13 +67,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "VoiceReminder/Classes/Presentation/Controller/Reminders/Reminder Detail/VRReminderDetailController.m"
-            timestampString = "450540018.518234"
+            filePath = "VoiceReminder/Classes/Bussiness/Bussiess Service/Reminder Setting/VRReminderSettingService.m"
+            timestampString = "452532404.745749"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
-            landmarkName = "-textFieldShouldBeginEditing:"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "-scheduleLocalNotificationWith:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VoiceReminder/Classes/Data/Data model/Data mapping/VRSoundMapping.m"
+            timestampString = "452532606.019222"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "+saveMediaItemToDocument:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

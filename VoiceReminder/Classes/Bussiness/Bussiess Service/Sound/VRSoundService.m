@@ -16,62 +16,52 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.songArray = [NSMutableArray new];
-        self.recordArray = [NSMutableArray new];
+        self.mp3SoundArray = [NSMutableArray new];
+        self.recordSoundArray = [NSMutableArray new];
+        self.systemSoundArray = [NSMutableArray new];
     }
     
     return self;
-}
-
-- (void)saveSoundWithModel:(VRSoundModel *)model toDatabaseLocalWithCompletionhandler:(databaseHandler)completion {
-    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-        [VRSoundMapping entityFromModel:model inContext:localContext];
-    } completion:^(BOOL success, NSError *error) {
-        VRSoundModel *result = nil;
-        Sound *entity = [Sound MR_findFirstByAttribute:VRUUID withValue:model.uuid];
-        if (entity) {
-            result = [[VRSoundModel alloc] initWithEntity:entity];
-        }
-        
-        if(completion) {
-            completion (nil, result);
-        }
-    }];
 }
 
 - (void)getListSounds {
     NSArray *listSound = [Sound MR_findAll];
     for (Sound *entity in listSound) {
         VRSoundModel *model = [[VRSoundModel alloc] initWithEntity:entity];
-        if (model.persistenID) {
-            [self.songArray addObject:model];
+        if (model.isMp3Sound) {
+            [self.mp3SoundArray addObject:model];
         }
-        else {
-            [self.recordArray addObject:model];
+        else if (model.isRecordSound){
+            [self.recordSoundArray addObject:model];
+        }
+        else if (model.isSystemSound) {
+            [self.systemSoundArray addObject:model];
         }
     }
     
-    NSArray *tempSongs = [self.songArray sortedArrayUsingComparator:^NSComparisonResult(VRSoundModel *obj1, VRSoundModel *obj2) {
+    NSArray *tempSongs = [self.mp3SoundArray sortedArrayUsingComparator:^NSComparisonResult(VRSoundModel *obj1, VRSoundModel *obj2) {
         return [obj1.name compare:obj2.name];
     }];
-    self.songArray = [NSMutableArray arrayWithArray:tempSongs];
+    
+    self.mp3SoundArray = [NSMutableArray arrayWithArray:tempSongs];
     
     VRSoundModel *defaultSong = [VRSoundModel new];
     defaultSong.name = @"Pick a song";
     defaultSong.isDefaultObject = YES;
-    [self.songArray insertObject:defaultSong atIndex:0];
+    [self.mp3SoundArray insertObject:defaultSong atIndex:0];
     
-    NSArray *tempRecord = [self.recordArray sortedArrayUsingComparator:^NSComparisonResult(VRSoundModel *obj1, VRSoundModel *obj2) {
+    NSArray *tempRecord = [self.recordSoundArray sortedArrayUsingComparator:^NSComparisonResult(VRSoundModel *obj1, VRSoundModel *obj2) {
         return [obj1.name compare:obj2.name];
     }];
-    self.recordArray = [NSMutableArray  arrayWithArray:tempRecord];
+    self.recordSoundArray = [NSMutableArray  arrayWithArray:tempRecord];
     VRSoundModel *defaultRecord = [VRSoundModel new];
     defaultRecord.name = @"Default";
     defaultRecord.isDefaultObject = YES;
-    [self.recordArray insertObject:defaultRecord atIndex:0];
+    [self.recordSoundArray insertObject:defaultRecord atIndex:0];
     
     if (self.getSoundListCompleted) {
         self.getSoundListCompleted();
     }
 }
+
 @end

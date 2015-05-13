@@ -21,6 +21,6 @@
 + (NSString *)commonFormatFromDateTime:(NSDate *)date;
 + (NSString *)commonFormatFromMonthYear:(NSDate *)date;
 + (NSString *)commonFormatFromYear:(NSDate *)date;
-
++ (NSString *)removeWhiteSpace:(NSString *)inputString;
 + (NSSortDescriptor *)sortDescriptorByCreatedDate;
 @end

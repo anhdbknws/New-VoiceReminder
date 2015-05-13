@@ -10,11 +10,14 @@
 #import "BaseModel.h"
 @class VRReminderModel, Sound;
 
-@interface VRSoundModel : BaseModel
+@interface VRSoundModel : BaseModel <NSCopying>
 @property (nonatomic, strong) NSString * name;
 @property (nonatomic, strong) NSString * url;
-@property (nonatomic, strong) NSNumber * persistenID;
+@property (nonatomic, strong) NSURL * mp3Url;
 @property (nonatomic, strong) VRReminderModel *reminder;
 @property (nonatomic, assign) BOOL isDefaultObject;
+@property (nonatomic, assign) BOOL isMp3Sound;
+@property (nonatomic, assign) BOOL isSystemSound;
+@property (nonatomic, assign) BOOL isRecordSound;
 - (instancetype)initWithEntity:(Sound *)entity;
 @end

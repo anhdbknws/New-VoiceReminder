@@ -68,4 +68,17 @@
     
     return _repeats;
 }
+
+- (id)copyWithZone:(NSZone *)zone {
+    VRReminderModel *object = [[VRReminderModel alloc] init];
+    object.name = [self.name copyWithZone:zone];
+    object.timeReminder = [self.timeReminder copyWithZone:zone];
+    object.repeats = [self.repeats copyWithZone:zone];
+    object.photoList = [self.photoList copyWithZone:zone];
+    object.isActive = self.isActive;
+    object.alertReminder = self.alertReminder;
+    object.soundModel = [self.soundModel copyWithZone:zone];
+    object.entity = self.entity;
+    return object;
+}
 @end
