@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0640"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CDA75B1F7C98F5A353C1208B"
+               BlueprintIdentifier = "0206DF5936FC002EC00FCA2D"
                BuildableName = "libPods-VoiceReminder-MBProgressHUD.a"
                BlueprintName = "Pods-VoiceReminder-MBProgressHUD"
                ReferencedContainer = "container:Pods.xcodeproj">

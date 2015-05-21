@@ -13,6 +13,7 @@
 #import "VRLocalizationCenter.h"
 #import "SBTickerView.h"
 #import "SBTickView.h"
+#import "VRReminderSettingViewController.h"
 
 @interface VRMainScreenViewController ()
 
@@ -30,30 +31,31 @@
     [self configureClockTicker];
 }
 
+
+
 #pragma mark - ConfigureUI
 
 - (void)configureUI {
     self.view.backgroundColor = [UIColor whiteColor];
-    NSLog(@"%@", VRLocalizationString(klocalizeKeyRecord));
-    [self.recordButton setTitle:[VRLocalizationString(klocalizeKeyRecord) uppercaseString] forState:UIControlStateNormal];
-    [self.recordButton setBackgroundColor:[UIColor blueColor]];
+    [self configButton:self.recordButton WithTittle:[@"Record" uppercaseString]];
     [self.recordButton addTarget:self action:@selector(recordAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.recordButton.layer.cornerRadius = 8;
-    self.recordButton.layer.borderColor = [UIColor blueColor].CGColor;
-    self.recordButton.layer.borderWidth = 1.0f;
-    [self.recordButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
-    
-    [self.remindersButton setTitle:@"REMINDERS" forState:UIControlStateNormal];
-    [self.remindersButton setBackgroundColor:[UIColor blueColor]];
+
+    [self configButton:self.remindersButton WithTittle:[@"Reminder" uppercaseString]];
     [self.remindersButton addTarget:self action:@selector(remindersAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.remindersButton.layer.cornerRadius = 8;
-    self.remindersButton.layer.borderWidth = 1.0f;
-    self.remindersButton.layer.borderColor = [UIColor blueColor].CGColor;
-    [self.remindersButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self configButton:self.buttonAlarm WithTittle:[@"alarm" uppercaseString]];
+    [self.buttonAlarm addTarget:self action:@selector(alarmAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(numberTick:) userInfo:nil repeats:YES];
     
+}
+
+- (void)configButton:(UIButton *)button WithTittle:(NSString *)title {
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setBackgroundColor:[UIColor blueColor]];
+    button.layer.cornerRadius = 8;
+    button.layer.borderWidth = 1.0f;
+    button.layer.borderColor = [UIColor blueColor].CGColor;
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 - (void)configureClockTicker {
@@ -81,6 +83,11 @@
 - (void)remindersAction:(id)sender {
     VRRemindersViewController *remindersViewController = [[VRRemindersViewController alloc] init];
     [self.navigationController pushViewController:remindersViewController animated:YES];
+}
+
+- (void)alarmAction:(UIButton *)sender {
+    VRReminderSettingViewController *vc = [[VRReminderSettingViewController alloc] initWithNibName:NSStringFromClass([VRReminderSettingViewController class]) bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

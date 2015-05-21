@@ -22,16 +22,21 @@
 
 @property (weak, nonatomic) id<JTCalendarDataSource> dataSource;
 
-@property (strong, nonatomic) NSDate *currentDate;
-@property (strong, nonatomic) NSDate *currentDateSelected;
+@property (nonatomic) NSDate *currentDate;
+@property (nonatomic) NSDate *currentDateSelected;
 
-@property (strong, nonatomic, readonly) JTCalendarDataCache *dataCache;
-@property (strong, nonatomic, readonly) JTCalendarAppearance *calendarAppearance;
+@property (nonatomic, readonly) JTCalendarDataCache *dataCache;
+@property (nonatomic, readonly) JTCalendarAppearance *calendarAppearance;
 
 - (void)reloadData;
 - (void)reloadAppearance;
 
-- (void)loadPreviousMonth;
-- (void)loadNextMonth;
+- (void)loadPreviousMonth DEPRECATED_MSG_ATTRIBUTE("Use loadPreviousPage instead");
+- (void)loadNextMonth DEPRECATED_MSG_ATTRIBUTE("Use loadNextPage instead");
+
+- (void)loadPreviousPage;
+- (void)loadNextPage;
+
+- (void)repositionViews;
 
 @end

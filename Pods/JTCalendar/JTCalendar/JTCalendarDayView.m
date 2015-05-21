@@ -10,6 +10,7 @@
 #import "JTCircleView.h"
 
 @interface JTCalendarDayView (){
+    UIView *backgroundView;
     JTCircleView *circleView;
     UILabel *textLabel;
     JTCircleView *dotView;
@@ -58,6 +59,11 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 {
     isSelected = NO;
     self.isOtherMonth = NO;
+
+    {
+        backgroundView = [UIView new];
+        [self addSubview:backgroundView];
+    }
     
     {
         circleView = [JTCircleView new];
@@ -98,7 +104,9 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 - (void)configureConstraintsForSubviews
 {
     textLabel.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    
+    backgroundView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+
+
     CGFloat sizeCircle = MIN(self.frame.size.width, self.frame.size.height);
     CGFloat sizeDot = sizeCircle;
     
@@ -113,7 +121,7 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
     circleView.layer.cornerRadius = sizeCircle / 2.;
     
     dotView.frame = CGRectMake(0, 0, sizeDot, sizeDot);
-    dotView.center = CGPointMake(self.frame.size.width / 2., (self.frame.size.height / 2.) + sizeDot * 2.5);
+    dotView.center = CGPointMake(self.frame.size.width / 2., (self.frame.size.height / 2.) +sizeDot * 2.5);
     dotView.layer.cornerRadius = sizeDot / 2.;
 }
 
@@ -123,7 +131,7 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
     if(!dateFormatter){
         dateFormatter = [NSDateFormatter new];
         dateFormatter.timeZone = self.calendarManager.calendarAppearance.calendar.timeZone;
-        [dateFormatter setDateFormat:@"dd"];
+        [dateFormatter setDateFormat:self.calendarManager.calendarAppearance.dayFormat];
     }
     
     self->_date = date;
@@ -136,6 +144,12 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 
 - (void)didTouch
 {
+    if([self.calendarManager.dataSource respondsToSelector:@selector(calendar:canSelectDate:)]){
+        if(![self.calendarManager.dataSource calendar:self.calendarManager canSelectDate:self.date]){
+            return;
+        }
+    }
+    
     [self setSelected:YES animated:YES];
     [self.calendarManager setCurrentDateSelected:self.date];
     
@@ -153,10 +167,10 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
     currentMonthIndex = currentMonthIndex % 12;
     
     if(currentMonthIndex == (calendarMonthIndex + 1) % 12){
-        [self.calendarManager loadNextMonth];
+        [self.calendarManager loadNextPage];
     }
     else if(currentMonthIndex == (calendarMonthIndex + 12 - 1) % 12){
-        [self.calendarManager loadPreviousMonth];
+        [self.calendarManager loadPreviousPage];
     }
 }
 
@@ -305,6 +319,9 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 {
     textLabel.textAlignment = NSTextAlignmentCenter;
     textLabel.font = self.calendarManager.calendarAppearance.dayTextFont;
+    backgroundView.backgroundColor = self.calendarManager.calendarAppearance.dayBackgroundColor;
+    backgroundView.layer.borderWidth = self.calendarManager.calendarAppearance.dayBorderWidth;
+    backgroundView.layer.borderColor = self.calendarManager.calendarAppearance.dayBorderColor.CGColor;
     
     [self configureConstraintsForSubviews];
     [self setSelected:isSelected animated:NO];

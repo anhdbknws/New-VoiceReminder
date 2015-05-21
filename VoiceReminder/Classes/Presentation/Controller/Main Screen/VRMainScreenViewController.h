@@ -18,5 +18,9 @@
 @property (weak, nonatomic) IBOutlet SBTickerView *clockTickerMinutes2;
 @property (weak, nonatomic) IBOutlet SBTickerView *clockTickerSecond1;
 @property (weak, nonatomic) IBOutlet SBTickerView *clockTickerSecond2;
+@property (weak, nonatomic) IBOutlet UIView *hourView;
+@property (weak, nonatomic) IBOutlet UIView *minutesView;
+@property (weak, nonatomic) IBOutlet UIView *secondView;
+@property (weak, nonatomic) IBOutlet UIButton *buttonAlarm;
 
 @end

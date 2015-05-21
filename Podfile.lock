@@ -1,10 +1,10 @@
 PODS:
-  - JTCalendar (1.1.11)
+  - JTCalendar (1.2.3)
   - MagicalRecord (2.2):
     - MagicalRecord/Core (= 2.2)
   - MagicalRecord/Core (2.2)
-  - MBProgressHUD (0.9)
-  - PureLayout (2.0.4)
+  - MBProgressHUD (0.9.1)
+  - PureLayout (2.0.6)
   - SWTableViewCell (0.3.7)
 
 DEPENDENCIES:
@@ -15,10 +15,10 @@ DEPENDENCIES:
   - SWTableViewCell (~> 0.3)
 
 SPEC CHECKSUMS:
-  JTCalendar: 0d4a11e8658ba947f1502a240778746f5777c1cc
-  MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
-  MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
-  PureLayout: ddf4fedf7e2f5984f972bbd2205dda4fc3418347
-  SWTableViewCell: 25de71898e3fcd11cf75707ef90245acf990ec03
+  JTCalendar: 246ea3e338fb97624846ec77cdcde448242c4d5c
+  MagicalRecord: f8a56bb87ab6552f20c4bb8681a1958a197ea3cd
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  PureLayout: f25f0bb904d5ccfe6e31da3cb869185259f02e0d
+  SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
 
-COCOAPODS: 0.36.0.beta.1
+COCOAPODS: 0.37.1

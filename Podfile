@@ -8,8 +8,3 @@ pod 'PureLayout', '~> 2.0'
 pod 'MBProgressHUD', '~> 0.9'
 pod 'MagicalRecord', '~> 2.2'
 end
-
-target 'VoiceReminderTests' do
-
-end
-

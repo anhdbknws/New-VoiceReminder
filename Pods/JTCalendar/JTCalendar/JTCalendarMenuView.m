@@ -51,6 +51,7 @@
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
     self.pagingEnabled = YES;
+    self.clipsToBounds = YES;
     
     for(int i = 0; i < NUMBER_PAGES_LOADED; ++i){
         JTCalendarMenuMonthView *monthView = [JTCalendarMenuMonthView new];
@@ -80,9 +81,17 @@
         x = (self.frame.size.width - width) / 2.;
     }
     
-    for(UIView *view in monthsViews){
-        view.frame = CGRectMake(x, 0, width, height);
-        x = CGRectGetMaxX(view.frame);
+    if(self.calendarManager.calendarAppearance.readFromRightToLeft){
+        for(UIView *view in [[monthsViews reverseObjectEnumerator] allObjects]){
+            view.frame = CGRectMake(x, 0, width, height);
+            x = CGRectGetMaxX(view.frame);
+        }
+    }
+    else{
+        for(UIView *view in monthsViews){
+            view.frame = CGRectMake(x, 0, width, height);
+            x = CGRectGetMaxX(view.frame);
+        }
     }
     
     self.contentSize = CGSizeMake(width * NUMBER_PAGES_LOADED, height);
