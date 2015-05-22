@@ -13,6 +13,42 @@
 		820B47B11AB647B000B6AD15 /* icon_edit_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 820B47AF1AB647AF00B6AD15 /* icon_edit_blue@2x.png */; };
 		820B47B21AB647B000B6AD15 /* icon_edit_blue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 820B47B01AB647B000B6AD15 /* icon_edit_blue@3x.png */; };
 		820B47B51AB64F1300B6AD15 /* VRNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 820B47B41AB64F1300B6AD15 /* VRNameCell.m */; };
+		821701E41AD097E100747B39 /* icon_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 821701E21AD097E100747B39 /* icon_camera@2x.png */; };
+		821701E51AD097E100747B39 /* icon_camera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 821701E31AD097E100747B39 /* icon_camera@3x.png */; };
+		821701E81AD09ACE00747B39 /* VRPhotoListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 821701E71AD09ACE00747B39 /* VRPhotoListCell.m */; };
+		821701EB1AD09B4600747B39 /* VRImageListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 821701EA1AD09B4600747B39 /* VRImageListView.m */; };
+		821701FA1AD0ABD900747B39 /* VRPhotoContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 821701F91AD0ABD900747B39 /* VRPhotoContentView.m */; };
+		821701FD1AD0AC8600747B39 /* VRAspectRatioImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 821701FC1AD0AC8600747B39 /* VRAspectRatioImageView.m */; };
+		821702001AD0AE8800747B39 /* VRAssetAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = 821701FF1AD0AE8800747B39 /* VRAssetAccessory.m */; };
+		821702031AD0AF6F00747B39 /* UIApplication+AppDimensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 821702021AD0AF6F00747B39 /* UIApplication+AppDimensions.m */; };
+		821702061AD0B20800747B39 /* icon_delete_photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 821702041AD0B20800747B39 /* icon_delete_photo@2x.png */; };
+		821702071AD0B20800747B39 /* icon_delete_photo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 821702051AD0B20800747B39 /* icon_delete_photo@3x.png */; };
+		8217022E1AD0BD3200747B39 /* ALAsset+accessibilityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8217020B1AD0BD3200747B39 /* ALAsset+accessibilityLabel.m */; };
+		8217022F1AD0BD3200747B39 /* ALAsset+assetType.m in Sources */ = {isa = PBXBuildFile; fileRef = 8217020D1AD0BD3200747B39 /* ALAsset+assetType.m */; };
+		821702301AD0BD3200747B39 /* ALAsset+isEqual.m in Sources */ = {isa = PBXBuildFile; fileRef = 8217020F1AD0BD3200747B39 /* ALAsset+isEqual.m */; };
+		821702311AD0BD3200747B39 /* ALAssetsGroup+isEqual.m in Sources */ = {isa = PBXBuildFile; fileRef = 821702111AD0BD3200747B39 /* ALAssetsGroup+isEqual.m */; };
+		821702321AD0BD3200747B39 /* NSDateFormatter+timeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 821702131AD0BD3200747B39 /* NSDateFormatter+timeIntervalFormatter.m */; };
+		821702331AD0BD3200747B39 /* CTAssetItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 821702151AD0BD3200747B39 /* CTAssetItemViewController.m */; };
+		821702341AD0BD3200747B39 /* CTAssetScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 821702171AD0BD3200747B39 /* CTAssetScrollView.m */; };
+		821702351AD0BD3200747B39 /* CTAssetsGroupViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 821702191AD0BD3200747B39 /* CTAssetsGroupViewCell.m */; };
+		821702361AD0BD3200747B39 /* CTAssetsGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8217021B1AD0BD3200747B39 /* CTAssetsGroupViewController.m */; };
+		821702371AD0BD3200747B39 /* CTAssetsPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8217021D1AD0BD3200747B39 /* CTAssetsPageViewController.m */; };
+		821702381AD0BD3200747B39 /* CTAssetsPicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8217021E1AD0BD3200747B39 /* CTAssetsPicker.xcassets */; };
+		821702391AD0BD3200747B39 /* CTAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 821702211AD0BD3200747B39 /* CTAssetsPickerController.m */; };
+		8217023A1AD0BD3200747B39 /* CTAssetsSupplementaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 821702231AD0BD3200747B39 /* CTAssetsSupplementaryView.m */; };
+		8217023B1AD0BD3200747B39 /* CTAssetsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 821702251AD0BD3200747B39 /* CTAssetsViewCell.m */; };
+		8217023C1AD0BD3200747B39 /* CTAssetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 821702271AD0BD3200747B39 /* CTAssetsViewController.m */; };
+		8217023D1AD0BD3200747B39 /* CTAssetsViewControllerTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 821702291AD0BD3200747B39 /* CTAssetsViewControllerTransition.m */; };
+		8217023E1AD0BD3200747B39 /* VCAppearanceConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 8217022B1AD0BD3200747B39 /* VCAppearanceConfig.m */; };
+		8217023F1AD0BD3200747B39 /* VCAssetAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8217022D1AD0BD3200747B39 /* VCAssetAccessory.m */; };
+		821702421AD0BF7100747B39 /* icon_arrow_topbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 821702401AD0BF7100747B39 /* icon_arrow_topbar@2x.png */; };
+		821702431AD0BF7100747B39 /* icon_arrow_topbar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 821702411AD0BF7100747B39 /* icon_arrow_topbar@3x.png */; };
+		821702461AD0BF8800747B39 /* bt_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 821702441AD0BF8800747B39 /* bt_cancel@2x.png */; };
+		821702471AD0BF8800747B39 /* bt_cancel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 821702451AD0BF8800747B39 /* bt_cancel@3x.png */; };
+		8217024A1AD0BFAC00747B39 /* bt_done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 821702481AD0BFAC00747B39 /* bt_done@2x.png */; };
+		8217024B1AD0BFAC00747B39 /* bt_done@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 821702491AD0BFAC00747B39 /* bt_done@3x.png */; };
+		8217024E1AD0BFC400747B39 /* bt_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8217024C1AD0BFC400747B39 /* bt_back@2x.png */; };
+		8217024F1AD0BFC400747B39 /* bt_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8217024D1AD0BFC400747B39 /* bt_back@3x.png */; };
 		82289B541AB7A7530069E821 /* speaker.png in Resources */ = {isa = PBXBuildFile; fileRef = 82289B531AB7A7530069E821 /* speaker.png */; };
 		823814D51AB9AD0400B00A02 /* SBTickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 823814D41AB9AD0400B00A02 /* SBTickerView.m */; };
 		823814DA1AB9AD1D00B00A02 /* SBDoubleSidedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 823814D71AB9AD1D00B00A02 /* SBDoubleSidedLayer.m */; };
@@ -25,12 +61,12 @@
 		8238C5A31AC36F350088EFE3 /* VRAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8238C5A11AC36F350088EFE3 /* VRAlertViewController.xib */; };
 		8238C5A61AC37CD40088EFE3 /* Repeat.m in Sources */ = {isa = PBXBuildFile; fileRef = 8238C5A51AC37CD40088EFE3 /* Repeat.m */; };
 		8238C5AC1AC37CD50088EFE3 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8238C5AB1AC37CD50088EFE3 /* Photo.m */; };
-		8238C5AF1AC37CD60088EFE3 /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 8238C5AE1AC37CD60088EFE3 /* Sound.m */; };
-		8238C5B21AC37DA30088EFE3 /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8238C5B11AC37DA30088EFE3 /* Reminder.m */; };
 		823EE36B1A6991330077C4B5 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 823EE3671A6991330077C4B5 /* 1.png */; };
 		823EE36C1A6991330077C4B5 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 823EE3681A6991330077C4B5 /* 2.png */; };
 		823EE36D1A6991330077C4B5 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 823EE3691A6991330077C4B5 /* 3.png */; };
 		823EE36E1A6991330077C4B5 /* tabbarbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 823EE36A1A6991330077C4B5 /* tabbarbg.png */; };
+		824721F41AEC90F2000066A5 /* SDAVAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 824721F31AEC90F2000066A5 /* SDAVAssetExportSession.m */; };
+		824DC8CA1ADA6258000B79D7 /* background-music-aac.caf in Resources */ = {isa = PBXBuildFile; fileRef = 824DC8C91ADA616A000B79D7 /* background-music-aac.caf */; };
 		824E75F11A7AE0680035C744 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 824E75F01A7AE0680035C744 /* AVFoundation.framework */; };
 		824E75F31A7AE0760035C744 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 824E75F21A7AE0760035C744 /* CoreAudio.framework */; };
 		824E765E1A7AF91E0035C744 /* VRReCordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824E76451A7AF91E0035C744 /* VRReCordViewController.m */; };
@@ -40,23 +76,25 @@
 		824E76621A7AF91E0035C744 /* VRReminderSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824E764D1A7AF91E0035C744 /* VRReminderSettingViewController.xib */; };
 		824E76631A7AF91E0035C744 /* VRCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824E76511A7AF91E0035C744 /* VRCalendarViewController.m */; };
 		824E76641A7AF91E0035C744 /* VRListReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824E76541A7AF91E0035C744 /* VRListReminderViewController.m */; };
-		824E76651A7AF91E0035C744 /* VRRemindersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824E76561A7AF91E0035C744 /* VRRemindersViewController.m */; };
 		824E76661A7AF91E0035C744 /* IQDropDownTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 824E765A1A7AF91E0035C744 /* IQDropDownTextField.m */; };
 		824E76671A7AF91E0035C744 /* VRReminderSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 824E765C1A7AF91E0035C744 /* VRReminderSettingCell.m */; };
 		824E76681A7AF91E0035C744 /* VRReminderSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824E765D1A7AF91E0035C744 /* VRReminderSettingCell.xib */; };
-		824E780F1A7AFA2C0035C744 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 824E766E1A7AFA2B0035C744 /* Person.m */; };
-		824E78641A7AFABA0035C744 /* VRPersonMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 824E78631A7AFABA0035C744 /* VRPersonMapping.m */; };
-		824E78671A7AFACA0035C744 /* VRPersonDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = 824E78661A7AFACA0035C744 /* VRPersonDTO.m */; };
 		824F2E721AB58B94009377AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 824F2E741AB58B94009377AD /* Localizable.strings */; };
 		824F2E781AB5D6EC009377AD /* icon_arrow_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 824F2E761AB5D6EB009377AD /* icon_arrow_right@2x.png */; };
 		824F2E791AB5D6EC009377AD /* icon_arrow_right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 824F2E771AB5D6EC009377AD /* icon_arrow_right@3x.png */; };
 		824F2E7C1AB5F710009377AD /* bt_edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 824F2E7A1AB5F710009377AD /* bt_edit@2x.png */; };
 		824F2E7D1AB5F710009377AD /* bt_edit@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 824F2E7B1AB5F710009377AD /* bt_edit@3x.png */; };
+		824F88E51AC76F6900FB4B5D /* VRRepeatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 824F88E41AC76F6900FB4B5D /* VRRepeatModel.m */; };
+		824F88E81AC7701B00FB4B5D /* VRRepeatMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 824F88E71AC7701B00FB4B5D /* VRRepeatMapping.m */; };
+		824F88EF1AC777C100FB4B5D /* VRSoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824F88ED1AC777C100FB4B5D /* VRSoundViewController.m */; };
+		824F88F01AC777C100FB4B5D /* VRSoundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824F88EE1AC777C100FB4B5D /* VRSoundViewController.xib */; };
+		824F88F41AC77B2300FB4B5D /* Re-record-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 824F88F31AC77B2300FB4B5D /* Re-record-icon.png */; };
 		82536D101A627F7200F4AA5B /* VRCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 82536D0F1A627F7200F4AA5B /* VRCommon.m */; };
 		8254EB491AC20CEB00D1C2CC /* VRNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8254EB471AC20CEB00D1C2CC /* VRNameViewController.m */; };
 		8254EB4A1AC20CEB00D1C2CC /* VRNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8254EB481AC20CEB00D1C2CC /* VRNameViewController.xib */; };
 		8254EB4E1AC2264600D1C2CC /* VRRepeatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8254EB4C1AC2264600D1C2CC /* VRRepeatViewController.m */; };
 		8254EB4F1AC2264600D1C2CC /* VRRepeatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8254EB4D1AC2264600D1C2CC /* VRRepeatViewController.xib */; };
+		825C4B921AD0557700C22B34 /* VRLocalNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 825C4B911AD0557700C22B34 /* VRLocalNotificationController.m */; };
 		8282C2921A67355F00A510D7 /* VRLocalizationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8282C2911A67355F00A510D7 /* VRLocalizationCenter.m */; };
 		829320181A7C2B0C00A3EAE5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 829320171A7C2B0C00A3EAE5 /* AppDelegate.m */; };
 		82A0DBE21AB0F2140071F419 /* VRReminderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A0DBE11AB0F2140071F419 /* VRReminderListCell.m */; };
@@ -76,6 +114,19 @@
 		82C302761A7E939400C854AA /* VRReminderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C302751A7E939400C854AA /* VRReminderModel.m */; };
 		82C3027C1A7EA11800C854AA /* VRReminderMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C3027B1A7EA11800C854AA /* VRReminderMapping.m */; };
 		82C302821A7EA4F000C854AA /* VRReminderSettingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C302811A7EA4F000C854AA /* VRReminderSettingService.m */; };
+		82C9C9361AD8804A000D77BC /* VRAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C9C9351AD8804A000D77BC /* VRAlertView.m */; };
+		82E31F0C1AD136840000B176 /* VCUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E31F0B1AD136840000B176 /* VCUtilities.m */; };
+		82E31F101AD13C0E0000B176 /* VRPhotoPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E31F0F1AD13C0E0000B176 /* VRPhotoPageController.m */; };
+		82E31F131AD145520000B176 /* VRPhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E31F121AD145520000B176 /* VRPhotoDetailViewController.m */; };
+		82E31F161AD1463C0000B176 /* VRPhotoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E31F151AD1463C0000B176 /* VRPhotoScrollView.m */; };
+		82E31F1C1AD183C00000B176 /* VRSoundMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E31F1B1AD183C00000B176 /* VRSoundMapping.m */; };
+		82E31F201AD1840B0000B176 /* VRSoundModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E31F1F1AD1840B0000B176 /* VRSoundModel.m */; };
+		82E31F241AD186B90000B176 /* VRSoundService.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E31F231AD186B90000B176 /* VRSoundService.m */; };
+		82F2A1951AD4746B006359C8 /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F2A1941AD4746B006359C8 /* Reminder.m */; };
+		82F2A1D31AD483AE006359C8 /* VRRemindersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F2A1D21AD483AE006359C8 /* VRRemindersViewController.m */; };
+		82F2A1D71AD483C2006359C8 /* VRReminderDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F2A1D51AD483C2006359C8 /* VRReminderDetailController.m */; };
+		82F2A1D81AD483C2006359C8 /* VRReminderDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82F2A1D61AD483C2006359C8 /* VRReminderDetailController.xib */; };
+		82F336AC1AE16D75008493AA /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F336AB1AE16D75008493AA /* Sound.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +138,66 @@
 		820B47B01AB647B000B6AD15 /* icon_edit_blue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_edit_blue@3x.png"; sourceTree = "<group>"; };
 		820B47B31AB64F1300B6AD15 /* VRNameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRNameCell.h; sourceTree = "<group>"; };
 		820B47B41AB64F1300B6AD15 /* VRNameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRNameCell.m; sourceTree = "<group>"; };
+		821701E21AD097E100747B39 /* icon_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_camera@2x.png"; sourceTree = "<group>"; };
+		821701E31AD097E100747B39 /* icon_camera@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_camera@3x.png"; sourceTree = "<group>"; };
+		821701E61AD09ACE00747B39 /* VRPhotoListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRPhotoListCell.h; sourceTree = "<group>"; };
+		821701E71AD09ACE00747B39 /* VRPhotoListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRPhotoListCell.m; sourceTree = "<group>"; };
+		821701E91AD09B4600747B39 /* VRImageListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRImageListView.h; sourceTree = "<group>"; };
+		821701EA1AD09B4600747B39 /* VRImageListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRImageListView.m; sourceTree = "<group>"; };
+		821701F81AD0ABD900747B39 /* VRPhotoContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRPhotoContentView.h; sourceTree = "<group>"; };
+		821701F91AD0ABD900747B39 /* VRPhotoContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRPhotoContentView.m; sourceTree = "<group>"; };
+		821701FB1AD0AC8600747B39 /* VRAspectRatioImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRAspectRatioImageView.h; sourceTree = "<group>"; };
+		821701FC1AD0AC8600747B39 /* VRAspectRatioImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRAspectRatioImageView.m; sourceTree = "<group>"; };
+		821701FE1AD0AE8800747B39 /* VRAssetAccessory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRAssetAccessory.h; sourceTree = "<group>"; };
+		821701FF1AD0AE8800747B39 /* VRAssetAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRAssetAccessory.m; sourceTree = "<group>"; };
+		821702011AD0AF6F00747B39 /* UIApplication+AppDimensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+AppDimensions.h"; sourceTree = "<group>"; };
+		821702021AD0AF6F00747B39 /* UIApplication+AppDimensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+AppDimensions.m"; sourceTree = "<group>"; };
+		821702041AD0B20800747B39 /* icon_delete_photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_delete_photo@2x.png"; sourceTree = "<group>"; };
+		821702051AD0B20800747B39 /* icon_delete_photo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_delete_photo@3x.png"; sourceTree = "<group>"; };
+		8217020A1AD0BD3200747B39 /* ALAsset+accessibilityLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+accessibilityLabel.h"; sourceTree = "<group>"; };
+		8217020B1AD0BD3200747B39 /* ALAsset+accessibilityLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+accessibilityLabel.m"; sourceTree = "<group>"; };
+		8217020C1AD0BD3200747B39 /* ALAsset+assetType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+assetType.h"; sourceTree = "<group>"; };
+		8217020D1AD0BD3200747B39 /* ALAsset+assetType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+assetType.m"; sourceTree = "<group>"; };
+		8217020E1AD0BD3200747B39 /* ALAsset+isEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+isEqual.h"; sourceTree = "<group>"; };
+		8217020F1AD0BD3200747B39 /* ALAsset+isEqual.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+isEqual.m"; sourceTree = "<group>"; };
+		821702101AD0BD3200747B39 /* ALAssetsGroup+isEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsGroup+isEqual.h"; sourceTree = "<group>"; };
+		821702111AD0BD3200747B39 /* ALAssetsGroup+isEqual.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsGroup+isEqual.m"; sourceTree = "<group>"; };
+		821702121AD0BD3200747B39 /* NSDateFormatter+timeIntervalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+timeIntervalFormatter.h"; sourceTree = "<group>"; };
+		821702131AD0BD3200747B39 /* NSDateFormatter+timeIntervalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+timeIntervalFormatter.m"; sourceTree = "<group>"; };
+		821702141AD0BD3200747B39 /* CTAssetItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetItemViewController.h; sourceTree = "<group>"; };
+		821702151AD0BD3200747B39 /* CTAssetItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetItemViewController.m; sourceTree = "<group>"; };
+		821702161AD0BD3200747B39 /* CTAssetScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetScrollView.h; sourceTree = "<group>"; };
+		821702171AD0BD3200747B39 /* CTAssetScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetScrollView.m; sourceTree = "<group>"; };
+		821702181AD0BD3200747B39 /* CTAssetsGroupViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsGroupViewCell.h; sourceTree = "<group>"; };
+		821702191AD0BD3200747B39 /* CTAssetsGroupViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsGroupViewCell.m; sourceTree = "<group>"; };
+		8217021A1AD0BD3200747B39 /* CTAssetsGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsGroupViewController.h; sourceTree = "<group>"; };
+		8217021B1AD0BD3200747B39 /* CTAssetsGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsGroupViewController.m; sourceTree = "<group>"; };
+		8217021C1AD0BD3200747B39 /* CTAssetsPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsPageViewController.h; sourceTree = "<group>"; };
+		8217021D1AD0BD3200747B39 /* CTAssetsPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsPageViewController.m; sourceTree = "<group>"; };
+		8217021E1AD0BD3200747B39 /* CTAssetsPicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CTAssetsPicker.xcassets; sourceTree = "<group>"; };
+		8217021F1AD0BD3200747B39 /* CTAssetsPickerCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsPickerCommon.h; sourceTree = "<group>"; };
+		821702201AD0BD3200747B39 /* CTAssetsPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsPickerController.h; sourceTree = "<group>"; };
+		821702211AD0BD3200747B39 /* CTAssetsPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsPickerController.m; sourceTree = "<group>"; };
+		821702221AD0BD3200747B39 /* CTAssetsSupplementaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsSupplementaryView.h; sourceTree = "<group>"; };
+		821702231AD0BD3200747B39 /* CTAssetsSupplementaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsSupplementaryView.m; sourceTree = "<group>"; };
+		821702241AD0BD3200747B39 /* CTAssetsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsViewCell.h; sourceTree = "<group>"; };
+		821702251AD0BD3200747B39 /* CTAssetsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsViewCell.m; sourceTree = "<group>"; };
+		821702261AD0BD3200747B39 /* CTAssetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsViewController.h; sourceTree = "<group>"; };
+		821702271AD0BD3200747B39 /* CTAssetsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsViewController.m; sourceTree = "<group>"; };
+		821702281AD0BD3200747B39 /* CTAssetsViewControllerTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsViewControllerTransition.h; sourceTree = "<group>"; };
+		821702291AD0BD3200747B39 /* CTAssetsViewControllerTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsViewControllerTransition.m; sourceTree = "<group>"; };
+		8217022A1AD0BD3200747B39 /* VCAppearanceConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCAppearanceConfig.h; sourceTree = "<group>"; };
+		8217022B1AD0BD3200747B39 /* VCAppearanceConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCAppearanceConfig.m; sourceTree = "<group>"; };
+		8217022C1AD0BD3200747B39 /* VCAssetAccessory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCAssetAccessory.h; sourceTree = "<group>"; };
+		8217022D1AD0BD3200747B39 /* VCAssetAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCAssetAccessory.m; sourceTree = "<group>"; };
+		821702401AD0BF7100747B39 /* icon_arrow_topbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_arrow_topbar@2x.png"; sourceTree = "<group>"; };
+		821702411AD0BF7100747B39 /* icon_arrow_topbar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_arrow_topbar@3x.png"; sourceTree = "<group>"; };
+		821702441AD0BF8800747B39 /* bt_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_cancel@2x.png"; sourceTree = "<group>"; };
+		821702451AD0BF8800747B39 /* bt_cancel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_cancel@3x.png"; sourceTree = "<group>"; };
+		821702481AD0BFAC00747B39 /* bt_done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_done@2x.png"; sourceTree = "<group>"; };
+		821702491AD0BFAC00747B39 /* bt_done@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_done@3x.png"; sourceTree = "<group>"; };
+		8217024C1AD0BFC400747B39 /* bt_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_back@2x.png"; sourceTree = "<group>"; };
+		8217024D1AD0BFC400747B39 /* bt_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_back@3x.png"; sourceTree = "<group>"; };
 		82289B531AB7A7530069E821 /* speaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speaker.png; sourceTree = "<group>"; };
 		823814D31AB9AD0400B00A02 /* SBTickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBTickerView.h; sourceTree = "<group>"; };
 		823814D41AB9AD0400B00A02 /* SBTickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTickerView.m; sourceTree = "<group>"; };
@@ -108,14 +219,13 @@
 		8238C5A51AC37CD40088EFE3 /* Repeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Repeat.m; sourceTree = "<group>"; };
 		8238C5AA1AC37CD50088EFE3 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		8238C5AB1AC37CD50088EFE3 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
-		8238C5AD1AC37CD60088EFE3 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
-		8238C5AE1AC37CD60088EFE3 /* Sound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sound.m; sourceTree = "<group>"; };
-		8238C5B01AC37DA30088EFE3 /* Reminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reminder.h; sourceTree = "<group>"; };
-		8238C5B11AC37DA30088EFE3 /* Reminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reminder.m; sourceTree = "<group>"; };
 		823EE3671A6991330077C4B5 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		823EE3681A6991330077C4B5 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		823EE3691A6991330077C4B5 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		823EE36A1A6991330077C4B5 /* tabbarbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarbg.png; sourceTree = "<group>"; };
+		824721F21AEC90F2000066A5 /* SDAVAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAVAssetExportSession.h; sourceTree = "<group>"; };
+		824721F31AEC90F2000066A5 /* SDAVAssetExportSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAVAssetExportSession.m; sourceTree = "<group>"; };
+		824DC8C91ADA616A000B79D7 /* background-music-aac.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "background-music-aac.caf"; sourceTree = "<group>"; };
 		824E75F01A7AE0680035C744 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		824E75F21A7AE0760035C744 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		824E76441A7AF91E0035C744 /* VRReCordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRReCordViewController.h; sourceTree = "<group>"; };
@@ -130,25 +240,25 @@
 		824E76511A7AF91E0035C744 /* VRCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRCalendarViewController.m; sourceTree = "<group>"; };
 		824E76531A7AF91E0035C744 /* VRListReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRListReminderViewController.h; sourceTree = "<group>"; };
 		824E76541A7AF91E0035C744 /* VRListReminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRListReminderViewController.m; sourceTree = "<group>"; };
-		824E76551A7AF91E0035C744 /* VRRemindersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRRemindersViewController.h; sourceTree = "<group>"; };
-		824E76561A7AF91E0035C744 /* VRRemindersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRRemindersViewController.m; sourceTree = "<group>"; };
 		824E76591A7AF91E0035C744 /* IQDropDownTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQDropDownTextField.h; sourceTree = "<group>"; };
 		824E765A1A7AF91E0035C744 /* IQDropDownTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQDropDownTextField.m; sourceTree = "<group>"; };
 		824E765B1A7AF91E0035C744 /* VRReminderSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRReminderSettingCell.h; sourceTree = "<group>"; };
 		824E765C1A7AF91E0035C744 /* VRReminderSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRReminderSettingCell.m; sourceTree = "<group>"; };
 		824E765D1A7AF91E0035C744 /* VRReminderSettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VRReminderSettingCell.xib; sourceTree = "<group>"; };
-		824E766D1A7AFA2B0035C744 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
-		824E766E1A7AFA2B0035C744 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
-		824E78621A7AFABA0035C744 /* VRPersonMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRPersonMapping.h; sourceTree = "<group>"; };
-		824E78631A7AFABA0035C744 /* VRPersonMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRPersonMapping.m; sourceTree = "<group>"; };
-		824E78651A7AFACA0035C744 /* VRPersonDTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRPersonDTO.h; sourceTree = "<group>"; };
-		824E78661A7AFACA0035C744 /* VRPersonDTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRPersonDTO.m; sourceTree = "<group>"; };
 		824F2E731AB58B94009377AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		824F2E751AB58BA6009377AD /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		824F2E761AB5D6EB009377AD /* icon_arrow_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_arrow_right@2x.png"; sourceTree = "<group>"; };
 		824F2E771AB5D6EC009377AD /* icon_arrow_right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_arrow_right@3x.png"; sourceTree = "<group>"; };
 		824F2E7A1AB5F710009377AD /* bt_edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_edit@2x.png"; sourceTree = "<group>"; };
 		824F2E7B1AB5F710009377AD /* bt_edit@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_edit@3x.png"; sourceTree = "<group>"; };
+		824F88E31AC76F6900FB4B5D /* VRRepeatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRRepeatModel.h; sourceTree = "<group>"; };
+		824F88E41AC76F6900FB4B5D /* VRRepeatModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRRepeatModel.m; sourceTree = "<group>"; };
+		824F88E61AC7701B00FB4B5D /* VRRepeatMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRRepeatMapping.h; sourceTree = "<group>"; };
+		824F88E71AC7701B00FB4B5D /* VRRepeatMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRRepeatMapping.m; sourceTree = "<group>"; };
+		824F88EC1AC777C100FB4B5D /* VRSoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRSoundViewController.h; sourceTree = "<group>"; };
+		824F88ED1AC777C100FB4B5D /* VRSoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRSoundViewController.m; sourceTree = "<group>"; };
+		824F88EE1AC777C100FB4B5D /* VRSoundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VRSoundViewController.xib; sourceTree = "<group>"; };
+		824F88F31AC77B2300FB4B5D /* Re-record-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Re-record-icon.png"; sourceTree = "<group>"; };
 		82536D0E1A627F7200F4AA5B /* VRCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRCommon.h; sourceTree = "<group>"; };
 		82536D0F1A627F7200F4AA5B /* VRCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRCommon.m; sourceTree = "<group>"; };
 		8254EB461AC20CEB00D1C2CC /* VRNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRNameViewController.h; sourceTree = "<group>"; };
@@ -157,6 +267,8 @@
 		8254EB4B1AC2264600D1C2CC /* VRRepeatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRRepeatViewController.h; sourceTree = "<group>"; };
 		8254EB4C1AC2264600D1C2CC /* VRRepeatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRRepeatViewController.m; sourceTree = "<group>"; };
 		8254EB4D1AC2264600D1C2CC /* VRRepeatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VRRepeatViewController.xib; sourceTree = "<group>"; };
+		825C4B901AD0557700C22B34 /* VRLocalNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRLocalNotificationController.h; sourceTree = "<group>"; };
+		825C4B911AD0557700C22B34 /* VRLocalNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRLocalNotificationController.m; sourceTree = "<group>"; };
 		8282C2901A67355F00A510D7 /* VRLocalizationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRLocalizationCenter.h; sourceTree = "<group>"; };
 		8282C2911A67355F00A510D7 /* VRLocalizationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRLocalizationCenter.m; sourceTree = "<group>"; };
 		829320161A7C2B0C00A3EAE5 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = VoiceReminder/Classes/AppDelegate/AppDelegate.h; sourceTree = SOURCE_ROOT; };
@@ -198,6 +310,31 @@
 		82C3027E1A7EA31100C854AA /* VRMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VRMacro.h; sourceTree = "<group>"; };
 		82C302801A7EA4F000C854AA /* VRReminderSettingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRReminderSettingService.h; sourceTree = "<group>"; };
 		82C302811A7EA4F000C854AA /* VRReminderSettingService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRReminderSettingService.m; sourceTree = "<group>"; };
+		82C9C9341AD8804A000D77BC /* VRAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRAlertView.h; sourceTree = "<group>"; };
+		82C9C9351AD8804A000D77BC /* VRAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRAlertView.m; sourceTree = "<group>"; };
+		82E31F0A1AD136840000B176 /* VCUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCUtilities.h; sourceTree = "<group>"; };
+		82E31F0B1AD136840000B176 /* VCUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCUtilities.m; sourceTree = "<group>"; };
+		82E31F0E1AD13C0E0000B176 /* VRPhotoPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRPhotoPageController.h; sourceTree = "<group>"; };
+		82E31F0F1AD13C0E0000B176 /* VRPhotoPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRPhotoPageController.m; sourceTree = "<group>"; };
+		82E31F111AD145520000B176 /* VRPhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRPhotoDetailViewController.h; sourceTree = "<group>"; };
+		82E31F121AD145520000B176 /* VRPhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRPhotoDetailViewController.m; sourceTree = "<group>"; };
+		82E31F141AD1463C0000B176 /* VRPhotoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRPhotoScrollView.h; sourceTree = "<group>"; };
+		82E31F151AD1463C0000B176 /* VRPhotoScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRPhotoScrollView.m; sourceTree = "<group>"; };
+		82E31F1A1AD183C00000B176 /* VRSoundMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRSoundMapping.h; sourceTree = "<group>"; };
+		82E31F1B1AD183C00000B176 /* VRSoundMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRSoundMapping.m; sourceTree = "<group>"; };
+		82E31F1E1AD1840B0000B176 /* VRSoundModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRSoundModel.h; sourceTree = "<group>"; };
+		82E31F1F1AD1840B0000B176 /* VRSoundModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRSoundModel.m; sourceTree = "<group>"; };
+		82E31F221AD186B90000B176 /* VRSoundService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRSoundService.h; sourceTree = "<group>"; };
+		82E31F231AD186B90000B176 /* VRSoundService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRSoundService.m; sourceTree = "<group>"; };
+		82F2A1931AD4746B006359C8 /* Reminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reminder.h; sourceTree = "<group>"; };
+		82F2A1941AD4746B006359C8 /* Reminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reminder.m; sourceTree = "<group>"; };
+		82F2A1D11AD483AE006359C8 /* VRRemindersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRRemindersViewController.h; sourceTree = "<group>"; };
+		82F2A1D21AD483AE006359C8 /* VRRemindersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRRemindersViewController.m; sourceTree = "<group>"; };
+		82F2A1D41AD483C2006359C8 /* VRReminderDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRReminderDetailController.h; sourceTree = "<group>"; };
+		82F2A1D51AD483C2006359C8 /* VRReminderDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRReminderDetailController.m; sourceTree = "<group>"; };
+		82F2A1D61AD483C2006359C8 /* VRReminderDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VRReminderDetailController.xib; sourceTree = "<group>"; };
+		82F336AA1AE16D75008493AA /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
+		82F336AB1AE16D75008493AA /* Sound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sound.m; sourceTree = "<group>"; };
 		A0EEC2D302155D15EA1B506F /* libPods-VoiceReminder.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VoiceReminder.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -215,6 +352,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		821702081AD0BD3200747B39 /* Asset Picker */ = {
+			isa = PBXGroup;
+			children = (
+				821702091AD0BD3200747B39 /* Categories */,
+				821702141AD0BD3200747B39 /* CTAssetItemViewController.h */,
+				821702151AD0BD3200747B39 /* CTAssetItemViewController.m */,
+				821702161AD0BD3200747B39 /* CTAssetScrollView.h */,
+				821702171AD0BD3200747B39 /* CTAssetScrollView.m */,
+				821702181AD0BD3200747B39 /* CTAssetsGroupViewCell.h */,
+				821702191AD0BD3200747B39 /* CTAssetsGroupViewCell.m */,
+				8217021A1AD0BD3200747B39 /* CTAssetsGroupViewController.h */,
+				8217021B1AD0BD3200747B39 /* CTAssetsGroupViewController.m */,
+				8217021C1AD0BD3200747B39 /* CTAssetsPageViewController.h */,
+				8217021D1AD0BD3200747B39 /* CTAssetsPageViewController.m */,
+				8217021E1AD0BD3200747B39 /* CTAssetsPicker.xcassets */,
+				8217021F1AD0BD3200747B39 /* CTAssetsPickerCommon.h */,
+				821702201AD0BD3200747B39 /* CTAssetsPickerController.h */,
+				821702211AD0BD3200747B39 /* CTAssetsPickerController.m */,
+				821702221AD0BD3200747B39 /* CTAssetsSupplementaryView.h */,
+				821702231AD0BD3200747B39 /* CTAssetsSupplementaryView.m */,
+				821702241AD0BD3200747B39 /* CTAssetsViewCell.h */,
+				821702251AD0BD3200747B39 /* CTAssetsViewCell.m */,
+				821702261AD0BD3200747B39 /* CTAssetsViewController.h */,
+				821702271AD0BD3200747B39 /* CTAssetsViewController.m */,
+				821702281AD0BD3200747B39 /* CTAssetsViewControllerTransition.h */,
+				821702291AD0BD3200747B39 /* CTAssetsViewControllerTransition.m */,
+				8217022A1AD0BD3200747B39 /* VCAppearanceConfig.h */,
+				8217022B1AD0BD3200747B39 /* VCAppearanceConfig.m */,
+				8217022C1AD0BD3200747B39 /* VCAssetAccessory.h */,
+				8217022D1AD0BD3200747B39 /* VCAssetAccessory.m */,
+			);
+			path = "Asset Picker";
+			sourceTree = "<group>";
+		};
+		821702091AD0BD3200747B39 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				8217020A1AD0BD3200747B39 /* ALAsset+accessibilityLabel.h */,
+				8217020B1AD0BD3200747B39 /* ALAsset+accessibilityLabel.m */,
+				8217020C1AD0BD3200747B39 /* ALAsset+assetType.h */,
+				8217020D1AD0BD3200747B39 /* ALAsset+assetType.m */,
+				8217020E1AD0BD3200747B39 /* ALAsset+isEqual.h */,
+				8217020F1AD0BD3200747B39 /* ALAsset+isEqual.m */,
+				821702101AD0BD3200747B39 /* ALAssetsGroup+isEqual.h */,
+				821702111AD0BD3200747B39 /* ALAssetsGroup+isEqual.m */,
+				821702121AD0BD3200747B39 /* NSDateFormatter+timeIntervalFormatter.h */,
+				821702131AD0BD3200747B39 /* NSDateFormatter+timeIntervalFormatter.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		8238C59A1AC33B850088EFE3 /* Repeat */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +425,19 @@
 		823EE3661A6991330077C4B5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				821702441AD0BF8800747B39 /* bt_cancel@2x.png */,
+				8217024C1AD0BFC400747B39 /* bt_back@2x.png */,
+				8217024D1AD0BFC400747B39 /* bt_back@3x.png */,
+				821702481AD0BFAC00747B39 /* bt_done@2x.png */,
+				821702491AD0BFAC00747B39 /* bt_done@3x.png */,
+				821702451AD0BF8800747B39 /* bt_cancel@3x.png */,
+				821702401AD0BF7100747B39 /* icon_arrow_topbar@2x.png */,
+				821702411AD0BF7100747B39 /* icon_arrow_topbar@3x.png */,
+				821702041AD0B20800747B39 /* icon_delete_photo@2x.png */,
+				821702051AD0B20800747B39 /* icon_delete_photo@3x.png */,
+				821701E21AD097E100747B39 /* icon_camera@2x.png */,
+				821701E31AD097E100747B39 /* icon_camera@3x.png */,
+				824F88F31AC77B2300FB4B5D /* Re-record-icon.png */,
 				8238C5981AC33B380088EFE3 /* assesory.png */,
 				82289B531AB7A7530069E821 /* speaker.png */,
 				820B47AF1AB647AF00B6AD15 /* icon_edit_blue@2x.png */,
@@ -276,6 +477,7 @@
 		824E76411A7AF91E0035C744 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				825C4B8F1AD0553400C22B34 /* Notification */,
 				824E76431A7AF91E0035C744 /* Record Screen */,
 				824E76421A7AF91E0035C744 /* Main Screen */,
 				824E764A1A7AF91E0035C744 /* Reminder Settings */,
@@ -318,6 +520,7 @@
 		824E764A1A7AF91E0035C744 /* Reminder Settings */ = {
 			isa = PBXGroup;
 			children = (
+				82E31F0D1AD13BDD0000B176 /* Photos */,
 				8238C59E1AC36F080088EFE3 /* Alert */,
 				8254EB421AC20CA300D1C2CC /* Name */,
 				8254EB431AC20CA300D1C2CC /* Repeat */,
@@ -332,10 +535,11 @@
 		824E764E1A7AF91E0035C744 /* Reminders */ = {
 			isa = PBXGroup;
 			children = (
+				82F2A1D11AD483AE006359C8 /* VRRemindersViewController.h */,
+				82F2A1D21AD483AE006359C8 /* VRRemindersViewController.m */,
+				82F2A1CD1AD482EF006359C8 /* Reminder Detail */,
 				824E764F1A7AF91E0035C744 /* Calendar */,
 				824E76521A7AF91E0035C744 /* List Reminder */,
-				824E76551A7AF91E0035C744 /* VRRemindersViewController.h */,
-				824E76561A7AF91E0035C744 /* VRRemindersViewController.m */,
 			);
 			path = Reminders;
 			sourceTree = "<group>";
@@ -378,6 +582,16 @@
 				824E765D1A7AF91E0035C744 /* VRReminderSettingCell.xib */,
 				820B47B31AB64F1300B6AD15 /* VRNameCell.h */,
 				820B47B41AB64F1300B6AD15 /* VRNameCell.m */,
+				821701E61AD09ACE00747B39 /* VRPhotoListCell.h */,
+				821701E71AD09ACE00747B39 /* VRPhotoListCell.m */,
+				821701E91AD09B4600747B39 /* VRImageListView.h */,
+				821701EA1AD09B4600747B39 /* VRImageListView.m */,
+				821701F81AD0ABD900747B39 /* VRPhotoContentView.h */,
+				821701F91AD0ABD900747B39 /* VRPhotoContentView.m */,
+				821701FB1AD0AC8600747B39 /* VRAspectRatioImageView.h */,
+				821701FC1AD0AC8600747B39 /* VRAspectRatioImageView.m */,
+				821701FE1AD0AE8800747B39 /* VRAssetAccessory.h */,
+				821701FF1AD0AE8800747B39 /* VRAssetAccessory.m */,
 			);
 			path = "Reminder Settings";
 			sourceTree = "<group>";
@@ -387,7 +601,6 @@
 			children = (
 				824E766C1A7AFA2B0035C744 /* Core Data */,
 				824E766F1A7AFA2B0035C744 /* Data mapping */,
-				824E780C1A7AFA2C0035C744 /* DTO */,
 			);
 			path = "Data model";
 			sourceTree = "<group>";
@@ -395,18 +608,16 @@
 		824E766C1A7AFA2B0035C744 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				824E766D1A7AFA2B0035C744 /* Person.h */,
-				824E766E1A7AFA2B0035C744 /* Person.m */,
 				82C3025E1A7E2F6F00C854AA /* BaseObject.h */,
 				82C3025F1A7E2F6F00C854AA /* BaseObject.m */,
-				8238C5AD1AC37CD60088EFE3 /* Sound.h */,
-				8238C5AE1AC37CD60088EFE3 /* Sound.m */,
 				8238C5AA1AC37CD50088EFE3 /* Photo.h */,
 				8238C5AB1AC37CD50088EFE3 /* Photo.m */,
 				8238C5A41AC37CD40088EFE3 /* Repeat.h */,
 				8238C5A51AC37CD40088EFE3 /* Repeat.m */,
-				8238C5B01AC37DA30088EFE3 /* Reminder.h */,
-				8238C5B11AC37DA30088EFE3 /* Reminder.m */,
+				82F2A1931AD4746B006359C8 /* Reminder.h */,
+				82F2A1941AD4746B006359C8 /* Reminder.m */,
+				82F336AA1AE16D75008493AA /* Sound.h */,
+				82F336AB1AE16D75008493AA /* Sound.m */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -414,23 +625,16 @@
 		824E766F1A7AFA2B0035C744 /* Data mapping */ = {
 			isa = PBXGroup;
 			children = (
-				824E78621A7AFABA0035C744 /* VRPersonMapping.h */,
-				824E78631A7AFABA0035C744 /* VRPersonMapping.m */,
 				82C302561A7E2ABF00C854AA /* NSManagedObject+voiceReminder.h */,
 				82C302571A7E2ABF00C854AA /* NSManagedObject+voiceReminder.m */,
 				82C3027A1A7EA11800C854AA /* VRReminderMapping.h */,
 				82C3027B1A7EA11800C854AA /* VRReminderMapping.m */,
+				824F88E61AC7701B00FB4B5D /* VRRepeatMapping.h */,
+				824F88E71AC7701B00FB4B5D /* VRRepeatMapping.m */,
+				82E31F1A1AD183C00000B176 /* VRSoundMapping.h */,
+				82E31F1B1AD183C00000B176 /* VRSoundMapping.m */,
 			);
 			path = "Data mapping";
-			sourceTree = "<group>";
-		};
-		824E780C1A7AFA2C0035C744 /* DTO */ = {
-			isa = PBXGroup;
-			children = (
-				824E78651A7AFACA0035C744 /* VRPersonDTO.h */,
-				824E78661A7AFACA0035C744 /* VRPersonDTO.m */,
-			);
-			path = DTO;
 			sourceTree = "<group>";
 		};
 		824E780D1A7AFA2C0035C744 /* Data service */ = {
@@ -448,9 +652,20 @@
 			path = SAO;
 			sourceTree = "<group>";
 		};
+		824F88E21AC76F4E00FB4B5D /* RepeatModel */ = {
+			isa = PBXGroup;
+			children = (
+				824F88E31AC76F6900FB4B5D /* VRRepeatModel.h */,
+				824F88E41AC76F6900FB4B5D /* VRRepeatModel.m */,
+			);
+			path = RepeatModel;
+			sourceTree = "<group>";
+		};
 		82536D071A6274AE00F4AA5B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				824721F21AEC90F2000066A5 /* SDAVAssetExportSession.h */,
+				824721F31AEC90F2000066A5 /* SDAVAssetExportSession.m */,
 				82536D0E1A627F7200F4AA5B /* VRCommon.h */,
 				82536D0F1A627F7200F4AA5B /* VRCommon.m */,
 			);
@@ -480,8 +695,22 @@
 		8254EB451AC20CA300D1C2CC /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				824F88EC1AC777C100FB4B5D /* VRSoundViewController.h */,
+				824F88ED1AC777C100FB4B5D /* VRSoundViewController.m */,
+				824F88EE1AC777C100FB4B5D /* VRSoundViewController.xib */,
 			);
 			path = Sound;
+			sourceTree = "<group>";
+		};
+		825C4B8F1AD0553400C22B34 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				825C4B901AD0557700C22B34 /* VRLocalNotificationController.h */,
+				825C4B911AD0557700C22B34 /* VRLocalNotificationController.m */,
+				82C9C9341AD8804A000D77BC /* VRAlertView.h */,
+				82C9C9351AD8804A000D77BC /* VRAlertView.m */,
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 		82A0DBDF1AB0F2010071F419 /* Reminder List */ = {
@@ -536,6 +765,7 @@
 				823EE3661A6991330077C4B5 /* Images */,
 				82A716F51A61A15200829BE5 /* Localization */,
 				82A716AC1A6188AA00829BE5 /* VoiceReminder.xcdatamodeld */,
+				824DC8C91ADA616A000B79D7 /* background-music-aac.caf */,
 				82A716B51A6188AA00829BE5 /* Images.xcassets */,
 				82A716A61A6188AA00829BE5 /* Info.plist */,
 				82C302551A7E28C600C854AA /* VoiceReminder-PrefixHeader.pch */,
@@ -595,6 +825,7 @@
 		82A716D41A618B2500829BE5 /* Bussiess Service */ = {
 			isa = PBXGroup;
 			children = (
+				82E31F211AD186AA0000B176 /* Sound */,
 				82A0DBE31AB0F81B0071F419 /* Reminder List */,
 				82C3027F1A7EA4DA00C854AA /* Reminder Setting */,
 			);
@@ -604,6 +835,8 @@
 		82A716D71A618B2500829BE5 /* Bussiness Model */ = {
 			isa = PBXGroup;
 			children = (
+				82E31F1D1AD183F80000B176 /* SoundModel */,
+				824F88E21AC76F4E00FB4B5D /* RepeatModel */,
 				82C302731A7E938000C854AA /* ReminderModel */,
 				82C302611A7E302E00C854AA /* BaseModel */,
 				82C302621A7E302E00C854AA /* PersonModel */,
@@ -614,6 +847,7 @@
 		82A716D91A618B2500829BE5 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				821702081AD0BD3200747B39 /* Asset Picker */,
 				82C3027D1A7EA2A200C854AA /* Config */,
 				82536D071A6274AE00F4AA5B /* Common */,
 				82A716DA1A618B2500829BE5 /* Helper */,
@@ -632,6 +866,10 @@
 		82A716DB1A618B2500829BE5 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				82E31F0A1AD136840000B176 /* VCUtilities.h */,
+				82E31F0B1AD136840000B176 /* VCUtilities.m */,
+				821702011AD0AF6F00747B39 /* UIApplication+AppDimensions.h */,
+				821702021AD0AF6F00747B39 /* UIApplication+AppDimensions.m */,
 				82B5CF251A6337470061AEF6 /* VREnumDefine.h */,
 				82B5CF261A6337470061AEF6 /* VREnumDefine.m */,
 			);
@@ -715,6 +953,47 @@
 			path = "Reminder Setting";
 			sourceTree = "<group>";
 		};
+		82E31F0D1AD13BDD0000B176 /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				82E31F0E1AD13C0E0000B176 /* VRPhotoPageController.h */,
+				82E31F0F1AD13C0E0000B176 /* VRPhotoPageController.m */,
+				82E31F111AD145520000B176 /* VRPhotoDetailViewController.h */,
+				82E31F121AD145520000B176 /* VRPhotoDetailViewController.m */,
+				82E31F141AD1463C0000B176 /* VRPhotoScrollView.h */,
+				82E31F151AD1463C0000B176 /* VRPhotoScrollView.m */,
+			);
+			path = Photos;
+			sourceTree = "<group>";
+		};
+		82E31F1D1AD183F80000B176 /* SoundModel */ = {
+			isa = PBXGroup;
+			children = (
+				82E31F1E1AD1840B0000B176 /* VRSoundModel.h */,
+				82E31F1F1AD1840B0000B176 /* VRSoundModel.m */,
+			);
+			path = SoundModel;
+			sourceTree = "<group>";
+		};
+		82E31F211AD186AA0000B176 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				82E31F221AD186B90000B176 /* VRSoundService.h */,
+				82E31F231AD186B90000B176 /* VRSoundService.m */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
+		82F2A1CD1AD482EF006359C8 /* Reminder Detail */ = {
+			isa = PBXGroup;
+			children = (
+				82F2A1D41AD483C2006359C8 /* VRReminderDetailController.h */,
+				82F2A1D51AD483C2006359C8 /* VRReminderDetailController.m */,
+				82F2A1D61AD483C2006359C8 /* VRReminderDetailController.xib */,
+			);
+			path = "Reminder Detail";
+			sourceTree = "<group>";
+		};
 		CB4F6116B0C8DF20052C4EC8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -794,27 +1073,44 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				824DC8CA1ADA6258000B79D7 /* background-music-aac.caf in Resources */,
 				824E76681A7AF91E0035C744 /* VRReminderSettingCell.xib in Resources */,
 				82A716B61A6188AA00829BE5 /* Images.xcassets in Resources */,
+				821702471AD0BF8800747B39 /* bt_cancel@3x.png in Resources */,
 				824F2E7C1AB5F710009377AD /* bt_edit@2x.png in Resources */,
 				82289B541AB7A7530069E821 /* speaker.png in Resources */,
 				824E76601A7AF91E0035C744 /* VRMainScreenViewController.xib in Resources */,
 				823EE36C1A6991330077C4B5 /* 2.png in Resources */,
+				821702431AD0BF7100747B39 /* icon_arrow_topbar@3x.png in Resources */,
 				820B47B21AB647B000B6AD15 /* icon_edit_blue@3x.png in Resources */,
+				8217024E1AD0BFC400747B39 /* bt_back@2x.png in Resources */,
+				821702461AD0BF8800747B39 /* bt_cancel@2x.png in Resources */,
 				824F2E721AB58B94009377AD /* Localizable.strings in Resources */,
 				8254EB4A1AC20CEB00D1C2CC /* VRNameViewController.xib in Resources */,
+				821702381AD0BD3200747B39 /* CTAssetsPicker.xcassets in Resources */,
+				821701E51AD097E100747B39 /* icon_camera@3x.png in Resources */,
+				821702071AD0B20800747B39 /* icon_delete_photo@3x.png in Resources */,
 				8238C5A31AC36F350088EFE3 /* VRAlertViewController.xib in Resources */,
 				824F2E7D1AB5F710009377AD /* bt_edit@3x.png in Resources */,
+				824F88F01AC777C100FB4B5D /* VRSoundViewController.xib in Resources */,
 				820B47B11AB647B000B6AD15 /* icon_edit_blue@2x.png in Resources */,
+				8217024F1AD0BFC400747B39 /* bt_back@3x.png in Resources */,
 				8254EB4F1AC2264600D1C2CC /* VRRepeatViewController.xib in Resources */,
+				821701E41AD097E100747B39 /* icon_camera@2x.png in Resources */,
+				824F88F41AC77B2300FB4B5D /* Re-record-icon.png in Resources */,
 				8238C5991AC33B380088EFE3 /* assesory.png in Resources */,
 				824F2E791AB5D6EC009377AD /* icon_arrow_right@3x.png in Resources */,
 				820B47AD1AB6478100B6AD15 /* icon_delete_blue@2x.png in Resources */,
+				821702061AD0B20800747B39 /* icon_delete_photo@2x.png in Resources */,
 				823EE36D1A6991330077C4B5 /* 3.png in Resources */,
 				823EE36B1A6991330077C4B5 /* 1.png in Resources */,
+				8217024B1AD0BFAC00747B39 /* bt_done@3x.png in Resources */,
+				821702421AD0BF7100747B39 /* icon_arrow_topbar@2x.png in Resources */,
 				820B47AE1AB6478100B6AD15 /* icon_delete_blue@3x.png in Resources */,
 				823EE36E1A6991330077C4B5 /* tabbarbg.png in Resources */,
 				824F2E781AB5D6EC009377AD /* icon_arrow_right@2x.png in Resources */,
+				8217024A1AD0BFAC00747B39 /* bt_done@2x.png in Resources */,
+				82F2A1D81AD483C2006359C8 /* VRReminderDetailController.xib in Resources */,
 				824E76621A7AF91E0035C744 /* VRReminderSettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -859,50 +1155,84 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				821702321AD0BD3200747B39 /* NSDateFormatter+timeIntervalFormatter.m in Sources */,
+				821702341AD0BD3200747B39 /* CTAssetScrollView.m in Sources */,
+				821702301AD0BD3200747B39 /* ALAsset+isEqual.m in Sources */,
+				8217022F1AD0BD3200747B39 /* ALAsset+assetType.m in Sources */,
+				8217023A1AD0BD3200747B39 /* CTAssetsSupplementaryView.m in Sources */,
 				8238C5AC1AC37CD50088EFE3 /* Photo.m in Sources */,
+				821702031AD0AF6F00747B39 /* UIApplication+AppDimensions.m in Sources */,
+				82E31F101AD13C0E0000B176 /* VRPhotoPageController.m in Sources */,
 				82C302821A7EA4F000C854AA /* VRReminderSettingService.m in Sources */,
 				82C3027C1A7EA11800C854AA /* VRReminderMapping.m in Sources */,
 				823814D51AB9AD0400B00A02 /* SBTickerView.m in Sources */,
+				821702331AD0BD3200747B39 /* CTAssetItemViewController.m in Sources */,
+				82E31F131AD145520000B176 /* VRPhotoDetailViewController.m in Sources */,
 				824E76661A7AF91E0035C744 /* IQDropDownTextField.m in Sources */,
+				82E31F201AD1840B0000B176 /* VRSoundModel.m in Sources */,
+				82F336AC1AE16D75008493AA /* Sound.m in Sources */,
+				821702371AD0BD3200747B39 /* CTAssetsPageViewController.m in Sources */,
 				82C302651A7E302E00C854AA /* VRPersonModel.m in Sources */,
+				824F88EF1AC777C100FB4B5D /* VRSoundViewController.m in Sources */,
 				8238C5A21AC36F350088EFE3 /* VRAlertViewController.m in Sources */,
 				824E76631A7AF91E0035C744 /* VRCalendarViewController.m in Sources */,
 				824E76641A7AF91E0035C744 /* VRListReminderViewController.m in Sources */,
+				8217023B1AD0BD3200747B39 /* CTAssetsViewCell.m in Sources */,
+				821701E81AD09ACE00747B39 /* VRPhotoListCell.m in Sources */,
 				8254EB491AC20CEB00D1C2CC /* VRNameViewController.m in Sources */,
-				824E76651A7AF91E0035C744 /* VRRemindersViewController.m in Sources */,
-				8238C5B21AC37DA30088EFE3 /* Reminder.m in Sources */,
+				82E31F1C1AD183C00000B176 /* VRSoundMapping.m in Sources */,
 				824E76611A7AF91E0035C744 /* VRReminderSettingViewController.m in Sources */,
 				8238C59D1AC33BAB0088EFE3 /* VRRepeatCell.m in Sources */,
-				824E780F1A7AFA2C0035C744 /* Person.m in Sources */,
-				8238C5AF1AC37CD60088EFE3 /* Sound.m in Sources */,
+				825C4B921AD0557700C22B34 /* VRLocalNotificationController.m in Sources */,
+				82C9C9361AD8804A000D77BC /* VRAlertView.m in Sources */,
 				824E765F1A7AF91E0035C744 /* VRMainScreenViewController.m in Sources */,
 				8254EB4E1AC2264600D1C2CC /* VRRepeatViewController.m in Sources */,
-				824E78671A7AFACA0035C744 /* VRPersonDTO.m in Sources */,
+				8217023E1AD0BD3200747B39 /* VCAppearanceConfig.m in Sources */,
 				82B5CF271A6337470061AEF6 /* VREnumDefine.m in Sources */,
 				823814E11AB9AD9700B00A02 /* SBTickView.m in Sources */,
 				82A716F81A61A29A00829BE5 /* VRLocalizeKey.m in Sources */,
+				824F88E51AC76F6900FB4B5D /* VRRepeatModel.m in Sources */,
+				82E31F0C1AD136840000B176 /* VCUtilities.m in Sources */,
+				821701FA1AD0ABD900747B39 /* VRPhotoContentView.m in Sources */,
+				824F88E81AC7701B00FB4B5D /* VRRepeatMapping.m in Sources */,
+				8217023C1AD0BD3200747B39 /* CTAssetsViewController.m in Sources */,
+				8217023D1AD0BD3200747B39 /* CTAssetsViewControllerTransition.m in Sources */,
 				82A0DBE21AB0F2140071F419 /* VRReminderListCell.m in Sources */,
+				82E31F241AD186B90000B176 /* VRSoundService.m in Sources */,
+				821702391AD0BD3200747B39 /* CTAssetsPickerController.m in Sources */,
+				8217022E1AD0BD3200747B39 /* ALAsset+accessibilityLabel.m in Sources */,
 				823814DB1AB9AD1D00B00A02 /* SBGradientOverlayLayer.m in Sources */,
+				82F2A1D71AD483C2006359C8 /* VRReminderDetailController.m in Sources */,
+				82F2A1D31AD483AE006359C8 /* VRRemindersViewController.m in Sources */,
 				82A716AE1A6188AA00829BE5 /* VoiceReminder.xcdatamodeld in Sources */,
 				820B47B51AB64F1300B6AD15 /* VRNameCell.m in Sources */,
 				824E76671A7AF91E0035C744 /* VRReminderSettingCell.m in Sources */,
 				82536D101A627F7200F4AA5B /* VRCommon.m in Sources */,
 				82C302681A7E304000C854AA /* BaseModel.m in Sources */,
+				821702351AD0BD3200747B39 /* CTAssetsGroupViewCell.m in Sources */,
+				824721F41AEC90F2000066A5 /* SDAVAssetExportSession.m in Sources */,
 				824E765E1A7AF91E0035C744 /* VRReCordViewController.m in Sources */,
 				82C302581A7E2ABF00C854AA /* NSManagedObject+voiceReminder.m in Sources */,
+				821701FD1AD0AC8600747B39 /* VRAspectRatioImageView.m in Sources */,
 				823814DE1AB9AD3200B00A02 /* UIView+SBExtras.m in Sources */,
 				8238C5A61AC37CD40088EFE3 /* Repeat.m in Sources */,
 				823814DA1AB9AD1D00B00A02 /* SBDoubleSidedLayer.m in Sources */,
+				821702001AD0AE8800747B39 /* VRAssetAccessory.m in Sources */,
+				82E31F161AD1463C0000B176 /* VRPhotoScrollView.m in Sources */,
 				82C302711A7E337100C854AA /* CircleProgressView.m in Sources */,
 				82C302601A7E2F6F00C854AA /* BaseObject.m in Sources */,
+				821702361AD0BD3200747B39 /* CTAssetsGroupViewController.m in Sources */,
+				8217023F1AD0BD3200747B39 /* VCAssetAccessory.m in Sources */,
+				821701EB1AD09B4600747B39 /* VRImageListView.m in Sources */,
 				8282C2921A67355F00A510D7 /* VRLocalizationCenter.m in Sources */,
 				82A716A81A6188AA00829BE5 /* main.m in Sources */,
 				82C3026C1A7E336400C854AA /* Session.m in Sources */,
-				824E78641A7AFABA0035C744 /* VRPersonMapping.m in Sources */,
 				82C302721A7E337100C854AA /* CircleShapeLayer.m in Sources */,
 				829320181A7C2B0C00A3EAE5 /* AppDelegate.m in Sources */,
 				82A0DBE61AB0F8370071F419 /* VRReminderListService.m in Sources */,
 				82C302761A7E939400C854AA /* VRReminderModel.m in Sources */,
+				82F2A1951AD4746B006359C8 /* Reminder.m in Sources */,
+				821702311AD0BD3200747B39 /* ALAssetsGroup+isEqual.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

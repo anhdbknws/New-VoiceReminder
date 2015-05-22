@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0640"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B30AB1FE145AC5559F5F51EA"
+               BlueprintIdentifier = "16E1C7F792515431B3258534"
                BuildableName = "libPods-VoiceReminder-JTCalendar.a"
                BlueprintName = "Pods-VoiceReminder-JTCalendar"
                ReferencedContainer = "container:Pods.xcodeproj">

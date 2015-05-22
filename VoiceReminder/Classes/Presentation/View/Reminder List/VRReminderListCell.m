@@ -45,29 +45,27 @@
     [self.contentView addSubview:self.name];
     [self.contentView addSubview:self.timeReminder];
     [self.contentView addSubview:self.lineSeparate];
-    [self.contentView addSubview:self.arrowView];
-//    self.contentView.backgroundColor = H1_COLOR;
+    [self.contentView addSubview:self.switchButton];
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
     // autolayout for components
-    [_name autoPinEdgeToSuperviewEdge:ALEdgeTop];
-    [_name autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:10];
-    [_name autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:_arrowView withOffset:18];
-    [_name autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:_timeReminder];
-    
-    [_timeReminder autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_name];
+    [_timeReminder autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:5];
     [_timeReminder autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:10];
-    [_timeReminder autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:_arrowView withOffset:18];
-    [_timeReminder autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:_lineSeparate];
+    [_timeReminder autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:_switchButton withOffset:18];
+    [_timeReminder autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:_name];
     
-    [_arrowView autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:15];
-    [_arrowView autoSetDimension:ALDimensionWidth toSize:8];
-    [_arrowView autoSetDimension:ALDimensionHeight toSize:12];
-    [_arrowView autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
+    [_name autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_timeReminder];
+    [_name autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:10];
+    [_name autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:_switchButton withOffset:18];
+    [_name autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:_lineSeparate];
     
+    [_switchButton autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:15];
+    [_switchButton autoSetDimension:ALDimensionWidth toSize:50];
+    [_switchButton autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
+
     [_lineSeparate autoPinEdgeToSuperviewEdge:ALEdgeLeading];
     [_lineSeparate autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
     [_lineSeparate autoPinEdgeToSuperviewEdge:ALEdgeBottom];
@@ -98,12 +96,16 @@
     return _lineSeparate;
 }
 
-- (UIImageView *)arrowView {
-    if (!_arrowView) {
-        _arrowView = [[UIImageView alloc] init];
+- (UISwitch *)switchButton {
+    if (!_switchButton) {
+        _switchButton = [[UISwitch alloc] initForAutoLayout];
+        [_switchButton addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    return _arrowView;
+    return _switchButton;
 }
 
+- (void)changeSwitch:(id)sender {
+    NSLog(@"dsds");
+}
 @end

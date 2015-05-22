@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "VRMainScreenViewController.h"
+#import "VRLocalNotificationController.h"
+#import "VRCommon.h"
+#import "VRAlertView.h"
 
 static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
 @interface AppDelegate ()
@@ -15,9 +18,22 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
 @end
 
 @implementation AppDelegate
-
+{
+    NSDate *currentDate;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+    }
+    
+    // Handle launching from a notification
+    
+    if (launchOptions[UIApplicationLaunchOptionsLocalNotificationKey] != nil){
+        UILocalNotification *notification = launchOptions[UIApplicationLaunchOptionsLocalNotificationKey];
+        [self application:application didReceiveLocalNotification:notification];
+    }
     
     //1. setting core data
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"VRDeleteDatabaseCount1"]) {
@@ -39,8 +55,6 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
     self.window.rootViewController = navi;
     [self.window makeKeyAndVisible];
     
-    
-//    [self configureUI];
     return YES;
 }
 
@@ -64,9 +78,25 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
     }
 }
 
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:@"Handling the local notification"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:@"Cancel", nil];
+    
+    VRAlertView *view = [[VRAlertView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, 100)];
+    [alert setValue:view forKey:@"accessoryView"];
+    view.backgroundColor = [UIColor redColor];
+    [alert show];
+}
+
 - (void)configureUI {
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0],NSFontAttributeName: [UIFont fontWithName:@"Arial-Bold" size:0.0]}];
 }
+
+
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -83,6 +113,8 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

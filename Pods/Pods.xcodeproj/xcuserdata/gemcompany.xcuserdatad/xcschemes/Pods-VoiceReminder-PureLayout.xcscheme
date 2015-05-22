@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0640"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "465318B61F0D96EAFE902816"
+               BlueprintIdentifier = "CF1359E88D3E897CC9F4C43C"
                BuildableName = "libPods-VoiceReminder-PureLayout.a"
                BlueprintName = "Pods-VoiceReminder-PureLayout"
                ReferencedContainer = "container:Pods.xcodeproj">

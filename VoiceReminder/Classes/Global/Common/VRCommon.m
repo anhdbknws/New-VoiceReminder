@@ -130,5 +130,13 @@ static NSDateFormatter *fm = nil;
 {
     return [NSSortDescriptor sortDescriptorWithKey:@"createdDate" ascending:NO];
 }
+
++ (NSString *)removeWhiteSpace:(NSString *)inputString {
+    if (!inputString) {
+        return nil;
+    }
+    
+    return [inputString stringByReplacingOccurrencesOfString:@" " withString:@""];
+}
 @end
 

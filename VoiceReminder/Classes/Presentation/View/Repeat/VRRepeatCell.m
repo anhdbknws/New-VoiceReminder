@@ -33,6 +33,7 @@
 - (void)initView {
     [self.contentView addSubview:self.titleLable];
     [self.contentView addSubview:self.imageV];
+    [self.contentView addSubview:self.rightArrow];
     [self.contentView addSubview:self.bottomLine];
 }
 
@@ -48,6 +49,10 @@
     [_imageV autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:15];
     [_imageV autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
     [_imageV autoSetDimension:ALDimensionWidth toSize:25];
+    
+    [_rightArrow autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:15];
+    [_rightArrow autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
+    [_rightArrow autoSetDimension:ALDimensionWidth toSize:8];
     
     [_bottomLine autoPinEdgeToSuperviewEdge:ALEdgeLeading];
     [_bottomLine autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
@@ -79,5 +84,13 @@
     }
     
     return _bottomLine;
+}
+
+- (UIImageView *)rightArrow {
+    if (!_rightArrow) {
+        _rightArrow = [[UIImageView alloc] initForAutoLayout];
+    }
+    
+    return _rightArrow;
 }
 @end

@@ -2,7 +2,7 @@
 //  Sound.m
 //  VoiceReminder
 //
-//  Created by GemCompany on 3/25/15.
+//  Created by GemCompany on 4/17/15.
 //  Copyright (c) 2015 Owner. All rights reserved.
 //
 
@@ -14,6 +14,9 @@
 
 @dynamic name;
 @dynamic url;
+@dynamic isMp3Sound;
+@dynamic isRecordSound;
+@dynamic isSystemSound;
 @dynamic reminder;
 
 @end

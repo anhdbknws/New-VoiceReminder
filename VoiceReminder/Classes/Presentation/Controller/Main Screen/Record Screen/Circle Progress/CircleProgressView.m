@@ -36,9 +36,16 @@
     [super layoutSubviews];
     
     self.progressLayer.frame = self.bounds;
-    
+    self.progressLabel.backgroundColor = [UIColor clearColor];
     [self.progressLabel sizeToFit];
-    self.progressLabel.center = CGPointMake(self.center.x - self.frame.origin.x, self.center.y- self.frame.origin.y);
+    
+    NSLog(@"%f ---------- %f", self.frame.origin.x, self.frame.origin.y);
+    
+//    self.progressLabel.center = CGPointMake(self.center.x - self.frame.origin.x, self.center.y- self.frame.origin.y);
+    
+    [self.progressLabel autoCenterInSuperview];
+    [self.progressLabel autoSetDimension:ALDimensionWidth toSize:100];
+    
 }
 
 - (void)updateConstraints {
@@ -48,7 +55,7 @@
 - (UILabel *)progressLabel
 {
     if (!_progressLabel) {
-        _progressLabel = [[UILabel alloc] initWithFrame:self.bounds];
+        _progressLabel = [[UILabel alloc] initForAutoLayout];
         _progressLabel.numberOfLines = 2;
         _progressLabel.textAlignment = NSTextAlignmentCenter;
         _progressLabel.backgroundColor = [UIColor clearColor];

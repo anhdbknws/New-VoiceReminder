@@ -1,11 +1,12 @@
 PODS:
-  - JTCalendar (1.2.3)
+  - JTCalendar (1.2.2)
   - MagicalRecord (2.2):
     - MagicalRecord/Core (= 2.2)
   - MagicalRecord/Core (2.2)
   - MBProgressHUD (0.9.1)
-  - PureLayout (2.0.6)
+  - PureLayout (2.0.5)
   - SWTableViewCell (0.3.7)
+  - WYPopoverController (0.3.7)
 
 DEPENDENCIES:
   - JTCalendar (~> 1.1)
@@ -13,12 +14,14 @@ DEPENDENCIES:
   - MBProgressHUD (~> 0.9)
   - PureLayout (~> 2.0)
   - SWTableViewCell (~> 0.3)
+  - WYPopoverController (~> 0.3)
 
 SPEC CHECKSUMS:
-  JTCalendar: 246ea3e338fb97624846ec77cdcde448242c4d5c
+  JTCalendar: 35f2fcc3513cdc31e68818f27c3faa8388cfa04a
   MagicalRecord: f8a56bb87ab6552f20c4bb8681a1958a197ea3cd
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  PureLayout: f25f0bb904d5ccfe6e31da3cb869185259f02e0d
+  PureLayout: a0fe75f1cf485801e7e00b723b8a3c32dca558e2
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
+  WYPopoverController: ebefa50c477bdbbd9dc992dfdffafa168c4484eb
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.35.0

@@ -11,5 +11,6 @@
 @interface VRListReminderViewController : UIViewController
 @property (nonatomic, strong) UISegmentedControl *segmentControl;
 @property (nonatomic, strong) UITableView *listEvents;
+@property (nonatomic, strong) UIViewController *rootViewController;
 - (void)editAction;
 @end

@@ -19,10 +19,23 @@
 #import "VRNameViewController.h"
 #import "VRRepeatViewController.h"
 #import "VRAlertViewController.h"
+#import "VRSoundViewController.h"
+#import "VRPhotoListCell.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "CTAssetsPickerController.h"
+#import "VCAppearanceConfig.h"
+#import "VCUtilities.h"
+#import "CTAssetItemViewController.h"
+#import "VCAssetAccessory.h"
+#import "VRPhotoPageController.h"
+#import "VRSoundModel.h"
+#import "VRRepeatModel.h"
 
 static NSString * const kImageArrow = @"icon_arrow_right";
+const NSInteger kPhotoActionSheetTag = 3249;
 
-@interface VRReminderSettingViewController ()<UITableViewDataSource, UITableViewDelegate, IQDropDownTextFieldDelegate, UITextFieldDelegate, AVAudioPlayerDelegate>
+@interface VRReminderSettingViewController ()<UITableViewDataSource, UITableViewDelegate, IQDropDownTextFieldDelegate, UITextFieldDelegate, AVAudioPlayerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, CTAssetsPickerControllerDelegate>
+
 @property (nonatomic, strong)AVAudioPlayer *audioPlayer;
 @property (nonatomic, strong) VRReminderModel *model;
 @property (nonatomic, assign) BOOL isLoading;
@@ -74,17 +87,20 @@ static NSString * const kImageArrow = @"icon_arrow_right";
     self.datePicker.minimumDate = [NSDate date];
     self.datePicker.backgroundColor = [UIColor whiteColor];
     self.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+    [self.datePicker addTarget:self action:@selector(datePickerDateChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)configureTableview {
     self.settingTableview.backgroundColor = [UIColor whiteColor];
-    self.settingTableview.scrollEnabled = NO;
+    self.settingTableview.scrollEnabled = YES
+    ;
     self.settingTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.settingTableview.dataSource = self;
     self.settingTableview.delegate   = self;
     
     [self.settingTableview registerNib:[UINib nibWithNibName:NSStringFromClass([VRReminderSettingCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([VRReminderSettingCell class])];
+    [self.settingTableview registerClass:[VRPhotoListCell class] forCellReuseIdentifier:NSStringFromClass([VRPhotoListCell class])];
 }
 
 
@@ -97,9 +113,29 @@ static NSString * const kImageArrow = @"icon_arrow_right";
 }
 
 - (void)prepareData{
-    self.model.name = @"Name";
+    
     self.listRepeat = [NSMutableArray new];
+    
+    self.model.name = @"Name";
+    self.model.repeats = [NSMutableArray new];
     self.model.alertReminder = ALERT_TYPE_AT_EVENT_TIME;
+    self.model.timeReminder = [VRCommon commonFormatFromDateTime:[NSDate date]];
+   
+    self.model.soundModel = [[VRSoundModel alloc] init];
+    
+    if (self.audioRecordingURL) {
+        self.model.soundModel.name = @"Audio recorded";
+        self.model.soundModel.url = [self.audioRecordingURL absoluteString];
+        self.model.soundModel.isRecordSound = YES;
+    }
+    else {
+        self.model.soundModel.name = @"Default";
+        self.model.soundModel.isDefaultObject = YES;
+        
+        NSString *backgroundMusicPath = [[NSBundle mainBundle] pathForResource:@"background-music-aac" ofType:@"caf"];
+        NSURL *backgroundMusicURL = [NSURL fileURLWithPath:backgroundMusicPath];
+        self.model.soundModel.url = [NSString stringWithFormat:@"%@", backgroundMusicURL];
+    }
 }
 
 - (void)viewWillLayoutSubviews {
@@ -112,12 +148,12 @@ static NSString * const kImageArrow = @"icon_arrow_right";
         return REMINDER_SETTING_TYPE_SOUND + 1;
     }
     else
-        return 1;
+        return _model.photoList.count > 0 ? 1:0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (tableView == self.settingTableview) {
-        return 1;
+        return 2;
     }
     else
         return 0;
@@ -125,7 +161,7 @@ static NSString * const kImageArrow = @"icon_arrow_right";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        return [self getsoundCellAtIndexPath:indexPath];
+        return [self getPhotoCellAtIndexPath:indexPath];
     }
     else {
         if (indexPath.row == REMINDER_SETTING_TYPE_NAME) {
@@ -147,6 +183,25 @@ static NSString * const kImageArrow = @"icon_arrow_right";
     return 30;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
+    headerView.backgroundColor = [UIColor colorWithRed:238/255.0 green:237/255.0 blue:242/255.0 alpha:1];
+    if (section == 1) {
+        UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(headerView.frame.origin.x + 15, 0, 60, 30)];
+        labelTitle.textColor = [UIColor redColor];
+        labelTitle.text = @"Photos";
+        [headerView addSubview:labelTitle];
+        
+        
+        UIButton *buttonRight = [[UIButton alloc] initWithFrame:CGRectMake(headerView.frame.size.width - 40, 0, 30, 30)];
+        [buttonRight setImage:[UIImage imageNamed:@"icon_camera"] forState:UIControlStateNormal];
+        [buttonRight addTarget:self action:@selector(choosePhoto:) forControlEvents:UIControlEventTouchUpInside];
+        [headerView addSubview:buttonRight];
+    }
+    
+    return headerView;
+}
+
 - (VRReminderSettingCell *)getNameCellAtIndexPath:(NSIndexPath *)indexPath {
     VRReminderSettingCell *cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderSettingCell class]) forIndexPath:indexPath];
     cell.titleLabel.text = @"Name";
@@ -164,7 +219,7 @@ static NSString * const kImageArrow = @"icon_arrow_right";
     cell.textfield.font = H1_FONT;
     cell.textfield.tag = REMINDER_SETTING_TYPE_REPEAT;
     cell.textfield.delegate = self;
-    cell.textfield.text = [self getRepeatString];
+    cell.textfield.text = [self.service getRepeatStringFrom:_listRepeat];
     
     [cell.arrowView setImage:[UIImage imageNamed:@"icon_arrow_right"]];
     return cell;
@@ -189,43 +244,50 @@ static NSString * const kImageArrow = @"icon_arrow_right";
     cell.textfield.font = H1_FONT;
     cell.textfield.tag = REMINDER_SETTING_TYPE_SOUND;
     cell.textfield.delegate = self;
-    cell.textfield.text = @"Default";
+    cell.textfield.text = self.model.soundModel.name;
     
     [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
     
     return cell;
 }
 
+- (VRPhotoListCell *)getPhotoCellAtIndexPath:(NSIndexPath *)indexPath {
+    VRPhotoListCell * cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRPhotoListCell class])];
+    cell.photoList = _model.photoList;
+    cell.editingMode  = YES;
+    
+    __weak typeof(self)weak = self;
+    cell.didDeleteCompletionBlock = ^(NSInteger index){
+        __strong typeof(weak)strong = weak;
+        if (strong) {
+            [strong.model.photoList removeObjectAtIndex:index];
+            if ([strong.model.photoList count] == 0) {
+                [weak.settingTableview reloadData];
+            }
+        }
+    };
+    cell.didSelectImage = ^(NSInteger index) {
+        [weak showPhotoPageControllerAtIndex:index];
+    };
+    return cell;
+}
+
 - (void)doneClicked:(id)sender {
     [self.view endEditing:YES];
 }
+
 #pragma mark - tableview delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.settingTableview) {
-        return 44;
+        if (indexPath.section == 1) {
+            return [VRPhotoListCell height];
+        }
+        else {
+            return 44;
+        }
     }
     else
         return 0;
-}
-
-#pragma mark - store data to model
-- (void)storeDataToModel:(UITextField *)textField {
-    switch (textField.tag) {
-        case REMINDER_SETTING_TYPE_REPEAT:
-//            _model.repeatReminder = [VREnumDefine repeatTypeIntegerFromString:textField.text];
-            break;
-        case REMINDER_SETTING_TYPE_ALERT:
-            _model.alertReminder = [VREnumDefine alertTypeIntegerFromString:textField.text];
-            break;
-        case REMINDER_SETTING_TYPE_SOUND:
-            _model.nameOfSound = textField.text;
-            break;
-        case REMINDER_SETTING_TYPE_NAME:
-            _model.name = textField.text;
-            break;
-        default:
-            break;
-    }
 }
 
 #pragma mark - Actions
@@ -267,34 +329,10 @@ static NSString * const kImageArrow = @"icon_arrow_right";
     }
 }
 
-- (void)playAction:(id)sender {
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:self.audioRecordingURL error:nil];
-    /* Did we get an instance of AVAudioPlayer? */
-    if (self.audioPlayer != nil){
-        /* Set the delegate and start playing */
-        self.audioPlayer.delegate = self;
-        if ([self.audioPlayer prepareToPlay] &&
-            [self.audioPlayer play]){
-            /* Successfully started playing */
-        }
-        else {
-            NSLog(@"failed to play");
-        }
-    }
-    else {
-        NSLog(@"failed to instantiate avaudioplayer");
-    }
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 #pragma  mark - dismiss keyboard
 - (BOOL) textFieldShouldReturn:(UITextField *)textField{
     [self.view endEditing:YES];
     [textField resignFirstResponder];
-    [self storeDataToModel:textField];
     return YES;
 }
 
@@ -313,11 +351,22 @@ static NSString * const kImageArrow = @"icon_arrow_right";
         [self setAlertValue];
         return NO;
     }
+    else if (textField.tag == REMINDER_SETTING_TYPE_SOUND) {
+        [self setSoundValue];
+        return NO;
+    }
     
     return YES;
 }
 
 #pragma mark - set value setting
+
+- (void) datePickerDateChanged:(UIDatePicker *)paramDatePicker{
+    if ([paramDatePicker isEqual:self.datePicker]){
+        NSLog(@"Selected date = %@", paramDatePicker.date);
+        _model.timeReminder = [VRCommon commonFormatFromDateTime:paramDatePicker.date];
+    }
+}
 - (void)setName {
     VRNameViewController *Vc = [[VRNameViewController alloc] initWithNibName:NSStringFromClass([VRNameViewController class]) bundle:nil];
     
@@ -341,15 +390,35 @@ static NSString * const kImageArrow = @"icon_arrow_right";
     __weak typeof (self)weak = self;
     VC.selectedCompleted = ^(NSMutableArray *listRepeatSelected) {
         __strong typeof (weak)strong = weak;
-        
         strong.listRepeat = listRepeatSelected;
-        
+        strong.model.repeats = [strong saveListRepeatToModel:listRepeatSelected];
         dispatch_async(dispatch_get_main_queue(), ^{
             [strong.settingTableview reloadData];
         });
     };
     
     [self.navigationController pushViewController:VC animated:YES];
+}
+
+- (NSMutableArray *)saveListRepeatToModel:(NSMutableArray *)listRepeat {
+    NSMutableArray *listEnum = [NSMutableArray new];
+    VRRepeatModel *model = [[VRRepeatModel alloc] init];
+    if (listRepeat.count == 7) {
+        model.repeatType = REPEAT_TYPE_EVERYDAY;
+        [listEnum addObject:model];
+    }
+    else if (!listRepeat.count) {
+        model.repeatType = REPEAT_TYPE_NERER;
+        [listEnum addObject:model];
+    }
+    else {
+        for (NSString *item in listRepeat) {
+            model.repeatType = [VREnumDefine repeatTypeIntegerFromString:item];
+            [listEnum addObject:model];
+        }
+    }
+    
+    return listEnum;
 }
 
 - (void)setAlertValue {
@@ -368,104 +437,161 @@ static NSString * const kImageArrow = @"icon_arrow_right";
     [self.navigationController pushViewController:VC animated:YES];
 }
 
+- (void)setSoundValue {
+    VRSoundViewController *vc = [[VRSoundViewController alloc] initWithNibName:NSStringFromClass([VRSoundViewController class]) bundle:nil];
+    vc.selectedSoundModel = self.model.soundModel;
+    
+    __weak typeof (self)weak = self;
+    vc.selectedSoundCompleted = ^(VRSoundModel *soundModel) {
+        __strong typeof (weak)strong = weak;
+        if (!strong) {
+            return ;
+        }
+        
+        strong.model.soundModel = [soundModel copy];
+        [strong.settingTableview reloadData];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 #pragma mark - dissmiss keyboard
 -(void)dismissKeyboard {
     [self.view endEditing:YES];
 }
 
-#pragma mark - helper
-- (NSString *)getRepeatString {
-    NSString *fullString = nil;
-    if (self.listRepeat.count == 7) {
-        fullString = @"Every day";
-    }
-    else if (!self.listRepeat.count) {
-        fullString = @"Never";
-    }
-    else if (self.listRepeat.count == 1) {
-        fullString = [self.listRepeat objectAtIndex:0];
+#pragma mark -photos
+- (void)choosePhoto:(id)sender {
+    [self.view endEditing:YES];
+    [self showPhotoActionSheet];
+}
+
+- (void)showPhotoActionSheet {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo", @"Choose From Library", nil];
+    actionSheet.tag = kPhotoActionSheetTag;
+    actionSheet.delegate = self;
+    [actionSheet showInView:self.view];
+}
+
+#pragma mark - actionsheet delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if ([actionSheet cancelButtonIndex] == buttonIndex) {
+        return;
     }
     else {
-        NSMutableArray *temp = [NSMutableArray new];
-        NSMutableArray *tempRepeat = [self sortOrderDayInWeekly];
-        for (NSString *item in tempRepeat) {
-            if ([item isEqualToString:@"Every Monday"]) {
-               [temp addObject:@"Mon"];
-            }
-            else if ([item isEqualToString:@"Every Tuesday"]) {
-                [temp addObject:@"Tue"];
-            }
-            else if ([item isEqualToString:@"Every Wednesday"]) {
-                [temp addObject:@"Wed"];
-            }
-            else if ([item isEqualToString:@"Every Thursday"]) {
-                [temp addObject:@"Thu"];
-            }
-            else if ([item isEqualToString:@"Every Friday"]) {
-                [temp addObject:@"Fri"];
-            }
-            else if ([item isEqualToString:@"Every Saturday"]) {
-                [temp addObject:@"Sat"];
-            }
-            else {
-                [temp addObject:@"Sun"];
-            }
+        switch (buttonIndex) {
+            case 0:
+                [self showCameraPicker];
+                break;
+            case 1:
+                [self chooseImageFromLibrary];
+                break;
+            default:
+                break;
         }
+    }
+}
+
+- (void)showCameraPicker {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        picker.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+        picker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+        picker.showsCameraControls = YES;
         
-        fullString = [temp componentsJoinedByString:@" "];
+        [self.navigationController presentViewController:picker animated:YES completion:^ {
+        }];
     }
-    
-    return fullString;
 }
 
-- (NSMutableArray *)sortOrderDayInWeekly {
-    NSMutableArray *temp = [NSMutableArray new];
-    for (NSString *item in self.listRepeat) {
-        if ([item isEqualToString:@"Every Monday"]) {
-            [temp addObject:item];
-        }
-    }
-    
-    for (NSString *item in self.listRepeat) {
-        if ([item isEqualToString:@"Every Tuesday"]) {
-            [temp addObject:item];
-        }
-    }
-    
-    for (NSString *item in self.listRepeat) {
-        if ([item isEqualToString:@"Every Wednesday"]) {
-            [temp addObject:item];
-        }
-    }
-    
-    for (NSString *item in self.listRepeat) {
-        if ([item isEqualToString:@"Every Thursday"]) {
-            [temp addObject:item];
-        }
-    }
-    
-    for (NSString *item in self.listRepeat) {
-        if ([item isEqualToString:@"Every Friday"]) {
-            [temp addObject:item];
-        }
-    }
-    
-    for (NSString *item in self.listRepeat) {
-        if ([item isEqualToString:@"Every Saturday"]) {
-            [temp addObject:item];
-        }
-    }
-    
-    for (NSString *item in self.listRepeat) {
-        if ([item isEqualToString:@"Every Sunday"]) {
-            [temp addObject:item];
-        }
-    }
-    
-    return temp;
+- (void)chooseImageFromLibrary {
+    [VCAppearanceConfig sharedConfig].prefixAssetsPickerTitle = @"Upload From";
+    CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] initWithAssetFilterType:ALAssetTypePhoto];
+    picker.delegate = self;
+    [self.navigationController presentViewController:picker animated:YES completion:nil];
 }
 
-#pragma mark -photos
+#pragma mark - Assets Picker Delegate
 
+- (BOOL)assetsPickerController:(CTAssetsPickerController *)picker isDefaultAssetsGroup:(ALAssetsGroup *)group
+{
+    return ([[group valueForProperty:ALAssetsGroupPropertyType] integerValue] == ALAssetsGroupSavedPhotos);
+}
+
+- (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets
+{
+    if (picker.selectedAssets.count > 0) {
+        MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = @"Loading...";
+        [picker dismissViewControllerAnimated:YES completion:^{
+            for (ALAsset * asset in picker.selectedAssets) {
+                NSString * url = [VCAssetAccessory saveAssetToDocument:asset];
+                [_model.photoList addObject:url];
+            }
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [self.settingTableview reloadData];
+            [self.settingTableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }];
+    }
+    else {
+        [picker dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+    }
+}
+
+- (BOOL)assetsPickerController:(CTAssetsPickerController *)picker shouldEnableAsset:(ALAsset *)asset
+{
+    if ([[asset valueForProperty:ALAssetPropertyType] isEqual:ALAssetTypeVideo])
+    {
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
+}
+
+- (BOOL)assetsPickerController:(CTAssetsPickerController *)picker shouldSelectAsset:(ALAsset *)asset
+{
+    return (asset.defaultRepresentation != nil);
+}
+
+#pragma mark - photo controller delegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
+    if(!img)
+        img = [info objectForKey:UIImagePickerControllerOriginalImage];
+    if (img) {
+        MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = @"Loading ...";
+        [picker dismissViewControllerAnimated:YES completion:^{
+            NSString * url = [VCAssetAccessory saveImageToDocument:img];
+            if (url.length) {
+                [_model.photoList addObject:url];
+            }
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [self.settingTableview reloadData];
+        }];
+    }
+    else {
+        [picker dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+    }
+}
+
+#pragma mark - photo detail
+
+- (void)showPhotoPageControllerAtIndex:(NSInteger)index
+{
+    VRPhotoPageController * photoPageController = [[VRPhotoPageController alloc] initWithPhotos:_model.photoList];
+    [photoPageController setPageIndex:index];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:photoPageController];
+    [[VCUtilities topViewController] presentViewController:navController animated:YES completion:NULL];
+}
 @end
