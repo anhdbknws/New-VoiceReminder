@@ -44,17 +44,17 @@
     return _photoList;
 }
 
-- (VRSoundModel *)soundModel {
-    if (!_soundModel) {
+- (VRSoundModel *)musicSoundModel {
+    if (!_musicSoundModel) {
         if (_entity.sound) {
-            _soundModel = [[VRSoundModel alloc] initWithEntity:_entity.sound];
+            _musicSoundModel = [[VRSoundModel alloc] initWithEntity:_entity.sound];
         }
         else {
-            _soundModel = [VRSoundModel new];
+            _musicSoundModel = [VRSoundModel new];
         }
     }
     
-    return _soundModel;
+    return _musicSoundModel;
 }
 
 - (NSMutableArray *)repeats {
@@ -77,7 +77,7 @@
     object.photoList = [self.photoList copyWithZone:zone];
     object.isActive = self.isActive;
     object.alertReminder = self.alertReminder;
-    object.soundModel = [self.soundModel copyWithZone:zone];
+    object.musicSoundModel = [self.musicSoundModel copyWithZone:zone];
     object.entity = self.entity;
     return object;
 }

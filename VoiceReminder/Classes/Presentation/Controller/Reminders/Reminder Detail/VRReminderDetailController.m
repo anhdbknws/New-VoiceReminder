@@ -192,7 +192,7 @@
             valueString = [VREnumDefine alertTypeStringFrom:_model.alertReminder];
             break;
         case REMINDER_DETAIL_ROW_TYPE_SOUND:
-            valueString = _model.soundModel.name;
+            valueString = _model.musicSoundModel.name;
             break;
         case REMINDER_DETAIL_ROW_TYPE_PHOTO:
             valueString = nil;
@@ -219,7 +219,7 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (textField.tag == REMINDER_DETAIL_ROW_TYPE_SOUND) {
         if (!self.isPlaying) {
-            self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:_model.soundModel.url] error:nil];
+            self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:_model.musicSoundModel.url] error:nil];
             self.isPlaying = YES;
             /* Did we get an instance of AVAudioPlayer? */
             if (self.audioPlayer != nil){

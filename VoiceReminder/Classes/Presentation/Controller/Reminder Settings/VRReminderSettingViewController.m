@@ -121,21 +121,11 @@ const NSInteger kPhotoActionSheetTag = 3249;
     self.model.alertReminder = ALERT_TYPE_AT_EVENT_TIME;
     self.model.timeReminder = [VRCommon commonFormatFromDateTime:[NSDate date]];
    
-    self.model.soundModel = [[VRSoundModel alloc] init];
+    self.model.musicSoundModel= [[VRSoundModel alloc] init];
+    self.model.musicSoundModel.name = @"Audio recorded"; // review
+    self.model.musicSoundModel.url = [self.audioRecordingURL absoluteString];
     
-    if (self.audioRecordingURL) {
-        self.model.soundModel.name = @"Audio recorded";
-        self.model.soundModel.url = [self.audioRecordingURL absoluteString];
-        self.model.soundModel.isRecordSound = YES;
-    }
-    else {
-        self.model.soundModel.name = @"Default";
-        self.model.soundModel.isDefaultObject = YES;
-        
-        NSString *backgroundMusicPath = [[NSBundle mainBundle] pathForResource:@"background-music-aac" ofType:@"caf"];
-        NSURL *backgroundMusicURL = [NSURL fileURLWithPath:backgroundMusicPath];
-        self.model.soundModel.url = [NSString stringWithFormat:@"%@", backgroundMusicURL];
-    }
+    self.model.shortSound = @"background";
 }
 
 - (void)viewWillLayoutSubviews {
@@ -145,7 +135,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
 #pragma mark - tableview datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return REMINDER_SETTING_TYPE_SOUND + 1;
+        return REMINDER_SETTING_TYPE_SHORT_SOUND + 1;
     }
     else
         return _model.photoList.count > 0 ? 1:0;
@@ -173,8 +163,11 @@ const NSInteger kPhotoActionSheetTag = 3249;
         else if (indexPath.row == REMINDER_SETTING_TYPE_ALERT) {
             return [self getAlertCellAtIndexPath:indexPath];
         }
-        else {
+        else if (indexPath.row == REMINDER_SETTING_TYPE_MUSIC_SOUND){
             return [self getsoundCellAtIndexPath:indexPath];
+        }
+        else {
+            return [self configureShortSoundAtIndexPath:indexPath];
         }
     }
 }
@@ -204,7 +197,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (VRReminderSettingCell *)getNameCellAtIndexPath:(NSIndexPath *)indexPath {
     VRReminderSettingCell *cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderSettingCell class]) forIndexPath:indexPath];
-    cell.titleLabel.text = @"Name";
+    cell.titleLabel.text = @"Label";
     cell.textfield.font = H1_FONT;
     cell.textfield.tag = REMINDER_SETTING_TYPE_NAME;
     cell.textfield.delegate = self;
@@ -240,14 +233,25 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (VRReminderSettingCell *)getsoundCellAtIndexPath:(NSIndexPath *)indexPath {
     VRReminderSettingCell *cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderSettingCell class]) forIndexPath:indexPath];
-    cell.titleLabel.text = @"Sound";
+    cell.titleLabel.text = @"Music/sound";
     cell.textfield.font = H1_FONT;
-    cell.textfield.tag = REMINDER_SETTING_TYPE_SOUND;
+    cell.textfield.tag = REMINDER_SETTING_TYPE_MUSIC_SOUND;
     cell.textfield.delegate = self;
-    cell.textfield.text = self.model.soundModel.name;
+    cell.textfield.text = self.model.musicSoundModel.name;
     
     [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
     
+    return cell;
+}
+
+- (VRReminderSettingCell *)configureShortSoundAtIndexPath:(NSIndexPath *)indexPath {
+    VRReminderSettingCell *cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderSettingCell class]) forIndexPath:indexPath];
+    cell.titleLabel.text = @"Short sound";
+    cell.textfield.font = H1_FONT;
+    cell.textfield.tag = REMINDER_SETTING_TYPE_SHORT_SOUND;
+    cell.textfield.delegate = self;
+    
+    [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
     return cell;
 }
 
@@ -351,7 +355,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
         [self setAlertValue];
         return NO;
     }
-    else if (textField.tag == REMINDER_SETTING_TYPE_SOUND) {
+    else if (textField.tag == REMINDER_SETTING_TYPE_MUSIC_SOUND) {
         [self setSoundValue];
         return NO;
     }
@@ -439,7 +443,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (void)setSoundValue {
     VRSoundViewController *vc = [[VRSoundViewController alloc] initWithNibName:NSStringFromClass([VRSoundViewController class]) bundle:nil];
-    vc.selectedSoundModel = self.model.soundModel;
+    vc.selectedSoundModel = self.model.musicSoundModel;
     
     __weak typeof (self)weak = self;
     vc.selectedSoundCompleted = ^(VRSoundModel *soundModel) {
@@ -448,7 +452,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
             return ;
         }
         
-        strong.model.soundModel = [soundModel copy];
+        strong.model.musicSoundModel = [soundModel copy];
         [strong.settingTableview reloadData];
     };
     [self.navigationController pushViewController:vc animated:YES];

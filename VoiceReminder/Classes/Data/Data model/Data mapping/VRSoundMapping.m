@@ -17,32 +17,32 @@
 
 @implementation VRSoundMapping
 + (Sound *)entityFromModel:(VRReminderModel *)model inContext:(NSManagedObjectContext *)context {
-    Sound *entity = [Sound entityWithUuid:model.soundModel.uuid inContext:context];
+    Sound *entity = [Sound entityWithUuid:model.musicSoundModel.uuid inContext:context];
     
-    if (model.soundModel.url.length && model.soundModel.isRecordSound) {
+    if (model.musicSoundModel.url.length && model.musicSoundModel.isRecordSound) {
         entity.url = [[self class] saveAudioToDocumentFolder:model];
-        entity.isRecordSound =[NSNumber numberWithBool:model.soundModel.isRecordSound];
+        entity.isRecordSound =[NSNumber numberWithBool:model.musicSoundModel.isRecordSound];
     }
-    else if (model.soundModel.url.length && model.soundModel.isDefaultObject) {
-        entity.url = model.soundModel.url;
+    else if (model.musicSoundModel.url.length && model.musicSoundModel.isDefaultObject) {
+        entity.url = model.musicSoundModel.url;
     }
-    else if (model.soundModel.mp3Url && model.soundModel.isMp3Sound){
-        entity.isMp3Sound = [NSNumber numberWithBool:model.soundModel.isMp3Sound];
+    else if (model.musicSoundModel.mp3Url && model.musicSoundModel.isMp3Sound){
+        entity.isMp3Sound = [NSNumber numberWithBool:model.musicSoundModel.isMp3Sound];
         entity.url = [[self class] saveMediaItemToDocument:model];
     }
     else {
         // system sound
-        entity.isSystemSound = [NSNumber numberWithBool:model.soundModel.isSystemSound];
+        entity.isSystemSound = [NSNumber numberWithBool:model.musicSoundModel.isSystemSound];
     }
     
-    entity.name = model.soundModel.name;
+    entity.name = model.musicSoundModel.name;
 
     return entity;
 }
 
 + (NSString *)saveAudioToDocumentFolder:(VRReminderModel *)model {
     // get content
-    NSData *data = [[self class] getContentWithURL:model.soundModel];
+    NSData *data = [[self class] getContentWithURL:model.musicSoundModel];
     
     NSString *fileName = [[self class] checkDuplicateFileName:model.name];
     
@@ -58,13 +58,13 @@
 
 + (NSString *)saveMediaItemToDocument:(VRReminderModel *)model {
     
-    AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL: model.soundModel.mp3Url options:nil];
+    AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL: model.musicSoundModel.mp3Url options:nil];
     
     //Now create an AVAssetExportSession object that will save your final audio file at specified path.
     AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset: songAsset presetName:AVAssetExportPresetAppleM4A];
     exporter.outputFileType = AVFileTypeAppleM4A;
     
-    NSString *fileName = [[self class] checkDuplicateFileName:[VRCommon removeWhiteSpace:model.soundModel.name]];
+    NSString *fileName = [[self class] checkDuplicateFileName:[VRCommon removeWhiteSpace:model.musicSoundModel.name]];
     NSString *exportFile = [[[self class] documentsDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.m4a", fileName]];
     NSURL *exportURL = [NSURL fileURLWithPath:exportFile];
     exporter.outputURL = exportURL;

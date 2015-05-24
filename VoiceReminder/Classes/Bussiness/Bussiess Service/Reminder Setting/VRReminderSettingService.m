@@ -55,12 +55,8 @@
     notification.alertAction = NSLocalizedString(@"View", nil);
     /* Badge settings */
     notification.applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
-    
-    NSString *backgroundMusicPath = [[NSBundle mainBundle] pathForResource:[VRCommon removeWhiteSpace:model.soundModel.name] ofType:@"m4a"];
-    
-    
-    
-    notification.soundName = [[VRCommon removeWhiteSpace:model.soundModel.name] stringByAppendingString:@".m4a"];
+    /* sound */
+    notification.soundName = model.shortSound;
     /* Additional information, user info */
     notification.userInfo = @{model.uuid : @"uuid", @"Alarm": @"VoiceReminder"};
     /* Schedule the notification */

@@ -23,6 +23,7 @@
     entity.timeReminder = [[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder];
     entity.createdDate = model.createdDate;
     entity.isActive = [NSNumber numberWithBool:YES];
+    entity.shortSound = model.shortSound;
     
     [entity removeRepeats:entity.repeats];
     for (VRRepeatModel *object in model.repeats) {
