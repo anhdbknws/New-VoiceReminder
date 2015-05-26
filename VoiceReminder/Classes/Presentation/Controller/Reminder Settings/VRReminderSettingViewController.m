@@ -30,6 +30,8 @@
 #import "VRPhotoPageController.h"
 #import "VRSoundModel.h"
 #import "VRRepeatModel.h"
+#import "VRSettingNotesCell.h"
+#import "VRTextView.h"
 
 static NSString * const kImageArrow = @"icon_arrow_right";
 const NSInteger kPhotoActionSheetTag = 3249;
@@ -101,6 +103,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     
     [self.settingTableview registerNib:[UINib nibWithNibName:NSStringFromClass([VRReminderSettingCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([VRReminderSettingCell class])];
     [self.settingTableview registerClass:[VRPhotoListCell class] forCellReuseIdentifier:NSStringFromClass([VRPhotoListCell class])];
+    [self.settingTableview registerNib:[UINib nibWithNibName:NSStringFromClass([VRSettingNotesCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([VRSettingNotesCell class])];
 }
 
 
@@ -135,7 +138,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
 #pragma mark - tableview datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return REMINDER_SETTING_TYPE_SHORT_SOUND + 1;
+        return REMINDER_SETTING_TYPE_NOTES + 1;
     }
     else
         return _model.photoList.count > 0 ? 1:0;
@@ -166,8 +169,11 @@ const NSInteger kPhotoActionSheetTag = 3249;
         else if (indexPath.row == REMINDER_SETTING_TYPE_MUSIC_SOUND){
             return [self getsoundCellAtIndexPath:indexPath];
         }
-        else {
+        else if (indexPath.row == REMINDER_SETTING_TYPE_SHORT_SOUND){
             return [self configureShortSoundAtIndexPath:indexPath];
+        }
+        else {
+            return [self configureNotesCellAtIndexPath:indexPath];
         }
     }
 }
@@ -252,6 +258,13 @@ const NSInteger kPhotoActionSheetTag = 3249;
     cell.textfield.delegate = self;
     
     [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
+    return cell;
+}
+
+- (VRSettingNotesCell *)configureNotesCellAtIndexPath:(NSIndexPath *)indexPath {
+    VRSettingNotesCell *cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRSettingNotesCell class]) forIndexPath:indexPath];
+    cell.labelTitle.text = @"Notes:";
+    cell.arrowView.image = [UIImage imageNamed:kImageArrow];
     return cell;
 }
 

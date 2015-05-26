@@ -7,7 +7,7 @@
 //
 
 #import "VRAlertView.h"
-
+static NSTimeInterval const kAnimationDuration = 1.0;
 @implementation VRAlertView
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -58,4 +58,45 @@
     return _imageView;
 }
 
+#pragma mark - animation
+- (void)animation {
+    self.imageView.animationImages = nil;
+    self.imageView.animationDuration = kAnimationDuration;
+    self.imageView.animationRepeatCount  = 1;
+    [self.imageView startAnimating];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kAnimationDuration * NSEC_PER_SEC), dispatch_get_main_queue(), ^
+                   {
+                       [self stopAnimateImages];
+                   });
+}
+
+
+- (void)stopAnimateImages
+{
+    [self.imageView stopAnimating];
+    self.imageView.image = [self.imageView.animationImages lastObject];
+    self.imageView.animationImages = nil;
+}
+
+#pragma mark - CreateImagesArray
+
+- (NSArray *)createImagesArray
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (NSInteger index = 0; index <= 16; index++)
+    {
+        NSString *imageName = [NSString stringWithFormat:@"frame_%03ld.png", (long)index];
+        
+        NSString *path = [[NSBundle mainBundle] pathForResource:imageName
+                                                         ofType:nil];
+        
+        // Allocating images with imageWithContentsOfFile makes images to do not cache.
+        UIImage *image = [UIImage imageWithContentsOfFile:path];
+        
+        [array addObject:image];
+    }
+    
+    return array;
+}
 @end
