@@ -52,12 +52,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VoiceReminder/Classes/Presentation/Controller/Reminder Settings/VRReminderSettingViewController.m"
-            timestampString = "450521159.196729"
+            timestampString = "454435916.716558"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "566"
-            endingLineNumber = "566"
-            landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
+            startingLineNumber = "570"
+            endingLineNumber = "570"
+            landmarkName = "-assetsPickerController:shouldEnableAsset:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,22 +74,6 @@
             startingLineNumber = "63"
             endingLineNumber = "63"
             landmarkName = "-scheduleLocalNotificationWith:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VoiceReminder/Classes/Data/Data model/Data mapping/VRSoundMapping.m"
-            timestampString = "452532606.019222"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "+saveMediaItemToDocument:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

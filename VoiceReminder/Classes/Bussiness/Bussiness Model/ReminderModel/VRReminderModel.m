@@ -25,6 +25,7 @@
         self.alertReminder  = [entity.alertReminder integerValue];
         self.timeReminder   = [[VRCommon commonDateTimeFormat] stringFromDate:entity.timeReminder];
         self.isActive       = entity.isActive.boolValue;
+        self.notes          = entity.notes;
     }
     
     return self;
@@ -44,17 +45,18 @@
     return _photoList;
 }
 
-- (VRSoundModel *)musicSoundModel {
-    if (!_musicSoundModel) {
+- (NSMutableArray *)soundModels {
+    if (!_soundModels) {
+        _soundModels = [NSMutableArray new];
         if (_entity.sound) {
-            _musicSoundModel = [[VRSoundModel alloc] initWithEntity:_entity.sound];
-        }
-        else {
-            _musicSoundModel = [VRSoundModel new];
+            for (Sound *object in _entity.sound) {
+                VRSoundModel *model = [[VRSoundModel alloc] initWithEntity:object];
+                [_soundModels addObject:model];
+            }
         }
     }
     
-    return _musicSoundModel;
+    return _soundModels;
 }
 
 - (NSMutableArray *)repeats {
@@ -77,7 +79,7 @@
     object.photoList = [self.photoList copyWithZone:zone];
     object.isActive = self.isActive;
     object.alertReminder = self.alertReminder;
-    object.musicSoundModel = [self.musicSoundModel copyWithZone:zone];
+    object.soundModels = [self.soundModels copyWithZone:zone];
     object.entity = self.entity;
     return object;
 }

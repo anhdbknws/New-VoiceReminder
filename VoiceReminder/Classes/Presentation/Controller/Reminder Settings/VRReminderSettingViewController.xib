@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VRReminderSettingViewController">
             <connections>
-                <outlet property="constraintTopDatePicker" destination="mpI-UH-lho" id="p9w-eA-NG4"/>
+                <outlet property="constraintBottomContentView" destination="Jey-aN-acX" id="OSD-WM-WZ4"/>
+                <outlet property="constraintTopContentView" destination="gw2-9T-DOS" id="EXa-is-K3a"/>
                 <outlet property="datePicker" destination="oB9-dL-KxG" id="udf-nh-N15"/>
                 <outlet property="settingTableview" destination="cZw-MX-0dn" id="Cwz-SH-NYo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -18,29 +19,42 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="oB9-dL-KxG">
-                    <rect key="frame" x="0.0" y="1" width="320" height="200"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="200" id="lef-8q-1RX"/>
-                    </constraints>
-                    <date key="date" timeIntervalSinceReferenceDate="448874310.65960199">
-                        <!--2015-03-24 07:18:30 +0000-->
-                    </date>
-                </datePicker>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="cZw-MX-0dn">
-                    <rect key="frame" x="0.0" y="205" width="320" height="363"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rja-Xc-kh1">
+                    <rect key="frame" x="0.0" y="1" width="320" height="567"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="oB9-dL-KxG">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="180" id="lef-8q-1RX"/>
+                            </constraints>
+                            <date key="date" timeIntervalSinceReferenceDate="448874310.65960199">
+                                <!--2015-03-24 07:18:30 +0000-->
+                            </date>
+                        </datePicker>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="cZw-MX-0dn">
+                            <rect key="frame" x="0.0" y="180" width="320" height="387"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </tableView>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </tableView>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="cZw-MX-0dn" secondAttribute="trailing" id="2er-oT-Rck"/>
+                        <constraint firstAttribute="trailing" secondItem="oB9-dL-KxG" secondAttribute="trailing" id="9D2-Yg-kKH"/>
+                        <constraint firstItem="oB9-dL-KxG" firstAttribute="leading" secondItem="rja-Xc-kh1" secondAttribute="leading" id="ICg-4t-Ktl"/>
+                        <constraint firstItem="cZw-MX-0dn" firstAttribute="leading" secondItem="rja-Xc-kh1" secondAttribute="leading" id="IwT-te-WQM"/>
+                        <constraint firstAttribute="bottom" secondItem="cZw-MX-0dn" secondAttribute="bottom" id="Rel-wF-7xX"/>
+                        <constraint firstItem="oB9-dL-KxG" firstAttribute="top" secondItem="rja-Xc-kh1" secondAttribute="top" id="egr-oP-x3h"/>
+                        <constraint firstItem="cZw-MX-0dn" firstAttribute="top" secondItem="oB9-dL-KxG" secondAttribute="bottom" id="yJL-OI-i3D"/>
+                        <constraint firstItem="cZw-MX-0dn" firstAttribute="leading" secondItem="oB9-dL-KxG" secondAttribute="trailing" constant="-320" id="zky-Fc-oAY"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="oB9-dL-KxG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1b7-be-VGw"/>
-                <constraint firstAttribute="bottom" secondItem="cZw-MX-0dn" secondAttribute="bottom" id="B5N-kK-xib"/>
-                <constraint firstItem="cZw-MX-0dn" firstAttribute="top" secondItem="oB9-dL-KxG" secondAttribute="bottom" constant="4" id="bFX-wS-Pet"/>
-                <constraint firstItem="cZw-MX-0dn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dtc-ja-4nQ"/>
-                <constraint firstItem="oB9-dL-KxG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="1" id="mpI-UH-lho"/>
-                <constraint firstAttribute="trailing" secondItem="cZw-MX-0dn" secondAttribute="trailing" id="mup-OX-bfJ"/>
-                <constraint firstAttribute="trailing" secondItem="oB9-dL-KxG" secondAttribute="trailing" id="q26-Zc-a3Q"/>
+                <constraint firstAttribute="bottom" secondItem="rja-Xc-kh1" secondAttribute="bottom" id="Jey-aN-acX"/>
+                <constraint firstItem="rja-Xc-kh1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Kyz-T5-3Hv"/>
+                <constraint firstAttribute="trailing" secondItem="rja-Xc-kh1" secondAttribute="trailing" id="UPn-J5-s1Z"/>
+                <constraint firstItem="rja-Xc-kh1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="1" id="gw2-9T-DOS"/>
             </constraints>
             <point key="canvasLocation" x="343" y="312"/>
         </view>

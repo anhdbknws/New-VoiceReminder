@@ -13,9 +13,9 @@
 @class VRSoundModel;
 @interface VRReminderModel : BaseModel <NSCopying>
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) VRSoundModel *musicSoundModel;
-@property (nonatomic, strong) NSString *shortSound;
+@property (nonatomic, strong) NSMutableArray *soundModels;
 @property (nonatomic, strong) NSString *timeReminder;
+@property (nonatomic, strong) NSString *notes;
 @property (nonatomic, strong) NSMutableArray *repeats;
 @property (strong, nonatomic) NSMutableArray * photoList;
 @property (nonatomic, assign) ALERT_TYPE alertReminder;

@@ -33,6 +33,7 @@
 #import "VRSettingNotesCell.h"
 #import "VRTextView.h"
 #import "Utils.h"
+#import "NSString+VR.h"
 
 static NSString * const kImageArrow = @"icon_arrow_right";
 const NSInteger kPhotoActionSheetTag = 3249;
@@ -55,6 +56,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     [self configureDatePicker];
     [self configureTableview];
     [self addTapgestureForDismissKeyboard];
+    [self detectKeyboard];
     
     if (!self.model) {
         self.model = [[VRReminderModel alloc] init];
@@ -65,6 +67,9 @@ const NSInteger kPhotoActionSheetTag = 3249;
     }
     
     [self prepareData];
+    
+    self.constraintTopContentView.constant = 0;
+    self.constraintBottomContentView.constant = 0;
 }
 
 #pragma mark - Configure UI
@@ -267,6 +272,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     cell.labelTitle.text = @"Notes:";
     cell.arrowView.image = [UIImage imageNamed:kImageArrow];
     cell.textViewNotes.delegate = self;
+    _noteTextView = (VRTextView*)cell.textViewNotes;
     return cell;
 }
 
@@ -302,7 +308,11 @@ const NSInteger kPhotoActionSheetTag = 3249;
             return [VRPhotoListCell height];
         }
         else {
-            return 44;
+            if (indexPath.row == REMINDER_SETTING_TYPE_NOTES) {
+                return [self caculateHeightOfTextView];
+            }
+            else
+                return 44;
         }
     }
     else
@@ -619,43 +629,17 @@ const NSInteger kPhotoActionSheetTag = 3249;
                                                  name:UIKeyboardWillHideNotification object:nil];
 }
 - (void)keyboardWasShown:(NSNotification *)notification {
-    NSDictionary* info = [notification userInfo];
-    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
-
-    [Utils moveUp:self.view offset:100 animation:YES];
-    /*
-     // If active text field is hidden by keyboard, scroll it so it's visible
-     // Your app might not need or want this behavior.
-     CGRect aRect = self.tableView.frame;
-     aRect.size.height -= kbSize.height;
-     CGRect originRect = [self.tableView convertRect:_activeField.frame fromView:_activeField];
-     if (!CGRectContainsPoint(aRect, originRect.origin) ) {
-     [self.tableView scrollRectToVisible:[self.tableView convertRect:_activeField.frame fromView:_activeField] animated:YES];
-     }
-     */
-    NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    UIViewAnimationCurve curve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        [UIView setAnimationCurve:curve];
-        self.settingTableview.contentInset = contentInsets;
-        self.settingTableview.scrollIndicatorInsets = contentInsets;
-        [self scrollToCursorForInputText:_activeField animated:NO];
+    [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
+        self.constraintTopContentView.constant = -180;
+        self.constraintBottomContentView.constant = 180;
     } completion:NULL];
 }
 
 - (void)keyboardWillBeHidden:(NSNotification *)aNotification {
-    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    NSDictionary* info = [aNotification userInfo];
-    NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    UIViewAnimationCurve curve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        [UIView setAnimationCurve:curve];
-        self.settingTableview.contentInset = contentInsets;
-        self.settingTableview.scrollIndicatorInsets = contentInsets;
-    } completion:NULL];
-}
+    [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
+        self.constraintTopContentView.constant = 0;
+        self.constraintBottomContentView.constant = 0;
+    } completion:NULL];}
 
 -(void)dismissKeyboard {
     [self.view endEditing:YES];
@@ -690,21 +674,33 @@ const NSInteger kPhotoActionSheetTag = 3249;
     }
     else
         return;
-    cursorRect = [self.settingTableview convertRect:cursorRect fromView:inputText];
-    if (![self rectVisible:cursorRect]) {
-        cursorRect.size.height += 8;
-        [self.settingTableview scrollRectToVisible:cursorRect animated:animated];
+    cursorRect = [self.view convertRect:cursorRect fromView:inputText];
+    
+    double height = self.view.frame.size.height - cursorRect.origin.y;
+    if (height > 190) {
+        self.constraintTopContentView.constant = -180;
+        self.constraintBottomContentView.constant = 180;
+    }
+    else {
+        self.constraintTopContentView.constant = -180 - (190 - height);
+        self.constraintBottomContentView.constant = 180 + (190- height);
     }
 }
 
-- (BOOL)rectVisible: (CGRect)rect
-{
-    CGRect visibleRect;
-    visibleRect.origin = self.settingTableview.contentOffset;
-    visibleRect.origin.y += self.settingTableview.contentInset.top;
-    visibleRect.size = self.settingTableview.bounds.size;
-    visibleRect.size.height -= self.settingTableview.contentInset.top + self.settingTableview.contentInset.bottom;
-    
-    return CGRectContainsRect(visibleRect, rect);
+- (CGFloat)caculateHeightOfTextView {
+    VRTextView *calculationView = _noteTextView;
+    if (!calculationView) {
+        calculationView = [[VRTextView alloc] init];
+        calculationView.font = H6_FONT;
+        calculationView.contentInset = UIEdgeInsetsMake(1, -2, 0, 0);
+        calculationView.textContainer.maximumNumberOfLines = 0;
+//        calculationView.text = self.service.modelCopy.note;
+        CGRect frame = calculationView.frame;
+        frame.size.width = self.settingTableview.bounds.size.width - [@"Notes" getWidthWithFont:H6_FONT maxSizeWidth:150 andHeight:H6_FONT.lineHeight] - 10;
+        calculationView.frame = frame;
+    }
+    CGFloat textViewWidth = calculationView.frame.size.width;
+    CGSize size = [calculationView sizeThatFits:CGSizeMake(textViewWidth, FLT_MAX)];
+    return size.height + 10;
 }
 @end

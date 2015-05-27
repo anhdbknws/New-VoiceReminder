@@ -11,5 +11,5 @@
 @interface VRSoundMapping : NSObject
 @property (nonatomic, copy) void(^saveAudioFileCompeted)(NSString *urrlString);
 
-+ (Sound *)entityFromModel:(VRReminderModel *)model inContext:(NSManagedObjectContext *)context;
++ (Sound *)entityFromModel:(VRSoundModel *)model inContext:(NSManagedObjectContext *)context;
 @end

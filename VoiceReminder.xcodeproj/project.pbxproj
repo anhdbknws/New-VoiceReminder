@@ -90,7 +90,6 @@
 		824F88EF1AC777C100FB4B5D /* VRSoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824F88ED1AC777C100FB4B5D /* VRSoundViewController.m */; };
 		824F88F01AC777C100FB4B5D /* VRSoundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824F88EE1AC777C100FB4B5D /* VRSoundViewController.xib */; };
 		824F88F41AC77B2300FB4B5D /* Re-record-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 824F88F31AC77B2300FB4B5D /* Re-record-icon.png */; };
-		82530B3F1B1220FF007F910F /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 82530B3E1B1220FF007F910F /* Reminder.m */; };
 		82536D101A627F7200F4AA5B /* VRCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 82536D0F1A627F7200F4AA5B /* VRCommon.m */; };
 		8254EB491AC20CEB00D1C2CC /* VRNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8254EB471AC20CEB00D1C2CC /* VRNameViewController.m */; };
 		8254EB4A1AC20CEB00D1C2CC /* VRNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8254EB481AC20CEB00D1C2CC /* VRNameViewController.xib */; };
@@ -128,6 +127,7 @@
 		82E31F241AD186B90000B176 /* VRSoundService.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E31F231AD186B90000B176 /* VRSoundService.m */; };
 		82E885FB1B14CCBD00513176 /* VRTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E885FA1B14CCBD00513176 /* VRTextView.m */; };
 		82E885FE1B14CD4300513176 /* NSString+VR.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E885FD1B14CD4300513176 /* NSString+VR.m */; };
+		82EB4B741B162ED0004E36DF /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EB4B731B162ED0004E36DF /* Reminder.m */; };
 		82F2A1D31AD483AE006359C8 /* VRRemindersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F2A1D21AD483AE006359C8 /* VRRemindersViewController.m */; };
 		82F2A1D71AD483C2006359C8 /* VRReminderDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F2A1D51AD483C2006359C8 /* VRReminderDetailController.m */; };
 		82F2A1D81AD483C2006359C8 /* VRReminderDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82F2A1D61AD483C2006359C8 /* VRReminderDetailController.xib */; };
@@ -266,8 +266,6 @@
 		824F88ED1AC777C100FB4B5D /* VRSoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRSoundViewController.m; sourceTree = "<group>"; };
 		824F88EE1AC777C100FB4B5D /* VRSoundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VRSoundViewController.xib; sourceTree = "<group>"; };
 		824F88F31AC77B2300FB4B5D /* Re-record-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Re-record-icon.png"; sourceTree = "<group>"; };
-		82530B3D1B1220FF007F910F /* Reminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reminder.h; sourceTree = "<group>"; };
-		82530B3E1B1220FF007F910F /* Reminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reminder.m; sourceTree = "<group>"; };
 		82536D0E1A627F7200F4AA5B /* VRCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRCommon.h; sourceTree = "<group>"; };
 		82536D0F1A627F7200F4AA5B /* VRCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRCommon.m; sourceTree = "<group>"; };
 		8254EB461AC20CEB00D1C2CC /* VRNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRNameViewController.h; sourceTree = "<group>"; };
@@ -342,6 +340,8 @@
 		82E885FA1B14CCBD00513176 /* VRTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRTextView.m; sourceTree = "<group>"; };
 		82E885FC1B14CD4300513176 /* NSString+VR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+VR.h"; sourceTree = "<group>"; };
 		82E885FD1B14CD4300513176 /* NSString+VR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+VR.m"; sourceTree = "<group>"; };
+		82EB4B721B162ED0004E36DF /* Reminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reminder.h; sourceTree = "<group>"; };
+		82EB4B731B162ED0004E36DF /* Reminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reminder.m; sourceTree = "<group>"; };
 		82F2A1D11AD483AE006359C8 /* VRRemindersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRRemindersViewController.h; sourceTree = "<group>"; };
 		82F2A1D21AD483AE006359C8 /* VRRemindersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRRemindersViewController.m; sourceTree = "<group>"; };
 		82F2A1D41AD483C2006359C8 /* VRReminderDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRReminderDetailController.h; sourceTree = "<group>"; };
@@ -637,8 +637,8 @@
 				8238C5A51AC37CD40088EFE3 /* Repeat.m */,
 				82F336AA1AE16D75008493AA /* Sound.h */,
 				82F336AB1AE16D75008493AA /* Sound.m */,
-				82530B3D1B1220FF007F910F /* Reminder.h */,
-				82530B3E1B1220FF007F910F /* Reminder.m */,
+				82EB4B721B162ED0004E36DF /* Reminder.h */,
+				82EB4B731B162ED0004E36DF /* Reminder.m */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -1184,6 +1184,7 @@
 				821702301AD0BD3200747B39 /* ALAsset+isEqual.m in Sources */,
 				8217022F1AD0BD3200747B39 /* ALAsset+assetType.m in Sources */,
 				8217023A1AD0BD3200747B39 /* CTAssetsSupplementaryView.m in Sources */,
+				82EB4B741B162ED0004E36DF /* Reminder.m in Sources */,
 				8238C5AC1AC37CD50088EFE3 /* Photo.m in Sources */,
 				821702031AD0AF6F00747B39 /* UIApplication+AppDimensions.m in Sources */,
 				82E31F101AD13C0E0000B176 /* VRPhotoPageController.m in Sources */,
@@ -1230,7 +1231,6 @@
 				823814DB1AB9AD1D00B00A02 /* SBGradientOverlayLayer.m in Sources */,
 				82F2A1D71AD483C2006359C8 /* VRReminderDetailController.m in Sources */,
 				82F2A1D31AD483AE006359C8 /* VRRemindersViewController.m in Sources */,
-				82530B3F1B1220FF007F910F /* Reminder.m in Sources */,
 				82A716AE1A6188AA00829BE5 /* VoiceReminder.xcdatamodeld in Sources */,
 				820B47B51AB64F1300B6AD15 /* VRNameCell.m in Sources */,
 				82AA35991B1386A600E5F087 /* VRSettingNotesCell.m in Sources */,

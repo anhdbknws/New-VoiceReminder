@@ -23,14 +23,17 @@
     entity.timeReminder = [[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder];
     entity.createdDate = model.createdDate;
     entity.isActive = [NSNumber numberWithBool:YES];
-    entity.shortSound = model.shortSound;
+    entity.notes = model.notes;
     
     [entity removeRepeats:entity.repeats];
     for (VRRepeatModel *object in model.repeats) {
         [entity addRepeatsObject:[VRRepeatMapping entityFromModel:object inContext:context]];
     }
     
-    entity.sound = [VRSoundMapping entityFromModel:model inContext:context];
+    [entity removeSound:entity.sound];
+    for (VRSoundModel *soundModel in model.soundModels) {
+        [entity addSoundObject:[VRSoundMapping entityFromModel:soundModel inContext:context]];
+    }
     
     [entity removePhotos:entity.photos];
     for (NSString *url in model.photoList) {
