@@ -21,5 +21,7 @@ typedef NS_ENUM(NSInteger, REMINDER_SETTING_TYPE) {
 @property (weak, nonatomic) IBOutlet UITableView *settingTableview;
 @property (nonatomic, strong) NSURL *audioRecordingURL;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (strong, nonatomic) UIView * activeField;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintTopDatePicker;
 
 @end

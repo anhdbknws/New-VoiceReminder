@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VRReminderSettingViewController">
             <connections>
+                <outlet property="constraintTopDatePicker" destination="mpI-UH-lho" id="p9w-eA-NG4"/>
                 <outlet property="datePicker" destination="oB9-dL-KxG" id="udf-nh-N15"/>
                 <outlet property="settingTableview" destination="cZw-MX-0dn" id="Cwz-SH-NYo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -36,8 +37,8 @@
                 <constraint firstItem="oB9-dL-KxG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1b7-be-VGw"/>
                 <constraint firstAttribute="bottom" secondItem="cZw-MX-0dn" secondAttribute="bottom" id="B5N-kK-xib"/>
                 <constraint firstItem="cZw-MX-0dn" firstAttribute="top" secondItem="oB9-dL-KxG" secondAttribute="bottom" constant="4" id="bFX-wS-Pet"/>
-                <constraint firstItem="oB9-dL-KxG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="1" id="chf-oM-ukf"/>
                 <constraint firstItem="cZw-MX-0dn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dtc-ja-4nQ"/>
+                <constraint firstItem="oB9-dL-KxG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="1" id="mpI-UH-lho"/>
                 <constraint firstAttribute="trailing" secondItem="cZw-MX-0dn" secondAttribute="trailing" id="mup-OX-bfJ"/>
                 <constraint firstAttribute="trailing" secondItem="oB9-dL-KxG" secondAttribute="trailing" id="q26-Zc-a3Q"/>
             </constraints>

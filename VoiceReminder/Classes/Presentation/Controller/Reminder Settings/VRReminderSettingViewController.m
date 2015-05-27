@@ -32,11 +32,12 @@
 #import "VRRepeatModel.h"
 #import "VRSettingNotesCell.h"
 #import "VRTextView.h"
+#import "Utils.h"
 
 static NSString * const kImageArrow = @"icon_arrow_right";
 const NSInteger kPhotoActionSheetTag = 3249;
 
-@interface VRReminderSettingViewController ()<UITableViewDataSource, UITableViewDelegate, IQDropDownTextFieldDelegate, UITextFieldDelegate, AVAudioPlayerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, CTAssetsPickerControllerDelegate>
+@interface VRReminderSettingViewController ()<UITableViewDataSource, UITableViewDelegate, IQDropDownTextFieldDelegate, UITextFieldDelegate, AVAudioPlayerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, CTAssetsPickerControllerDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong)AVAudioPlayer *audioPlayer;
 @property (nonatomic, strong) VRReminderModel *model;
@@ -265,6 +266,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     VRSettingNotesCell *cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRSettingNotesCell class]) forIndexPath:indexPath];
     cell.labelTitle.text = @"Notes:";
     cell.arrowView.image = [UIImage imageNamed:kImageArrow];
+    cell.textViewNotes.delegate = self;
     return cell;
 }
 
@@ -471,12 +473,6 @@ const NSInteger kPhotoActionSheetTag = 3249;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
-#pragma mark - dissmiss keyboard
--(void)dismissKeyboard {
-    [self.view endEditing:YES];
-}
-
 #pragma mark -photos
 - (void)choosePhoto:(id)sender {
     [self.view endEditing:YES];
@@ -610,5 +606,105 @@ const NSInteger kPhotoActionSheetTag = 3249;
     [photoPageController setPageIndex:index];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:photoPageController];
     [[VCUtilities topViewController] presentViewController:navController animated:YES completion:NULL];
+}
+
+#pragma mark - Keyboard management
+- (void)detectKeyboard {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+- (void)keyboardWasShown:(NSNotification *)notification {
+    NSDictionary* info = [notification userInfo];
+    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+
+    [Utils moveUp:self.view offset:100 animation:YES];
+    /*
+     // If active text field is hidden by keyboard, scroll it so it's visible
+     // Your app might not need or want this behavior.
+     CGRect aRect = self.tableView.frame;
+     aRect.size.height -= kbSize.height;
+     CGRect originRect = [self.tableView convertRect:_activeField.frame fromView:_activeField];
+     if (!CGRectContainsPoint(aRect, originRect.origin) ) {
+     [self.tableView scrollRectToVisible:[self.tableView convertRect:_activeField.frame fromView:_activeField] animated:YES];
+     }
+     */
+    NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve curve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        [UIView setAnimationCurve:curve];
+        self.settingTableview.contentInset = contentInsets;
+        self.settingTableview.scrollIndicatorInsets = contentInsets;
+        [self scrollToCursorForInputText:_activeField animated:NO];
+    } completion:NULL];
+}
+
+- (void)keyboardWillBeHidden:(NSNotification *)aNotification {
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    NSDictionary* info = [aNotification userInfo];
+    NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve curve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        [UIView setAnimationCurve:curve];
+        self.settingTableview.contentInset = contentInsets;
+        self.settingTableview.scrollIndicatorInsets = contentInsets;
+    } completion:NULL];
+}
+
+-(void)dismissKeyboard {
+    [self.view endEditing:YES];
+}
+#pragma mark - textview delegate
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    [self scrollToCursorForInputText:textView animated:YES];
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    [self scrollToCursorForInputText:textView animated:YES];
+    
+    return YES;
+}
+
+#pragma mark - cursor helper
+- (void)scrollToCursorForInputText:(UIView *)inputText animated:(BOOL)animated
+{
+    CGRect cursorRect;
+    if ([inputText isKindOfClass:[UITextView class]]) {
+        UITextView * textView = (UITextView *)inputText;
+        cursorRect = [textView caretRectForPosition:textView.selectedTextRange.start];
+    }
+    else if ([inputText isKindOfClass:[UITextField class]]) {
+        UITextField * textField = (UITextField *)inputText;
+        cursorRect = [textField caretRectForPosition:textField.selectedTextRange.start];
+    }
+    else
+        return;
+    cursorRect = [self.settingTableview convertRect:cursorRect fromView:inputText];
+    if (![self rectVisible:cursorRect]) {
+        cursorRect.size.height += 8;
+        [self.settingTableview scrollRectToVisible:cursorRect animated:animated];
+    }
+}
+
+- (BOOL)rectVisible: (CGRect)rect
+{
+    CGRect visibleRect;
+    visibleRect.origin = self.settingTableview.contentOffset;
+    visibleRect.origin.y += self.settingTableview.contentInset.top;
+    visibleRect.size = self.settingTableview.bounds.size;
+    visibleRect.size.height -= self.settingTableview.contentInset.top + self.settingTableview.contentInset.bottom;
+    
+    return CGRectContainsRect(visibleRect, rect);
 }
 @end
