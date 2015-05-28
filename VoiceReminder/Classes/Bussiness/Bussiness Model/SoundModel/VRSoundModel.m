@@ -15,6 +15,7 @@
         self.uuid = entity.uuid;
         self.url = entity.url;
         self.name = entity.name;
+        self.isShortSound = entity.isShortSound.boolValue;
         self.isMp3Sound = entity.isMp3Sound.boolValue;
         self.isRecordSound = entity.isRecordSound.boolValue;
         self.isSystemSound = entity.isSystemSound.boolValue;
@@ -28,6 +29,7 @@
     object.name = [self.name copyWithZone:zone];
     object.url = [self.url copyWithZone:zone];
     object.mp3Url = [self.mp3Url copyWithZone:zone];
+    object.isShortSound = self.isShortSound;
     object.isMp3Sound = self.isMp3Sound;
     object.isRecordSound = self.isRecordSound;
     object.isSystemSound = self.isSystemSound;

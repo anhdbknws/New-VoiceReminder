@@ -2,7 +2,7 @@
 //  Reminder.m
 //  VoiceReminder
 //
-//  Created by GemCompany on 5/27/15.
+//  Created by Nextop HN 2 on 5/28/15.
 //  Copyright (c) 2015 Owner. All rights reserved.
 //
 
@@ -17,9 +17,9 @@
 @dynamic alertReminder;
 @dynamic isActive;
 @dynamic name;
+@dynamic notes;
 @dynamic repeatReminder;
 @dynamic timeReminder;
-@dynamic notes;
 @dynamic photos;
 @dynamic repeats;
 @dynamic sound;

@@ -11,10 +11,11 @@
 
 @class VRSoundModel;
 @interface VRSoundService : NSObject
-@property (nonatomic , strong) NSMutableArray *mp3SoundArray;
-@property (nonatomic , strong) NSMutableArray *recordSoundArray;
+@property (nonatomic, strong) NSMutableArray *shortSoundArray;
+@property (nonatomic, strong) NSMutableArray *mp3SoundArray;
+@property (nonatomic, strong) NSMutableArray *recordSoundArray;
 @property (nonatomic, strong) NSMutableArray *systemSoundArray;
-@property (nonatomic , strong) void (^getSoundListCompleted)();
+@property (nonatomic, strong) void (^getSoundListCompleted)();
 
 - (void)getListSounds;
 

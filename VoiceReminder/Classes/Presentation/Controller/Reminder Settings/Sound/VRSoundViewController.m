@@ -84,18 +84,6 @@
         
         VRSoundModel *model = [_service.recordSoundArray objectAtIndex:indexPath.row];
         cell.titleLable.text = model.name;
-        
-        
-        if (self.selectedSoundModel.isDefaultObject) {
-            [cell.imageV setImage:[UIImage imageNamed:@"assesory"]];
-        }
-        else {
-            if ([model.uuid isEqualToString:self.selectedSoundModel.uuid]) {
-                [cell.imageV setImage:[UIImage imageNamed:@"assesory"]];
-            }
-            else
-                [cell.imageV setImage:[UIImage imageNamed:@""]];
-        }
         return cell;
     }
     else {
@@ -149,15 +137,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableViewSound deselectRowAtIndexPath:indexPath animated:YES];
     VRSoundModel *model = [_service.mp3SoundArray objectAtIndex:indexPath.row];
-    if (indexPath.section == 1 && model.isDefaultObject) {
-        [self configureMediaPlayer];
-        [self chooseSongFromLibrary];
-    }
-    else {
-        self.selectedSoundModel = model;
-        
-        [self.tableViewSound reloadData];
-    }
+//    if (indexPath.section == 1 && model.isDefaultObject) {
+//        [self configureMediaPlayer];
+//        [self chooseSongFromLibrary];
+//    }
+//    else {
+//        self.selectedSoundModel = model;
+//        
+//        [self.tableViewSound reloadData];
+//    }
 }
 
 #pragma mark - Actions

@@ -130,11 +130,18 @@ const NSInteger kPhotoActionSheetTag = 3249;
     self.model.alertReminder = ALERT_TYPE_AT_EVENT_TIME;
     self.model.timeReminder = [VRCommon commonFormatFromDateTime:[NSDate date]];
    
-    self.model.musicSoundModel= [[VRSoundModel alloc] init];
-    self.model.musicSoundModel.name = @"Audio recorded"; // review
-    self.model.musicSoundModel.url = [self.audioRecordingURL absoluteString];
+    VRSoundModel *musicModel = [[VRSoundModel alloc] init];
+    musicModel.name = @"Audio recorded"; // get sound default
+    musicModel.url = [self.audioRecordingURL absoluteString];
+    musicModel.isSystemSound = YES;
     
-    self.model.shortSound = @"background";
+    [self.model.soundModels addObject:musicModel];
+    
+    VRSoundModel *shortSoundModel = [[VRSoundModel alloc] init];
+    shortSoundModel.name = @"background";
+    shortSoundModel.isShortSound = YES;
+    
+    [self.model.soundModels addObject:shortSoundModel];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -249,7 +256,12 @@ const NSInteger kPhotoActionSheetTag = 3249;
     cell.textfield.font = H1_FONT;
     cell.textfield.tag = REMINDER_SETTING_TYPE_MUSIC_SOUND;
     cell.textfield.delegate = self;
-    cell.textfield.text = self.model.musicSoundModel.name;
+    for (VRSoundModel *model in self.model.soundModels) {
+        if (!model.isShortSound) {
+            cell.textfield.text = model.name;
+        }
+    }
+    
     
     [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
     
@@ -260,6 +272,12 @@ const NSInteger kPhotoActionSheetTag = 3249;
     VRReminderSettingCell *cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderSettingCell class]) forIndexPath:indexPath];
     cell.titleLabel.text = @"Short sound";
     cell.textfield.font = H1_FONT;
+    for (VRSoundModel *model in self.model.soundModels) {
+        if (model.isShortSound) {
+            cell.textfield.text = model.name;
+        }
+    }
+    
     cell.textfield.tag = REMINDER_SETTING_TYPE_SHORT_SOUND;
     cell.textfield.delegate = self;
     
@@ -381,7 +399,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
         return NO;
     }
     else if (textField.tag == REMINDER_SETTING_TYPE_MUSIC_SOUND) {
-        [self setSoundValue];
+        [self setMusicSound];
         return NO;
     }
     
@@ -466,18 +484,25 @@ const NSInteger kPhotoActionSheetTag = 3249;
     [self.navigationController pushViewController:VC animated:YES];
 }
 
-- (void)setSoundValue {
+- (void)setMusicSound {
     VRSoundViewController *vc = [[VRSoundViewController alloc] initWithNibName:NSStringFromClass([VRSoundViewController class]) bundle:nil];
-    vc.selectedSoundModel = self.model.musicSoundModel;
-    
+    for (VRSoundModel *model in self.model.soundModels) {
+        if (!model.isShortSound) {
+            vc.selectedSoundModel = model;
+        }
+    }
+
     __weak typeof (self)weak = self;
     vc.selectedSoundCompleted = ^(VRSoundModel *soundModel) {
         __strong typeof (weak)strong = weak;
         if (!strong) {
             return ;
         }
-        
-        strong.model.musicSoundModel = [soundModel copy];
+        for (VRSoundModel *model in self.model.soundModels) {
+            if (!model.isShortSound) {
+                [self.model.soundModels replaceObjectAtIndex:[self.model.soundModels indexOfObject:model] withObject:soundModel];
+            }
+        }
         [strong.settingTableview reloadData];
     };
     [self.navigationController pushViewController:vc animated:YES];

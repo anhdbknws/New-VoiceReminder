@@ -66,7 +66,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return REMINDER_DETAIL_ROW_TYPE_SOUND + 1;
+        return REMINDER_DETAIL_ROW_TYPE_SHORT_SOUND + 1;
     }
     else {
         return 1;
@@ -160,8 +160,11 @@
         case REMINDER_DETAIL_ROW_TYPE_ALERT:
             titleString = @"Alert";
             break;
-        case REMINDER_DETAIL_ROW_TYPE_SOUND:
-            titleString = @"Sound";
+        case REMINDER_DETAIL_ROW_TYPE_MUSIC_SOUND:
+            titleString = @"Music/sound";
+            break;
+        case REMINDER_DETAIL_ROW_TYPE_SHORT_SOUND:
+            titleString = @"Short sound";
             break;
         case REMINDER_DETAIL_ROW_TYPE_PHOTO:
             titleString = @"Photo";
@@ -191,8 +194,19 @@
         case REMINDER_DETAIL_ROW_TYPE_ALERT:
             valueString = [VREnumDefine alertTypeStringFrom:_model.alertReminder];
             break;
-        case REMINDER_DETAIL_ROW_TYPE_SOUND:
-            valueString = _model.musicSoundModel.name;
+        case REMINDER_DETAIL_ROW_TYPE_MUSIC_SOUND:
+            for (VRSoundModel *model in self.model.soundModels) {
+                if (!model.isShortSound) {
+                    valueString = model.name;
+                }
+            }
+            break;
+        case REMINDER_DETAIL_ROW_TYPE_SHORT_SOUND:
+            for (VRSoundModel *model in self.model.soundModels) {
+                if (model.isShortSound) {
+                    valueString = model.name;
+                }
+            }
             break;
         case REMINDER_DETAIL_ROW_TYPE_PHOTO:
             valueString = nil;
@@ -217,27 +231,27 @@
 
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    if (textField.tag == REMINDER_DETAIL_ROW_TYPE_SOUND) {
-        if (!self.isPlaying) {
-            self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:_model.musicSoundModel.url] error:nil];
-            self.isPlaying = YES;
-            /* Did we get an instance of AVAudioPlayer? */
-            if (self.audioPlayer != nil){
-                /* Set the delegate and start playing */
-                self.audioPlayer.delegate = self;
-                if ([self.audioPlayer prepareToPlay] &&
-                    [self.audioPlayer play]){
-                    /* Successfully started playing */
-                }
-                else {
-                    NSLog(@"failed to play");
-                }
-            }
-            else {
-                NSLog(@"failed to instantiate avaudioplayer");
-            }
-        }
-    }
+//    if (textField.tag == REMINDER_DETAIL_ROW_TYPE_SOUND) {
+//        if (!self.isPlaying) {
+//            self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:_model.musicSoundModel.url] error:nil];
+//            self.isPlaying = YES;
+//            /* Did we get an instance of AVAudioPlayer? */
+//            if (self.audioPlayer != nil){
+//                /* Set the delegate and start playing */
+//                self.audioPlayer.delegate = self;
+//                if ([self.audioPlayer prepareToPlay] &&
+//                    [self.audioPlayer play]){
+//                    /* Successfully started playing */
+//                }
+//                else {
+//                    NSLog(@"failed to play");
+//                }
+//            }
+//            else {
+//                NSLog(@"failed to instantiate avaudioplayer");
+//            }
+//        }
+//    }
     
     return NO;
 }

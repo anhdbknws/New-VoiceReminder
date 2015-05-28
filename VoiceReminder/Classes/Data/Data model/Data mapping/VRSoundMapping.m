@@ -19,7 +19,7 @@
 + (Sound *)entityFromModel:(VRSoundModel *)model inContext:(NSManagedObjectContext *)context {
     Sound *entity = [Sound entityWithUuid:model.uuid inContext:context];
     
-    if (model.isMusicSound) {
+    if (!model.isShortSound) {
 //        entity.url = [[self class] saveAudioToDocumentFolder:model];
     }
     else if (model.isShortSound) {
@@ -46,6 +46,7 @@
 //    });
 //    
 //    return dataPath;
+    return @"dsdsds";
 }
 
 + (NSString *)saveMediaItemToDocument:(VRReminderModel *)model {
@@ -97,6 +98,7 @@
 //    });
 //    
 //    return [NSString stringWithFormat:@"%@", exportURL];
+    return @"dsdsds";
 }
 
 + (NSData *)getContentWithURL:(VRSoundModel *)model {

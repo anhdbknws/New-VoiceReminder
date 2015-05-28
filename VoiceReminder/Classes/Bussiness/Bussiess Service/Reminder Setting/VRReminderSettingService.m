@@ -56,7 +56,12 @@
     /* Badge settings */
     notification.applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
     /* sound */
-    notification.soundName = model.shortSound;
+    for (VRSoundModel *soundModel in model.soundModels) {
+        if (soundModel.isShortSound) {
+            notification.soundName = model.name;
+        }
+    }
+    
     /* Additional information, user info */
     notification.userInfo = @{model.uuid : @"uuid", @"Alarm": @"VoiceReminder"};
     /* Schedule the notification */

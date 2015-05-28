@@ -47,16 +47,15 @@
     
     VRSoundModel *defaultSong = [VRSoundModel new];
     defaultSong.name = @"Pick a song";
-    defaultSong.isDefaultObject = YES;
     [self.mp3SoundArray insertObject:defaultSong atIndex:0];
     
     NSArray *tempRecord = [self.recordSoundArray sortedArrayUsingComparator:^NSComparisonResult(VRSoundModel *obj1, VRSoundModel *obj2) {
         return [obj1.name compare:obj2.name];
     }];
+    
     self.recordSoundArray = [NSMutableArray  arrayWithArray:tempRecord];
     VRSoundModel *defaultRecord = [VRSoundModel new];
     defaultRecord.name = @"Default";
-    defaultRecord.isDefaultObject = YES;
     [self.recordSoundArray insertObject:defaultRecord atIndex:0];
     
     if (self.getSoundListCompleted) {

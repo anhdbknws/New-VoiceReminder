@@ -16,6 +16,10 @@
 @property (nonatomic, strong) NSURL * mp3Url;
 @property (nonatomic, strong) VRReminderModel *reminder;
 @property (nonatomic, assign) BOOL isShortSound;
-@property (nonatomic, assign) BOOL isMusicSound;
+@property (nonatomic, assign) BOOL isMp3Sound;
+@property (nonatomic, assign) BOOL isRecordSound;
+@property (nonatomic, assign) BOOL isSystemSound;
+
 - (instancetype)initWithEntity:(Sound *)entity;
+
 @end
