@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "VRTextView.h"
+#import "UIPlaceHolderTextView.h"
 
 @interface VRSettingNotesCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
-@property (weak, nonatomic) IBOutlet VRTextView *textViewNotes;
+@property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *textViewNotes;
 @property (weak, nonatomic) IBOutlet UIImageView *arrowView;
 
 @end

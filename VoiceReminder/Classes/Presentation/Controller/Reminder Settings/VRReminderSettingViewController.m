@@ -31,7 +31,6 @@
 #import "VRSoundModel.h"
 #import "VRRepeatModel.h"
 #import "VRSettingNotesCell.h"
-#import "VRTextView.h"
 #import "Utils.h"
 #import "NSString+VR.h"
 
@@ -290,7 +289,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     cell.labelTitle.text = @"Notes:";
     cell.arrowView.image = [UIImage imageNamed:kImageArrow];
     cell.textViewNotes.delegate = self;
-    _noteTextView = (VRTextView*)cell.textViewNotes;
+    _noteTextView = (UIPlaceHolderTextView*)cell.textViewNotes;
     return cell;
 }
 
@@ -327,7 +326,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
         }
         else {
             if (indexPath.row == REMINDER_SETTING_TYPE_NOTES) {
-                return [self caculateHeightOfTextView];
+                return MAX(44, [self caculateHeightOfTextView]);
             }
             else
                 return 44;
@@ -713,15 +712,15 @@ const NSInteger kPhotoActionSheetTag = 3249;
 }
 
 - (CGFloat)caculateHeightOfTextView {
-    VRTextView *calculationView = _noteTextView;
+    UIPlaceHolderTextView *calculationView = _noteTextView;
     if (!calculationView) {
-        calculationView = [[VRTextView alloc] init];
+        calculationView = [[UIPlaceHolderTextView alloc] init];
         calculationView.font = H6_FONT;
         calculationView.contentInset = UIEdgeInsetsMake(1, -2, 0, 0);
         calculationView.textContainer.maximumNumberOfLines = 0;
-//        calculationView.text = self.service.modelCopy.note;
+        calculationView.text = self.model.notes;
         CGRect frame = calculationView.frame;
-        frame.size.width = self.settingTableview.bounds.size.width - [@"Notes" getWidthWithFont:H6_FONT maxSizeWidth:150 andHeight:H6_FONT.lineHeight] - 10;
+        frame.size.width = self.settingTableview.bounds.size.width - 42 - 10;
         calculationView.frame = frame;
     }
     CGFloat textViewWidth = calculationView.frame.size.width;

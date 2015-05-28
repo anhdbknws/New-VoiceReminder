@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1318F2441B17319900406E36 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1318F2431B17319900406E36 /* UIPlaceHolderTextView.m */; };
 		134D5BBD1B16B913004091CC /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 134D5BBC1B16B913004091CC /* Reminder.m */; };
 		134D5BC31B16CB0E004091CC /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 134D5BC21B16CB0E004091CC /* Sound.m */; };
 		1362026B1B15CFF1000FE2E3 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1362026A1B15CFF1000FE2E3 /* Utils.m */; };
@@ -136,6 +137,8 @@
 
 /* Begin PBXFileReference section */
 		108F426228FCC632FE98DC15 /* Pods-VoiceReminder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceReminder.release.xcconfig"; path = "Pods/Target Support Files/Pods-VoiceReminder/Pods-VoiceReminder.release.xcconfig"; sourceTree = "<group>"; };
+		1318F2421B17319900406E36 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		1318F2431B17319900406E36 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		134D5BBB1B16B913004091CC /* Reminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reminder.h; sourceTree = "<group>"; };
 		134D5BBC1B16B913004091CC /* Reminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reminder.m; sourceTree = "<group>"; };
 		134D5BC11B16CB0E004091CC /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
@@ -613,6 +616,8 @@
 				82E885FA1B14CCBD00513176 /* VRTextView.m */,
 				82E885FC1B14CD4300513176 /* NSString+VR.h */,
 				82E885FD1B14CD4300513176 /* NSString+VR.m */,
+				1318F2421B17319900406E36 /* UIPlaceHolderTextView.h */,
+				1318F2431B17319900406E36 /* UIPlaceHolderTextView.m */,
 			);
 			path = "Reminder Settings";
 			sourceTree = "<group>";
@@ -1219,6 +1224,7 @@
 				82A716F81A61A29A00829BE5 /* VRLocalizeKey.m in Sources */,
 				824F88E51AC76F6900FB4B5D /* VRRepeatModel.m in Sources */,
 				82E31F0C1AD136840000B176 /* VCUtilities.m in Sources */,
+				1318F2441B17319900406E36 /* UIPlaceHolderTextView.m in Sources */,
 				821701FA1AD0ABD900747B39 /* VRPhotoContentView.m in Sources */,
 				824F88E81AC7701B00FB4B5D /* VRRepeatMapping.m in Sources */,
 				8217023C1AD0BD3200747B39 /* CTAssetsViewController.m in Sources */,
