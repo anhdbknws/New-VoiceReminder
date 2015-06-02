@@ -56,6 +56,8 @@
 		82289B541AB7A7530069E821 /* speaker.png in Resources */ = {isa = PBXBuildFile; fileRef = 82289B531AB7A7530069E821 /* speaker.png */; };
 		8232B3D31B1DFD7000CCA807 /* VRNotesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8232B3D11B1DFD7000CCA807 /* VRNotesController.m */; };
 		8232B3D41B1DFD7000CCA807 /* VRNotesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8232B3D21B1DFD7000CCA807 /* VRNotesController.xib */; };
+		8232B3D91B1E10FC00CCA807 /* VRShortSoundController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8232B3D71B1E10FC00CCA807 /* VRShortSoundController.m */; };
+		8232B3DA1B1E10FC00CCA807 /* VRShortSoundController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8232B3D81B1E10FC00CCA807 /* VRShortSoundController.xib */; };
 		823814D51AB9AD0400B00A02 /* SBTickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 823814D41AB9AD0400B00A02 /* SBTickerView.m */; };
 		823814DA1AB9AD1D00B00A02 /* SBDoubleSidedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 823814D71AB9AD1D00B00A02 /* SBDoubleSidedLayer.m */; };
 		823814DB1AB9AD1D00B00A02 /* SBGradientOverlayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 823814D91AB9AD1D00B00A02 /* SBGradientOverlayLayer.m */; };
@@ -218,6 +220,9 @@
 		8232B3D01B1DFD7000CCA807 /* VRNotesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRNotesController.h; sourceTree = "<group>"; };
 		8232B3D11B1DFD7000CCA807 /* VRNotesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRNotesController.m; sourceTree = "<group>"; };
 		8232B3D21B1DFD7000CCA807 /* VRNotesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VRNotesController.xib; sourceTree = "<group>"; };
+		8232B3D61B1E10FC00CCA807 /* VRShortSoundController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRShortSoundController.h; sourceTree = "<group>"; };
+		8232B3D71B1E10FC00CCA807 /* VRShortSoundController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRShortSoundController.m; sourceTree = "<group>"; };
+		8232B3D81B1E10FC00CCA807 /* VRShortSoundController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VRShortSoundController.xib; sourceTree = "<group>"; };
 		823814D31AB9AD0400B00A02 /* SBTickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBTickerView.h; sourceTree = "<group>"; };
 		823814D41AB9AD0400B00A02 /* SBTickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTickerView.m; sourceTree = "<group>"; };
 		823814D61AB9AD1D00B00A02 /* SBDoubleSidedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBDoubleSidedLayer.h; sourceTree = "<group>"; };
@@ -435,6 +440,16 @@
 			path = Notes;
 			sourceTree = "<group>";
 		};
+		8232B3D51B1E10E400CCA807 /* Short Sound */ = {
+			isa = PBXGroup;
+			children = (
+				8232B3D61B1E10FC00CCA807 /* VRShortSoundController.h */,
+				8232B3D71B1E10FC00CCA807 /* VRShortSoundController.m */,
+				8232B3D81B1E10FC00CCA807 /* VRShortSoundController.xib */,
+			);
+			path = "Short Sound";
+			sourceTree = "<group>";
+		};
 		8238C59A1AC33B850088EFE3 /* Repeat */ = {
 			isa = PBXGroup;
 			children = (
@@ -552,6 +567,7 @@
 		824E764A1A7AF91E0035C744 /* Reminder Settings */ = {
 			isa = PBXGroup;
 			children = (
+				8232B3D51B1E10E400CCA807 /* Short Sound */,
 				8232B3CF1B1DFD3300CCA807 /* Notes */,
 				82E31F0D1AD13BDD0000B176 /* Photos */,
 				8238C59E1AC36F080088EFE3 /* Alert */,
@@ -1121,6 +1137,7 @@
 				824E76681A7AF91E0035C744 /* VRReminderSettingCell.xib in Resources */,
 				82A716B61A6188AA00829BE5 /* Images.xcassets in Resources */,
 				821702471AD0BF8800747B39 /* bt_cancel@3x.png in Resources */,
+				8232B3DA1B1E10FC00CCA807 /* VRShortSoundController.xib in Resources */,
 				824F2E7C1AB5F710009377AD /* bt_edit@2x.png in Resources */,
 				82289B541AB7A7530069E821 /* speaker.png in Resources */,
 				824E76601A7AF91E0035C744 /* VRMainScreenViewController.xib in Resources */,
@@ -1269,6 +1286,7 @@
 				823814DE1AB9AD3200B00A02 /* UIView+SBExtras.m in Sources */,
 				8238C5A61AC37CD40088EFE3 /* Repeat.m in Sources */,
 				82E885FE1B14CD4300513176 /* NSString+VR.m in Sources */,
+				8232B3D91B1E10FC00CCA807 /* VRShortSoundController.m in Sources */,
 				823814DA1AB9AD1D00B00A02 /* SBDoubleSidedLayer.m in Sources */,
 				821702001AD0AE8800747B39 /* VRAssetAccessory.m in Sources */,
 				82E31F161AD1463C0000B176 /* VRPhotoScrollView.m in Sources */,

@@ -119,7 +119,6 @@ const NSInteger kPhotoActionSheetTag = 3249;
 - (void)prepareData{
     
     self.listRepeat = [NSMutableArray new];
-//    self.model.notes = @"Notes";
     self.model.name = @"Name";
     self.model.repeats = [NSMutableArray new];
     self.model.alertReminder = ALERT_TYPE_AT_EVENT_TIME;
@@ -287,7 +286,6 @@ const NSInteger kPhotoActionSheetTag = 3249;
     cell.textViewNotes.delegate = self;
     _noteTextView = (UIPlaceHolderTextView*)cell.textViewNotes;
     cell.textViewNotes.tag = REMINDER_SETTING_TYPE_NOTES;
-    cell.textViewNotes.placeholder = @"Name";
     cell.textViewNotes.text = self.model.notes;
     return cell;
 }
@@ -401,6 +399,10 @@ const NSInteger kPhotoActionSheetTag = 3249;
         [self setMusicSound];
         return NO;
     }
+    else if (textField.tag == REMINDER_SETTING_TYPE_SHORT_SOUND) {
+        
+        return NO;
+    }
     
     return YES;
 }
@@ -505,6 +507,10 @@ const NSInteger kPhotoActionSheetTag = 3249;
         [strong.settingTableview reloadData];
     };
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)setShortSound {
+    
 }
 
 #pragma mark -photos
