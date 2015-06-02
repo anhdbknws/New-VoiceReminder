@@ -11,4 +11,5 @@
 @interface VRNameViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *nameTableview;
 @property (nonatomic, copy) void (^doneNameCompleted)(NSString *name);
+@property (nonatomic, strong) NSString *nameValue;
 @end

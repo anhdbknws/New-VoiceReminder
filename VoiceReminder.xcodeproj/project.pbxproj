@@ -54,6 +54,8 @@
 		8217024E1AD0BFC400747B39 /* bt_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8217024C1AD0BFC400747B39 /* bt_back@2x.png */; };
 		8217024F1AD0BFC400747B39 /* bt_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8217024D1AD0BFC400747B39 /* bt_back@3x.png */; };
 		82289B541AB7A7530069E821 /* speaker.png in Resources */ = {isa = PBXBuildFile; fileRef = 82289B531AB7A7530069E821 /* speaker.png */; };
+		8232B3D31B1DFD7000CCA807 /* VRNotesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8232B3D11B1DFD7000CCA807 /* VRNotesController.m */; };
+		8232B3D41B1DFD7000CCA807 /* VRNotesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8232B3D21B1DFD7000CCA807 /* VRNotesController.xib */; };
 		823814D51AB9AD0400B00A02 /* SBTickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 823814D41AB9AD0400B00A02 /* SBTickerView.m */; };
 		823814DA1AB9AD1D00B00A02 /* SBDoubleSidedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 823814D71AB9AD1D00B00A02 /* SBDoubleSidedLayer.m */; };
 		823814DB1AB9AD1D00B00A02 /* SBGradientOverlayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 823814D91AB9AD1D00B00A02 /* SBGradientOverlayLayer.m */; };
@@ -213,6 +215,9 @@
 		8217024C1AD0BFC400747B39 /* bt_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_back@2x.png"; sourceTree = "<group>"; };
 		8217024D1AD0BFC400747B39 /* bt_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_back@3x.png"; sourceTree = "<group>"; };
 		82289B531AB7A7530069E821 /* speaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speaker.png; sourceTree = "<group>"; };
+		8232B3D01B1DFD7000CCA807 /* VRNotesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRNotesController.h; sourceTree = "<group>"; };
+		8232B3D11B1DFD7000CCA807 /* VRNotesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRNotesController.m; sourceTree = "<group>"; };
+		8232B3D21B1DFD7000CCA807 /* VRNotesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VRNotesController.xib; sourceTree = "<group>"; };
 		823814D31AB9AD0400B00A02 /* SBTickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBTickerView.h; sourceTree = "<group>"; };
 		823814D41AB9AD0400B00A02 /* SBTickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTickerView.m; sourceTree = "<group>"; };
 		823814D61AB9AD1D00B00A02 /* SBDoubleSidedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBDoubleSidedLayer.h; sourceTree = "<group>"; };
@@ -420,6 +425,16 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		8232B3CF1B1DFD3300CCA807 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				8232B3D01B1DFD7000CCA807 /* VRNotesController.h */,
+				8232B3D11B1DFD7000CCA807 /* VRNotesController.m */,
+				8232B3D21B1DFD7000CCA807 /* VRNotesController.xib */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
 		8238C59A1AC33B850088EFE3 /* Repeat */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,6 +552,7 @@
 		824E764A1A7AF91E0035C744 /* Reminder Settings */ = {
 			isa = PBXGroup;
 			children = (
+				8232B3CF1B1DFD3300CCA807 /* Notes */,
 				82E31F0D1AD13BDD0000B176 /* Photos */,
 				8238C59E1AC36F080088EFE3 /* Alert */,
 				8254EB421AC20CA300D1C2CC /* Name */,
@@ -1111,6 +1127,7 @@
 				823EE36C1A6991330077C4B5 /* 2.png in Resources */,
 				821702431AD0BF7100747B39 /* icon_arrow_topbar@3x.png in Resources */,
 				820B47B21AB647B000B6AD15 /* icon_edit_blue@3x.png in Resources */,
+				8232B3D41B1DFD7000CCA807 /* VRNotesController.xib in Resources */,
 				8217024E1AD0BFC400747B39 /* bt_back@2x.png in Resources */,
 				821702461AD0BF8800747B39 /* bt_cancel@2x.png in Resources */,
 				824F2E721AB58B94009377AD /* Localizable.strings in Resources */,
@@ -1207,6 +1224,7 @@
 				824F88EF1AC777C100FB4B5D /* VRSoundViewController.m in Sources */,
 				8238C5A21AC36F350088EFE3 /* VRAlertViewController.m in Sources */,
 				824E76631A7AF91E0035C744 /* VRCalendarViewController.m in Sources */,
+				8232B3D31B1DFD7000CCA807 /* VRNotesController.m in Sources */,
 				824E76641A7AF91E0035C744 /* VRListReminderViewController.m in Sources */,
 				8217023B1AD0BD3200747B39 /* CTAssetsViewCell.m in Sources */,
 				821701E81AD09ACE00747B39 /* VRPhotoListCell.m in Sources */,

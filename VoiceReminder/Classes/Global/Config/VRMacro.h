@@ -64,6 +64,7 @@
 #define H2_COLOR RGBCOLOR(254,0,32,1)
 #define H3_COLOR RGBCOLOR(247,247,247,1)
 #define H4_COLOR RGBCOLOR(248,237,242,1)
+#define H5_COLOR RGBCOLOR(238, 237, 242, 1)
 
 typedef void(^databaseHandler)(NSError * error, id result);
 #endif

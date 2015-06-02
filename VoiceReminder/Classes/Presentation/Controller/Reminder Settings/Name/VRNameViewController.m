@@ -42,7 +42,7 @@
 }
 
 - (void)configureTableView {
-    self.nameTableview.backgroundColor = [UIColor colorWithRed:238/255.0 green:237/255.0 blue:242/255.0 alpha:1];
+    self.nameTableview.backgroundColor = H5_COLOR;
     self.nameTableview.delegate = self;
     self.nameTableview.dataSource = self;
     self.nameTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -69,7 +69,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VRNameCell *cell = [self.nameTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRNameCell class]) forIndexPath:indexPath];
-    cell.valueTextfield.text = @"Name";
+    cell.valueTextfield.text = self.nameValue;
     cell.valueTextfield.delegate = self;
     [cell.valueTextfield becomeFirstResponder];
     cell.valueTextfield.clearButtonMode = UITextFieldViewModeWhileEditing;

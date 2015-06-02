@@ -7,8 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VRReminderSettingViewController">
             <connections>
-                <outlet property="constraintBottomContentView" destination="Jey-aN-acX" id="OSD-WM-WZ4"/>
-                <outlet property="constraintTopContentView" destination="gw2-9T-DOS" id="EXa-is-K3a"/>
                 <outlet property="datePicker" destination="oB9-dL-KxG" id="udf-nh-N15"/>
                 <outlet property="settingTableview" destination="cZw-MX-0dn" id="Cwz-SH-NYo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

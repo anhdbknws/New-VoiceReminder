@@ -31,8 +31,8 @@
 #import "VRSoundModel.h"
 #import "VRRepeatModel.h"
 #import "VRSettingNotesCell.h"
-#import "Utils.h"
 #import "NSString+VR.h"
+#import "VRNotesController.h"
 
 static NSString * const kImageArrow = @"icon_arrow_right";
 const NSInteger kPhotoActionSheetTag = 3249;
@@ -55,7 +55,6 @@ const NSInteger kPhotoActionSheetTag = 3249;
     [self configureDatePicker];
     [self configureTableview];
     [self addTapgestureForDismissKeyboard];
-    [self detectKeyboard];
     
     if (!self.model) {
         self.model = [[VRReminderModel alloc] init];
@@ -66,9 +65,6 @@ const NSInteger kPhotoActionSheetTag = 3249;
     }
     
     [self prepareData];
-    
-    self.constraintTopContentView.constant = 0;
-    self.constraintBottomContentView.constant = 0;
 }
 
 #pragma mark - Configure UI
@@ -123,7 +119,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
 - (void)prepareData{
     
     self.listRepeat = [NSMutableArray new];
-    
+//    self.model.notes = @"Notes";
     self.model.name = @"Name";
     self.model.repeats = [NSMutableArray new];
     self.model.alertReminder = ALERT_TYPE_AT_EVENT_TIME;
@@ -290,6 +286,9 @@ const NSInteger kPhotoActionSheetTag = 3249;
     cell.arrowView.image = [UIImage imageNamed:kImageArrow];
     cell.textViewNotes.delegate = self;
     _noteTextView = (UIPlaceHolderTextView*)cell.textViewNotes;
+    cell.textViewNotes.tag = REMINDER_SETTING_TYPE_NOTES;
+    cell.textViewNotes.placeholder = @"Name";
+    cell.textViewNotes.text = self.model.notes;
     return cell;
 }
 
@@ -308,6 +307,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
             }
         }
     };
+    
     cell.didSelectImage = ^(NSInteger index) {
         [weak showPhotoPageControllerAtIndex:index];
     };
@@ -415,7 +415,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
 }
 - (void)setName {
     VRNameViewController *Vc = [[VRNameViewController alloc] initWithNibName:NSStringFromClass([VRNameViewController class]) bundle:nil];
-    
+    Vc.nameValue = self.model.name;
     __weak typeof (self)weak = self;
     Vc.doneNameCompleted = ^(NSString *name) {
         __strong typeof (weak)strong = weak;
@@ -642,73 +642,36 @@ const NSInteger kPhotoActionSheetTag = 3249;
     [[VCUtilities topViewController] presentViewController:navController animated:YES completion:NULL];
 }
 
-#pragma mark - Keyboard management
-- (void)detectKeyboard {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-}
-- (void)keyboardWasShown:(NSNotification *)notification {
-    [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
-        self.constraintTopContentView.constant = -180;
-        self.constraintBottomContentView.constant = 180;
-    } completion:NULL];
-}
-
-- (void)keyboardWillBeHidden:(NSNotification *)aNotification {
-    [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
-        self.constraintTopContentView.constant = 0;
-        self.constraintBottomContentView.constant = 0;
-    } completion:NULL];}
 
 -(void)dismissKeyboard {
     [self.view endEditing:YES];
 }
+
 #pragma mark - textview delegate
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    [self scrollToCursorForInputText:textView animated:YES];
-    return YES;
-}
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
+    if (textView.tag == REMINDER_SETTING_TYPE_NOTES) {
+        [self setNotesValue];
         return NO;
     }
-    [self scrollToCursorForInputText:textView animated:YES];
-    
     return YES;
 }
 
-#pragma mark - cursor helper
-- (void)scrollToCursorForInputText:(UIView *)inputText animated:(BOOL)animated
-{
-    CGRect cursorRect;
-    if ([inputText isKindOfClass:[UITextView class]]) {
-        UITextView * textView = (UITextView *)inputText;
-        cursorRect = [textView caretRectForPosition:textView.selectedTextRange.start];
-    }
-    else if ([inputText isKindOfClass:[UITextField class]]) {
-        UITextField * textField = (UITextField *)inputText;
-        cursorRect = [textField caretRectForPosition:textField.selectedTextRange.start];
-    }
-    else
-        return;
-    cursorRect = [self.view convertRect:cursorRect fromView:inputText];
+- (void)setNotesValue {
+    VRNotesController *noteVC = [[VRNotesController alloc] initWithNibName:NSStringFromClass([VRNotesController class]) bundle:nil];
+    noteVC.notesValue = self.model.notes;
     
-    double height = self.view.frame.size.height - cursorRect.origin.y;
-    if (height > 190) {
-        self.constraintTopContentView.constant = -180;
-        self.constraintBottomContentView.constant = 180;
-    }
-    else {
-        self.constraintTopContentView.constant = -180 - (190 - height);
-        self.constraintBottomContentView.constant = 180 + (190- height);
-    }
+    __weak typeof (self)weak = self;
+    noteVC.doneNotesCompleted = ^(NSString *notes) {
+        __strong typeof (weak)strong = weak;
+        if (!strong) {
+            return ;
+        }
+        strong.model.notes = notes;
+        
+        [strong.settingTableview reloadData];
+    };
+    
+    [self.navigationController pushViewController:noteVC animated:YES];
 }
 
 - (CGFloat)caculateHeightOfTextView {
@@ -727,4 +690,6 @@ const NSInteger kPhotoActionSheetTag = 3249;
     CGSize size = [calculationView sizeThatFits:CGSizeMake(textViewWidth, FLT_MAX)];
     return size.height + 10;
 }
+
+
 @end
