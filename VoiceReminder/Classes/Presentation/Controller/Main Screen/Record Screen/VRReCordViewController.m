@@ -68,7 +68,7 @@ static NSInteger minutesLimit = 1;
     
     [backButton setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
     
-    UIBarButtonItem *settingButton = [[UIBarButtonItem alloc] initWithTitle:@"Setting" style:UIBarButtonItemStylePlain target:self action:@selector(settingClick:)];
+    UIBarButtonItem *settingButton = [[UIBarButtonItem alloc] initWithTitle:@"Alarm" style:UIBarButtonItemStylePlain target:self action:@selector(settingClick:)];
     [settingButton setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = settingButton;
     

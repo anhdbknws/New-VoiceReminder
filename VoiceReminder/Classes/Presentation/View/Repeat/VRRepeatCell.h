@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface VRRepeatCell : UITableViewCell
-@property (nonatomic, strong) UILabel *titleLable;
+@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *imageV;
 @property (nonatomic, strong) UIImageView *rightArrow;
 @property (nonatomic, strong) UIView *bottomLine;

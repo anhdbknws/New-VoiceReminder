@@ -9,39 +9,40 @@
 #import "VRSoundViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "VRSoundModel.h"
-#import "VRRepeatCell.h"
+#import "VRReCordViewController.h"
+#import "VRSoundCell.h"
 
-@interface VRSoundViewController ()<UITableViewDataSource, UITableViewDelegate, MPMediaPickerControllerDelegate>
+@interface VRSoundViewController ()<UITableViewDataSource, UITableViewDelegate, MPMediaPickerControllerDelegate, AVAudioPlayerDelegate>
 @property (nonatomic, strong) MPMusicPlayerController *musicPlayer;
-
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (assign) BOOL isPlaying;
 @end
 
 @implementation VRSoundViewController
-
+{
+    SOUND_TYPE currentType;
+}
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"Sound";
-        self.view.backgroundColor = [UIColor whiteColor];
+        self.title = @"Music/sound";
     }
-    
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self getListSoundFromDBLocal];
-    [self configureNavigation];
+    [self backButton];
+    [self addButton];
     [self configureTableView];
+    [self setupSegment];
 }
 
-- (void)configureNavigation {
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
-    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [UIColor redColor],NSForegroundColorAttributeName,
-                                    [UIColor redColor],NSBackgroundColorAttributeName,nil];
-    [backButton setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    self.navigationItem.leftBarButtonItem = backButton;
+- (void)setupSegment {
+    [self.segment addTarget:self action:@selector(segmentChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.segment setTintColor:[UIColor redColor]];
+    currentType = SOUND_TYPE_RECORD;
 }
 
 - (void)configureTableView {
@@ -49,7 +50,7 @@
     self.tableViewSound.dataSource = self;
     self.tableViewSound.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableViewSound.backgroundColor = [UIColor colorWithRed:238/255.0 green:237/255.0 blue:242/255.0 alpha:1];
-    [self.tableViewSound registerClass:[VRRepeatCell class] forCellReuseIdentifier:NSStringFromClass([VRRepeatCell class])];
+    [self.tableViewSound registerClass:[VRSoundCell class] forCellReuseIdentifier:NSStringFromClass([VRSoundCell class])];
 }
 
 - (void)getListSoundFromDBLocal {
@@ -66,95 +67,119 @@
 
 #pragma mark - tableview Delegate && datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return SOUND_SECTION_TYPE_SONGS + 1;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+    if (currentType == SOUND_TYPE_RECORD) {
         return _service.recordSoundArray.count;
+    }
+    else if (currentType == SOUND_TYPE_SHORT_SOUND) {
+        return [VREnumDefine listShortSound].count;
     }
     else
         return _service.mp3SoundArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        VRRepeatCell *cell = [self.tableViewSound dequeueReusableCellWithIdentifier:NSStringFromClass([VRRepeatCell class]) forIndexPath:indexPath];
-        cell.imageV.hidden = NO;
-        
-        VRSoundModel *model = [_service.recordSoundArray objectAtIndex:indexPath.row];
-        cell.titleLable.text = model.name;
-        return cell;
+    VRSoundCell *cell = [self.tableViewSound dequeueReusableCellWithIdentifier:NSStringFromClass([VRSoundCell class]) forIndexPath:indexPath];
+    VRSoundModel *model;
+    cell.arrowImage.hidden = NO;
+    if (currentType == SOUND_TYPE_RECORD) {
+        model = [_service.recordSoundArray objectAtIndex:indexPath.row];
+    }
+    else if (currentType == SOUND_TYPE_SHORT_SOUND) {
+        model = [_service.shortSoundArray objectAtIndex:indexPath.row];
     }
     else {
-        VRRepeatCell *cell = [self.tableViewSound dequeueReusableCellWithIdentifier:NSStringFromClass([VRRepeatCell class]) forIndexPath:indexPath];
-        VRSoundModel *model = [_service.mp3SoundArray objectAtIndex:indexPath.row];
-        cell.titleLable.text = model.name;
-        
-        [cell.imageV setImage:[UIImage imageNamed:@""]];
-        if (indexPath.row == 0) {
-            cell.imageV.hidden = YES;
-            [cell.rightArrow setImage:[UIImage imageNamed:@"icon_arrow_right"]];
-        }
-        else {
-            cell.imageV.hidden = NO;
-            if ([model.uuid isEqualToString:self.selectedSoundModel.uuid]) {
-                [cell.imageV setImage:[UIImage imageNamed:@"assesory"]];
-            }
-            else
-                [cell.imageV setImage:[UIImage imageNamed:@""]];
-        }
-        
-        return cell;
+        model = [_service.mp3SoundArray objectAtIndex:indexPath.row];
     }
+    cell.labelTitle.text = model.name;
+    [cell.imageV setImage:[UIImage imageNamed:@"icon_sound"]];
+    if ([model.uuid isEqualToString:self.soundModel.uuid]) {
+        [cell.arrowImage setImage:[UIImage imageNamed:@"assesory"]];
+    }
+    else {
+        cell.arrowImage.hidden = YES;
+    }
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 44.0f;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 50.0f;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *view  = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
-    view.backgroundColor = [UIColor colorWithRed:238/255.0 green:237/255.0 blue:242/255.0 alpha:1];
-    UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, view.frame.size.width - 20, 30)];
-    labelTitle.textColor = [UIColor colorWithRed:149/255.0 green:148/255.0 blue:153/255.0 alpha:1];
-    
-    if (section == 0) {
-        labelTitle.text = @"Records";
-    }
-    else{
-        labelTitle.text = @"Songs";
-    }
-
-    [view addSubview:labelTitle];
-    return view;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableViewSound deselectRowAtIndexPath:indexPath animated:YES];
-    VRSoundModel *model = [_service.mp3SoundArray objectAtIndex:indexPath.row];
-//    if (indexPath.section == 1 && model.isDefaultObject) {
-//        [self configureMediaPlayer];
-//        [self chooseSongFromLibrary];
-//    }
-//    else {
-//        self.selectedSoundModel = model;
-//        
-//        [self.tableViewSound reloadData];
-//    }
+    VRSoundModel *model;
+    if (currentType == SOUND_TYPE_RECORD) {
+        model = [_service.recordSoundArray objectAtIndex:indexPath.row];
+    }
+    else if (currentType == SOUND_TYPE_SHORT_SOUND) {
+        model = [_service.shortSoundArray objectAtIndex:indexPath.row];
+    }
+    else {
+        model = [_service.mp3SoundArray objectAtIndex:indexPath.row];
+    }
+    
+    self.soundModel = model;
+    [self.tableViewSound reloadData];
+    
+    /*play audio*/
+    if (currentType == SOUND_TYPE_SHORT_SOUND) {
+        [self setupAudioPlayerForShortSound:model.name];
+        [self playSound];
+    }
 }
 
 #pragma mark - Actions
-- (void)backAction:(id)sender {
+- (void)doneAction:(id)sender {
+    [self.view endEditing:YES];
+    
     if (self.selectedSoundCompleted) {
-        self.selectedSoundCompleted (self.selectedSoundModel);
+        self.selectedSoundCompleted (self.soundModel);
     }
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)addAction:(id)sender {
+    if (currentType == SOUND_TYPE_RECORD) {
+        [self record];
+    }
+    else {
+        [self addMp3];
+    }
+}
+- (void)addMp3 {
+    [self chooseSongFromLibrary];
+}
+
+- (void)record {
+    VRReCordViewController *Vc = [[VRReCordViewController alloc] init];
+    [self.navigationController pushViewController:Vc animated:YES];
+}
+
+- (void)segmentChanged:(UISegmentedControl *)sender {
+    NSInteger selectedSegmentIndex = [sender selectedSegmentIndex];
+    switch (selectedSegmentIndex) {
+        case SOUND_TYPE_RECORD:
+            currentType = SOUND_TYPE_RECORD;
+            [self showAddButton];
+            break;
+        case SOUND_TYPE_SONG:
+            currentType = SOUND_TYPE_SONG;
+            [self showAddButton];
+            break;
+        case SOUND_TYPE_SHORT_SOUND:
+            currentType = SOUND_TYPE_SHORT_SOUND;
+            [self hideAddButton];
+            break;
+        default:
+            break;
+    }
+    
+    [self.tableViewSound reloadData];
 }
 
 - (void)dealloc {
@@ -164,10 +189,6 @@
 }
 
 #pragma mark - choose song from music library
-
-- (void)configureMediaPlayer {
-    self.musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
-}
 
 - (void)chooseSongFromLibrary {
     MPMediaPickerController *pickerVC = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
@@ -182,15 +203,22 @@
     if (mediaItemCollection) {
         
         MPMediaItem *item = [mediaItemCollection.items firstObject];
-        VRSoundModel *soundModel = [VRSoundModel new];
-        soundModel.mp3Url = [item valueForKey:MPMediaItemPropertyAssetURL];
-        soundModel.name = [item valueForKey:MPMediaItemPropertyTitle];
-        soundModel.isMp3Sound = YES;
-        [_service.mp3SoundArray insertObject:soundModel atIndex:1];
-        _selectedSoundModel = soundModel;
+        VRSoundModel *model = [VRSoundModel new];
+        model.mp3Url = [item valueForKey:MPMediaItemPropertyAssetURL];
+        model.name = [item valueForKey:MPMediaItemPropertyTitle];
+        model.isMp3Sound = YES;
+        [_service.mp3SoundArray insertObject:model atIndex:0];
+        self.soundModel = model;
         [self.tableViewSound reloadData];
         
-        [_musicPlayer setQueueWithItemCollection: mediaItemCollection];
+        if(!_musicPlayer){
+            _musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
+        }
+        
+        [_musicPlayer setQueueWithItemCollection:mediaItemCollection];
+        [_musicPlayer setNowPlayingItem:item];
+        
+        [_musicPlayer prepareToPlay];
         [_musicPlayer play];
     }
     
@@ -201,4 +229,24 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - play audio
+- (void)setupAudioPlayerForShortSound:(NSString *)shortSoundName {
+    NSString *backgroundMusicPath = [[NSBundle mainBundle] pathForResource:shortSoundName ofType:@"caf"];
+    NSURL *backgroundMusicURL = [NSURL fileURLWithPath:backgroundMusicPath];
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:nil];
+    self.audioPlayer.delegate = self;  // We need this so we can restart after interruptions
+    self.audioPlayer.numberOfLoops = -1;
+}
+
+- (void)playSound {
+    if (self.isPlaying) {
+        [self.audioPlayer stop];
+    }
+    
+    if ([self.audioPlayer prepareToPlay]) {
+        [self.audioPlayer play];
+    }
+    
+    self.isPlaying = YES;
+}
 @end

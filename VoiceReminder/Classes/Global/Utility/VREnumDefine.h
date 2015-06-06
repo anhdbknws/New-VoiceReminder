@@ -42,4 +42,8 @@ typedef NS_ENUM(NSInteger, ALERT_TYPE) {
 + (NSArray *)listAlertType;
 + (NSString *)alertTypeStringFrom:(ALERT_TYPE)type;
 + (ALERT_TYPE)alertTypeIntegerFromString:(NSString *)typeString;
+
++ (NSArray *)listShortSound;
+
+
 @end

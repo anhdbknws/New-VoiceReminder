@@ -25,18 +25,10 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configureNavigation];
+    [self backButton];
+    [self doneButton];
     [self configureTableView];
     [self prepareData];
-}
-
-- (void)configureNavigation {
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
-    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [UIColor redColor],NSForegroundColorAttributeName,
-                                    [UIColor redColor],NSBackgroundColorAttributeName,nil];
-    [backButton setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    self.navigationItem.leftBarButtonItem = backButton;
 }
 
 - (void)configureTableView {
@@ -49,8 +41,7 @@
 }
 
 - (void)prepareData {
-    NSArray *array = @[@"Every Monday", @"Every Tuesday", @"Every Wednesday", @"Every Thursday", @"Every Friday", @"Every Saturday", @"Every Sunday"];
-    self.arrayRepeat = [NSMutableArray arrayWithArray:array];
+    self.arrayRepeat = [NSMutableArray arrayWithArray:[VREnumDefine listRepeatType]];
 }
 
 #pragma mark - tableview delegate
@@ -70,7 +61,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VRRepeatCell *cell = [self.repeatTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRRepeatCell class]) forIndexPath:indexPath];
     NSString *repeat = [self.arrayRepeat objectAtIndex:indexPath.row];
-    cell.titleLable.text = repeat;
+    cell.titleLabel.text = repeat;
     
     BOOL found = NO;
     for (NSString *item in self.arrayRepeatSelected) {
@@ -130,7 +121,7 @@
 }
 
 #pragma mark - Actions
-- (void)backAction:(id)sender {
+- (void)doneAction:(id)sender {
     if (self.selectedCompleted) {
         self.selectedCompleted (self.arrayRepeatSelected);
     }

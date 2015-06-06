@@ -19,6 +19,7 @@
         self.mp3SoundArray = [NSMutableArray new];
         self.recordSoundArray = [NSMutableArray new];
         self.systemSoundArray = [NSMutableArray new];
+        self.shortSoundArray = [NSMutableArray new];
     }
     
     return self;
@@ -37,26 +38,25 @@
         else if (model.isSystemSound) {
             [self.systemSoundArray addObject:model];
         }
+        else {
+            [self.shortSoundArray addObject:model];
+        }
     }
     
+    /* musics */
     NSArray *tempSongs = [self.mp3SoundArray sortedArrayUsingComparator:^NSComparisonResult(VRSoundModel *obj1, VRSoundModel *obj2) {
         return [obj1.name compare:obj2.name];
     }];
     
     self.mp3SoundArray = [NSMutableArray arrayWithArray:tempSongs];
     
-    VRSoundModel *defaultSong = [VRSoundModel new];
-    defaultSong.name = @"Pick a song";
-    [self.mp3SoundArray insertObject:defaultSong atIndex:0];
     
+    /* record sound */
     NSArray *tempRecord = [self.recordSoundArray sortedArrayUsingComparator:^NSComparisonResult(VRSoundModel *obj1, VRSoundModel *obj2) {
         return [obj1.name compare:obj2.name];
     }];
     
     self.recordSoundArray = [NSMutableArray  arrayWithArray:tempRecord];
-    VRSoundModel *defaultRecord = [VRSoundModel new];
-    defaultRecord.name = @"Default";
-    [self.recordSoundArray insertObject:defaultRecord atIndex:0];
     
     if (self.getSoundListCompleted) {
         self.getSoundListCompleted();

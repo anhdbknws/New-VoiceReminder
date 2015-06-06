@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VRSettingBaseViewController.h"
 
-@interface VRRepeatViewController : UIViewController
+@interface VRRepeatViewController : VRSettingBaseViewController
 @property (weak, nonatomic) IBOutlet UITableView *repeatTableview;
 @property (nonatomic,strong) NSMutableArray *arrayRepeatSelected;
 @property (nonatomic,copy) void(^selectedCompleted)(NSMutableArray *selectedArray);

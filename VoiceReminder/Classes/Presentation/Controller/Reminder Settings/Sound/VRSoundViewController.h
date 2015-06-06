@@ -8,15 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "VRSoundService.h"
+#import "VRSettingBaseViewController.h"
+
 @class VRSoundModel;
-typedef NS_ENUM(NSInteger, SOUND_SECTION_TYPE) {
-    SOUND_SECTION_TYPE_RECORD = 0,
-    SOUND_SECTION_TYPE_SONGS = 1,
+typedef NS_ENUM(NSInteger, SOUND_TYPE) {
+    SOUND_TYPE_SONG = 1,
+    SOUND_TYPE_SHORT_SOUND = 2,
+    SOUND_TYPE_RECORD = 0
 };
 
-@interface VRSoundViewController : UIViewController
+@interface VRSoundViewController : VRSettingBaseViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableViewSound;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
+
 @property (nonatomic, strong) VRSoundService *service;
-@property (nonatomic, strong) VRSoundModel *selectedSoundModel;
+@property (nonatomic, strong) VRSoundModel *soundModel;
 @property (nonatomic, strong) void (^selectedSoundCompleted)(VRSoundModel *model);
 @end

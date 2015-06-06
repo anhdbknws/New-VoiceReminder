@@ -67,4 +67,5 @@
 #define H5_COLOR RGBCOLOR(238, 237, 242, 1)
 
 typedef void(^databaseHandler)(NSError * error, id result);
+#define kSaveShortSoundToDBLocal @"SaveShortSoundToDBLocal"
 #endif

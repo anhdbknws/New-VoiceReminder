@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VRSettingBaseViewController.h"
 
-@interface VRNotesController : UIViewController
+@interface VRNotesController : VRSettingBaseViewController
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintBottom;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintTop;
 @property (weak, nonatomic) IBOutlet UITextView *textViewNotes;

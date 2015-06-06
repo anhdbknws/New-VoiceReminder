@@ -18,27 +18,16 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"Name";
-        self.name = @"Name";
-        self.view.backgroundColor = [UIColor whiteColor];
     }
     
     return self;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configureNavigation];
+    [self backButton];
+    [self doneButton];
     [self configureTableView];
     [self addGesture];
-}
-
-- (void)configureNavigation {
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
-    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [UIColor redColor],NSForegroundColorAttributeName,
-                                    [UIColor redColor],NSBackgroundColorAttributeName,nil];
-    [backButton setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    
-    self.navigationItem.leftBarButtonItem = backButton;
 }
 
 - (void)configureTableView {
@@ -101,7 +90,7 @@
 }
 
 #pragma mark - actions
-- (void)backAction:(id)sender {
+- (void)doneAction:(id)sender {
     [self.view endEditing:YES];
     
     if (self.doneNameCompleted) {

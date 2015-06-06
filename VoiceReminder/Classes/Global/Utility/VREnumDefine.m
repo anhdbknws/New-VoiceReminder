@@ -29,9 +29,9 @@
 }
 
 + (NSArray *)listRepeatType {
-    return @[@"Never",@"Every Monday", @"Every Tuesday", @"Every Wednesday", @"Every Thursday", @"Every Friday", @"Every Saturday", @"Every Sunday", @"Every day"];
+    NSArray *array = @[@"Every Monday", @"Every Tuesday", @"Every Wednesday", @"Every Thursday", @"Every Friday", @"Every Saturday", @"Every Sunday"];
+    return array;
 }
-
 + (NSString *)repeatTypeStringFrom:(REPEAT_TYPE)type {
     return [[self class] listRepeatType][type];
 }
@@ -47,4 +47,7 @@
     return REPEAT_TYPE_UNKNOW;
 }
 
++ (NSArray *)listShortSound {
+    return @[@"alarm", @"awesomemorning_alarm", @"background", @"car_alarm", @"car_sms", @"chicken_alarm", @"complete_car_alarm", @"cop_car", @"morning_alarm_remix", @"morning_alarm", @"nice_morning_alarm", @"sweet_morning_alarm"];
+}
 @end

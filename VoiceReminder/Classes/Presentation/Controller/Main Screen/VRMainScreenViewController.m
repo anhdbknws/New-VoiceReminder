@@ -14,6 +14,8 @@
 #import "SBTickerView.h"
 #import "SBTickView.h"
 #import "VRReminderSettingViewController.h"
+#import "VRSoundMapping.h"
+#import "VRSoundModel.h"
 
 @interface VRMainScreenViewController ()
 
@@ -29,6 +31,10 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self configureUI];
     [self configureClockTicker];
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kSaveShortSoundToDBLocal]) {
+        [self saveShortSoundModelToDB];
+    }
 }
 
 
@@ -108,6 +114,27 @@
     }];
     
     _currentClock = newClock;
+}
+
+#pragma mark - save shortsound to database
+- (void)saveShortSoundModelToDB {
+    NSMutableArray *listShortSoundModel = [NSMutableArray new];
+    for (NSString *string in [VREnumDefine listShortSound]) {
+        VRSoundModel *model = [VRSoundModel new];
+        model.isShortSound  = YES;
+        model.name = string;
+        [listShortSoundModel addObject:model];
+    }
+    
+    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+        for (VRSoundModel *model in listShortSoundModel) {
+            [VRSoundMapping entityFromModel:model inContext:localContext];
+        }
+    } completion:^(BOOL success, NSError *error) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSaveShortSoundToDBLocal];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }];
+    
 }
 
 - (void)dealloc {

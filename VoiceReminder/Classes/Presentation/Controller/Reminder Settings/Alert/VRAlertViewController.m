@@ -25,18 +25,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configureNavigation];
+    [self backButton];
+    [self doneButton];
     [self configureTableView];
-}
-
-- (void)configureNavigation {
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
-    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [UIColor redColor],NSForegroundColorAttributeName,
-                                    [UIColor redColor],NSBackgroundColorAttributeName,nil];
-    [backButton setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    
-    self.navigationItem.leftBarButtonItem = backButton;
 }
 
 - (void)configureTableView {
@@ -60,7 +51,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VRRepeatCell *cell = [self.alertTableView dequeueReusableCellWithIdentifier:NSStringFromClass([VRRepeatCell class]) forIndexPath:indexPath];
     NSString *alert = [[VREnumDefine listAlertType] objectAtIndex:indexPath.row];
-    cell.titleLable.text = alert;
+    cell.titleLabel.text = alert;
     if ([self.alertSelected isEqualToString:alert]) {
         cell.imageV.hidden = NO;
         [cell.imageV setImage:[UIImage imageNamed:@"assesory.png"]];
@@ -94,7 +85,7 @@
 }
 
 #pragma mark - actions
-- (void)backAction:(id)sender {
+- (void)doneAction:(id)sender {
     if (self.selectedAlertCompleted) {
         self.selectedAlertCompleted(self.alertSelected);
     }

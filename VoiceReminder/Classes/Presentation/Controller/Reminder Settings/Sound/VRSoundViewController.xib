@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VRSoundViewController">
             <connections>
+                <outlet property="segment" destination="OBp-g7-K70" id="vNg-H3-NAp"/>
                 <outlet property="tableViewSound" destination="mqn-jv-Yed" id="TGg-pJ-irn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -17,16 +18,30 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mqn-jv-Yed">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="0.0" y="35" width="320" height="533"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </tableView>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OBp-g7-K70">
+                    <rect key="frame" x="8" y="2" width="304" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="wek-zV-6kG"/>
+                    </constraints>
+                    <segments>
+                        <segment title="Record"/>
+                        <segment title="Songs"/>
+                        <segment title="Short sound"/>
+                    </segments>
+                </segmentedControl>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="mqn-jv-Yed" secondAttribute="bottom" id="6KS-rU-Coc"/>
-                <constraint firstItem="mqn-jv-Yed" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8oJ-rq-Uih"/>
-                <constraint firstItem="mqn-jv-Yed" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SkD-xk-bCx"/>
-                <constraint firstAttribute="trailing" secondItem="mqn-jv-Yed" secondAttribute="trailing" id="aNz-zo-A6Y"/>
+                <constraint firstAttribute="trailing" secondItem="OBp-g7-K70" secondAttribute="trailing" constant="8" id="06X-ga-kp9"/>
+                <constraint firstAttribute="bottom" secondItem="mqn-jv-Yed" secondAttribute="bottom" id="5IG-r7-R1x"/>
+                <constraint firstAttribute="trailing" secondItem="mqn-jv-Yed" secondAttribute="trailing" id="Drg-5v-yUN"/>
+                <constraint firstItem="mqn-jv-Yed" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="N4R-d1-Cv2"/>
+                <constraint firstItem="OBp-g7-K70" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="2" id="cAP-NV-qfL"/>
+                <constraint firstItem="mqn-jv-Yed" firstAttribute="top" secondItem="OBp-g7-K70" secondAttribute="bottom" constant="5" id="dxX-VZ-QHi"/>
+                <constraint firstItem="OBp-g7-K70" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="g3M-BB-Upf"/>
             </constraints>
             <point key="canvasLocation" x="366" y="251"/>
         </view>

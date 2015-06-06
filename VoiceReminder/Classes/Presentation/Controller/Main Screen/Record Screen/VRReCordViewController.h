@@ -14,4 +14,5 @@
 @property (nonatomic, strong) UIButton *stopButton;
 @property (nonatomic, strong) UIButton *reRecordButton;
 @property (nonatomic, strong) UIButton *playButton;
+
 @end

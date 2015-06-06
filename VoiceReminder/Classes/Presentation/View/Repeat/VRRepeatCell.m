@@ -31,7 +31,7 @@
 }
 
 - (void)initView {
-    [self.contentView addSubview:self.titleLable];
+    [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.imageV];
     [self.contentView addSubview:self.rightArrow];
     [self.contentView addSubview:self.bottomLine];
@@ -41,10 +41,10 @@
     [super layoutSubviews];
     
     //layout
-    [_titleLable autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:15];
-    [_titleLable autoPinEdgeToSuperviewEdge:ALEdgeTop];
-    [_titleLable autoPinEdgeToSuperviewEdge:ALEdgeBottom];
-    [_titleLable autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:_imageV withOffset:10];
+    [_titleLabel autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:15];
+    [_titleLabel autoPinEdgeToSuperviewEdge:ALEdgeTop];
+    [_titleLabel autoPinEdgeToSuperviewEdge:ALEdgeBottom];
+    [_titleLabel autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:_imageV withOffset:10];
     
     [_imageV autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:15];
     [_imageV autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
@@ -60,13 +60,13 @@
     [_bottomLine autoSetDimension:ALDimensionHeight toSize:1];
 }
 
-- (UILabel *)titleLable {
-    if (!_titleLable) {
-        _titleLable = [[UILabel alloc] initForAutoLayout];
-        _titleLable.numberOfLines = 0;
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] initForAutoLayout];
+        _titleLabel.numberOfLines = 0;
     }
     
-    return _titleLable;
+    return _titleLabel;
 }
 
 - (UIImageView *)imageV {

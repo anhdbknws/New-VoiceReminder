@@ -18,17 +18,11 @@
 @implementation VRSoundMapping
 + (Sound *)entityFromModel:(VRSoundModel *)model inContext:(NSManagedObjectContext *)context {
     Sound *entity = [Sound entityWithUuid:model.uuid inContext:context];
-    
-    if (!model.isShortSound) {
-//        entity.url = [[self class] saveAudioToDocumentFolder:model];
-    }
-    else if (model.isShortSound) {
-//        entity.url = model.musicSoundModel.url;
-    }
-    else{
-        
-    }
-    
+    entity.isShortSound = [NSNumber numberWithBool:model.isShortSound];
+    entity.isMp3Sound = [NSNumber numberWithBool:model.isMp3Sound];
+    entity.isRecordSound = [NSNumber numberWithBool:model.isRecordSound];
+    entity.name = model.name;
+    entity.url = model.url;
     return entity;
 }
 

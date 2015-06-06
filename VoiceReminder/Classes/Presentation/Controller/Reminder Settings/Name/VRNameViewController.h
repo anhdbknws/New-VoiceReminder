@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VRSettingBaseViewController.h"
 
-@interface VRNameViewController : UIViewController
+@interface VRNameViewController : VRSettingBaseViewController
 @property (weak, nonatomic) IBOutlet UITableView *nameTableview;
 @property (nonatomic, copy) void (^doneNameCompleted)(NSString *name);
 @property (nonatomic, strong) NSString *nameValue;

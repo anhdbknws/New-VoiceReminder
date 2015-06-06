@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface VRAlertViewController : UIViewController
+#import "VRSettingBaseViewController.h"
+@interface VRAlertViewController : VRSettingBaseViewController
 @property (weak, nonatomic) IBOutlet UITableView *alertTableView;
 @property (nonatomic, strong) NSString *alertSelected;
 
