@@ -11,6 +11,19 @@
 		134D5BBD1B16B913004091CC /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 134D5BBC1B16B913004091CC /* Reminder.m */; };
 		1362026B1B15CFF1000FE2E3 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1362026A1B15CFF1000FE2E3 /* Utils.m */; };
 		652B1737257012C5B78580A0 /* libPods-VoiceReminder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EEC2D302155D15EA1B506F /* libPods-VoiceReminder.a */; };
+		8205BBED1B23F660007C5258 /* alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = 82B4CCBC1B22A28B008341D3 /* alarm.caf */; };
+		8205BBEE1B23F660007C5258 /* awesomemorning_alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = 82B4CCBD1B22A28B008341D3 /* awesomemorning_alarm.caf */; };
+		8205BBEF1B23F660007C5258 /* background.caf in Resources */ = {isa = PBXBuildFile; fileRef = 82B4CCBE1B22A28B008341D3 /* background.caf */; };
+		8205BBF01B23F660007C5258 /* car_alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = 82B4CCBF1B22A28B008341D3 /* car_alarm.caf */; };
+		8205BBF11B23F660007C5258 /* car_sms.caf in Resources */ = {isa = PBXBuildFile; fileRef = 82B4CCC01B22A28B008341D3 /* car_sms.caf */; };
+		8205BBF21B23F660007C5258 /* chicken_alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = 82B4CCC11B22A28B008341D3 /* chicken_alarm.caf */; };
+		8205BBF31B23F660007C5258 /* complete_car_alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = 82B4CCC21B22A28B008341D3 /* complete_car_alarm.caf */; };
+		8205BBF41B23F660007C5258 /* cop_car.caf in Resources */ = {isa = PBXBuildFile; fileRef = 82B4CCC31B22A28B008341D3 /* cop_car.caf */; };
+		8205BBF51B23F660007C5258 /* morning_alarm_remix.caf in Resources */ = {isa = PBXBuildFile; fileRef = 82B4CCC41B22A28B008341D3 /* morning_alarm_remix.caf */; };
+		8205BBF61B23F660007C5258 /* morning_alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = 82B4CCC51B22A28B008341D3 /* morning_alarm.caf */; };
+		8205BBF71B23F660007C5258 /* nice_morning_alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = 82B4CCC61B22A28B008341D3 /* nice_morning_alarm.caf */; };
+		8205BBF81B23F660007C5258 /* sweet_morning_alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = 82B4CCC71B22A28B008341D3 /* sweet_morning_alarm.caf */; };
+		8205BBFE1B245097007C5258 /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 8205BBFD1B245097007C5258 /* Sound.m */; };
 		820B47AD1AB6478100B6AD15 /* icon_delete_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 820B47AB1AB6478100B6AD15 /* icon_delete_blue@2x.png */; };
 		820B47AE1AB6478100B6AD15 /* icon_delete_blue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 820B47AC1AB6478100B6AD15 /* icon_delete_blue@3x.png */; };
 		820B47B11AB647B000B6AD15 /* icon_edit_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 820B47AF1AB647AF00B6AD15 /* icon_edit_blue@2x.png */; };
@@ -101,7 +114,6 @@
 		8254EB4E1AC2264600D1C2CC /* VRRepeatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8254EB4C1AC2264600D1C2CC /* VRRepeatViewController.m */; };
 		8254EB4F1AC2264600D1C2CC /* VRRepeatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8254EB4D1AC2264600D1C2CC /* VRRepeatViewController.xib */; };
 		825C4B921AD0557700C22B34 /* VRLocalNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 825C4B911AD0557700C22B34 /* VRLocalNotificationController.m */; };
-		82773FB01B23565C00590D45 /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 82773FAF1B23565C00590D45 /* Sound.m */; };
 		8282C2921A67355F00A510D7 /* VRLocalizationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8282C2911A67355F00A510D7 /* VRLocalizationCenter.m */; };
 		829320181A7C2B0C00A3EAE5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 829320171A7C2B0C00A3EAE5 /* AppDelegate.m */; };
 		82A0DBE21AB0F2140071F419 /* VRReminderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A0DBE11AB0F2140071F419 /* VRReminderListCell.m */; };
@@ -153,6 +165,8 @@
 		136202691B15CFF1000FE2E3 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		1362026A1B15CFF1000FE2E3 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		2330FD062FD5F76BDE37B9A8 /* Pods-VoiceReminder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceReminder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VoiceReminder/Pods-VoiceReminder.debug.xcconfig"; sourceTree = "<group>"; };
+		8205BBFC1B245097007C5258 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
+		8205BBFD1B245097007C5258 /* Sound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sound.m; sourceTree = "<group>"; };
 		820B47AB1AB6478100B6AD15 /* icon_delete_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_delete_blue@2x.png"; sourceTree = "<group>"; };
 		820B47AC1AB6478100B6AD15 /* icon_delete_blue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_delete_blue@3x.png"; sourceTree = "<group>"; };
 		820B47AF1AB647AF00B6AD15 /* icon_edit_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_edit_blue@2x.png"; sourceTree = "<group>"; };
@@ -295,8 +309,6 @@
 		8254EB4D1AC2264600D1C2CC /* VRRepeatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VRRepeatViewController.xib; sourceTree = "<group>"; };
 		825C4B901AD0557700C22B34 /* VRLocalNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRLocalNotificationController.h; sourceTree = "<group>"; };
 		825C4B911AD0557700C22B34 /* VRLocalNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRLocalNotificationController.m; sourceTree = "<group>"; };
-		82773FAE1B23565C00590D45 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
-		82773FAF1B23565C00590D45 /* Sound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sound.m; sourceTree = "<group>"; };
 		8282C2901A67355F00A510D7 /* VRLocalizationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRLocalizationCenter.h; sourceTree = "<group>"; };
 		8282C2911A67355F00A510D7 /* VRLocalizationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRLocalizationCenter.m; sourceTree = "<group>"; };
 		829320161A7C2B0C00A3EAE5 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = VoiceReminder/Classes/AppDelegate/AppDelegate.h; sourceTree = SOURCE_ROOT; };
@@ -706,8 +718,8 @@
 				8238C5A51AC37CD40088EFE3 /* Repeat.m */,
 				134D5BBB1B16B913004091CC /* Reminder.h */,
 				134D5BBC1B16B913004091CC /* Reminder.m */,
-				82773FAE1B23565C00590D45 /* Sound.h */,
-				82773FAF1B23565C00590D45 /* Sound.m */,
+				8205BBFC1B245097007C5258 /* Sound.h */,
+				8205BBFD1B245097007C5258 /* Sound.m */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -1184,6 +1196,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8205BBED1B23F660007C5258 /* alarm.caf in Resources */,
+				8205BBEE1B23F660007C5258 /* awesomemorning_alarm.caf in Resources */,
+				8205BBEF1B23F660007C5258 /* background.caf in Resources */,
+				8205BBF01B23F660007C5258 /* car_alarm.caf in Resources */,
+				8205BBF11B23F660007C5258 /* car_sms.caf in Resources */,
+				8205BBF21B23F660007C5258 /* chicken_alarm.caf in Resources */,
+				8205BBF31B23F660007C5258 /* complete_car_alarm.caf in Resources */,
+				8205BBF41B23F660007C5258 /* cop_car.caf in Resources */,
+				8205BBF51B23F660007C5258 /* morning_alarm_remix.caf in Resources */,
+				8205BBF61B23F660007C5258 /* morning_alarm.caf in Resources */,
+				8205BBF71B23F660007C5258 /* nice_morning_alarm.caf in Resources */,
+				8205BBF81B23F660007C5258 /* sweet_morning_alarm.caf in Resources */,
 				824E76681A7AF91E0035C744 /* VRReminderSettingCell.xib in Resources */,
 				82A716B61A6188AA00829BE5 /* Images.xcassets in Resources */,
 				821702471AD0BF8800747B39 /* bt_cancel@3x.png in Resources */,
@@ -1287,7 +1311,7 @@
 				82C3027C1A7EA11800C854AA /* VRReminderMapping.m in Sources */,
 				823814D51AB9AD0400B00A02 /* SBTickerView.m in Sources */,
 				821702331AD0BD3200747B39 /* CTAssetItemViewController.m in Sources */,
-				82773FB01B23565C00590D45 /* Sound.m in Sources */,
+				8205BBFE1B245097007C5258 /* Sound.m in Sources */,
 				82E31F131AD145520000B176 /* VRPhotoDetailViewController.m in Sources */,
 				824E76661A7AF91E0035C744 /* IQDropDownTextField.m in Sources */,
 				82E31F201AD1840B0000B176 /* VRSoundModel.m in Sources */,

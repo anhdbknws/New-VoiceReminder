@@ -32,7 +32,7 @@
     
     [entity removeSound:entity.sound];
     for (VRSoundModel *soundModel in model.soundModels) {
-        [entity addSoundObject:[VRSoundMapping entityFromModel:soundModel inContext:context]];
+        [entity addSoundObject:[VRSoundMapping entityFromModel:soundModel andReminderName:model.name inContext:context]];
     }
     
     [entity removePhotos:entity.photos];
@@ -43,6 +43,7 @@
         photo.index = @([model.photoList indexOfObject:url]);
         [entity addPhotosObject:photo];
     }
+    
     return entity;
 }
 

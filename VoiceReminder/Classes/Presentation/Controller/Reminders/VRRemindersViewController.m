@@ -39,8 +39,8 @@ NSString *kNotificationName1 = @"testNotification";
     self.view.backgroundColor = [UIColor whiteColor];
     [self createListViewControllers];
     
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editAction:)];
-    self.navigationItem.rightBarButtonItem = editButton;
+    [self leftNavigationItem:nil andTitle:@"Back" orImage:nil];
+    [self rightNavigationItem:@selector(editAction:) andTitle:@"Edit" orImage:nil];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -96,6 +96,11 @@ NSString *kNotificationName1 = @"testNotification";
     otherVC.tabBarItem.image = [UIImage imageNamed:@"1.png"];
 }
 
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    return !self.selectLock;
+}
+
+#pragma mark - Actions
 - (void)editAction:(id)sender {
     if (selectedIndex == 0) {
         [_calendarController editAction];
@@ -105,12 +110,8 @@ NSString *kNotificationName1 = @"testNotification";
     }
 }
 
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-    return !self.selectLock;
-}
-
 - (void)dealloc {
-//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 @end

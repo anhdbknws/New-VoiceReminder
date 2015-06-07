@@ -14,7 +14,6 @@
 
 @interface VRSoundViewController ()<UITableViewDataSource, UITableViewDelegate, MPMediaPickerControllerDelegate, AVAudioPlayerDelegate>
 @property (nonatomic, strong) MPMusicPlayerController *musicPlayer;
-@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 @property (assign) BOOL isPlaying;
 @end
 
@@ -33,8 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self getListSoundFromDBLocal];
-    [self backButton];
-    [self addButton];
+    [self leftNavigationItem:@selector(backAction) andTitle:@"Back" orImage:nil];
+    [self rightNavigationItem:@selector(addAction:) andTitle:nil orImage:[UIImage imageNamed:@"bt_add"]];
     [self configureTableView];
     [self setupSegment];
 }
@@ -133,7 +132,8 @@
 }
 
 #pragma mark - Actions
-- (void)doneAction:(id)sender {
+- (void)backAction {
+    [self.audioPlayer stop];
     [self.view endEditing:YES];
     
     if (self.selectedSoundCompleted) {
@@ -161,6 +161,8 @@
 }
 
 - (void)segmentChanged:(UISegmentedControl *)sender {
+    [self.audioPlayer stop];
+    
     NSInteger selectedSegmentIndex = [sender selectedSegmentIndex];
     switch (selectedSegmentIndex) {
         case SOUND_TYPE_RECORD:
@@ -229,24 +231,5 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - play audio
-- (void)setupAudioPlayerForShortSound:(NSString *)shortSoundName {
-    NSString *backgroundMusicPath = [[NSBundle mainBundle] pathForResource:shortSoundName ofType:@"caf"];
-    NSURL *backgroundMusicURL = [NSURL fileURLWithPath:backgroundMusicPath];
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:nil];
-    self.audioPlayer.delegate = self;  // We need this so we can restart after interruptions
-    self.audioPlayer.numberOfLoops = -1;
-}
 
-- (void)playSound {
-    if (self.isPlaying) {
-        [self.audioPlayer stop];
-    }
-    
-    if ([self.audioPlayer prepareToPlay]) {
-        [self.audioPlayer play];
-    }
-    
-    self.isPlaying = YES;
-}
 @end

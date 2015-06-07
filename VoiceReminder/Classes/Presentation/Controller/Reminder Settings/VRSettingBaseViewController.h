@@ -9,11 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @interface VRSettingBaseViewController : UIViewController
-- (void)doneButton;
-- (void)backButton;
-- (void)addButton;
-- (void)addAction:(id)sender;
-- (void)doneAction:(id)sender;
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic,assign) BOOL isPlaying;
+
+- (void)leftNavigationItem:(SEL)selector andTitle:(NSString *)title orImage:(UIImage *)image;
+- (void)rightNavigationItem:(SEL)selector andTitle:(NSString *)title orImage:(UIImage *)image;
+
 - (void)hideAddButton;
 - (void)showAddButton;
+
+// play audio
+- (void)setupAudioPlayerForShortSound:(NSString *)shortSoundName;
+- (void)playSound;
 @end

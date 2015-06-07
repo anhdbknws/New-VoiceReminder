@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface VRListReminderViewController : UIViewController
+#import "VRSettingBaseViewController.h"
+@interface VRListReminderViewController : VRSettingBaseViewController
 @property (nonatomic, strong) UISegmentedControl *segmentControl;
-@property (nonatomic, strong) UITableView *listEvents;
+@property (nonatomic, strong) UITableView *listEventTableview;
 @property (nonatomic, strong) UIViewController *rootViewController;
 - (void)editAction;
 @end

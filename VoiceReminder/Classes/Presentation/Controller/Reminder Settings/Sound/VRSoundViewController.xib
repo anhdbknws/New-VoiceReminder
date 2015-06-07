@@ -22,7 +22,7 @@
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </tableView>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OBp-g7-K70">
-                    <rect key="frame" x="8" y="2" width="304" height="29"/>
+                    <rect key="frame" x="5" y="2" width="310" height="29"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="28" id="wek-zV-6kG"/>
                     </constraints>
@@ -35,13 +35,13 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="OBp-g7-K70" secondAttribute="trailing" constant="8" id="06X-ga-kp9"/>
+                <constraint firstAttribute="trailing" secondItem="OBp-g7-K70" secondAttribute="trailing" constant="5" id="06X-ga-kp9"/>
                 <constraint firstAttribute="bottom" secondItem="mqn-jv-Yed" secondAttribute="bottom" id="5IG-r7-R1x"/>
                 <constraint firstAttribute="trailing" secondItem="mqn-jv-Yed" secondAttribute="trailing" id="Drg-5v-yUN"/>
                 <constraint firstItem="mqn-jv-Yed" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="N4R-d1-Cv2"/>
                 <constraint firstItem="OBp-g7-K70" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="2" id="cAP-NV-qfL"/>
                 <constraint firstItem="mqn-jv-Yed" firstAttribute="top" secondItem="OBp-g7-K70" secondAttribute="bottom" constant="5" id="dxX-VZ-QHi"/>
-                <constraint firstItem="OBp-g7-K70" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="g3M-BB-Upf"/>
+                <constraint firstItem="OBp-g7-K70" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="g3M-BB-Upf"/>
             </constraints>
             <point key="canvasLocation" x="366" y="251"/>
         </view>

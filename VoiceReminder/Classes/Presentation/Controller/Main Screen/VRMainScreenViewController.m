@@ -128,7 +128,7 @@
     
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
         for (VRSoundModel *model in listShortSoundModel) {
-            [VRSoundMapping entityFromModel:model inContext:localContext];
+            [VRSoundMapping entityFromModel:model andReminderName:nil inContext:localContext];
         }
     } completion:^(BOOL success, NSError *error) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSaveShortSoundToDBLocal];

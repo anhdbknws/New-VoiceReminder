@@ -26,8 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configTextview];
-    [self backButton];
-    [self doneButton];
+    [self leftNavigationItem:nil andTitle:@"Back" orImage:nil];
+    [self rightNavigationItem:@selector(doneAction:) andTitle:@"Done" orImage:nil];
 }
 
 - (void)configTextview {

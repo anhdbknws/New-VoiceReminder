@@ -20,40 +20,31 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _listReminder = [NSMutableArray new];
+        _listReminderActive = [NSMutableArray new];
+        _listReminderAll = [NSMutableArray new];
+        _listReminderCompleted = [NSMutableArray new];
     }
     
     return self;
 }
 
-- (void)getListReminderAll {
-    [_listReminder removeAllObjects];
-    NSArray *listEntity = [Reminder MR_findAll];
-    for (Reminder *entity in listEntity) {
-        VRReminderModel *model = [[VRReminderModel alloc] initWithEntity:entity];
-        [_listReminder addObject:model];
-    }
-}
+- (void)getListReminderFromDB {
 
-- (void)getListReminderActive {
-    [_listReminder removeAllObjects];
     NSArray *listEntity = [Reminder MR_findAll];
-    for (Reminder *entity in listEntity) {
-        VRReminderModel *model = [[VRReminderModel alloc] initWithEntity:entity];
-        if (model.isActive) {
-            [_listReminder addObject:model];
-        }
-    }
-}
-
-- (void)getListReminderCompleted {
-    [_listReminder removeAllObjects];
-    NSArray *listEntity = [Reminder MR_findAll];
+    
     NSDate *currentDate = [NSDate date];
+    /* all reminder */
     for (Reminder *entity in listEntity) {
         VRReminderModel *model = [[VRReminderModel alloc] initWithEntity:entity];
-        if ([currentDate compare:[[VRCommon commonDateFormat] dateFromString:model.timeReminder]] == NSOrderedDescending) {
-            [_listReminder addObject:model];
+        [_listReminderAll addObject:model];
+        
+        if (model.isActive) {
+            [_listReminderActive addObject:model];
+        }
+        
+        NSDate *dateReminder = [[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder];
+        if ([dateReminder compare:currentDate] == NSOrderedDescending) {
+            [_listReminderCompleted addObject:model];
         }
     }
 }
@@ -63,6 +54,19 @@
         Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid];
         if (entity) {
             [entity MR_deleteEntity];
+        }
+    } completion:^(BOOL success, NSError *error) {
+        if (completion) {
+            completion(error, nil);
+        }
+    }];
+}
+
+- (void)setStatusForReminder:(VRReminderModel *)model withState:(BOOL)active completionHandler:(databaseHandler)completion{
+    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+        Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:model.uuid];
+        if (entity) {
+            entity.isActive = [NSNumber numberWithBool:active];
         }
     } completion:^(BOOL success, NSError *error) {
         if (completion) {

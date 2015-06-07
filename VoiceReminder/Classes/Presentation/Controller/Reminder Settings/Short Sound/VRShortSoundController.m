@@ -25,10 +25,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self backButton];
-    [self doneButton];
+    [self leftNavigationItem:nil andTitle:@"Back" orImage:nil];
+    [self rightNavigationItem:@selector(doneAction:) andTitle:@"Done" orImage:nil];
     [self setupTableView];
     [self getDataFromDB];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.audioPlayer stop];
 }
 
 - (void)getDataFromDB {
@@ -101,9 +106,13 @@
     self.soundModel = [_service.shortSoundArray objectAtIndex:indexPath.row];
     
     [self.tableViewShortSound reloadData];
+    [self setupAudioPlayerForShortSound:self.soundModel.name];
+    [self playSound];
 }
 
 - (void)doneAction:(id)sender {
+    [self.audioPlayer stop];
+    
     [self.view endEditing:YES];
     if (self.selectShortSoundCompleted) {
         self.selectShortSoundCompleted(self.soundModel);

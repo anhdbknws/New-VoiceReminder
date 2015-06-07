@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VRSettingBaseViewController.h"
 
-@interface VRRemindersViewController : UIViewController
+@interface VRRemindersViewController : VRSettingBaseViewController
 @property (nonatomic, strong) UIViewController *viewController;
 @end

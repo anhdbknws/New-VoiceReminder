@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 @class VRReminderModel;
 @interface VRReminderListService : NSObject
-@property (nonatomic, strong) NSMutableArray *listReminder;
+@property (nonatomic, strong) NSMutableArray *listReminderAll;
+@property (nonatomic, strong) NSMutableArray *listReminderActive;
+@property (nonatomic, strong) NSMutableArray *listReminderCompleted;
 - (void)deleteReminderWithUUID:(NSString *)uuid completionHandler:(databaseHandler)completion;
-- (void)getListReminderActive;
-- (void)getListReminderAll;
-- (void)getListReminderCompleted;
+- (void)getListReminderFromDB;
+- (void)setStatusForReminder:(VRReminderModel *)model withState:(BOOL)active completionHandler:(databaseHandler)completion;
 @end

@@ -34,6 +34,7 @@
 #import "NSString+VR.h"
 #import "VRNotesController.h"
 #import "VRShortSoundController.h"
+#import "Sound.h"
 
 static NSString * const kImageArrow = @"icon_arrow_right";
 const NSInteger kPhotoActionSheetTag = 3249;
@@ -125,18 +126,23 @@ const NSInteger kPhotoActionSheetTag = 3249;
     self.model.alertReminder = ALERT_TYPE_AT_EVENT_TIME;
     self.model.timeReminder = [VRCommon commonFormatFromDateTime:[NSDate date]];
    
-    VRSoundModel *musicModel = [[VRSoundModel alloc] init];
-    musicModel.name = @"Audio recorded"; // get sound default
-    musicModel.url = [self.audioRecordingURL absoluteString];
-    musicModel.isMp3Sound = YES;
-    
-    [self.model.soundModels addObject:musicModel];
-    
-    VRSoundModel *shortSoundModel = [[VRSoundModel alloc] init];
-    shortSoundModel.name = [VREnumDefine listShortSound][0];
-    shortSoundModel.isShortSound = YES;
-    
+    /* short sound*/
+    NSArray *listSound = [Sound MR_findAll];
+    VRSoundModel *shortSoundModel = [[VRSoundModel alloc] initWithEntity:listSound[0]];
     [self.model.soundModels addObject:shortSoundModel];
+    
+    /* music sound */
+    VRSoundModel *musicModel = [[VRSoundModel alloc] init];
+    if (self.audioRecordingURL) {
+        musicModel.name = @"Audio recorded"; // get sound default
+        musicModel.url = [self.audioRecordingURL absoluteString];
+        musicModel.isMp3Sound = YES;
+    }
+    else {
+        musicModel = [shortSoundModel copy];
+    }
+    
+    [self.model.soundModels insertObject:musicModel atIndex:0];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -251,14 +257,8 @@ const NSInteger kPhotoActionSheetTag = 3249;
     cell.textfield.font = H1_FONT;
     cell.textfield.tag = REMINDER_SETTING_TYPE_MUSIC_SOUND;
     cell.textfield.delegate = self;
-    
-    for (VRSoundModel *model in self.model.soundModels) {
-        if (model.isMp3Sound) {
-            cell.textfield.text = model.name;
-        }
-    }
-    
-    
+    VRSoundModel *model = [self.model.soundModels firstObject];
+    cell.textfield.text = model.name;
     [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
     
     return cell;
@@ -266,14 +266,11 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (VRReminderSettingCell *)configureShortSoundAtIndexPath:(NSIndexPath *)indexPath {
     VRReminderSettingCell *cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderSettingCell class]) forIndexPath:indexPath];
+    
     cell.titleLabel.text = @"Short sound";
     cell.textfield.font = H1_FONT;
-    for (VRSoundModel *model in self.model.soundModels) {
-        if (model.isShortSound) {
-            cell.textfield.text = model.name;
-        }
-    }
-    
+    VRSoundModel *model = [self.model.soundModels lastObject];
+    cell.textfield.text = model.name;
     cell.textfield.tag = REMINDER_SETTING_TYPE_SHORT_SOUND;
     cell.textfield.delegate = self;
     
@@ -489,7 +486,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (void)chooseMusicSound {
     VRSoundViewController *vc = [[VRSoundViewController alloc] initWithNibName:NSStringFromClass([VRSoundViewController class]) bundle:nil];
-    vc.soundModel = [self getMusicSound];
+    vc.soundModel = [self.model.soundModels firstObject];
 
     __weak typeof (self)weak = self;
     vc.selectedSoundCompleted = ^(VRSoundModel *soundModel) {
@@ -497,7 +494,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
         if (!strong) {
             return ;
         }
-        [strong setMusicSound:soundModel];
+        [strong.model.soundModels replaceObjectAtIndex:0 withObject:soundModel];
         [strong.settingTableview reloadData];
     };
     [self.navigationController pushViewController:vc animated:YES];
@@ -506,56 +503,15 @@ const NSInteger kPhotoActionSheetTag = 3249;
 - (void)chooseShortSound {
     VRShortSoundController *shortSoundVC = [[VRShortSoundController alloc] initWithNibName:NSStringFromClass([VRShortSoundController class]) bundle:nil];
     
+    __weak typeof (self)weak = self;
     shortSoundVC.selectShortSoundCompleted = ^(VRSoundModel *soundModel) {
-        [self setShortSoundModel:soundModel];
-        [self.settingTableview reloadData];
+        [weak.model.soundModels replaceObjectAtIndex:1 withObject:soundModel];
+        [weak.settingTableview reloadData];
     };
     
-    shortSoundVC.soundModel = [self getShortSound];
+    shortSoundVC.soundModel = [self.model.soundModels lastObject];
     
     [self.navigationController pushViewController:shortSoundVC animated:YES];
-}
-
-- (VRSoundModel *)getMusicSound {
-    VRSoundModel *model;
-    for (VRSoundModel *object in self.model.soundModels) {
-        if (object.isMp3Sound) {
-            model = object;
-            break;
-        }
-    }
-    
-    return model;
-}
-
-- (void)setMusicSound:(VRSoundModel *)model {
-    for (VRSoundModel *object in self.model.soundModels) {
-        if (object.isMp3Sound) {
-            [self.model.soundModels replaceObjectAtIndex:[self.model.soundModels indexOfObject:object] withObject:model];
-            break;
-        }
-    }
-}
-
-- (VRSoundModel *)getShortSound {
-    VRSoundModel *model;
-    for (VRSoundModel *object in self.model.soundModels) {
-        if (object.isShortSound) {
-            model = object;
-            break;
-        }
-    }
-    
-    return model;
-}
-
-- (void)setShortSoundModel:(VRSoundModel*)model {
-    for (VRSoundModel *object in self.model.soundModels) {
-        if (object.isShortSound) {
-            [self.model.soundModels replaceObjectAtIndex:[self.model.soundModels indexOfObject:object] withObject:model];
-            break;
-        }
-    }
 }
 
 #pragma mark -photos

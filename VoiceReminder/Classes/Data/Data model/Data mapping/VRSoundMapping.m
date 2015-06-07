@@ -16,88 +16,95 @@
 
 
 @implementation VRSoundMapping
-+ (Sound *)entityFromModel:(VRSoundModel *)model inContext:(NSManagedObjectContext *)context {
++ (Sound *)entityFromModel:(VRSoundModel *)model andReminderName:(NSString *)reminderName inContext:(NSManagedObjectContext *)context {
     Sound *entity = [Sound entityWithUuid:model.uuid inContext:context];
     entity.isShortSound = [NSNumber numberWithBool:model.isShortSound];
     entity.isMp3Sound = [NSNumber numberWithBool:model.isMp3Sound];
     entity.isRecordSound = [NSNumber numberWithBool:model.isRecordSound];
     entity.name = model.name;
-    entity.url = model.url;
+    if (model.isRecordSound) {
+       entity.url = [self saveAudioToDocumentFolder:model.url withName:reminderName];
+        entity.name = reminderName;
+    }
+    else if (model.isMp3Sound) {
+        entity.url = [self saveMediaItemToDocument:model];
+    }
+    else {
+        entity.url = model.url;
+    }
+    
     return entity;
 }
 
-+ (NSString *)saveAudioToDocumentFolder:(VRReminderModel *)model {
-//    // get content
-//    NSData *data = [[self class] getContentWithURL:model.musicSoundModel];
-//    
-//    NSString *fileName = [[self class] checkDuplicateFileName:model.name];
-//    
-//    NSString *dataPath = [[[self class] documentsDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.m4a", fileName]];
-//    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-//        // Save it into file system
-//        [data writeToFile:dataPath atomically:YES];
-//    });
-//    
-//    return dataPath;
-    return @"dsdsds";
-}
++ (NSString *)saveAudioToDocumentFolder:(NSString *)url withName:(NSString *)name{
+    NSData *data = [[self class] getContentWithURL:url];
 
-+ (NSString *)saveMediaItemToDocument:(VRReminderModel *)model {
+    NSString *fileName = [[self class] checkDuplicateFileName:name];
+
+    NSString *dataPath = [[[self class] documentsDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.m4a", fileName]];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        // Save it into document
+        [data writeToFile:dataPath atomically:YES];
+    });
     
-//    AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL: model.musicSoundModel.mp3Url options:nil];
-//    
-//    //Now create an AVAssetExportSession object that will save your final audio file at specified path.
-//    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset: songAsset presetName:AVAssetExportPresetAppleM4A];
-//    exporter.outputFileType = AVFileTypeAppleM4A;
-//    
-//    NSString *fileName = [[self class] checkDuplicateFileName:[VRCommon removeWhiteSpace:model.musicSoundModel.name]];
-//    NSString *exportFile = [[[self class] documentsDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.m4a", fileName]];
-//    NSURL *exportURL = [NSURL fileURLWithPath:exportFile];
-//    exporter.outputURL = exportURL;
-//    
-//    exporter.shouldOptimizeForNetworkUse = YES;
-//    CMTime start = CMTimeMakeWithSeconds(1.0, 100);
-//    CMTime duration = CMTimeMakeWithSeconds(3.0, 100);
-//    CMTimeRange range = CMTimeRangeMake(start, duration);
-//    exporter.timeRange = range;
-//    
-//    
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [exporter exportAsynchronouslyWithCompletionHandler:^{
-//            int exportStatus = exporter.status;
-//            
-//            switch (exportStatus) {
-//                case AVAssetExportSessionStatusFailed:
-//                    break;
-//                case AVAssetExportSessionStatusCompleted:
-//                {
-//                    NSData *data = [NSData dataWithContentsOfFile: exportFile];
-//                    if (data) {
-//                        
-//                        NSLog(@"completed");
-//                    }
-//                    else {
-//                        NSLog(@"export failed");
-//                    }
-//                }
-//                    break;
-//                case AVAssetExportSessionStatusUnknown:
-//                    NSLog(@"unknow");
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }];
-//    });
-//    
-//    return [NSString stringWithFormat:@"%@", exportURL];
-    return @"dsdsds";
+    return dataPath;
 }
 
-+ (NSData *)getContentWithURL:(VRSoundModel *)model {
++ (NSString *)saveMediaItemToDocument:(VRSoundModel *)model {
+    
+    AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL:model.mp3Url options:nil];
+    
+    //Now create an AVAssetExportSession object that will save your final audio file at specified path.
+    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset: songAsset presetName:AVAssetExportPresetAppleM4A];
+    exporter.outputFileType = AVFileTypeAppleM4A;
+    
+    NSString *fileName = [[self class] checkDuplicateFileName:[VRCommon removeWhiteSpace:model.name]];
+    NSString *exportFile = [[[self class] documentsDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.m4a", fileName]];
+    NSURL *exportURL = [NSURL fileURLWithPath:exportFile];
+    exporter.outputURL = exportURL;
+    
+    exporter.shouldOptimizeForNetworkUse = YES;
+    CMTime start = CMTimeMakeWithSeconds(1.0, 100);
+    CMTime duration = CMTimeMakeWithSeconds(3.0, 100);
+    CMTimeRange range = CMTimeRangeMake(start, duration);
+    exporter.timeRange = range;
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [exporter exportAsynchronouslyWithCompletionHandler:^{
+            int exportStatus = exporter.status;
+            
+            switch (exportStatus) {
+                case AVAssetExportSessionStatusFailed:
+                    break;
+                case AVAssetExportSessionStatusCompleted:
+                {
+                    NSData *data = [NSData dataWithContentsOfFile: exportFile];
+                    if (data) {
+                        
+                        NSLog(@"completed");
+                    }
+                    else {
+                        NSLog(@"export failed");
+                    }
+                }
+                    break;
+                case AVAssetExportSessionStatusUnknown:
+                    NSLog(@"unknow");
+                    break;
+                default:
+                    break;
+            }
+        }];
+    });
+    
+    return [NSString stringWithFormat:@"%@", exportURL];
+}
+
++ (NSData *)getContentWithURL:(NSString *)url {
     NSError *readingError = nil;
-    NSData  *fileData = [NSData dataWithContentsOfURL:[NSURL URLWithString:model.url]
+    NSData  *fileData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]
                                               options:NSDataReadingMapped
                                                 error:&readingError];
     return fileData;

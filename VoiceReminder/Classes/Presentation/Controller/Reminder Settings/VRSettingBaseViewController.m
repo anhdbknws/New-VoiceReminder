@@ -8,7 +8,7 @@
 
 #import "VRSettingBaseViewController.h"
 
-@interface VRSettingBaseViewController ()
+@interface VRSettingBaseViewController ()<AVAudioPlayerDelegate>
 
 @end
 
@@ -21,23 +21,38 @@
     self.view.backgroundColor = [UIColor whiteColor];
 }
 
-- (void)backButton {
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
+- (void)leftNavigationItem:(SEL)selector andTitle:(NSString *)title orImage:(UIImage *)image {
+    SEL backSelector;
+    if (selector) {
+        backSelector = selector;
+    }
+    else {
+        backSelector = @selector(backAction:);
+    }
+    UIBarButtonItem *leftButton;
     
-    [backButton setTitleTextAttributes:[self textAttributes] forState:UIControlStateNormal];
-    self.navigationItem.leftBarButtonItem = backButton;
+    if (title.length) {
+        leftButton = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:self action:backSelector];
+    }
+    else {
+        leftButton = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:selector];
+    }
+    
+    [leftButton setTitleTextAttributes:[self textAttributes] forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = leftButton;
 }
 
-- (void)doneButton {
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(doneAction:)];
-    [doneButton setTitleTextAttributes:[self textAttributes] forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = doneButton;
-}
-
-- (void)addButton {
-    addButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"bt_add"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(addAction:)];
-    [addButton setTitleTextAttributes:[self textAttributes] forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = addButton;
+- (void)rightNavigationItem:(SEL)selector andTitle:(NSString *)title orImage:(UIImage *)image{
+    UIBarButtonItem *rightButton;
+    if (title.length) {
+        rightButton = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:self action:selector];
+    }
+    else {
+        rightButton = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:selector];
+    }
+    
+    [rightButton setTitleTextAttributes:[self textAttributes] forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = rightButton;
 }
 
 - (NSDictionary *)textAttributes {
@@ -61,6 +76,27 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - play audio
+- (void)setupAudioPlayerForShortSound:(NSString *)shortSoundName {
+    NSString *backgroundMusicPath = [[NSBundle mainBundle] pathForResource:shortSoundName ofType:@"caf"];
+    NSURL *backgroundMusicURL = [NSURL fileURLWithPath:backgroundMusicPath];
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:nil];
+    self.audioPlayer.delegate = self;  // We need this so we can restart after interruptions
+    self.audioPlayer.numberOfLoops = -1;
+}
+
+- (void)playSound {
+    if (self.isPlaying) {
+        [self.audioPlayer stop];
+    }
+    
+    if ([self.audioPlayer prepareToPlay]) {
+        [self.audioPlayer play];
+    }
+    
+    self.isPlaying = YES;
 }
 
 @end

@@ -25,40 +25,63 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
 
 @implementation VRListReminderViewController
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.title = @"List";
+        self.view.backgroundColor = [UIColor whiteColor];
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareData];
     [self configureUI];
-    [self configureTableView];
 }
 
 #pragma mark - ConfigureUI
 - (void)configureUI {
-    self.title = @"List";
     self.isEditMode = NO;
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.segmentControl = [[UISegmentedControl alloc] initWithItems:@[@"Active", @"All", @"Completed"]];
-    [self.segmentControl setFrame:CGRectMake(10, 5, self.view.frame.size.width - 20, 30)];
-    self.segmentControl.selectedSegmentIndex = 0;
-    [self.segmentControl addTarget:self action:@selector(selectedSegmentAtIndex:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:self.segmentControl];
+    [self.view addSubview:self.listEventTableview];
+    [self.listEventTableview registerClass:[VRReminderListCell class] forCellReuseIdentifier:NSStringFromClass([VRReminderListCell class])];
+    
+    //layout
+    [_segmentControl autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:0];
+    [_segmentControl autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:5];
+    [_segmentControl autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:5];
+    [_segmentControl autoSetDimension:ALDimensionHeight toSize:30];
+    
+    [_listEventTableview autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:0];
+    [_listEventTableview autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:0];
+    [_listEventTableview autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
+    [_listEventTableview autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_segmentControl withOffset:3];
 }
 
-- (void)configureTableView {
-    self.listEvents = [[UITableView alloc] initWithFrame:CGRectMake(0, 35, self.view.frame.size.width, self.view.frame.size.height - 140) style:UITableViewStylePlain];
-    self.listEvents.backgroundColor = [UIColor whiteColor];
-    self.listEvents.delegate = self;
-    self.listEvents.dataSource = self;
-    [self.listEvents registerClass:[VRReminderListCell class] forCellReuseIdentifier:NSStringFromClass([VRReminderListCell class])];
-
-    [self.view addSubview:self.listEvents];
+- (UISegmentedControl *)segmentControl {
+    if (!_segmentControl) {
+        _segmentControl = [[UISegmentedControl alloc] initWithItems:@[@"Active", @"All", @"Completed"]];
+        self.segmentControl.selectedSegmentIndex = 0;
+        [self.segmentControl setTintColor:[UIColor redColor]];
+        [self.segmentControl addTarget:self action:@selector(selectedSegmentAtIndex:) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    return _segmentControl;
 }
 
-- (void)configureNavigationBar {
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
-    self.navigationItem.leftBarButtonItem = backButton;
+- (UITableView *)listEventTableview {
+    if (!_listEventTableview) {
+        _listEventTableview = [[UITableView alloc] initForAutoLayout];
+        _listEventTableview.backgroundColor = [UIColor whiteColor];
+        _listEventTableview.delegate = self;
+        _listEventTableview.dataSource = self;
+    }
+    
+    return _listEventTableview;
 }
+
 
 - (void)prepareData {
     if (!_service) {
@@ -81,7 +104,7 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
     VRReminderListCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderListCell class]) forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    NSLog(@"%d", indexPath.row);
+    NSLog(@"%ld", (long)indexPath.row);
     
     VRReminderModel *model = [_service.listReminder objectAtIndex:indexPath.row];
     cell.leftUtilityButtons = [self leftButton];
@@ -132,7 +155,7 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
             break;
     }
     
-    [self.listEvents reloadData];
+    [self.listEventTableview reloadData];
 }
 
 - (void)dealloc {
@@ -142,6 +165,6 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
 #pragma mark - List reminder 
 - (void)editAction {
     self.isEditMode = !self.isEditMode;
-    [self.listEvents reloadData];
+    [self.listEventTableview reloadData];
 }
 @end
