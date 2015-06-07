@@ -10,6 +10,7 @@
 #import "Reminder.h"
 #import "VRReminderModel.h"
 #import "VRCommon.h"
+#import "VRReminderMapping.h"
 
 @interface VRReminderListService ()
 @property (nonatomic, strong) NSString *uuid;
@@ -68,13 +69,14 @@
     }];
 }
 
-- (void)setStatusForReminder:(VRReminderModel *)model withState:(BOOL)active completionHandler:(databaseHandler)completion{
+- (void)setStatusForReminder:(VRReminderModel *)model completionHandler:(databaseHandler)completion{
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
         Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:model.uuid];
         if (entity) {
-            entity.isActive = [NSNumber numberWithBool:active];
+            entity.isActive = [NSNumber numberWithBool:!model.isActive];
         }
     } completion:^(BOOL success, NSError *error) {
+        Reminder *enti = [Reminder MR_findFirstByAttribute:@"uuid" withValue:model.uuid];
         if (completion) {
             completion(error, nil);
         }

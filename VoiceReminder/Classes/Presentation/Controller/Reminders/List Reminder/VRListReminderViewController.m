@@ -129,7 +129,9 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
     
     __weak typeof (self)weak = self;
     cell.changeSwitch = ^(id sender) {
-        [weak updateStatus:!model.isActive];
+        [weak updateStatusFor:model CompletionHandler:^(NSError *error, id result) {
+            [weak.listEventTableview reloadData];
+        }];
     };
     
     [cell layoutSubviews];

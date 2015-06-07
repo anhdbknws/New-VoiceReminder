@@ -20,5 +20,5 @@
  * update status reminder (active or not active)
  */
 
-- (void)updateStatus:(BOOL)status;
+- (void)updateStatusFor:(VRReminderModel *)model CompletionHandler:(databaseHandler)completion;
 @end

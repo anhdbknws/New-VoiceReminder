@@ -7,6 +7,7 @@
 //
 
 #import "VRReminderListBaseController.h"
+#import "VRReminderModel.h"
 
 @interface VRReminderListBaseController ()
 
@@ -30,8 +31,16 @@
     }];
 }
 
-- (void)updateStatus:(BOOL)status {
+- (void)updateStatusFor:(VRReminderModel *)model CompletionHandler:(databaseHandler)completion{
+    if (!_service) {
+        _service = [[VRReminderListService alloc] init];
+    }
     
+    [_service setStatusForReminder:model completionHandler:^(NSError *error, id result) {
+        if (completion) {
+            completion(error, result);
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
