@@ -27,7 +27,7 @@ NSString *kNotificationName1 = @"testNotification";
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.title = @"diepnn";
+        self.title = @"List reminders";
     }
     
     return self;

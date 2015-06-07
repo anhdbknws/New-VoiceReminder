@@ -14,4 +14,5 @@
 @property (nonatomic, strong) UIView *lineSeparate;
 @property (nonatomic, strong) UISwitch *switchButton;
 @property (nonatomic, copy) void(^pressEditButton)(id sender);
+@property (nonatomic, copy) void(^changeSwitch)(id sender);
 @end

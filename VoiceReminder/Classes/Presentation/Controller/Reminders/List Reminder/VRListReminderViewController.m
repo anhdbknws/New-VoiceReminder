@@ -8,7 +8,6 @@
 
 #import "VrListReminderViewController.h"
 #import "VRReminderListCell.h"
-#import "VRReminderListService.h"
 #import "VRReminderModel.h"
 #import "VRCommon.h"
 #import <SWTableViewCell.h>
@@ -19,16 +18,16 @@ static NSString * const kImageEditBlue = @"icon_edit_blue";
 static NSString * const kImageDeleteBlue = @"icon_delete_blue";
 
 @interface VRListReminderViewController ()<UITableViewDataSource, UITableViewDelegate, SWTableViewCellDelegate>
-@property (nonatomic, strong) VRReminderListService *service;
 @property (nonatomic, assign) BOOL isEditMode;
 @end
 
 @implementation VRListReminderViewController
-
+{
+    LIST_REMINDER_TYPE currentSegment;
+}
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.title = @"List";
         self.view.backgroundColor = [UIColor whiteColor];
     }
     
@@ -37,8 +36,14 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self prepareData];
     [self configureUI];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getReminderFromDBLocalCompletionHandler:^(NSError *error, id result) {
+        [self.listEventTableview reloadData];
+    }];
 }
 
 #pragma mark - ConfigureUI
@@ -58,6 +63,8 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
     [_listEventTableview autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:0];
     [_listEventTableview autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
     [_listEventTableview autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_segmentControl withOffset:3];
+    
+    currentSegment = LIST_REMINDER_TYPE_ACTIVE;
 }
 
 - (UISegmentedControl *)segmentControl {
@@ -77,18 +84,10 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
         _listEventTableview.backgroundColor = [UIColor whiteColor];
         _listEventTableview.delegate = self;
         _listEventTableview.dataSource = self;
+        _listEventTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     
     return _listEventTableview;
-}
-
-
-- (void)prepareData {
-    if (!_service) {
-        _service = [[VRReminderListService alloc] init];
-    }
-    
-    [_service getListReminderActive];
 }
 
 #pragma mark - Tableview datasource
@@ -97,26 +96,59 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _service.listReminder.count;
+    if (currentSegment == LIST_REMINDER_TYPE_ACTIVE) {
+        return self.service.listReminderActive.count;
+    }
+    else if (currentSegment == LIST_REMINDER_TYPE_ALL) {
+        return self.service.listReminderAll.count;
+    }
+    else {
+        return self.service.listReminderCompleted.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VRReminderListCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderListCell class]) forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+    VRReminderModel *model;
+    if (currentSegment == LIST_REMINDER_TYPE_ACTIVE) {
+        model = [self.service.listReminderActive objectAtIndex:indexPath.row];
+    }
+    else if (currentSegment == LIST_REMINDER_TYPE_ALL) {
+        model = [self.service.listReminderAll objectAtIndex:indexPath.row];
+    }
+    else {
+        model = [self.service.listReminderCompleted objectAtIndex:indexPath.row];
+    }
     
-    NSLog(@"%ld", (long)indexPath.row);
-    
-    VRReminderModel *model = [_service.listReminder objectAtIndex:indexPath.row];
     cell.leftUtilityButtons = [self leftButton];
     cell.name.text = model.name;
     cell.timeReminder.text = model.timeReminder;
+    [cell.switchButton setOn:model.isActive];
+    
+    __weak typeof (self)weak = self;
+    cell.changeSwitch = ^(id sender) {
+        [weak updateStatus:!model.isActive];
+    };
+    
     [cell layoutSubviews];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     VRReminderDetailController *vc = [[VRReminderDetailController alloc] initWithNibName:NSStringFromClass([VRReminderDetailController class]) bundle:nil];
-    VRReminderModel *model = [_service.listReminder objectAtIndex:indexPath.row];
+    VRReminderModel *model;
+    if (currentSegment == LIST_REMINDER_TYPE_ACTIVE) {
+        model = [self.service.listReminderActive objectAtIndex:indexPath.row];
+    }
+    else if (currentSegment == LIST_REMINDER_TYPE_ALL) {
+        model = [self.service.listReminderAll objectAtIndex:indexPath.row];
+    }
+    else {
+        model = [self.service.listReminderCompleted objectAtIndex:indexPath.row];
+    }
+    
     vc.model = model;
     [self.rootViewController.navigationController pushViewController:vc animated:YES];
 }
@@ -136,20 +168,17 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
     return 55;
 }
 #pragma mark - actions
-- (void)backAction:(id)sender {
-    NSLog(@"back");
-}
 
 - (void)selectedSegmentAtIndex:(UISegmentedControl *)segment {
     switch (segment.selectedSegmentIndex) {
-        case 0:
-            [_service getListReminderActive];
+        case LIST_REMINDER_TYPE_ACTIVE:
+            currentSegment = LIST_REMINDER_TYPE_ACTIVE;
             break;
-        case 1:
-            [_service getListReminderAll];
+        case LIST_REMINDER_TYPE_ALL:
+            currentSegment = LIST_REMINDER_TYPE_ALL;
             break;
-        case 2:
-            [_service getListReminderCompleted];
+        case LIST_REMINDER_TYPE_COMPLETED:
+            currentSegment = LIST_REMINDER_TYPE_COMPLETED;
             break;
         default:
             break;

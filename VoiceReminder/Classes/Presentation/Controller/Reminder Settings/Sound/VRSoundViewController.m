@@ -38,6 +38,11 @@
     [self setupSegment];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getRightBarItem];
+}
+
 - (void)setupSegment {
     [self.segment addTarget:self action:@selector(segmentChanged:) forControlEvents:UIControlEventValueChanged];
     [self.segment setTintColor:[UIColor redColor]];
@@ -126,6 +131,11 @@
     
     /*play audio*/
     if (currentType == SOUND_TYPE_SHORT_SOUND) {
+        if (self.isPlaying) {
+            [self.audioPlayer stop];
+            self.audioPlayer = nil;
+        }
+        
         [self setupAudioPlayerForShortSound:model.name];
         [self playSound];
     }
@@ -209,8 +219,21 @@
         model.mp3Url = [item valueForKey:MPMediaItemPropertyAssetURL];
         model.name = [item valueForKey:MPMediaItemPropertyTitle];
         model.isMp3Sound = YES;
-        [_service.mp3SoundArray insertObject:model atIndex:0];
-        self.soundModel = model;
+        
+        BOOL isExisted = NO;
+        for (VRSoundModel *object in _service.mp3SoundArray) {
+            if ([object.name isEqualToString:self.soundModel.name]) {
+                self.soundModel = object;
+                isExisted = YES;
+                break;
+            }
+        }
+        
+        if (!isExisted) {
+            [_service.mp3SoundArray insertObject:model atIndex:0];
+            self.soundModel = model;
+        }
+        
         [self.tableViewSound reloadData];
         
         if(!_musicPlayer){

@@ -8,7 +8,9 @@
 
 #import "VRCalendarViewController.h"
 #import "JTCalendarAppearance.h"
-NSString *kNotificationName = @"testNotification";
+#import "VRReminderListCell.h"
+#import "VRReminderModel.h"
+
 @interface VRCalendarViewController ()<JTCalendarDataSource, UITableViewDataSource, UITableViewDelegate>
 
 @end
@@ -20,20 +22,23 @@ NSString *kNotificationName = @"testNotification";
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.navigationController.title = @"calender";
+        self.view.backgroundColor = [UIColor whiteColor];
     }
     
     return self;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self configureUI];
-    // calendar view
     [self createCalendar];
-    
-    // tableview
     [self configureTableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getReminderFromDBLocalCompletionHandler:^(NSError *error, id result) {
+        [self.listEventTableview reloadData];
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -44,29 +49,75 @@ NSString *kNotificationName = @"testNotification";
 #pragma mark - ConfigureUI
 
 - (void)configureUI {
-    // menu view
-    self.menuView = [[JTCalendarMenuView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
-    self.menuView.backgroundColor = [UIColor redColor];
-    
     [self.view addSubview:self.menuView];
-    
-    self.contentView = [[JTCalendarContentView alloc] initWithFrame:CGRectMake(10, 44, self.view.frame.size.width - 20, 280)];
     [self.view addSubview:self.contentView];
+    [self.view addSubview:self.horizontalView];
+    [self.view addSubview:self.listEventTableview];
     
-    UIView *horizontal = [[UIView alloc] initWithFrame:CGRectMake(0, 324, self.view.frame.size.width, 1)];
-    horizontal.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [self.view addSubview:horizontal];
+    /* layout views*/
+    [_menuView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:0];
+    [_menuView autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:0];
+    [_menuView autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:0];
+    [_menuView autoSetDimension:ALDimensionHeight toSize:44];
+    
+    [_contentView autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:5];
+    [_contentView autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:5];
+    [_contentView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_menuView];
+    [_contentView autoSetDimension:ALDimensionHeight toSize:200];
+    
+    [_horizontalView autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:0];
+    [_horizontalView autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:0];
+    [_horizontalView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_contentView withOffset:5];
+    [_horizontalView autoSetDimension:ALDimensionHeight toSize:1];
+    
+    [_listEventTableview autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_horizontalView];
+    [_listEventTableview autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:0];
+    [_listEventTableview autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:0];
+    [_listEventTableview autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:50];
 }
-
 
 - (void)configureTableView {
-    self.listEventTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 324, self.view.frame.size.width, self.view.frame.size.height - 440) style:UITableViewStylePlain];
-    self.listEventTableView.backgroundColor = [UIColor whiteColor];
-    self.listEventTableView.dataSource = self;
-    self.listEventTableView.delegate = self;
-    
-    [self.view addSubview:self.listEventTableView];
+    [self.listEventTableview registerClass:[VRReminderListCell class] forCellReuseIdentifier:NSStringFromClass([VRReminderListCell class])];
 }
+
+- (UIView *)horizontalView {
+    if (!_horizontalView) {
+        _horizontalView = [[UIView alloc] initForAutoLayout];
+        _horizontalView.backgroundColor = [UIColor colorWithRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1];
+    }
+    
+    return _horizontalView;
+}
+
+- (JTCalendarMenuView *)menuView {
+    if (!_menuView) {
+        _menuView = [[JTCalendarMenuView alloc] initForAutoLayout];
+        _menuView.backgroundColor = [UIColor redColor];
+    }
+    
+    return _menuView;
+}
+
+- (JTCalendarContentView *)contentView {
+    if (!_contentView) {
+        _contentView = [[JTCalendarContentView alloc] initForAutoLayout];
+    }
+    
+    return _contentView;
+}
+
+- (UITableView *)listEventTableview {
+    if (!_listEventTableview) {
+        _listEventTableview = [[UITableView alloc] initForAutoLayout];
+        _listEventTableview.backgroundColor = [UIColor whiteColor];
+        _listEventTableview.dataSource = self;
+        _listEventTableview.delegate = self;
+        _listEventTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
+    return _listEventTableview;
+}
+
 
 #pragma mark - Tableview datasource
 
@@ -75,26 +126,28 @@ NSString *kNotificationName = @"testNotification";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 100;
+    return self.service.listReminderAll.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *simpleTableIdentifier = @"SimpleTableItem";
+    VRReminderListCell *cell = [self.listEventTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderListCell class]) forIndexPath:indexPath];
+    VRReminderModel *model = [self.service.listReminderAll objectAtIndex:indexPath.row];
+    cell.name.text = model.name;
+    [cell.switchButton setOn:model.isActive];
+    cell.timeReminder.text = model.timeReminder;
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    __weak typeof(self)weak = self;
+    cell.changeSwitch = ^(id sender) {
+        [weak updateStatus:!model.isActive];
+    };
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-    }
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
+    [cell layoutSubviews];
     return cell;
-
 }
 
 #pragma mark - tableview delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    return 55;
 }
 
 

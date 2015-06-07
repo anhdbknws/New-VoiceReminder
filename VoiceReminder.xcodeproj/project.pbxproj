@@ -114,6 +114,7 @@
 		8254EB4E1AC2264600D1C2CC /* VRRepeatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8254EB4C1AC2264600D1C2CC /* VRRepeatViewController.m */; };
 		8254EB4F1AC2264600D1C2CC /* VRRepeatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8254EB4D1AC2264600D1C2CC /* VRRepeatViewController.xib */; };
 		825C4B921AD0557700C22B34 /* VRLocalNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 825C4B911AD0557700C22B34 /* VRLocalNotificationController.m */; };
+		8281B6151B24974C0072E33C /* VRReminderListBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8281B6141B24974C0072E33C /* VRReminderListBaseController.m */; };
 		8282C2921A67355F00A510D7 /* VRLocalizationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8282C2911A67355F00A510D7 /* VRLocalizationCenter.m */; };
 		829320181A7C2B0C00A3EAE5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 829320171A7C2B0C00A3EAE5 /* AppDelegate.m */; };
 		82A0DBE21AB0F2140071F419 /* VRReminderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A0DBE11AB0F2140071F419 /* VRReminderListCell.m */; };
@@ -309,6 +310,8 @@
 		8254EB4D1AC2264600D1C2CC /* VRRepeatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VRRepeatViewController.xib; sourceTree = "<group>"; };
 		825C4B901AD0557700C22B34 /* VRLocalNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRLocalNotificationController.h; sourceTree = "<group>"; };
 		825C4B911AD0557700C22B34 /* VRLocalNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRLocalNotificationController.m; sourceTree = "<group>"; };
+		8281B6131B24974C0072E33C /* VRReminderListBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRReminderListBaseController.h; sourceTree = "<group>"; };
+		8281B6141B24974C0072E33C /* VRReminderListBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRReminderListBaseController.m; sourceTree = "<group>"; };
 		8282C2901A67355F00A510D7 /* VRLocalizationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRLocalizationCenter.h; sourceTree = "<group>"; };
 		8282C2911A67355F00A510D7 /* VRLocalizationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRLocalizationCenter.m; sourceTree = "<group>"; };
 		829320161A7C2B0C00A3EAE5 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = VoiceReminder/Classes/AppDelegate/AppDelegate.h; sourceTree = SOURCE_ROOT; };
@@ -626,6 +629,8 @@
 		824E764E1A7AF91E0035C744 /* Reminders */ = {
 			isa = PBXGroup;
 			children = (
+				8281B6131B24974C0072E33C /* VRReminderListBaseController.h */,
+				8281B6141B24974C0072E33C /* VRReminderListBaseController.m */,
 				82F2A1D11AD483AE006359C8 /* VRRemindersViewController.h */,
 				82F2A1D21AD483AE006359C8 /* VRRemindersViewController.m */,
 				82F2A1CD1AD482EF006359C8 /* Reminder Detail */,
@@ -1378,6 +1383,7 @@
 				8282C2921A67355F00A510D7 /* VRLocalizationCenter.m in Sources */,
 				82A716A81A6188AA00829BE5 /* main.m in Sources */,
 				82C3026C1A7E336400C854AA /* Session.m in Sources */,
+				8281B6151B24974C0072E33C /* VRReminderListBaseController.m in Sources */,
 				82C302721A7E337100C854AA /* CircleShapeLayer.m in Sources */,
 				829320181A7C2B0C00A3EAE5 /* AppDelegate.m in Sources */,
 				82A0DBE61AB0F8370071F419 /* VRReminderListService.m in Sources */,

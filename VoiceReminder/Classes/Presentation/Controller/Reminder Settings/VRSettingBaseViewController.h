@@ -15,6 +15,7 @@
 - (void)leftNavigationItem:(SEL)selector andTitle:(NSString *)title orImage:(UIImage *)image;
 - (void)rightNavigationItem:(SEL)selector andTitle:(NSString *)title orImage:(UIImage *)image;
 
+- (void)getRightBarItem;
 - (void)hideAddButton;
 - (void)showAddButton;
 

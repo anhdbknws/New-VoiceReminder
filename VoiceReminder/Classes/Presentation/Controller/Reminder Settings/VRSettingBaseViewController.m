@@ -35,7 +35,7 @@
         leftButton = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:self action:backSelector];
     }
     else {
-        leftButton = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:selector];
+        leftButton = [[UIBarButtonItem alloc] initWithImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:selector];
     }
     
     [leftButton setTitleTextAttributes:[self textAttributes] forState:UIControlStateNormal];
@@ -48,7 +48,7 @@
         rightButton = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:self action:selector];
     }
     else {
-        rightButton = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:selector];
+        rightButton = [[UIBarButtonItem alloc] initWithImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:selector];
     }
     
     [rightButton setTitleTextAttributes:[self textAttributes] forState:UIControlStateNormal];
@@ -67,6 +67,10 @@
 
 - (void)showAddButton {
     [self.navigationItem setRightBarButtonItem:addButton animated:YES];
+}
+
+- (void)getRightBarItem {
+    addButton = self.navigationItem.rightBarButtonItem;
 }
 
 - (void)backAction:(id)sender {

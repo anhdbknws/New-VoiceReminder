@@ -26,6 +26,7 @@
 
 - (id)copyWithZone:(NSZone *)zone {
     VRSoundModel *object = [VRSoundModel new];
+    object.uuid = [self.uuid copyWithZone:zone];
     object.name = [self.name copyWithZone:zone];
     object.url = [self.url copyWithZone:zone];
     object.mp3Url = [self.mp3Url copyWithZone:zone];

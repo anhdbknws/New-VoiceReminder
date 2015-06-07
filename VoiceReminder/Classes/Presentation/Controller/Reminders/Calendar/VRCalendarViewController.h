@@ -10,11 +10,14 @@
 #import "JTCalendar.h"
 #import "JTCalendarMenuView.h"
 #import "JTCalendarContentView.h"
+#import "VRReminderListBaseController.h"
 
-@interface VRCalendarViewController : UIViewController
+@interface VRCalendarViewController : VRReminderListBaseController
 @property (nonatomic, strong) JTCalendarMenuView *menuView;
 @property (nonatomic, strong) JTCalendarContentView *contentView;
-@property (nonatomic, strong) UITableView *listEventTableView;
+@property (nonatomic, strong) UITableView *listEventTableview;
 @property (nonatomic, strong) JTCalendar *calendar;
+@property (nonatomic, strong) UIView *horizontalView;
+
 - (void)editAction;
 @end

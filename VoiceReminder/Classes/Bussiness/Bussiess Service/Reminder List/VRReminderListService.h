@@ -13,6 +13,6 @@
 @property (nonatomic, strong) NSMutableArray *listReminderActive;
 @property (nonatomic, strong) NSMutableArray *listReminderCompleted;
 - (void)deleteReminderWithUUID:(NSString *)uuid completionHandler:(databaseHandler)completion;
-- (void)getListReminderFromDB;
+- (void)getListReminderFromDBWithcompletionHandler:(databaseHandler)completion;
 - (void)setStatusForReminder:(VRReminderModel *)model withState:(BOOL)active completionHandler:(databaseHandler)completion;
 @end

@@ -91,6 +91,7 @@
 - (UIView *)lineSeparate {
     if (!_lineSeparate) {
         _lineSeparate = [[UIView alloc] initForAutoLayout];
+        _lineSeparate.backgroundColor = [UIColor colorWithRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1];
     }
     
     return _lineSeparate;
@@ -106,6 +107,8 @@
 }
 
 - (void)changeSwitch:(id)sender {
-    NSLog(@"dsds");
+    if (self.changeSwitch) {
+        self.changeSwitch(sender);
+    }
 }
 @end

@@ -28,10 +28,10 @@
     return self;
 }
 
-- (void)getListReminderFromDB {
-
-    NSArray *listEntity = [Reminder MR_findAll];
+- (void)getListReminderFromDBWithcompletionHandler:(databaseHandler)completion {
+    [self resetAll];
     
+    NSArray *listEntity = [Reminder MR_findAll];
     NSDate *currentDate = [NSDate date];
     /* all reminder */
     for (Reminder *entity in listEntity) {
@@ -47,6 +47,12 @@
             [_listReminderCompleted addObject:model];
         }
     }
+}
+
+- (void)resetAll {
+    [_listReminderActive removeAllObjects];
+    [_listReminderAll removeAllObjects];
+    [_listReminderCompleted removeAllObjects];
 }
 
 - (void)deleteReminderWithUUID:(NSString *)uuid completionHandler:(databaseHandler)completion {
