@@ -69,6 +69,11 @@ const NSInteger kPhotoActionSheetTag = 3249;
     [self prepareData];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+}
+
 #pragma mark - Configure UI
 - (void)configureUI {
     self.title = @"Reminder Setting " ;

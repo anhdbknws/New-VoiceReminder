@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)leftNavigationItem:(SEL)selector andTitle:(NSString *)title orImage:(UIImage *)image {

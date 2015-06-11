@@ -59,6 +59,7 @@ static NSInteger minutesLimit = 1;
 }
 
 - (void)configureNavigationBar {
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
     self.navigationItem.leftBarButtonItem = backButton;
     

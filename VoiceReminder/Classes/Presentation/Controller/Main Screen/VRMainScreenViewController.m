@@ -38,6 +38,11 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+}
+
 -(void)getdate {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
@@ -68,6 +73,8 @@
 
 - (void)configureUI {
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    // button view
     [self configButton:self.recordButton WithTittle:[@"Record" uppercaseString]];
     [self.recordButton addTarget:self action:@selector(recordAction:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -75,18 +82,29 @@
     [self.remindersButton addTarget:self action:@selector(remindersAction:) forControlEvents:UIControlEventTouchUpInside];
     [self configButton:self.buttonAlarm WithTittle:[@"alarm" uppercaseString]];
     [self.buttonAlarm addTarget:self action:@selector(alarmAction:) forControlEvents:UIControlEventTouchUpInside];
-    
+    NSArray *views = @[self.recordButton, self.buttonAlarm, self.remindersButton];
+    [views autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSpacing:0.0 insetSpacing:YES matchedSizes:YES];
+    // tick view
     [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(numberTick:) userInfo:nil repeats:YES];
     [self.backGroundImageView setImage:[UIImage imageNamed:@"q0.jpg"]];
     
+    // near button view
+    self.lineView.backgroundColor = [UIColor colorWithRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1];
+    
+    // middle view
+    self.buttonZodiac.layer.cornerRadius = 14;
+    self.buttonZodiac.layer.borderWidth = 2.0f;
+    self.buttonZodiac.layer.borderColor = [UIColor redColor].CGColor;
+    self.buttonZodiac.backgroundColor = [UIColor whiteColor];
+    [self.buttonZodiac setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 
 - (void)configButton:(UIButton *)button WithTittle:(NSString *)title {
     [button setTitle:title forState:UIControlStateNormal];
-    [button setBackgroundColor:[UIColor blueColor]];
-    button.layer.cornerRadius = 8;
-    button.layer.borderWidth = 1.0f;
-    button.layer.borderColor = [UIColor blueColor].CGColor;
+    [button setBackgroundColor:[UIColor redColor]];
+//    button.layer.cornerRadius = 8;
+//    button.layer.borderWidth = 1.0f;
+//    button.layer.borderColor = [UIColor blueColor].CGColor;
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 

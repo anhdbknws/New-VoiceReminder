@@ -42,6 +42,7 @@
 }
 
 - (void)configureNavigation {
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
     NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                     [UIColor redColor],NSForegroundColorAttributeName,

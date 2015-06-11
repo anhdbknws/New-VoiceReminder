@@ -24,4 +24,19 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonAlarm;
 @property (weak, nonatomic) IBOutlet UIImageView *backGroundImageView;
 
+// view near bottom
+@property (weak, nonatomic) IBOutlet UIView *lineView;
+@property (weak, nonatomic) IBOutlet UILabel *labelGoodHours;
+@property (weak, nonatomic) IBOutlet UILabel *labelLunarYear;
+@property (weak, nonatomic) IBOutlet UILabel *labelLunarDay;
+@property (weak, nonatomic) IBOutlet UILabel *labelLunarMonth;
+
+// view middle
+@property (weak, nonatomic) IBOutlet UILabel *labelGregorianDate;
+@property (weak, nonatomic) IBOutlet UILabel *labelGregorianDay;
+@property (weak, nonatomic) IBOutlet UILabel *labelGregorianWeek;
+
+@property (weak, nonatomic) IBOutlet UIButton *buttonZodiac;
+@property (weak, nonatomic) IBOutlet UILabel *labelIdiom;
+
 @end
