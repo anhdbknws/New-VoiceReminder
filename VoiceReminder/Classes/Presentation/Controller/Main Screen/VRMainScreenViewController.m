@@ -28,6 +28,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self getdate];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self configureUI];
     [self configureClockTicker];
@@ -35,6 +36,30 @@
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kSaveShortSoundToDBLocal]) {
         [self saveShortSoundModelToDB];
     }
+}
+
+-(void)getdate {
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"MMM dd, yyyy HH:mm"];
+    NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
+    [timeFormat setDateFormat:@"HH:mm:ss"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init] ;
+    [dateFormatter setDateFormat:@"EEEE"];
+    
+    NSDate *now = [[NSDate alloc] init];
+    NSString *dateString = [VRCommon commonFormatFromDate:now];
+    NSString *theDate = [dateFormat stringFromDate:now];
+    NSString *theTime = [timeFormat stringFromDate:now];
+    
+    NSString *week = [dateFormatter stringFromDate:now];
+    NSLog(@"\n"
+          "theDate: |%@| \n"
+          "theTime: |%@| \n"
+          "Now: |%@| \n"
+          "Week: |%@| \n"
+          , theDate, theTime,dateString,week);
 }
 
 
@@ -52,6 +77,7 @@
     [self.buttonAlarm addTarget:self action:@selector(alarmAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(numberTick:) userInfo:nil repeats:YES];
+    [self.backGroundImageView setImage:[UIImage imageNamed:@"q0.jpg"]];
     
 }
 

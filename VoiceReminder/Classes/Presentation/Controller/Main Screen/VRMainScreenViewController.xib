@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VRMainScreenViewController">
             <connections>
+                <outlet property="backGroundImageView" destination="oHA-eV-5Sr" id="bCX-xb-ZGy"/>
                 <outlet property="buttonAlarm" destination="UXx-6I-gAN" id="fbQ-cv-40F"/>
                 <outlet property="clockTickerHour1" destination="s5w-5A-WQc" id="DQg-LH-ztd"/>
                 <outlet property="clockTickerHour2" destination="uLU-zc-dkd" id="D9g-8p-Gta"/>
@@ -27,6 +28,9 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oHA-eV-5Sr">
+                    <rect key="frame" x="0.0" y="-5" width="320" height="573"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xNx-t1-Tpp">
                     <rect key="frame" x="7" y="21" width="97" height="48"/>
                     <subviews>
@@ -156,11 +160,15 @@
                 <constraint firstItem="aja-SY-wLs" firstAttribute="top" secondItem="iST-VB-kWE" secondAttribute="top" id="6wH-ei-UM5"/>
                 <constraint firstItem="xNx-t1-Tpp" firstAttribute="top" secondItem="hsM-2W-Sp2" secondAttribute="top" id="9vW-Z0-8F2"/>
                 <constraint firstItem="aja-SY-wLs" firstAttribute="top" secondItem="UXx-6I-gAN" secondAttribute="bottom" constant="33" id="Ft4-qS-iJJ"/>
+                <constraint firstItem="oHA-eV-5Sr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="I8t-9h-j23"/>
+                <constraint firstItem="oHA-eV-5Sr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-5" id="IVs-FX-flY"/>
                 <constraint firstItem="iST-VB-kWE" firstAttribute="leading" secondItem="aja-SY-wLs" secondAttribute="trailing" constant="61" id="LW1-nE-kTv"/>
                 <constraint firstAttribute="centerX" secondItem="hsM-2W-Sp2" secondAttribute="centerX" constant="-0.5" id="NAu-vf-mFl"/>
+                <constraint firstAttribute="trailing" secondItem="oHA-eV-5Sr" secondAttribute="trailing" id="S33-rZ-H8Y"/>
                 <constraint firstItem="iST-VB-kWE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="192" id="Tsk-Fg-pQ2"/>
                 <constraint firstItem="hsM-2W-Sp2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="21" id="VvN-lF-5w1"/>
                 <constraint firstItem="hsM-2W-Sp2" firstAttribute="leading" secondItem="xNx-t1-Tpp" secondAttribute="trailing" constant="8" id="XTJ-Pb-f0I"/>
+                <constraint firstAttribute="bottom" secondItem="oHA-eV-5Sr" secondAttribute="bottom" id="Yvs-7S-6P6"/>
                 <constraint firstItem="qKg-tE-axE" firstAttribute="leading" secondItem="hsM-2W-Sp2" secondAttribute="trailing" constant="6" id="bnX-90-krW"/>
                 <constraint firstItem="qKg-tE-axE" firstAttribute="top" secondItem="hsM-2W-Sp2" secondAttribute="top" id="dP1-Eh-QgJ"/>
                 <constraint firstAttribute="trailing" secondItem="iST-VB-kWE" secondAttribute="trailing" constant="20" id="fo4-GO-cfK"/>

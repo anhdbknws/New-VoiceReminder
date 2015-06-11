@@ -37,6 +37,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self getReminderFromDBLocalCompletionHandler:^(NSError *error, id result) {
+        [self createCalendar];
         [self.listEventTableview reloadData];
     }];
 }
@@ -154,7 +155,10 @@
 
 
 - (void)createCalendar {
-    self.calendar = [[JTCalendar alloc] init];
+    if (!self.calendar) {
+        self.calendar = [[JTCalendar alloc] init];
+    }
+    
     self.calendar.calendarAppearance.calendar.firstWeekday = 2; // Sunday == 1, Saturday == 7
     self.calendar.calendarAppearance.dayCircleRatio = 1;
     self.calendar.calendarAppearance.ratioContentMenu = 2.;
@@ -191,20 +195,27 @@
 #pragma mark - Actions
 
 - (void)createRandomEvents {
-    eventsByDate = [NSMutableDictionary new];
+    if (!eventsByDate) {
+        eventsByDate = [NSMutableDictionary new];
+    }
+    else {
+        [eventsByDate removeAllObjects];
+    }
     
-    for(int i = 0; i < 30; ++i){
+    for(VRReminderModel *model in self.service.listReminderAll){
         // Generate 30 random dates between now and 60 days later
-        NSDate *randomDate = [NSDate dateWithTimeInterval:(rand() % (3600 * 24 * 60)) sinceDate:[NSDate date]];
-        
+//        NSDate *randomDate = [NSDate dateWithTimeInterval:(rand() % (3600 * 24 * 60)) sinceDate:[NSDate date]];
+
+        NSDate *listDates = [[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder];
+        NSLog(@"diep: %@", listDates);
         // Use the date as key for eventsByDate
-        NSString *key = [[self dateFormatter] stringFromDate:randomDate];
+//        NSString *key = [[self dateFormatter] stringFromDate:randomDate];
         
-        if(!eventsByDate[key]){
-            eventsByDate[key] = [NSMutableArray new];
-        }
-        
-        [eventsByDate[key] addObject:randomDate];
+//        if(!eventsByDate[key]){
+//            eventsByDate[key] = [NSMutableArray new];
+//        }
+//        
+//        [eventsByDate[key] addObject:randomDate];
     }
 }
 

@@ -24,6 +24,29 @@
 		8205BBF71B23F660007C5258 /* nice_morning_alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = 82B4CCC61B22A28B008341D3 /* nice_morning_alarm.caf */; };
 		8205BBF81B23F660007C5258 /* sweet_morning_alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = 82B4CCC71B22A28B008341D3 /* sweet_morning_alarm.caf */; };
 		8205BBFE1B245097007C5258 /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 8205BBFD1B245097007C5258 /* Sound.m */; };
+		820671081B28954500F4FE5F /* q0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820670F11B28954500F4FE5F /* q0.jpg */; };
+		820671091B28954500F4FE5F /* q1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820670F21B28954500F4FE5F /* q1.jpg */; };
+		8206710A1B28954500F4FE5F /* q2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820670F31B28954500F4FE5F /* q2.jpg */; };
+		8206710B1B28954500F4FE5F /* q3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820670F41B28954500F4FE5F /* q3.jpg */; };
+		8206710C1B28954500F4FE5F /* q4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820670F51B28954500F4FE5F /* q4.jpg */; };
+		8206710D1B28954500F4FE5F /* q5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820670F61B28954500F4FE5F /* q5.jpg */; };
+		8206710E1B28954500F4FE5F /* q6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820670F71B28954500F4FE5F /* q6.jpg */; };
+		8206710F1B28954500F4FE5F /* q7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820670F81B28954500F4FE5F /* q7.jpg */; };
+		820671101B28954500F4FE5F /* q8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820670F91B28954500F4FE5F /* q8.jpg */; };
+		820671111B28954500F4FE5F /* q9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820670FA1B28954500F4FE5F /* q9.jpg */; };
+		820671121B28954500F4FE5F /* q10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820670FB1B28954500F4FE5F /* q10.jpg */; };
+		820671131B28954500F4FE5F /* q11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820670FC1B28954500F4FE5F /* q11.jpg */; };
+		820671141B28954500F4FE5F /* q12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820670FD1B28954500F4FE5F /* q12.jpg */; };
+		820671151B28954500F4FE5F /* q13.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820670FE1B28954500F4FE5F /* q13.jpg */; };
+		820671161B28954500F4FE5F /* q14.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820670FF1B28954500F4FE5F /* q14.jpg */; };
+		820671171B28954500F4FE5F /* q15.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820671001B28954500F4FE5F /* q15.jpg */; };
+		820671181B28954500F4FE5F /* q16.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820671011B28954500F4FE5F /* q16.jpg */; };
+		820671191B28954500F4FE5F /* q17.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820671021B28954500F4FE5F /* q17.jpg */; };
+		8206711A1B28954500F4FE5F /* q18.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820671031B28954500F4FE5F /* q18.jpg */; };
+		8206711B1B28954500F4FE5F /* q19.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820671041B28954500F4FE5F /* q19.jpg */; };
+		8206711C1B28954500F4FE5F /* q20.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820671051B28954500F4FE5F /* q20.jpg */; };
+		8206711D1B28954500F4FE5F /* q21.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820671061B28954500F4FE5F /* q21.jpg */; };
+		8206711E1B28954500F4FE5F /* q22.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 820671071B28954500F4FE5F /* q22.jpg */; };
 		820B47AD1AB6478100B6AD15 /* icon_delete_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 820B47AB1AB6478100B6AD15 /* icon_delete_blue@2x.png */; };
 		820B47AE1AB6478100B6AD15 /* icon_delete_blue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 820B47AC1AB6478100B6AD15 /* icon_delete_blue@3x.png */; };
 		820B47B11AB647B000B6AD15 /* icon_edit_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 820B47AF1AB647AF00B6AD15 /* icon_edit_blue@2x.png */; };
@@ -168,6 +191,29 @@
 		2330FD062FD5F76BDE37B9A8 /* Pods-VoiceReminder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceReminder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VoiceReminder/Pods-VoiceReminder.debug.xcconfig"; sourceTree = "<group>"; };
 		8205BBFC1B245097007C5258 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
 		8205BBFD1B245097007C5258 /* Sound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sound.m; sourceTree = "<group>"; };
+		820670F11B28954500F4FE5F /* q0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q0.jpg; sourceTree = "<group>"; };
+		820670F21B28954500F4FE5F /* q1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q1.jpg; sourceTree = "<group>"; };
+		820670F31B28954500F4FE5F /* q2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q2.jpg; sourceTree = "<group>"; };
+		820670F41B28954500F4FE5F /* q3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q3.jpg; sourceTree = "<group>"; };
+		820670F51B28954500F4FE5F /* q4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q4.jpg; sourceTree = "<group>"; };
+		820670F61B28954500F4FE5F /* q5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q5.jpg; sourceTree = "<group>"; };
+		820670F71B28954500F4FE5F /* q6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q6.jpg; sourceTree = "<group>"; };
+		820670F81B28954500F4FE5F /* q7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q7.jpg; sourceTree = "<group>"; };
+		820670F91B28954500F4FE5F /* q8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q8.jpg; sourceTree = "<group>"; };
+		820670FA1B28954500F4FE5F /* q9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q9.jpg; sourceTree = "<group>"; };
+		820670FB1B28954500F4FE5F /* q10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q10.jpg; sourceTree = "<group>"; };
+		820670FC1B28954500F4FE5F /* q11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q11.jpg; sourceTree = "<group>"; };
+		820670FD1B28954500F4FE5F /* q12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q12.jpg; sourceTree = "<group>"; };
+		820670FE1B28954500F4FE5F /* q13.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q13.jpg; sourceTree = "<group>"; };
+		820670FF1B28954500F4FE5F /* q14.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q14.jpg; sourceTree = "<group>"; };
+		820671001B28954500F4FE5F /* q15.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q15.jpg; sourceTree = "<group>"; };
+		820671011B28954500F4FE5F /* q16.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q16.jpg; sourceTree = "<group>"; };
+		820671021B28954500F4FE5F /* q17.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q17.jpg; sourceTree = "<group>"; };
+		820671031B28954500F4FE5F /* q18.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q18.jpg; sourceTree = "<group>"; };
+		820671041B28954500F4FE5F /* q19.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q19.jpg; sourceTree = "<group>"; };
+		820671051B28954500F4FE5F /* q20.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q20.jpg; sourceTree = "<group>"; };
+		820671061B28954500F4FE5F /* q21.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q21.jpg; sourceTree = "<group>"; };
+		820671071B28954500F4FE5F /* q22.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q22.jpg; sourceTree = "<group>"; };
 		820B47AB1AB6478100B6AD15 /* icon_delete_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_delete_blue@2x.png"; sourceTree = "<group>"; };
 		820B47AC1AB6478100B6AD15 /* icon_delete_blue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_delete_blue@3x.png"; sourceTree = "<group>"; };
 		820B47AF1AB647AF00B6AD15 /* icon_edit_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_edit_blue@2x.png"; sourceTree = "<group>"; };
@@ -418,6 +464,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		820670F01B28953600F4FE5F /* background */ = {
+			isa = PBXGroup;
+			children = (
+				820670F11B28954500F4FE5F /* q0.jpg */,
+				820670F21B28954500F4FE5F /* q1.jpg */,
+				820670F31B28954500F4FE5F /* q2.jpg */,
+				820670F41B28954500F4FE5F /* q3.jpg */,
+				820670F51B28954500F4FE5F /* q4.jpg */,
+				820670F61B28954500F4FE5F /* q5.jpg */,
+				820670F71B28954500F4FE5F /* q6.jpg */,
+				820670F81B28954500F4FE5F /* q7.jpg */,
+				820670F91B28954500F4FE5F /* q8.jpg */,
+				820670FA1B28954500F4FE5F /* q9.jpg */,
+				820670FB1B28954500F4FE5F /* q10.jpg */,
+				820670FC1B28954500F4FE5F /* q11.jpg */,
+				820670FD1B28954500F4FE5F /* q12.jpg */,
+				820670FE1B28954500F4FE5F /* q13.jpg */,
+				820670FF1B28954500F4FE5F /* q14.jpg */,
+				820671001B28954500F4FE5F /* q15.jpg */,
+				820671011B28954500F4FE5F /* q16.jpg */,
+				820671021B28954500F4FE5F /* q17.jpg */,
+				820671031B28954500F4FE5F /* q18.jpg */,
+				820671041B28954500F4FE5F /* q19.jpg */,
+				820671051B28954500F4FE5F /* q20.jpg */,
+				820671061B28954500F4FE5F /* q21.jpg */,
+				820671071B28954500F4FE5F /* q22.jpg */,
+			);
+			path = background;
+			sourceTree = "<group>";
+		};
 		821702081AD0BD3200747B39 /* Asset Picker */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +587,7 @@
 		823EE3661A6991330077C4B5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				820670F01B28953600F4FE5F /* background */,
 				82B4CCC81B22A8C6008341D3 /* icon_sound.png */,
 				82E64A911B20AE52003886E8 /* bt_add@2x.png */,
 				82E64A8D1B20AC9C003886E8 /* icon_add@2x.png */,
@@ -1201,10 +1278,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8206710F1B28954500F4FE5F /* q7.jpg in Resources */,
+				8206710A1B28954500F4FE5F /* q2.jpg in Resources */,
 				8205BBED1B23F660007C5258 /* alarm.caf in Resources */,
+				820671151B28954500F4FE5F /* q13.jpg in Resources */,
+				8206710B1B28954500F4FE5F /* q3.jpg in Resources */,
 				8205BBEE1B23F660007C5258 /* awesomemorning_alarm.caf in Resources */,
 				8205BBEF1B23F660007C5258 /* background.caf in Resources */,
 				8205BBF01B23F660007C5258 /* car_alarm.caf in Resources */,
+				8206710C1B28954500F4FE5F /* q4.jpg in Resources */,
+				8206711C1B28954500F4FE5F /* q20.jpg in Resources */,
 				8205BBF11B23F660007C5258 /* car_sms.caf in Resources */,
 				8205BBF21B23F660007C5258 /* chicken_alarm.caf in Resources */,
 				8205BBF31B23F660007C5258 /* complete_car_alarm.caf in Resources */,
@@ -1213,11 +1296,14 @@
 				8205BBF61B23F660007C5258 /* morning_alarm.caf in Resources */,
 				8205BBF71B23F660007C5258 /* nice_morning_alarm.caf in Resources */,
 				8205BBF81B23F660007C5258 /* sweet_morning_alarm.caf in Resources */,
+				820671111B28954500F4FE5F /* q9.jpg in Resources */,
 				824E76681A7AF91E0035C744 /* VRReminderSettingCell.xib in Resources */,
 				82A716B61A6188AA00829BE5 /* Images.xcassets in Resources */,
 				821702471AD0BF8800747B39 /* bt_cancel@3x.png in Resources */,
+				820671191B28954500F4FE5F /* q17.jpg in Resources */,
 				8232B3DA1B1E10FC00CCA807 /* VRShortSoundController.xib in Resources */,
 				824F2E7C1AB5F710009377AD /* bt_edit@2x.png in Resources */,
+				8206711B1B28954500F4FE5F /* q19.jpg in Resources */,
 				82289B541AB7A7530069E821 /* speaker.png in Resources */,
 				824E76601A7AF91E0035C744 /* VRMainScreenViewController.xib in Resources */,
 				823EE36C1A6991330077C4B5 /* 2.png in Resources */,
@@ -1226,28 +1312,41 @@
 				820B47B21AB647B000B6AD15 /* icon_edit_blue@3x.png in Resources */,
 				8232B3D41B1DFD7000CCA807 /* VRNotesController.xib in Resources */,
 				8217024E1AD0BFC400747B39 /* bt_back@2x.png in Resources */,
+				8206710E1B28954500F4FE5F /* q6.jpg in Resources */,
 				821702461AD0BF8800747B39 /* bt_cancel@2x.png in Resources */,
+				820671091B28954500F4FE5F /* q1.jpg in Resources */,
+				820671131B28954500F4FE5F /* q11.jpg in Resources */,
 				824F2E721AB58B94009377AD /* Localizable.strings in Resources */,
+				820671181B28954500F4FE5F /* q16.jpg in Resources */,
 				8254EB4A1AC20CEB00D1C2CC /* VRNameViewController.xib in Resources */,
 				82AA359A1B1386A600E5F087 /* VRSettingNotesCell.xib in Resources */,
 				821702381AD0BD3200747B39 /* CTAssetsPicker.xcassets in Resources */,
+				820671101B28954500F4FE5F /* q8.jpg in Resources */,
 				821701E51AD097E100747B39 /* icon_camera@3x.png in Resources */,
 				821702071AD0B20800747B39 /* icon_delete_photo@3x.png in Resources */,
 				8238C5A31AC36F350088EFE3 /* VRAlertViewController.xib in Resources */,
 				824F2E7D1AB5F710009377AD /* bt_edit@3x.png in Resources */,
+				820671171B28954500F4FE5F /* q15.jpg in Resources */,
 				824F88F01AC777C100FB4B5D /* VRSoundViewController.xib in Resources */,
 				82E64A921B20AE52003886E8 /* bt_add@2x.png in Resources */,
+				820671121B28954500F4FE5F /* q10.jpg in Resources */,
 				820B47B11AB647B000B6AD15 /* icon_edit_blue@2x.png in Resources */,
 				82E64A8F1B20AC9C003886E8 /* icon_add@2x.png in Resources */,
 				8217024F1AD0BFC400747B39 /* bt_back@3x.png in Resources */,
 				8254EB4F1AC2264600D1C2CC /* VRRepeatViewController.xib in Resources */,
 				821701E41AD097E100747B39 /* icon_camera@2x.png in Resources */,
 				824F88F41AC77B2300FB4B5D /* Re-record-icon.png in Resources */,
+				820671081B28954500F4FE5F /* q0.jpg in Resources */,
+				8206711E1B28954500F4FE5F /* q22.jpg in Resources */,
 				8238C5991AC33B380088EFE3 /* assesory.png in Resources */,
+				8206710D1B28954500F4FE5F /* q5.jpg in Resources */,
+				8206711D1B28954500F4FE5F /* q21.jpg in Resources */,
 				82E64A901B20AC9C003886E8 /* icon_add@3x.png in Resources */,
 				824F2E791AB5D6EC009377AD /* icon_arrow_right@3x.png in Resources */,
 				820B47AD1AB6478100B6AD15 /* icon_delete_blue@2x.png in Resources */,
 				821702061AD0B20800747B39 /* icon_delete_photo@2x.png in Resources */,
+				820671161B28954500F4FE5F /* q14.jpg in Resources */,
+				8206711A1B28954500F4FE5F /* q18.jpg in Resources */,
 				823EE36D1A6991330077C4B5 /* 3.png in Resources */,
 				823EE36B1A6991330077C4B5 /* 1.png in Resources */,
 				8217024B1AD0BFAC00747B39 /* bt_done@3x.png in Resources */,
@@ -1255,6 +1354,7 @@
 				820B47AE1AB6478100B6AD15 /* icon_delete_blue@3x.png in Resources */,
 				823EE36E1A6991330077C4B5 /* tabbarbg.png in Resources */,
 				824F2E781AB5D6EC009377AD /* icon_arrow_right@2x.png in Resources */,
+				820671141B28954500F4FE5F /* q12.jpg in Resources */,
 				8217024A1AD0BFAC00747B39 /* bt_done@2x.png in Resources */,
 				82F2A1D81AD483C2006359C8 /* VRReminderDetailController.xib in Resources */,
 				824E76621A7AF91E0035C744 /* VRReminderSettingViewController.xib in Resources */,

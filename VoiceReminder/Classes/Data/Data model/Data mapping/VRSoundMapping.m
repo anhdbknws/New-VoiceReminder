@@ -64,13 +64,6 @@
     NSURL *exportURL = [NSURL fileURLWithPath:exportFile];
     exporter.outputURL = exportURL;
     
-    exporter.shouldOptimizeForNetworkUse = YES;
-    CMTime start = CMTimeMakeWithSeconds(1.0, 100);
-    CMTime duration = CMTimeMakeWithSeconds(3.0, 100);
-    CMTimeRange range = CMTimeRangeMake(start, duration);
-    exporter.timeRange = range;
-    
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         [exporter exportAsynchronouslyWithCompletionHandler:^{
             int exportStatus = exporter.status;

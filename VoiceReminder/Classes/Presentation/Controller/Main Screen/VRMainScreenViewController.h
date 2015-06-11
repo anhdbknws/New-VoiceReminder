@@ -22,5 +22,6 @@
 @property (weak, nonatomic) IBOutlet UIView *minutesView;
 @property (weak, nonatomic) IBOutlet UIView *secondView;
 @property (weak, nonatomic) IBOutlet UIButton *buttonAlarm;
+@property (weak, nonatomic) IBOutlet UIImageView *backGroundImageView;
 
 @end
