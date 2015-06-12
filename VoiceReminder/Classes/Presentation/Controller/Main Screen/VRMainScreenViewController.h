@@ -39,4 +39,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonZodiac;
 @property (weak, nonatomic) IBOutlet UILabel *labelIdiom;
 
+// overlay view
+@property (weak, nonatomic) IBOutlet UIView *viewOverlay;
+
+
 @end

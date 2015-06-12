@@ -17,7 +17,7 @@
 #import "VRSoundMapping.h"
 #import "VRSoundModel.h"
 
-@interface VRMainScreenViewController ()
+@interface VRMainScreenViewController () <UIGestureRecognizerDelegate>
 
 @end
 
@@ -32,6 +32,7 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self configureUI];
     [self configureClockTicker];
+    [self setupGesture];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kSaveShortSoundToDBLocal]) {
         [self saveShortSoundModelToDB];
@@ -102,9 +103,6 @@
 - (void)configButton:(UIButton *)button WithTittle:(NSString *)title {
     [button setTitle:title forState:UIControlStateNormal];
     [button setBackgroundColor:[UIColor redColor]];
-//    button.layer.cornerRadius = 8;
-//    button.layer.borderWidth = 1.0f;
-//    button.layer.borderColor = [UIColor blueColor].CGColor;
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
@@ -121,6 +119,30 @@
     
     for (SBTickerView *ticker in _clockTickers)
         [ticker setFrontView:[SBTickView tickViewWithTitle:@"0" fontSize:30.]];
+}
+
+#pragma mark - gesture
+- (void)setupGesture{
+    // Swipe Left detect
+    UISwipeGestureRecognizer *swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(detectSwiped:)];
+    swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.viewOverlay addGestureRecognizer:swipeLeftRecognizer];
+    [swipeLeftRecognizer setDelegate:self];
+    
+    // Swipe Right detect
+    UISwipeGestureRecognizer *swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(detectSwiped:)];
+    swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.viewOverlay addGestureRecognizer:swipeRightRecognizer];
+    [swipeRightRecognizer setDelegate:self];
+}
+
+- (void)detectSwiped:(UISwipeGestureRecognizer *)gesture {
+    if (gesture.direction == UISwipeGestureRecognizerDirectionRight) {
+        NSLog(@"swipe right");
+    }
+    else if (gesture.direction == UISwipeGestureRecognizerDirectionLeft){
+        NSLog(@"swipe left");
+    }
 }
 
 
