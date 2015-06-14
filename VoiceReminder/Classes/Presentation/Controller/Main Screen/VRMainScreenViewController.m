@@ -41,8 +41,8 @@
         [self saveShortSoundModelToDB];
     }
     
-    VRLunarHelper *helper = [[VRLunarHelper alloc] init];
-    [helper ConvertSolarToLunar:[NSDate date]];
+    NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"www/index" ofType:@"html" inDirectory:nil];
+    [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:indexPath]]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -151,11 +151,14 @@
         NSLog(@"swipe right");
         //1.setback ground
         [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
+        
+        [self.webview stringByEvaluatingJavaScriptFromString:@"_flipLeft()"];
     }
     else if (gesture.direction == UISwipeGestureRecognizerDirectionLeft){
         NSLog(@"swipe left");
         //1. set backgroun
         [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
+        [self.webview stringByEvaluatingJavaScriptFromString:@"_flipLeft()"];
     }
 }
 
