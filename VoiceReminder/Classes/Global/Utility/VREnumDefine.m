@@ -50,4 +50,8 @@
 + (NSArray *)listShortSound {
     return @[@"alarm", @"awesomemorning_alarm", @"background", @"car_alarm", @"car_sms", @"chicken_alarm", @"complete_car_alarm", @"cop_car", @"morning_alarm_remix", @"morning_alarm", @"nice_morning_alarm", @"sweet_morning_alarm"];
 }
+
++ (NSArray *)listBackgroundImages {
+    return @[@"q0", @"q1", @"q2", @"q3", @"q4", @"q5", @"q6", @"q7", @"q8", @"q9", @"q10", @"q11", @"q12", @"q13", @"q14", @"q15", @"q16", @"q17", @"q18", @"q19", @"q20", @"q21", @"q22"];
+}
 @end

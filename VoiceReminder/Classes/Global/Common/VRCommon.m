@@ -138,5 +138,52 @@ static NSDateFormatter *fm = nil;
     
     return [inputString stringByReplacingOccurrencesOfString:@" " withString:@""];
 }
+
++ (NSDate *)addOneMonthToDate:(NSDate *)date {
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setMonth:1];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *newDate = [calendar dateByAddingComponents:dateComponents toDate:date options:0];
+    return newDate;
+}
+
++ (NSDate *)minusOneMonthFromDate:(NSDate *)date {
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setMonth:-1];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *oneMonthAgo = [calendar dateByAddingComponents:dateComponents toDate:date options:0];
+    return oneMonthAgo;
+}
+
++ (NSDate *)addOneDayToDate:(NSDate *)date {
+    NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
+    dayComponent.day = 1;
+    
+    NSCalendar *theCalendar = [NSCalendar currentCalendar];
+    NSDate *nextDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
+    
+    return nextDate;
+}
+
++ (NSDate *)minusOneDayFromDate:(NSDate *)date {
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setDay:-1];
+    NSDate *oneDayAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:date options:0];
+    return oneDayAgo;
+}
+
++ (NSDate *)addOneWeektoDate:(NSDate *)date {
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setDay:7];
+    NSDate *nextWeek = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:date options:0];
+    return nextWeek;
+}
+
++ (NSDate *)minusOneWeekFromDate:(NSDate *)date {
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setDay:-7];
+    NSDate *oneWeekAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:date options:0];
+    return oneWeekAgo;
+}
 @end
 

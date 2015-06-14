@@ -45,5 +45,6 @@ typedef NS_ENUM(NSInteger, ALERT_TYPE) {
 
 + (NSArray *)listShortSound;
 
++ (NSArray *)listBackgroundImages;
 
 @end

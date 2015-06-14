@@ -23,4 +23,11 @@
 + (NSString *)commonFormatFromYear:(NSDate *)date;
 + (NSString *)removeWhiteSpace:(NSString *)inputString;
 + (NSSortDescriptor *)sortDescriptorByCreatedDate;
+
++ (NSDate *)addOneMonthToDate:(NSDate *)date;
++ (NSDate *)minusOneMonthFromDate:(NSDate *)date;
++ (NSDate *)addOneDayToDate:(NSDate *)date;
++ (NSDate *)minusOneDayFromDate:(NSDate *)date;
++ (NSDate *)addOneWeektoDate:(NSDate *)date;
++ (NSDate *)minusOneWeekFromDate:(NSDate *)date;
 @end

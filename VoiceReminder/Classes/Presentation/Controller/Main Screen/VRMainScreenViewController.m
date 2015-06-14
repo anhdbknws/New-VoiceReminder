@@ -16,6 +16,7 @@
 #import "VRReminderSettingViewController.h"
 #import "VRSoundMapping.h"
 #import "VRSoundModel.h"
+#import "VRLunarHelper.h"
 
 @interface VRMainScreenViewController () <UIGestureRecognizerDelegate>
 
@@ -28,6 +29,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //1.prepare data
+    [self prepareData];
     [self getdate];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self configureUI];
@@ -37,6 +40,9 @@
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kSaveShortSoundToDBLocal]) {
         [self saveShortSoundModelToDB];
     }
+    
+    VRLunarHelper *helper = [[VRLunarHelper alloc] init];
+    [helper ConvertSolarToLunar:[NSDate date]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -68,7 +74,11 @@
           , theDate, theTime,dateString,week);
 }
 
-
+#pragma mark prepare date
+- (void)prepareData {
+    //1. list image background
+    self.listImageBackground = [NSMutableArray arrayWithArray:[VREnumDefine listBackgroundImages]];
+}
 
 #pragma mark - ConfigureUI
 
@@ -87,7 +97,7 @@
     [views autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSpacing:0.0 insetSpacing:YES matchedSizes:YES];
     // tick view
     [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(numberTick:) userInfo:nil repeats:YES];
-    [self.backGroundImageView setImage:[UIImage imageNamed:@"q0.jpg"]];
+    [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
     
     // near button view
     self.lineView.backgroundColor = [UIColor colorWithRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1];
@@ -139,10 +149,19 @@
 - (void)detectSwiped:(UISwipeGestureRecognizer *)gesture {
     if (gesture.direction == UISwipeGestureRecognizerDirectionRight) {
         NSLog(@"swipe right");
+        //1.setback ground
+        [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
     }
     else if (gesture.direction == UISwipeGestureRecognizerDirectionLeft){
         NSLog(@"swipe left");
+        //1. set backgroun
+        [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
     }
+}
+
+- (UIImage *)getRandomBackgroundImage {
+    UIImage *image = [UIImage imageNamed:[self.listImageBackground objectAtIndex:(arc4random() % self.listImageBackground.count)]];
+    return image;
 }
 
 

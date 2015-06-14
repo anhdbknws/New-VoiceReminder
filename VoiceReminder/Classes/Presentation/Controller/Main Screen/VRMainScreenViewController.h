@@ -42,5 +42,7 @@
 // overlay view
 @property (weak, nonatomic) IBOutlet UIView *viewOverlay;
 
+// data
+@property (nonatomic, strong) NSMutableArray *listImageBackground;
 
 @end
