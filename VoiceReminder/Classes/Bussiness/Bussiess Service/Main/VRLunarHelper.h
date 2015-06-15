@@ -30,4 +30,6 @@
 
 - (NSString *)getMonthYearStringFromDate:(NSDate *)date;
 
+- (NSString *)horoscopeEngFromVi:(NSString *)horoscopeVi;
+
 @end

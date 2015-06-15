@@ -74,7 +74,7 @@
     if([self checkDate:date from:_Scorpio to:Scorpio_])
         return @"Bọ Cạp (24/10-21/11)"; //scorpio|
     if([self checkDate:date from:_Sagittarius to:Sagittarius_])
-        return @"sagittarius|Nhân Mã (22/11-21/12)";
+        return @"Nhân Mã (22/11-21/12)"; //sagittarius|
     if ([self checkDate:date from:_Aquarius to:Aquarius_]) {
         return @"Bảo Bình (20/1-18/2)"; //aquarius|
     }
@@ -83,6 +83,45 @@
     }
     
     return @"";
+}
+
+- (NSString *)horoscopeEngFromVi:(NSString *)horoscopeVi {
+    if ([horoscopeVi isEqualToString:@"Ma Kết"]) {
+        return @"capricorn";
+    }
+    else if ([horoscopeVi isEqualToString:@"Bạch Dương"]) {
+        return @"aries";
+    }
+    else if ([horoscopeVi isEqualToString:@"Kim Ngưu"]) {
+        return @"taurus";
+    }
+    else if ([horoscopeVi isEqualToString:@"Song Tử"]) {
+        return @"gemini";
+    }
+    else if ([horoscopeVi isEqualToString:@"Cự Giải"]) {
+        return @"cancer";
+    }
+    else if ([horoscopeVi isEqualToString:@"Sư Tử"]) {
+        return @"leo";
+    }
+    else if ([horoscopeVi isEqualToString:@"Xử Nữ"]) {
+        return @"virgo";
+    }
+    else if ([horoscopeVi isEqualToString:@"Bọ Cạp"]) {
+        return @"scorpio";
+    }
+    else if ([horoscopeVi isEqualToString:@"Thiên Bình"]) {
+        return @"libra";
+    }
+    else if ([horoscopeVi isEqualToString:@"Nhân Mã"]) {
+        return @"sagittarius";
+    }
+    else if ([horoscopeVi isEqualToString:@"Bảo Bình"]){
+        return @"aquarius";
+    }
+    else {
+        return @"pisces";
+    }
 }
 
 - (NSDate *)creatDateFrom:(int)day and:(int)month and:(int)year {

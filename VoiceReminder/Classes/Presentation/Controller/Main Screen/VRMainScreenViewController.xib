@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="backGroundImageView" destination="oHA-eV-5Sr" id="bCX-xb-ZGy"/>
                 <outlet property="buttonAlarm" destination="UXx-6I-gAN" id="fbQ-cv-40F"/>
+                <outlet property="buttonHoroscope" destination="okc-xE-HN5" id="7Qt-Zi-8eO"/>
                 <outlet property="buttonZodiac" destination="8Xw-qI-fiV" id="n3i-00-oVD"/>
                 <outlet property="clockTickerHour1" destination="s5w-5A-WQc" id="DQg-LH-ztd"/>
                 <outlet property="clockTickerHour2" destination="uLU-zc-dkd" id="D9g-8p-Gta"/>
@@ -262,7 +263,25 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kYx-X1-h0F" userLabel="Over lay view">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="525"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okc-xE-HN5">
+                            <rect key="frame" x="30" y="199" width="260" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="pBz-dl-P9k"/>
+                            </constraints>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="okc-xE-HN5" secondAttribute="centerX" id="6WY-rb-Mih"/>
+                        <constraint firstAttribute="trailing" secondItem="okc-xE-HN5" secondAttribute="trailing" constant="30" id="SYv-Yk-660"/>
+                        <constraint firstItem="okc-xE-HN5" firstAttribute="top" secondItem="kYx-X1-h0F" secondAttribute="top" constant="199" id="tfe-uo-1oS"/>
+                        <constraint firstItem="okc-xE-HN5" firstAttribute="leading" secondItem="kYx-X1-h0F" secondAttribute="leading" constant="30" id="vGK-P6-4wS"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

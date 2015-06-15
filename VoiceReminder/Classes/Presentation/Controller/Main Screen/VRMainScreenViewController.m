@@ -17,6 +17,8 @@
 #import "VRSoundMapping.h"
 #import "VRSoundModel.h"
 #import "VRLunarHelper.h"
+#import "NSString+VR.h"
+#import "VRHoroscopeController.h"
 
 @interface VRMainScreenViewController () <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) VRLunarHelper *service;
@@ -82,6 +84,7 @@
     self.buttonZodiac.layer.borderColor = [UIColor redColor].CGColor;
     self.buttonZodiac.backgroundColor = [UIColor clearColor];
     [self.buttonZodiac setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.buttonHoroscope addTarget:self action:@selector(horoscopeDetail) forControlEvents:UIControlEventTouchUpInside];
     
     [self updateDataFromMidleView];
 }
@@ -94,14 +97,11 @@
     // day of week
     self.labelGregorianWeek.text = [NSString stringWithFormat:@"Thứ %d", [_service getDayOfWeekFromDate:currentDate]];
     
-    [self.buttonZodiac setTitle:[_service getCungHoangDao:[NSDate date]] forState:UIControlStateNormal];
+    [self.buttonZodiac setTitle:[_service getCungHoangDao:currentDate] forState:UIControlStateNormal];
     self.labelIdiom.text = [self getIDomsRadom];
 }
 
 - (void)setupNearBottomView {
-    // near button view
-    self.lineView.backgroundColor = [UIColor colorWithRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1];
-    
     self.viewLunar.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7];
     self.webview.opaque = NO;
     self.webview.backgroundColor = [UIColor clearColor];
@@ -126,6 +126,13 @@
     [button setTitle:title forState:UIControlStateNormal];
     [button setBackgroundColor:[UIColor redColor]];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
+
+- (void)horoscopeDetail {
+    NSArray* subString = [[_service getCungHoangDao:currentDate] componentsSeparatedByString: @"("];
+    VRHoroscopeController *vc = [[VRHoroscopeController alloc] init];
+    vc.horoscope = [_service horoscopeEngFromVi:[[subString objectAtIndex: 0] removeWhitespace]];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)configureClockTicker {

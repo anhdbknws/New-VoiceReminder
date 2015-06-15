@@ -25,8 +25,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *backGroundImageView;
 
 // view near bottom
-@property (weak, nonatomic) IBOutlet UIView *lineView;
-@property (weak, nonatomic) IBOutlet UILabel *labelGoodHours;
 @property (weak, nonatomic) IBOutlet UIView *viewLunar;
 
 // view middle
@@ -39,6 +37,7 @@
 
 // overlay view
 @property (weak, nonatomic) IBOutlet UIView *viewOverlay;
+@property (weak, nonatomic) IBOutlet UIButton *buttonHoroscope;
 
 // data
 @property (nonatomic, strong) NSMutableArray *listImageBackground;
