@@ -89,6 +89,7 @@
     cell.textfield.text = [self valueAtIndexPath:indexPath];
     cell.textfield.tag = indexPath.row;
     cell.textfield.delegate = self;
+    [cell.arrowView setImage:[UIImage imageNamed:@"icon_arrow_right"]];
     return cell;
 }
 
