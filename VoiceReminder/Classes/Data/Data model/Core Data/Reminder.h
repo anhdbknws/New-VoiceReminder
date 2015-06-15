@@ -2,7 +2,7 @@
 //  Reminder.h
 //  VoiceReminder
 //
-//  Created by Nextop HN 2 on 5/28/15.
+//  Created by GemCompany on 6/15/15.
 //  Copyright (c) 2015 Owner. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "BaseObject.h"
 
-@class Photo, Repeat, Sound;
+@class Photo, Repeat, ShortSound, Sound;
 
 @interface Reminder : BaseObject
 
@@ -22,7 +22,8 @@
 @property (nonatomic, retain) NSDate * timeReminder;
 @property (nonatomic, retain) NSSet *photos;
 @property (nonatomic, retain) NSSet *repeats;
-@property (nonatomic, retain) NSSet *sound;
+@property (nonatomic, retain) Sound *sound;
+@property (nonatomic, retain) ShortSound *shortSound;
 @end
 
 @interface Reminder (CoreDataGeneratedAccessors)
@@ -36,10 +37,5 @@
 - (void)removeRepeatsObject:(Repeat *)value;
 - (void)addRepeats:(NSSet *)values;
 - (void)removeRepeats:(NSSet *)values;
-
-- (void)addSoundObject:(Sound *)value;
-- (void)removeSoundObject:(Sound *)value;
-- (void)addSound:(NSSet *)values;
-- (void)removeSound:(NSSet *)values;
 
 @end

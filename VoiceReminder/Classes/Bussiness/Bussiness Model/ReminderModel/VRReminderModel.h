@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "BaseModel.h"
 #import "Reminder.h"
+#import "VRSoundModel.h"
+#import "VRShortSoundModel.h"
 
 @class VRSoundModel;
 @interface VRReminderModel : BaseModel <NSCopying>
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSMutableArray *soundModels;
+@property (nonatomic, strong) VRSoundModel *soundModel;
+@property (nonatomic, strong) VRShortSoundModel *shortSoundModel;
 @property (nonatomic, strong) NSString *timeReminder;
 @property (nonatomic, strong) NSString *notes;
 @property (nonatomic, strong) NSMutableArray *repeats;

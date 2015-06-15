@@ -2,13 +2,14 @@
 //  Reminder.m
 //  VoiceReminder
 //
-//  Created by Nextop HN 2 on 5/28/15.
+//  Created by GemCompany on 6/15/15.
 //  Copyright (c) 2015 Owner. All rights reserved.
 //
 
 #import "Reminder.h"
 #import "Photo.h"
 #import "Repeat.h"
+#import "ShortSound.h"
 #import "Sound.h"
 
 
@@ -23,5 +24,6 @@
 @dynamic photos;
 @dynamic repeats;
 @dynamic sound;
+@dynamic shortSound;
 
 @end

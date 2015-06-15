@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "VRReminderModel.h"
+#import "VRSettingBaseViewController.h"
 
 typedef NS_ENUM(NSInteger, REMINDER_DETAIL_ROW_TYPE) {
     REMINDER_DETAIL_ROW_TYPE_TIME = 0,
@@ -16,10 +17,11 @@ typedef NS_ENUM(NSInteger, REMINDER_DETAIL_ROW_TYPE) {
     REMINDER_DETAIL_ROW_TYPE_ALERT = 3,
     REMINDER_DETAIL_ROW_TYPE_MUSIC_SOUND = 4,
     REMINDER_DETAIL_ROW_TYPE_SHORT_SOUND = 5,
-    REMINDER_DETAIL_ROW_TYPE_PHOTO = 6,
+    REMINDER_DETAIL_ROW_TYPE_NOTES = 6,
+    REMINDER_DETAIL_ROW_TYPE_PHOTO = 7,
 };
 
-@interface VRReminderDetailController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface VRReminderDetailController : VRSettingBaseViewController <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableViewDetail;
 @property (nonatomic,strong) VRReminderModel *model;
 @end

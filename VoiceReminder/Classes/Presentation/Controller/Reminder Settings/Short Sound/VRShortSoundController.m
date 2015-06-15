@@ -8,7 +8,6 @@
 
 #import "VRShortSoundController.h"
 #import "VRSoundCell.h"
-#import "VRSoundModel.h"
 
 @interface VRShortSoundController () <UITableViewDataSource, UITableViewDelegate>
 

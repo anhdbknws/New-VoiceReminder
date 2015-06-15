@@ -22,27 +22,32 @@
         <attribute name="timeReminder" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="reminder" inverseEntity="Photo" syncable="YES"/>
         <relationship name="repeats" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repeat" inverseName="reminder" inverseEntity="Repeat" syncable="YES"/>
-        <relationship name="sound" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sound" inverseName="reminder" inverseEntity="Sound" syncable="YES"/>
+        <relationship name="shortSound" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ShortSound" inverseName="reminder" inverseEntity="ShortSound" syncable="YES"/>
+        <relationship name="sound" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sound" inverseName="reminder" inverseEntity="Sound" syncable="YES"/>
     </entity>
     <entity name="Repeat" representedClassName="Repeat" parentEntity="BaseObject" syncable="YES">
         <attribute name="repeatType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="reminder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reminder" inverseName="repeats" inverseEntity="Reminder" syncable="YES"/>
     </entity>
+    <entity name="ShortSound" representedClassName="ShortSound" parentEntity="BaseObject" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="reminder" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Reminder" inverseName="shortSound" inverseEntity="Reminder" syncable="YES"/>
+    </entity>
     <entity name="Sound" representedClassName="Sound" parentEntity="BaseObject" syncable="YES">
         <attribute name="isMp3Sound" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isRecordSound" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="isShortSound" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isSystemSound" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="reminder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reminder" inverseName="sound" inverseEntity="Reminder" syncable="YES"/>
+        <relationship name="reminder" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Reminder" inverseName="sound" inverseEntity="Reminder" syncable="YES"/>
     </entity>
     <elements>
-        <element name="BaseObject" positionX="-63" positionY="0" width="128" height="75"/>
-        <element name="Person" positionX="-63" positionY="-18" width="128" height="75"/>
-        <element name="Photo" positionX="-54" positionY="54" width="128" height="88"/>
-        <element name="Reminder" positionX="-54" positionY="18" width="128" height="180"/>
-        <element name="Repeat" positionX="-36" positionY="72" width="128" height="73"/>
-        <element name="Sound" positionX="-45" positionY="63" width="128" height="150"/>
+        <element name="BaseObject" positionX="-72" positionY="-27" width="128" height="75"/>
+        <element name="Person" positionX="-207" positionY="-147" width="128" height="75"/>
+        <element name="Photo" positionX="295" positionY="209" width="128" height="88"/>
+        <element name="Reminder" positionX="-56" positionY="162" width="128" height="193"/>
+        <element name="Repeat" positionX="-351" positionY="44" width="128" height="73"/>
+        <element name="Sound" positionX="178" positionY="-18" width="128" height="133"/>
+        <element name="ShortSound" positionX="-54" positionY="90" width="128" height="73"/>
     </elements>
 </model>

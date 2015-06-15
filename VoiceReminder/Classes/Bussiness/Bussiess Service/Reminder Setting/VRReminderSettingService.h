@@ -12,7 +12,12 @@
 #import "VRReminderModel.h"
 
 @interface VRReminderSettingService : NSObject
+@property (nonatomic,strong, readonly) VRReminderModel *modelOringinal;
+@property (nonatomic, strong) VRReminderModel *modelCopy;
+
+- (void)performFetchReminderWith:(NSString *)uuid;
 - (void)addReminder:(VRReminderModel *)model toDatabaseLocalWithCompletionhandler:(databaseHandler)completion;
 - (BOOL)validateModel:(VRReminderModel *)model errorMessage:(NSString **)errorMessage;
 - (NSString *)getRepeatStringFrom:(NSMutableArray *)listRepeat;
+
 @end

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CircleProgressView.h"
 #import "UIPlaceHolderTextView.h"
+#import "VRSettingBaseViewController.h"
+
 typedef NS_ENUM(NSInteger, REMINDER_SETTING_TYPE) {
     REMINDER_SETTING_TYPE_NAME          = 0,
     REMINDER_SETTING_TYPE_REPEAT        = 1,
@@ -18,10 +20,12 @@ typedef NS_ENUM(NSInteger, REMINDER_SETTING_TYPE) {
     REMINDER_SETTING_TYPE_NOTES         = 5
 };
 
-@interface VRReminderSettingViewController : UIViewController
+@interface VRReminderSettingViewController : VRSettingBaseViewController
 @property (weak, nonatomic) IBOutlet UITableView *settingTableview;
 @property (nonatomic, strong) NSURL *audioRecordingURL;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) UIView * activeField;
 @property (nonatomic, strong) UIPlaceHolderTextView * noteTextView;
+@property (nonatomic, strong) NSString *uuid;
+
 @end

@@ -1,5 +1,5 @@
 //
-//  Sound.h
+//  ShortSound.h
 //  VoiceReminder
 //
 //  Created by GemCompany on 6/15/15.
@@ -12,17 +12,13 @@
 
 @class Reminder;
 
-@interface Sound : BaseObject
+@interface ShortSound : BaseObject
 
-@property (nonatomic, retain) NSNumber * isMp3Sound;
-@property (nonatomic, retain) NSNumber * isRecordSound;
-@property (nonatomic, retain) NSNumber * isSystemSound;
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * url;
 @property (nonatomic, retain) NSSet *reminder;
 @end
 
-@interface Sound (CoreDataGeneratedAccessors)
+@interface ShortSound (CoreDataGeneratedAccessors)
 
 - (void)addReminderObject:(Reminder *)value;
 - (void)removeReminderObject:(Reminder *)value;

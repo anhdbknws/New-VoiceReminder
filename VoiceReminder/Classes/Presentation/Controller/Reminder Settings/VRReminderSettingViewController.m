@@ -35,6 +35,7 @@
 #import "VRNotesController.h"
 #import "VRShortSoundController.h"
 #import "Sound.h"
+#import "VRShortSoundModel.h"
 
 static NSString * const kImageArrow = @"icon_arrow_right";
 const NSInteger kPhotoActionSheetTag = 3249;
@@ -57,15 +58,6 @@ const NSInteger kPhotoActionSheetTag = 3249;
     [self configureDatePicker];
     [self configureTableview];
     [self addTapgestureForDismissKeyboard];
-    
-    if (!self.model) {
-        self.model = [[VRReminderModel alloc] init];
-    }
-    
-    if (!self.service) {
-        self.service = [[VRReminderSettingService alloc] init];
-    }
-    
     [self prepareData];
 }
 
@@ -79,18 +71,8 @@ const NSInteger kPhotoActionSheetTag = 3249;
     self.title = @"Reminder Setting " ;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.translucent = NO;
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction:)];
-    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [UIColor redColor],NSForegroundColorAttributeName,
-                                    [UIColor redColor],NSBackgroundColorAttributeName,nil];
-    [cancelButton setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    
-    self.navigationItem.leftBarButtonItem = cancelButton;
-    
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(saveAction:)];
-    self.navigationItem.rightBarButtonItem = saveButton;
-    [saveButton setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-
+    [self leftNavigationItem:nil andTitle:@"Cancel" orImage:nil];
+    [self rightNavigationItem:@selector(saveAction:) andTitle:@"Save" orImage:nil];
 }
 
 - (void)configureDatePicker {
@@ -124,30 +106,18 @@ const NSInteger kPhotoActionSheetTag = 3249;
 }
 
 - (void)prepareData{
-    
-    self.listRepeat = [NSMutableArray new];
-    self.model.name = @"Name";
-    self.model.repeats = [NSMutableArray new];
-    self.model.alertReminder = ALERT_TYPE_AT_EVENT_TIME;
-    self.model.timeReminder = [VRCommon commonFormatFromDateTime:[NSDate date]];
-   
-    /* short sound*/
-    NSArray *listSound = [Sound MR_findAll];
-    VRSoundModel *shortSoundModel = [[VRSoundModel alloc] initWithEntity:listSound[0]];
-    [self.model.soundModels addObject:shortSoundModel];
-    
-    /* music sound */
-    VRSoundModel *musicModel = [[VRSoundModel alloc] init];
-    if (self.audioRecordingURL) {
-        musicModel.name = @"Audio recorded"; // get sound default
-        musicModel.url = [self.audioRecordingURL absoluteString];
-        musicModel.isMp3Sound = YES;
-    }
-    else {
-        musicModel = [shortSoundModel copy];
+    if (!_service) {
+        _service = [[VRReminderSettingService alloc] init];
     }
     
-    [self.model.soundModels insertObject:musicModel atIndex:0];
+    [_service performFetchReminderWith:_uuid];
+    
+    _service.modelCopy = [_service.modelOringinal copy];
+    if (_audioRecordingURL) {
+        _service.modelCopy.soundModel.url = [_audioRecordingURL absoluteString];
+        _service.modelCopy.soundModel.isRecordSound = YES;
+    }
+    
 }
 
 - (void)viewWillLayoutSubviews {
@@ -262,7 +232,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     cell.textfield.font = H1_FONT;
     cell.textfield.tag = REMINDER_SETTING_TYPE_MUSIC_SOUND;
     cell.textfield.delegate = self;
-    VRSoundModel *model = [self.model.soundModels firstObject];
+    VRSoundModel *model = _service.modelCopy.soundModel;
     cell.textfield.text = model.name;
     [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
     
@@ -274,7 +244,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     
     cell.titleLabel.text = @"Short sound";
     cell.textfield.font = H1_FONT;
-    VRSoundModel *model = [self.model.soundModels lastObject];
+    VRShortSoundModel *model = _service.modelCopy.shortSoundModel;
     cell.textfield.text = model.name;
     cell.textfield.tag = REMINDER_SETTING_TYPE_SHORT_SOUND;
     cell.textfield.delegate = self;
@@ -491,7 +461,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (void)chooseMusicSound {
     VRSoundViewController *vc = [[VRSoundViewController alloc] initWithNibName:NSStringFromClass([VRSoundViewController class]) bundle:nil];
-    vc.soundModel = [self.model.soundModels firstObject];
+    vc.soundModel = _service.modelCopy.soundModel;
 
     __weak typeof (self)weak = self;
     vc.selectedSoundCompleted = ^(VRSoundModel *soundModel) {
@@ -499,7 +469,8 @@ const NSInteger kPhotoActionSheetTag = 3249;
         if (!strong) {
             return ;
         }
-        [strong.model.soundModels replaceObjectAtIndex:0 withObject:soundModel];
+
+        strong.service.modelCopy.soundModel = soundModel;
         [strong.settingTableview reloadData];
     };
     [self.navigationController pushViewController:vc animated:YES];
@@ -509,12 +480,13 @@ const NSInteger kPhotoActionSheetTag = 3249;
     VRShortSoundController *shortSoundVC = [[VRShortSoundController alloc] initWithNibName:NSStringFromClass([VRShortSoundController class]) bundle:nil];
     
     __weak typeof (self)weak = self;
-    shortSoundVC.selectShortSoundCompleted = ^(VRSoundModel *soundModel) {
-        [weak.model.soundModels replaceObjectAtIndex:1 withObject:soundModel];
+    shortSoundVC.selectShortSoundCompleted = ^(VRShortSoundModel *soundModel) {
+
+        weak.service.modelCopy.shortSoundModel = soundModel;
         [weak.settingTableview reloadData];
     };
     
-    shortSoundVC.soundModel = [self.model.soundModels lastObject];
+    shortSoundVC.soundModel = _service.modelCopy.shortSoundModel;
     
     [self.navigationController pushViewController:shortSoundVC animated:YES];
 }

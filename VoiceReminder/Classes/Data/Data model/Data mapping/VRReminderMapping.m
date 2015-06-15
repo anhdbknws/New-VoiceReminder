@@ -14,6 +14,7 @@
 #import "Photo.h"
 #import "VRSoundModel.h"
 #import "VRSoundMapping.h"
+#import "VRShortSoundMapping.h"
 
 @implementation VRReminderMapping
 + (Reminder*)entityFromModel:(VRReminderModel *)model inContext:(NSManagedObjectContext *)context {
@@ -25,15 +26,8 @@
     entity.isActive = [NSNumber numberWithBool:YES];
     entity.notes = model.notes;
     
-    [entity removeRepeats:entity.repeats];
-    for (VRRepeatModel *object in model.repeats) {
-        [entity addRepeatsObject:[VRRepeatMapping entityFromModel:object inContext:context]];
-    }
-    
-    [entity removeSound:entity.sound];
-    for (VRSoundModel *soundModel in model.soundModels) {
-        [entity addSoundObject:[VRSoundMapping entityFromModel:soundModel andReminderName:model.name inContext:context]];
-    }
+    entity.sound = [VRSoundMapping entityFromModel:model.soundModel andReminderName:model.name inContext:context];
+    entity.shortSound = [VRShortSoundMapping entityFromModel:model.shortSoundModel inContext:context];
     
     [entity removePhotos:entity.photos];
     for (NSString *url in model.photoList) {

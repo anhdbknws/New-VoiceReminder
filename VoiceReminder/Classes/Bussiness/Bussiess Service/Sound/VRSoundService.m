@@ -11,6 +11,9 @@
 #import "Sound.h"
 #import "VRSoundMapping.h"
 #import "VRSoundModel.h"
+#import "ShortSound.h"
+#import "VRShortSoundModel.h"
+#import "VRShortSoundMapping.h"
 
 @implementation VRSoundService
 - (instancetype)init {
@@ -35,11 +38,8 @@
         else if (model.isRecordSound){
             [self.recordSoundArray addObject:model];
         }
-        else if (model.isSystemSound) {
-            [self.systemSoundArray addObject:model];
-        }
         else {
-            [self.shortSoundArray addObject:model];
+            [self.systemSoundArray addObject:model];
         }
     }
     
@@ -57,6 +57,13 @@
     }];
     
     self.recordSoundArray = [NSMutableArray  arrayWithArray:tempRecord];
+    
+    /*short sound*/
+    NSArray *listShortSound = [ShortSound MR_findAll];
+    for (ShortSound *entity in listShortSound) {
+        VRShortSoundModel *model = [[VRShortSoundModel alloc] initWithEntity:entity];
+        [_shortSoundArray addObject:model];
+    }
     
     if (self.getSoundListCompleted) {
         self.getSoundListCompleted();

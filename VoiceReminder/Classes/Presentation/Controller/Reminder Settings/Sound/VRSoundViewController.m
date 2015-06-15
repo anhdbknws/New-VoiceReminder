@@ -155,7 +155,7 @@
 
 - (void)addAction:(id)sender {
     if (currentType == SOUND_TYPE_RECORD) {
-        [self record];
+        [self record];// next version
     }
     else {
         [self addMp3];
@@ -177,7 +177,7 @@
     switch (selectedSegmentIndex) {
         case SOUND_TYPE_RECORD:
             currentType = SOUND_TYPE_RECORD;
-            [self showAddButton];
+            [self hideAddButton];
             break;
         case SOUND_TYPE_SONG:
             currentType = SOUND_TYPE_SONG;

@@ -23,7 +23,7 @@
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"diepnn";
+        self.title = @"Reminder detail";
         self.view.backgroundColor = [UIColor colorWithRed:238/255.0 green:237/255.0 blue:242/255.0 alpha:1];
     }
     
@@ -33,22 +33,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupTableView];
-    [self configureNavigation];
+    [self leftNavigationItem:nil andTitle:@"Back" orImage:nil];
+    [self rightNavigationItem:@selector(editAction:) andTitle:nil orImage:[UIImage imageNamed:@"icon_edit_blue"]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.isPlaying = NO;
-}
-
-- (void)configureNavigation {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
-    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [UIColor redColor],NSForegroundColorAttributeName,
-                                    [UIColor redColor],NSBackgroundColorAttributeName,nil];
-    [backButton setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    self.navigationItem.leftBarButtonItem = backButton;
+    self.isPlaying = NO;
 }
 
 - (void)setupTableView {
@@ -67,7 +59,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return REMINDER_DETAIL_ROW_TYPE_SHORT_SOUND + 1;
+        return REMINDER_DETAIL_ROW_TYPE_NOTES + 1;
     }
     else {
         return 1;
@@ -85,6 +77,7 @@
 
 - (VRReminderSettingCell *)getSettingInforAtIndexPath:(NSIndexPath *)indexPath {
     VRReminderSettingCell *cell = [self.tableViewDetail dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderSettingCell class]) forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.titleLabel.text = [self titleAtIndexPath:indexPath];
     cell.textfield.text = [self valueAtIndexPath:indexPath];
     cell.textfield.tag = indexPath.row;
@@ -168,6 +161,9 @@
         case REMINDER_DETAIL_ROW_TYPE_SHORT_SOUND:
             titleString = @"Short sound";
             break;
+        case REMINDER_DETAIL_ROW_TYPE_NOTES:
+            titleString = @"Notes";
+            break;
         case REMINDER_DETAIL_ROW_TYPE_PHOTO:
             titleString = @"Photo";
             break;
@@ -197,18 +193,19 @@
             valueString = [VREnumDefine alertTypeStringFrom:_model.alertReminder];
             break;
         case REMINDER_DETAIL_ROW_TYPE_MUSIC_SOUND:
-            for (VRSoundModel *model in self.model.soundModels) {
-                if (!model.isShortSound) {
-                    valueString = model.name;
-                }
-            }
+        {
+            VRSoundModel *model = self.model.soundModel;
+            valueString = model.name;
+        }
             break;
         case REMINDER_DETAIL_ROW_TYPE_SHORT_SOUND:
-            for (VRSoundModel *model in self.model.soundModels) {
-                if (model.isShortSound) {
-                    valueString = model.name;
-                }
-            }
+        {
+            VRShortSoundModel *model = self.model.shortSoundModel;
+            valueString = model.name;
+        }
+            break;
+        case REMINDER_DETAIL_ROW_TYPE_NOTES:
+            valueString = _model.notes;
             break;
         case REMINDER_DETAIL_ROW_TYPE_PHOTO:
             valueString = nil;
@@ -233,28 +230,6 @@
 
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-//    if (textField.tag == REMINDER_DETAIL_ROW_TYPE_SOUND) {
-//        if (!self.isPlaying) {
-//            self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:_model.musicSoundModel.url] error:nil];
-//            self.isPlaying = YES;
-//            /* Did we get an instance of AVAudioPlayer? */
-//            if (self.audioPlayer != nil){
-//                /* Set the delegate and start playing */
-//                self.audioPlayer.delegate = self;
-//                if ([self.audioPlayer prepareToPlay] &&
-//                    [self.audioPlayer play]){
-//                    /* Successfully started playing */
-//                }
-//                else {
-//                    NSLog(@"failed to play");
-//                }
-//            }
-//            else {
-//                NSLog(@"failed to instantiate avaudioplayer");
-//            }
-//        }
-//    }
-    
     return NO;
 }
 
@@ -262,6 +237,11 @@
     [super viewWillDisappear:animated];
     self.audioPlayer = nil;
     self.isPlaying = NO;
+}
+
+#pragma mark - Actions
+- (void) editAction:(id)sender {
+    NSLog(@"edit");
 }
 
 - (void)dealloc {

@@ -14,8 +14,8 @@
 #import "SBTickerView.h"
 #import "SBTickView.h"
 #import "VRReminderSettingViewController.h"
-#import "VRSoundMapping.h"
-#import "VRSoundModel.h"
+#import "VRShortSoundMapping.h"
+#import "VRShortSoundModel.h"
 #import "VRLunarHelper.h"
 #import "NSString+VR.h"
 #import "VRHoroscopeController.h"
@@ -241,15 +241,14 @@
 - (void)saveShortSoundModelToDB {
     NSMutableArray *listShortSoundModel = [NSMutableArray new];
     for (NSString *string in [VREnumDefine listShortSound]) {
-        VRSoundModel *model = [VRSoundModel new];
-        model.isShortSound  = YES;
+        VRShortSoundModel *model = [VRShortSoundModel new];
         model.name = string;
         [listShortSoundModel addObject:model];
     }
     
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-        for (VRSoundModel *model in listShortSoundModel) {
-            [VRSoundMapping entityFromModel:model andReminderName:nil inContext:localContext];
+        for (VRShortSoundModel *model in listShortSoundModel) {
+            [VRShortSoundMapping entityFromModel:model inContext:localContext];
         }
     } completion:^(BOOL success, NSError *error) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSaveShortSoundToDBLocal];

@@ -9,6 +9,9 @@
 #import "VRReminderSettingService.h"
 #import "VRCommon.h"
 #import "VRSoundModel.h"
+#import "VRShortSoundModel.h"
+#import "ShortSound.h"
+#import "Sound.h"
 
 @interface VRReminderSettingService()<AVAudioPlayerDelegate>
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
@@ -29,6 +32,38 @@
             completion(error, result);
         }
     }];
+}
+
+- (void)performFetchReminderWith:(NSString *)uuid {
+    if (uuid.length) {
+        Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid];
+        if (entity) {
+            _modelOringinal = [[VRReminderModel alloc] initWithEntity:entity];
+        }
+    }
+    
+    if (!_modelOringinal) {
+        _modelOringinal = [VRReminderModel new];
+        
+        _modelOringinal.name = @"Name";
+        
+        _modelOringinal.repeats = [NSMutableArray new];
+        [_modelOringinal.repeats addObject:[[VREnumDefine listRepeatType] firstObject]];
+        
+        _modelOringinal.alertReminder = ALERT_TYPE_AT_EVENT_TIME;
+        
+        _modelOringinal.timeReminder = [VRCommon commonFormatFromDateTime:[NSDate date]];
+        
+        /* short sound*/
+        NSArray *listSound = [ShortSound MR_findAll];
+        _modelOringinal.shortSoundModel = [[VRShortSoundModel alloc] initWithEntity:listSound[0]];
+        
+        
+        /* music sound */
+        _modelOringinal.soundModel = [[VRSoundModel alloc] init];
+        _modelOringinal.soundModel.name = _modelOringinal.shortSoundModel.name;
+        _modelOringinal.soundModel.isSystemSound = YES;
+    }
 }
 
 - (BOOL)validateModel:(VRReminderModel *)model errorMessage:(NSString *__autoreleasing *)errorMessage {
@@ -56,11 +91,7 @@
     /* Badge settings */
     notification.applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
     /* sound */
-    for (VRSoundModel *soundModel in model.soundModels) {
-        if (soundModel.isShortSound) {
-            notification.soundName = model.name;
-        }
-    }
+    notification.soundName = model.shortSoundModel.name;
     
     /* Additional information, user info */
     notification.userInfo = @{model.uuid : @"uuid", @"Alarm": @"VoiceReminder"};

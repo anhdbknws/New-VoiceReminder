@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "VRSettingBaseViewController.h"
-#import "VRSoundModel.h"
+#import "VRShortSoundModel.h"
 #import "VRSoundService.h"
 
 @interface VRShortSoundController : VRSettingBaseViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableViewShortSound;
-@property (nonatomic, strong) void (^selectShortSoundCompleted)(VRSoundModel *shortSoundModel);
-@property (nonatomic, strong) VRSoundModel *soundModel;
+@property (nonatomic, strong) void (^selectShortSoundCompleted)(VRShortSoundModel *shortSoundModel);
+@property (nonatomic, strong) VRShortSoundModel *soundModel;
 @property (nonatomic, strong) VRSoundService *service;
 @end
