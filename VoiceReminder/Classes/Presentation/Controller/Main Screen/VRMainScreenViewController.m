@@ -19,19 +19,19 @@
 #import "VRLunarHelper.h"
 
 @interface VRMainScreenViewController () <UIGestureRecognizerDelegate>
-
+@property (nonatomic, strong) VRLunarHelper *service;
 @end
 
 @implementation VRMainScreenViewController
 {
     NSString *_currentClock;
     NSArray *_clockTickers;
+    NSDate *currentDate; // is date displaying
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     //1.prepare data
     [self prepareData];
-    [self getdate];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self configureUI];
     [self configureClockTicker];
@@ -41,12 +41,7 @@
         [self saveShortSoundModelToDB];
     }
     
-    self.viewLunar.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7];
     
-    self.webview.opaque = NO;
-    self.webview.backgroundColor = [UIColor clearColor];
-    NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"www/index" ofType:@"html" inDirectory:nil];
-    [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:indexPath]]];
     
     
 }
@@ -56,32 +51,13 @@
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
--(void)getdate {
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd"];
-    NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:@"MMM dd, yyyy HH:mm"];
-    NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
-    [timeFormat setDateFormat:@"HH:mm:ss"];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init] ;
-    [dateFormatter setDateFormat:@"EEEE"];
-    
-    NSDate *now = [[NSDate alloc] init];
-    NSString *dateString = [VRCommon commonFormatFromDate:now];
-    NSString *theDate = [dateFormat stringFromDate:now];
-    NSString *theTime = [timeFormat stringFromDate:now];
-    
-    NSString *week = [dateFormatter stringFromDate:now];
-    NSLog(@"\n"
-          "theDate: |%@| \n"
-          "theTime: |%@| \n"
-          "Now: |%@| \n"
-          "Week: |%@| \n"
-          , theDate, theTime,dateString,week);
-}
-
 #pragma mark prepare date
 - (void)prepareData {
+    if (!_service) {
+        _service = [[VRLunarHelper alloc] init];
+    }
+    //1.get current date
+    currentDate = [NSDate date];
     //1. list image background
     self.listImageBackground = [NSMutableArray arrayWithArray:[VREnumDefine listBackgroundImages]];
 }
@@ -89,31 +65,61 @@
 #pragma mark - ConfigureUI
 
 - (void)configureUI {
-    self.view.backgroundColor = [UIColor whiteColor];
+    // tick view
+    [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(numberTick:) userInfo:nil repeats:YES];
     
+    [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
+    
+    [self setupMidleView];
+    [self setupNearBottomView];
+    [self setupBottomView];
+}
+
+- (void)setupMidleView {
+    // middle view
+    self.buttonZodiac.layer.cornerRadius = 14;
+    self.buttonZodiac.layer.borderWidth = 2.0f;
+    self.buttonZodiac.layer.borderColor = [UIColor redColor].CGColor;
+    self.buttonZodiac.backgroundColor = [UIColor clearColor];
+    [self.buttonZodiac setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    [self updateDataFromMidleView];
+}
+
+- (void)updateDataFromMidleView {
+    // month year
+    self.labelGregorianDate.text = [_service getMonthYearStringFromDate:currentDate];
+    // day
+    self.labelGregorianDay.text = [NSString stringWithFormat:@"%d", [_service getDayFromDate:currentDate]];
+    // day of week
+    self.labelGregorianWeek.text = [NSString stringWithFormat:@"Thứ %d", [_service getDayOfWeekFromDate:currentDate]];
+    
+    [self.buttonZodiac setTitle:[_service getCungHoangDao:[NSDate date]] forState:UIControlStateNormal];
+    self.labelIdiom.text = [self getIDomsRadom];
+}
+
+- (void)setupNearBottomView {
+    // near button view
+    self.lineView.backgroundColor = [UIColor colorWithRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1];
+    
+    self.viewLunar.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7];
+    self.webview.opaque = NO;
+    self.webview.backgroundColor = [UIColor clearColor];
+    NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"www/index" ofType:@"html" inDirectory:nil];
+    [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:indexPath]]];
+}
+
+- (void)setupBottomView {
     // button view
     [self configButton:self.recordButton WithTittle:[@"Record" uppercaseString]];
     [self.recordButton addTarget:self action:@selector(recordAction:) forControlEvents:UIControlEventTouchUpInside];
-
+    
     [self configButton:self.remindersButton WithTittle:[@"Reminder" uppercaseString]];
     [self.remindersButton addTarget:self action:@selector(remindersAction:) forControlEvents:UIControlEventTouchUpInside];
     [self configButton:self.buttonAlarm WithTittle:[@"alarm" uppercaseString]];
     [self.buttonAlarm addTarget:self action:@selector(alarmAction:) forControlEvents:UIControlEventTouchUpInside];
     NSArray *views = @[self.recordButton, self.buttonAlarm, self.remindersButton];
     [views autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSpacing:0.0 insetSpacing:YES matchedSizes:YES];
-    // tick view
-    [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(numberTick:) userInfo:nil repeats:YES];
-    [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
-    
-    // near button view
-    self.lineView.backgroundColor = [UIColor colorWithRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1];
-    
-    // middle view
-    self.buttonZodiac.layer.cornerRadius = 14;
-    self.buttonZodiac.layer.borderWidth = 2.0f;
-    self.buttonZodiac.layer.borderColor = [UIColor redColor].CGColor;
-    self.buttonZodiac.backgroundColor = [UIColor whiteColor];
-    [self.buttonZodiac setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 
 - (void)configButton:(UIButton *)button WithTittle:(NSString *)title {
@@ -157,14 +163,22 @@
         NSLog(@"swipe right");
         //1.setback ground
         [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
+        //2.update lunarview
+        [self.webview stringByEvaluatingJavaScriptFromString:@"_flipRight()"];
+        //3.previuous date
+        currentDate = [VRCommon minusOneDayFromDate:currentDate];
+        [self updateDataFromMidleView];
         
-        [self.webview stringByEvaluatingJavaScriptFromString:@"_flipLeft()"];
     }
     else if (gesture.direction == UISwipeGestureRecognizerDirectionLeft){
         NSLog(@"swipe left");
         //1. set backgroun
         [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
+        //2.update lunarview
         [self.webview stringByEvaluatingJavaScriptFromString:@"_flipLeft()"];
+        //3.next date
+        currentDate =[VRCommon addOneDayToDate:currentDate];
+        [self updateDataFromMidleView];
     }
 }
 
@@ -173,6 +187,12 @@
     return image;
 }
 
+- (NSString *)getIDomsRadom {
+    NSString *idomString = nil;
+    NSDictionary *dict = [_service.listIdoms objectAtIndex:(arc4random() % self.listImageBackground.count)];
+    idomString = [dict objectForKey:@"content"];
+    return idomString;
+}
 
 #pragma mark - Actions
 - (void)recordAction:(id)sender {

@@ -17,12 +17,10 @@
                 <outlet property="clockTickerSecond1" destination="vZn-GB-a5H" id="neW-DZ-Urz"/>
                 <outlet property="clockTickerSecond2" destination="sKz-BJ-bpF" id="vuO-1C-yyq"/>
                 <outlet property="hourView" destination="xNx-t1-Tpp" id="aM5-Hc-8eQ"/>
-                <outlet property="labelGoodHours" destination="PJu-xY-pIH" id="GM0-EZ-BFN"/>
                 <outlet property="labelGregorianDate" destination="bBg-MK-WMD" id="3jN-uv-HAe"/>
                 <outlet property="labelGregorianDay" destination="BcQ-3f-9Cg" id="PQs-H3-5Xr"/>
                 <outlet property="labelGregorianWeek" destination="xNe-BV-A0P" id="6Jc-cs-z7w"/>
                 <outlet property="labelIdiom" destination="doA-bv-eL9" id="YVb-R8-pPf"/>
-                <outlet property="lineView" destination="LZE-rY-WKd" id="cMZ-IL-uMM"/>
                 <outlet property="minutesView" destination="hsM-2W-Sp2" id="O8T-tf-YSR"/>
                 <outlet property="recordButton" destination="aja-SY-wLs" id="HUT-Sa-t9r"/>
                 <outlet property="remindersButton" destination="iST-VB-kWE" id="qnH-fV-uoX"/>
@@ -175,38 +173,17 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHn-1C-tty" userLabel="ViewNearBottom">
                     <rect key="frame" x="0.0" y="363" width="320" height="165"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LZE-rY-WKd">
-                            <rect key="frame" x="0.0" y="49" width="320" height="1"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="1" id="UhJ-IT-9d6"/>
-                            </constraints>
-                        </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Giờ tốt : Tý (23-1), Sửu(1-3), Mão(5-7), Ngọ(11-13), Thân(15-17), Dậu(17-19)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJu-xY-pIH">
-                            <rect key="frame" x="8" y="4" width="304" height="41"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uIk-u6-jhc">
-                            <rect key="frame" x="0.0" y="50" width="320" height="115"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="165"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </webView>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.99607849120000003" green="0.0" blue="0.12549020350000001" alpha="1" colorSpace="deviceRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="LZE-rY-WKd" secondAttribute="trailing" id="Aat-wN-Ymg"/>
-                        <constraint firstItem="uIk-u6-jhc" firstAttribute="top" secondItem="LZE-rY-WKd" secondAttribute="bottom" id="Pts-eV-xTJ"/>
-                        <constraint firstAttribute="trailing" secondItem="PJu-xY-pIH" secondAttribute="trailing" constant="8" id="Tat-eb-Q5A"/>
-                        <constraint firstItem="PJu-xY-pIH" firstAttribute="leading" secondItem="aHn-1C-tty" secondAttribute="leading" constant="8" id="Zkh-So-lr0"/>
-                        <constraint firstItem="LZE-rY-WKd" firstAttribute="leading" secondItem="aHn-1C-tty" secondAttribute="leading" id="dWf-m9-3pL"/>
                         <constraint firstAttribute="trailing" secondItem="uIk-u6-jhc" secondAttribute="trailing" id="fIx-yh-6l2"/>
+                        <constraint firstItem="uIk-u6-jhc" firstAttribute="top" secondItem="aHn-1C-tty" secondAttribute="top" id="gAC-Oh-Sb7"/>
                         <constraint firstAttribute="bottom" secondItem="uIk-u6-jhc" secondAttribute="bottom" id="jj5-P9-eD8"/>
-                        <constraint firstItem="LZE-rY-WKd" firstAttribute="top" secondItem="aHn-1C-tty" secondAttribute="top" constant="49" id="lvx-zM-6cw"/>
                         <constraint firstItem="uIk-u6-jhc" firstAttribute="leading" secondItem="aHn-1C-tty" secondAttribute="leading" id="m9T-wl-o6v"/>
-                        <constraint firstItem="PJu-xY-pIH" firstAttribute="top" secondItem="aHn-1C-tty" secondAttribute="top" constant="4" id="oEK-9H-XrV"/>
-                        <constraint firstItem="LZE-rY-WKd" firstAttribute="top" secondItem="PJu-xY-pIH" secondAttribute="bottom" constant="4" id="rNe-qs-sPv"/>
                         <constraint firstAttribute="height" constant="165" id="yu9-jv-bOW"/>
                     </constraints>
                 </view>

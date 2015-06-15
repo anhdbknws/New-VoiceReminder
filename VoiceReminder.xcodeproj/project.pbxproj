@@ -148,8 +148,8 @@
 		82A716AE1A6188AA00829BE5 /* VoiceReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 82A716AC1A6188AA00829BE5 /* VoiceReminder.xcdatamodeld */; };
 		82A716B61A6188AA00829BE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82A716B51A6188AA00829BE5 /* Images.xcassets */; };
 		82A716F81A61A29A00829BE5 /* VRLocalizeKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A716F71A61A29A00829BE5 /* VRLocalizeKey.m */; };
-		82A891C11B2D75290002025E /* VRLunarHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A891C01B2D75290002025E /* VRLunarHelper.m */; };
-		82A891C51B2D78C30002025E /* VRLunarDateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A891C41B2D78C30002025E /* VRLunarDateModel.m */; };
+		82A8D3391B2E7DDF00E19E2B /* VRLunarHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A8D3381B2E7DDF00E19E2B /* VRLunarHelper.m */; };
+		82A8D33B1B2EADBC00E19E2B /* zodiac_bg.gif in Resources */ = {isa = PBXBuildFile; fileRef = 82A8D33A1B2EADBC00E19E2B /* zodiac_bg.gif */; };
 		82A92C651B2DE8D6004776FF /* www in Resources */ = {isa = PBXBuildFile; fileRef = 82A92C641B2DE8D6004776FF /* www */; };
 		82AA35991B1386A600E5F087 /* VRSettingNotesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AA35971B1386A600E5F087 /* VRSettingNotesCell.m */; };
 		82AA359A1B1386A600E5F087 /* VRSettingNotesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82AA35981B1386A600E5F087 /* VRSettingNotesCell.xib */; };
@@ -382,10 +382,9 @@
 		82A716C41A6188AA00829BE5 /* VoiceReminderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceReminderTests.m; sourceTree = "<group>"; };
 		82A716F61A61A29A00829BE5 /* VRLocalizeKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRLocalizeKey.h; sourceTree = "<group>"; };
 		82A716F71A61A29A00829BE5 /* VRLocalizeKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRLocalizeKey.m; sourceTree = "<group>"; };
-		82A891BF1B2D75290002025E /* VRLunarHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRLunarHelper.h; sourceTree = "<group>"; };
-		82A891C01B2D75290002025E /* VRLunarHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRLunarHelper.m; sourceTree = "<group>"; };
-		82A891C31B2D78C30002025E /* VRLunarDateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRLunarDateModel.h; sourceTree = "<group>"; };
-		82A891C41B2D78C30002025E /* VRLunarDateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRLunarDateModel.m; sourceTree = "<group>"; };
+		82A8D3371B2E7DDF00E19E2B /* VRLunarHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRLunarHelper.h; sourceTree = "<group>"; };
+		82A8D3381B2E7DDF00E19E2B /* VRLunarHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRLunarHelper.m; sourceTree = "<group>"; };
+		82A8D33A1B2EADBC00E19E2B /* zodiac_bg.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = zodiac_bg.gif; sourceTree = "<group>"; };
 		82A92C641B2DE8D6004776FF /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../../../../../Desktop/www; sourceTree = "<group>"; };
 		82AA35961B1386A600E5F087 /* VRSettingNotesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRSettingNotesCell.h; sourceTree = "<group>"; };
 		82AA35971B1386A600E5F087 /* VRSettingNotesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRSettingNotesCell.m; sourceTree = "<group>"; };
@@ -600,6 +599,7 @@
 			isa = PBXGroup;
 			children = (
 				820670F01B28953600F4FE5F /* background */,
+				82A8D33A1B2EADBC00E19E2B /* zodiac_bg.gif */,
 				82B4CCC81B22A8C6008341D3 /* icon_sound.png */,
 				82E64A911B20AE52003886E8 /* bt_add@2x.png */,
 				82E64A8D1B20AC9C003886E8 /* icon_add@2x.png */,
@@ -1032,6 +1032,7 @@
 		82A716D41A618B2500829BE5 /* Bussiess Service */ = {
 			isa = PBXGroup;
 			children = (
+				82A8D3361B2E7D8000E19E2B /* Main */,
 				82E31F211AD186AA0000B176 /* Sound */,
 				82A0DBE31AB0F81B0071F419 /* Reminder List */,
 				82C3027F1A7EA4DA00C854AA /* Reminder Setting */,
@@ -1042,7 +1043,6 @@
 		82A716D71A618B2500829BE5 /* Bussiness Model */ = {
 			isa = PBXGroup;
 			children = (
-				82A891C21B2D78B00002025E /* LunarModel */,
 				82E31F1D1AD183F80000B176 /* SoundModel */,
 				824F88E21AC76F4E00FB4B5D /* RepeatModel */,
 				82C302731A7E938000C854AA /* ReminderModel */,
@@ -1082,8 +1082,6 @@
 				821702021AD0AF6F00747B39 /* UIApplication+AppDimensions.m */,
 				82B5CF251A6337470061AEF6 /* VREnumDefine.h */,
 				82B5CF261A6337470061AEF6 /* VREnumDefine.m */,
-				82A891BF1B2D75290002025E /* VRLunarHelper.h */,
-				82A891C01B2D75290002025E /* VRLunarHelper.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1108,13 +1106,13 @@
 			path = language;
 			sourceTree = "<group>";
 		};
-		82A891C21B2D78B00002025E /* LunarModel */ = {
+		82A8D3361B2E7D8000E19E2B /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				82A891C31B2D78C30002025E /* VRLunarDateModel.h */,
-				82A891C41B2D78C30002025E /* VRLunarDateModel.m */,
+				82A8D3371B2E7DDF00E19E2B /* VRLunarHelper.h */,
+				82A8D3381B2E7DDF00E19E2B /* VRLunarHelper.m */,
 			);
-			path = LunarModel;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		82B4CCBB1B22A241008341D3 /* short sound */ = {
@@ -1320,6 +1318,7 @@
 				8205BBF01B23F660007C5258 /* car_alarm.caf in Resources */,
 				8277E4DC1B2D548C007C7C1A /* idom_vi.json in Resources */,
 				8277E4C31B2D2DE9007C7C1A /* q2.png in Resources */,
+				82A8D33B1B2EADBC00E19E2B /* zodiac_bg.gif in Resources */,
 				8277E4C71B2D2DE9007C7C1A /* q6.png in Resources */,
 				8205BBF11B23F660007C5258 /* car_sms.caf in Resources */,
 				8205BBF21B23F660007C5258 /* chicken_alarm.caf in Resources */,
@@ -1445,7 +1444,6 @@
 				8217022F1AD0BD3200747B39 /* ALAsset+assetType.m in Sources */,
 				134D5BBD1B16B913004091CC /* Reminder.m in Sources */,
 				8217023A1AD0BD3200747B39 /* CTAssetsSupplementaryView.m in Sources */,
-				82A891C51B2D78C30002025E /* VRLunarDateModel.m in Sources */,
 				8238C5AC1AC37CD50088EFE3 /* Photo.m in Sources */,
 				821702031AD0AF6F00747B39 /* UIApplication+AppDimensions.m in Sources */,
 				82E31F101AD13C0E0000B176 /* VRPhotoPageController.m in Sources */,
@@ -1464,7 +1462,6 @@
 				82C302651A7E302E00C854AA /* VRPersonModel.m in Sources */,
 				824F88EF1AC777C100FB4B5D /* VRSoundViewController.m in Sources */,
 				8238C5A21AC36F350088EFE3 /* VRAlertViewController.m in Sources */,
-				82A891C11B2D75290002025E /* VRLunarHelper.m in Sources */,
 				824E76631A7AF91E0035C744 /* VRCalendarViewController.m in Sources */,
 				8232B3D31B1DFD7000CCA807 /* VRNotesController.m in Sources */,
 				824E76641A7AF91E0035C744 /* VRListReminderViewController.m in Sources */,
@@ -1482,6 +1479,7 @@
 				82B5CF271A6337470061AEF6 /* VREnumDefine.m in Sources */,
 				823814E11AB9AD9700B00A02 /* SBTickView.m in Sources */,
 				82A716F81A61A29A00829BE5 /* VRLocalizeKey.m in Sources */,
+				82A8D3391B2E7DDF00E19E2B /* VRLunarHelper.m in Sources */,
 				824F88E51AC76F6900FB4B5D /* VRRepeatModel.m in Sources */,
 				82E31F0C1AD136840000B176 /* VCUtilities.m in Sources */,
 				1318F2441B17319900406E36 /* UIPlaceHolderTextView.m in Sources */,

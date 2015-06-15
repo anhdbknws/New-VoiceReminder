@@ -160,7 +160,7 @@ static NSDateFormatter *fm = nil;
     dayComponent.day = 1;
     
     NSCalendar *theCalendar = [NSCalendar currentCalendar];
-    NSDate *nextDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
+    NSDate *nextDate = [theCalendar dateByAddingComponents:dayComponent toDate:date options:0];
     
     return nextDate;
 }
