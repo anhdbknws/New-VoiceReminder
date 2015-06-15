@@ -1,0 +1,70 @@
+<html>
+<head>
+	<title>Lunar</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link href="resources/css/style.css" rel="stylesheet" type="text/css" />
+	<script language="JavaScript" src="resources/js/jquery-1.0.min.js" type="text/javascript"></script>
+	<script language="JavaScript" src="resources/js/moment.min.js" type="text/javascript"></script>
+	<script language="JavaScript" src="resources/js/amlich-hnd.js" type="text/javascript"></script>	
+	<script language="Javascript" src="resources/js/functions.js"></script>
+	<script language="JavaScript" src="resources/js/touch.js" type="text/javascript"></script>	
+    <script language="Javascript">
+        $(document).ready(function(){
+            set_uiDate();	
+            flip();	                    
+        });
+        
+        function _flipLeft() {
+            goToNextDate();
+        };
+    
+        function _flipRight() {
+            goToPrevDate();
+        };
+    
+    </script>
+</head>
+<body style = "background-color: transparent; ">
+	<div class="content" id="content" style = "background-color: transparent; ">
+		<table class="front main" id="front" style = "background-color: transparent; ">
+            <tr><td class="giohoangdao"colspan="2"></td></tr>
+			<tr class="ff" style = "background-color: transparent; ">
+				<td style="width:170px; height: 115px;">
+	            	<div class="LunarMonth"></div>			
+					<div class="LunarDate"></div>			
+					<div class="LunarYear"></div>
+				</td>		
+				<td style="width:170px; height: 115px;">
+					<div class="canchithang"></div>			
+					<div class="canchingay"></div>			
+					<div class="canchigio"></div>			
+					<div class="tietkhi"></div>			
+				</td>
+	        </tr>    
+	 	</table> 	
+	 	<table class="back main" id="back" style = "background-color: transparent; ">
+            <tr><td class="giohoangdao"colspan="2"></td></tr>
+			<tr class="ff">
+				<td style="width:170px; height: 115px;">
+	            	<div class="LunarMonth"></div>			
+					<div class="LunarDate"></div>			
+					<div class="LunarYear"></div>
+				</td>		
+				<td style="width:170px; height: 115px;">
+					<div class="canchithang"></div>			
+					<div class="canchingay"></div>			
+					<div class="canchigio"></div>			
+					<div class="tietkhi"></div>			
+				</td>
+	        </tr>    
+	 	</table> 	
+ 	<!-- </div> 	
+	 <div class="menu">
+ 	 	<ul class="coolMenu">		
+			<li><a href="index.html" style="border-left:1px solid #FFF;">Hôm Nay</a></li>
+			<li><a href="lichthang.html">Lịch Tháng</a></li>
+			<li><a href="about.html" style="border-right:1px solid #a97720;">Tác Giả</a></li>		
+		</ul>		
+	</div> -->  	
+</body> 
+<html>

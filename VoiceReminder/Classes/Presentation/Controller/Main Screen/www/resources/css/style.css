@@ -1,0 +1,366 @@
+*{
+margin:0px;
+padding:0px;
+}
+body{
+margin: auto;	
+width: 100%;
+font-family: Verdana, Geneva, sans-serif;
+color: #434a54;
+
+}
+
+/*flip*/
+.content
+{
+width: 100%;
+height: 100%;
+position: relative;
+-webkit-perspective: 600px;
+-moz-perspective: 600px;
+overflow : auto;
+}
+
+table{
+width: 100%;
+height: 100%;
+background:#fefefe;
+}
+td{
+list-style-type:none;
+text-align:center;
+}
+.header{
+/*background:url(../images/header.gif) no-repeat top left;*/
+height: 0px;
+}
+.monthYear{
+font: bold 16px verdana;	
+color: #c9351b;
+height: 30px;
+margin-top:5px;
+}
+.date{
+font: bold 90px verdana;
+color:#c9351b;	
+text-shadow: 0.05em 0.05em 0.05em #CCC;
+height: 80px;
+line-height: 80px;
+}
+.dayofWeek{
+font: bold 17px verdana;
+color:#333;	
+height: 30px;
+}
+
+.danhngon{
+	font: 11px Arial;
+	color: #501604;
+/*	background:url(../images/m2.gif) bottom left right top no-repeat;*/
+	border-bottom: 1px solid #CCC;
+	padding: 0 5px;
+}
+
+.cunghoangdao{
+	font: 11px Arial;
+	color: #000;
+	padding: 0 5px;
+}
+.cunghoangdao a{
+	font: 11px Arial;
+	color: #05668a;
+	text-decoration: none;	
+}
+.giohoangdao{
+    font: bold 10px verdana;
+    color:#333;	
+    border-bottom: 1px solid #CCC;
+    height: 40px;
+    background:url(../images/m2.gif) bottom left right top no-repeat;
+}
+
+.LunarMonth, .LunarYear, .canchithang, .canchingay, .canchigio, .tietkhi{
+color:#7a4f25;
+font: normal 16px "Times New Roman", Times, serif;
+padding: 1px 0px;	
+}
+
+.LunarDate
+{
+    color:#7a4f25;
+    font: normal 32px "Times New Roman", Times, serif;
+    padding: 1px 0px;
+}
+
+.main{
+/*background: url(../images/main.gif) 2px 89px no-repeat;*/
+position: absolute;
+top: 0;
+left: 0;
+}
+.ff{
+background: transparent;
+}
+#footer{
+/*background:url(../images/footer.gif) no-repeat top left;*/
+}
+
+/* Structure
+------------------------------------------*/
+.coolMenu,
+.coolMenu ul {
+	list-style: none;
+
+}
+.coolMenu {
+	float: left;
+	width: 100%;
+}
+.coolMenu > li {
+	float: left;
+}
+.coolMenu li a {
+	display: block;
+	height: 2em;
+	line-height: 2em;
+	padding: 0 1.5em;
+	text-decoration: none;
+    color: #fff;
+}
+.coolMenu ul {
+	position: absolute;
+	display: none;
+	z-index: 999;
+}
+.coolMenu ul li{
+	padding: 2px 25px;
+}
+.coolMenu ul li a {
+	width: 80px;
+}
+.coolMenu li:hover ul.noJS {
+	display: block; 
+}
+
+
+/* Main menu 2f8be8;
+------------------------------------------*/
+.coolMenu {
+	font-family: Arial;
+	font-size: 12px;
+	background: #a97720;
+}
+.coolMenu > li > a {
+	color: #fff;
+	font-weight: bold;
+	border-right: 1px solid #CCC;
+	padding: 2px 25px;
+}
+.coolMenu > li:hover > a {
+	background: #f09d28;
+	color: #000;
+}
+
+
+/* Submenu
+------------------------------------------*/
+.coolMenu ul {
+	background: #f09d28;
+	
+}
+.coolMenu ul li a {
+	color: #000;
+	
+}
+.coolMenu ul li:hover a {
+	background: .ffc97c;
+	
+}
+
+
+
+/*------region lichthang--------- */
+#select{
+padding: 2px 0px;
+font-size: 14px;
+    margin-left: 30px;
+}
+#monthSelected{
+padding: 2px 6px;
+font-size: 14px;
+margin: 0px 7px 0px 3px;
+}
+#yearSelected{
+padding: 2px 5px 2px 2px;
+margin: 0px 7px 0px 3px;	
+font-size: 14px;
+}
+
+.tableMonth /*dinh nghia table*/
+{
+border-collapse:collapse;
+height: 330px;
+margin-top:0px;
+margin-bottom: 0px;
+}
+
+.tableMonth td{
+border: 1px solid #CCC;	
+}
+
+.tableDayWeek /* dinh nghia cell CN T2 T3 (so nam tren, canh trai).... */
+{
+/*background: url(../images/select.gif) top left no-repeat;*/
+font: bold 15px arial;
+color: .ffF;
+}
+
+.tableDayMonth /*  dinh nghia cell ngay thang */
+{
+height: 10px;
+padding: 5px;
+}
+
+.am, .am2  /* dinh nghia cho ngay am lich trong cell . (So nam duoi) canh phai */
+{
+font: normal 11px arial;
+}
+
+.tet /* dinh nghia cho o cell la ngay Tet */
+{
+background:#FC3;
+font-weight: bold;
+}
+
+.homnay /* dinh nghia cho cell la ngay Hom nay */
+{
+background: #b8dae6;
+font-weight: bold;
+color: #003;	
+}
+
+#about{
+/*background:url(../images/about.gif) top left no-repeat;*/
+height: 430px;
+}
+
+#owner
+{
+padding-top: 250px;
+text-align: center;
+color: #930;
+font: bold 14px verdana;
+    
+}
+
+#dev{	
+text-align: center;
+color: #930;
+font: bold 14px verdana;
+}
+
+#design{
+text-align: center;
+color: #C30;	
+font: bold 14px verdana;
+}
+}
+.cls{
+	clear: both;
+}
+
+/*flip*/
+.front{
+	z-index: 9999;
+	-webkit-transform: rotateY(0deg);
+	-webkit-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+	-moz-transform: rotateY(0deg);
+	-moz-transform-style: preserve-3d;
+	-moz-backface-visibility: hidden;
+	-o-transition: all .4s ease-in-out;
+	-ms-transition: all .4s ease-in-out;
+	-moz-transition: all .4s ease-in-out;
+	-webkit-transition: all .4s ease-in-out;
+	transition: all .4s ease-in-out;	
+}
+
+.back{
+	z-index:999;
+	-webkit-transform: rotateY(-180deg);
+	-webkit-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+	-moz-transform: rotateY(-180deg);
+	-moz-transform-style: preserve-3d;
+	-moz-backface-visibility: hidden;	
+	-o-transition: all .4s ease-in-out;
+	-ms-transition: all .4s ease-in-out;
+	-moz-transition: all .4s ease-in-out;
+	-webkit-transition: all .4s ease-in-out;
+	transition: all .4s ease-in-out;
+}
+
+.leftToRight-flip .front{
+	z-index: 999;
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+}
+.leftToRight-flip .back{
+	z-index: 9999;
+	-webkit-transform: rotateY(0deg);
+	-moz-transform: rotateY(0deg);
+}
+
+.rightToLeft-flip .front{
+	z-index: 999;
+	-webkit-transform: rotateY(-180deg);
+	-moz-transform: rotateY(-180deg);
+}
+.rightToLeft-flip .back{
+	z-index: 9999;
+	-webkit-transform: rotateY(-360deg);
+	-moz-transform: rotateY(-360deg);
+}
+
+/* Cung hoang dao */
+.text-container{
+	padding: 20px;
+	font: 11px verdana;	
+}
+.text-container p{
+	margin-bottom: 5px;
+	text-align: justify;
+}
+
+.sign{		
+	margin: auto;	
+	width: 209px;/*100*/
+	height: 240px;
+	background: url(../images/zodiac_signs_new.png) no-repeat;
+}
+
+.aries{background-position: 0px 0;}
+.taurus{background-position: -207px 0;}
+.gemini{background-position: -415px 0;}
+.cancer{background-position: -623px 0;}
+.leo{background-position: -831px 0;}
+.virgo{background-position: -1041px 0;}
+.libra{background-position: -1250px 0;}
+.scorpio{background-position: -1459px 0;}
+.sagittarius{background-position: -1669px 0;}
+.capricorn{background-position: -1879px 0;}
+.aquarius{background-position: -2088px 0;}
+.pisces{background-position: -2299px 0;}
+
+
+
+
+
+.label{text-align: center; padding: 5px 0;}
+.red{color: #d8400b;}
+.blue{color: #0f7ebe;}
+.green{color: #2a9306;}
+.brown{color: #894f04;}
+.pink{color: #cc0ca6;}
+.orange{color: #d06e06;}
+.purple{color: #550eb6;}

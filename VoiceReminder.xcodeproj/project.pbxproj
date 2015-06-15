@@ -155,7 +155,7 @@
 		82A8D3491B2EB95B00E19E2B /* VRReCordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A8D3451B2EB95B00E19E2B /* VRReCordViewController.m */; };
 		82A8D34D1B2EBA5700E19E2B /* VRHoroscopeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A8D34C1B2EBA5700E19E2B /* VRHoroscopeController.m */; };
 		82A8D3531B2EC06700E19E2B /* NSString+VR.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A8D3521B2EC06700E19E2B /* NSString+VR.m */; };
-		82A92C651B2DE8D6004776FF /* www in Resources */ = {isa = PBXBuildFile; fileRef = 82A92C641B2DE8D6004776FF /* www */; };
+		82A8D3551B2EC76800E19E2B /* www in Resources */ = {isa = PBXBuildFile; fileRef = 82A8D3541B2EC76800E19E2B /* www */; };
 		82AA35991B1386A600E5F087 /* VRSettingNotesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AA35971B1386A600E5F087 /* VRSettingNotesCell.m */; };
 		82AA359A1B1386A600E5F087 /* VRSettingNotesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82AA35981B1386A600E5F087 /* VRSettingNotesCell.xib */; };
 		82B4CCBA1B228AAD008341D3 /* VRSettingBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B4CCB91B228AAD008341D3 /* VRSettingBaseViewController.m */; };
@@ -396,7 +396,7 @@
 		82A8D34C1B2EBA5700E19E2B /* VRHoroscopeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRHoroscopeController.m; sourceTree = "<group>"; };
 		82A8D3511B2EC06700E19E2B /* NSString+VR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+VR.h"; sourceTree = "<group>"; };
 		82A8D3521B2EC06700E19E2B /* NSString+VR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+VR.m"; sourceTree = "<group>"; };
-		82A92C641B2DE8D6004776FF /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../../../../../Desktop/www; sourceTree = "<group>"; };
+		82A8D3541B2EC76800E19E2B /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
 		82AA35961B1386A600E5F087 /* VRSettingNotesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRSettingNotesCell.h; sourceTree = "<group>"; };
 		82AA35971B1386A600E5F087 /* VRSettingNotesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRSettingNotesCell.m; sourceTree = "<group>"; };
 		82AA35981B1386A600E5F087 /* VRSettingNotesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VRSettingNotesCell.xib; sourceTree = "<group>"; };
@@ -671,8 +671,8 @@
 		824E76421A7AF91E0035C744 /* Main Screen */ = {
 			isa = PBXGroup;
 			children = (
+				82A8D3541B2EC76800E19E2B /* www */,
 				82A8D34A1B2EBA3100E19E2B /* Horoscope */,
-				82A92C641B2DE8D6004776FF /* www */,
 				823814DF1AB9AD9700B00A02 /* SBTickView.h */,
 				823814E01AB9AD9700B00A02 /* SBTickView.m */,
 				823814DC1AB9AD3200B00A02 /* UIView+SBExtras.h */,
@@ -1359,6 +1359,7 @@
 				8277E4C41B2D2DE9007C7C1A /* q3.png in Resources */,
 				8232B3D41B1DFD7000CCA807 /* VRNotesController.xib in Resources */,
 				8217024E1AD0BFC400747B39 /* bt_back@2x.png in Resources */,
+				82A8D3551B2EC76800E19E2B /* www in Resources */,
 				821702461AD0BF8800747B39 /* bt_cancel@2x.png in Resources */,
 				8277E4CF1B2D2DE9007C7C1A /* q14.png in Resources */,
 				824F2E721AB58B94009377AD /* Localizable.strings in Resources */,
@@ -1367,7 +1368,6 @@
 				8254EB4A1AC20CEB00D1C2CC /* VRNameViewController.xib in Resources */,
 				8277E4D11B2D2DE9007C7C1A /* q16.png in Resources */,
 				82AA359A1B1386A600E5F087 /* VRSettingNotesCell.xib in Resources */,
-				82A92C651B2DE8D6004776FF /* www in Resources */,
 				821702381AD0BD3200747B39 /* CTAssetsPicker.xcassets in Resources */,
 				8277E4C21B2D2DE9007C7C1A /* q1.png in Resources */,
 				821701E51AD097E100747B39 /* icon_camera@3x.png in Resources */,
