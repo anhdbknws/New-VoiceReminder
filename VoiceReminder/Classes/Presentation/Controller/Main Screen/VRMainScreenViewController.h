@@ -27,9 +27,7 @@
 // view near bottom
 @property (weak, nonatomic) IBOutlet UIView *lineView;
 @property (weak, nonatomic) IBOutlet UILabel *labelGoodHours;
-@property (weak, nonatomic) IBOutlet UILabel *labelLunarYear;
-@property (weak, nonatomic) IBOutlet UILabel *labelLunarDay;
-@property (weak, nonatomic) IBOutlet UILabel *labelLunarMonth;
+@property (weak, nonatomic) IBOutlet UIView *viewLunar;
 
 // view middle
 @property (weak, nonatomic) IBOutlet UILabel *labelGregorianDate;

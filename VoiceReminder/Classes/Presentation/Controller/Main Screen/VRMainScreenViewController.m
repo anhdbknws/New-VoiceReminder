@@ -41,8 +41,14 @@
         [self saveShortSoundModelToDB];
     }
     
+    self.viewLunar.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7];
+    
+    self.webview.opaque = NO;
+    self.webview.backgroundColor = [UIColor clearColor];
     NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"www/index" ofType:@"html" inDirectory:nil];
     [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:indexPath]]];
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

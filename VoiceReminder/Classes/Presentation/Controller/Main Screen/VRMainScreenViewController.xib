@@ -28,6 +28,7 @@
                 <outlet property="remindersButton" destination="iST-VB-kWE" id="qnH-fV-uoX"/>
                 <outlet property="secondView" destination="qKg-tE-axE" id="MMZ-iV-w4G"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewLunar" destination="aHn-1C-tty" id="yPx-am-Rl1"/>
                 <outlet property="viewOverlay" destination="kYx-X1-h0F" id="TUO-lQ-laU"/>
                 <outlet property="webview" destination="uIk-u6-jhc" id="Tz8-xZ-Igz"/>
             </connections>
@@ -190,10 +191,10 @@
                         </label>
                         <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uIk-u6-jhc">
                             <rect key="frame" x="0.0" y="50" width="320" height="115"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </webView>
                     </subviews>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="LZE-rY-WKd" secondAttribute="trailing" id="Aat-wN-Ymg"/>
                         <constraint firstItem="uIk-u6-jhc" firstAttribute="top" secondItem="LZE-rY-WKd" secondAttribute="bottom" id="Pts-eV-xTJ"/>
