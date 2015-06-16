@@ -43,6 +43,9 @@
 @property (nonatomic, strong) NSMutableArray *listImageBackground;
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
 
-@property (nonatomic, strong) NSDate *displayDate;
+@property (nonatomic, strong) NSDate *oldDate;
+@property (nonatomic, strong) NSDate *newerDate;
+
+- (void)loadWebView;
 
 @end

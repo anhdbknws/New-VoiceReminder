@@ -38,6 +38,11 @@
     [self.pageController didMoveToParentViewController:self];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -45,16 +50,12 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     VRMainScreenViewController *previousVC = (VRMainScreenViewController *)viewController;
-    NSDate  *displayDate = [previousVC displayDate];
-    [previousVC.webview stringByEvaluatingJavaScriptFromString:@"_flipRight()"];
-    //    if (index == 0) {
-    //        return nil;
-    //    }
+    NSDate  *displayDate = [previousVC oldDate];
     
-    // Decrease the index by 1 to return
-//    index--;
-    
-    return [self viewControllerAtIndex:[VRCommon minusOneDayFromDate:displayDate]];
+    VRMainScreenViewController *prepareDisplayVC = [self viewControllerAtIndex:[VRCommon minusOneDayFromDate:displayDate]];
+    prepareDisplayVC.oldDate = displayDate;
+    [prepareDisplayVC loadWebView];
+    return prepareDisplayVC;
     
 }
 
@@ -62,16 +63,12 @@
     
    
     VRMainScreenViewController *nextVC = (VRMainScreenViewController *)viewController;
-     NSDate *displayDate = [nextVC displayDate];
-    [nextVC.webview stringByEvaluatingJavaScriptFromString:@"_flipLeft()"];
+     NSDate *displayDate = [nextVC oldDate];
     
-//    index++;
-    
-    //    if (index == 5) {
-    //        return nil;
-    //    }
-    
-    return [self viewControllerAtIndex:[VRCommon addOneDayToDate:displayDate]];
+    VRMainScreenViewController *prepareDisplayVC = [self viewControllerAtIndex:[VRCommon addOneDayToDate:displayDate]];
+    prepareDisplayVC.oldDate = displayDate;
+    [prepareDisplayVC loadWebView];
+    return prepareDisplayVC;
     
 }
 
@@ -79,7 +76,7 @@
     
     VRMainScreenViewController *childViewController = [[VRMainScreenViewController alloc] initWithNibName:@"VRMainScreenViewController" bundle:nil];
     
-    childViewController.displayDate = date;
+    childViewController.newerDate = date;
     
     return childViewController;
     

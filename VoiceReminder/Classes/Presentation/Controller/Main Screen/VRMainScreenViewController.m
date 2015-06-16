@@ -20,7 +20,7 @@
 #import "NSString+VR.h"
 #import "VRHoroscopeController.h"
 
-@interface VRMainScreenViewController () <UIGestureRecognizerDelegate>
+@interface VRMainScreenViewController () <UIGestureRecognizerDelegate, UIWebViewDelegate>
 @property (nonatomic, strong) VRLunarHelper *service;
 @end
 
@@ -37,20 +37,28 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self configureUI];
     [self configureClockTicker];
-//    [self setupGesture];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kSaveShortSoundToDBLocal]) {
         [self saveShortSoundModelToDB];
     }
-    
-    
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    // compareDate
+}
+
+- (void)loadWebView {
+    if ([self.newerDate compare:self.oldDate] == NSOrderedAscending) {
+        [self.webview stringByEvaluatingJavaScriptFromString:@"_flipRight()"];
+    }
+    else {
+        [self.webview stringByEvaluatingJavaScriptFromString:@"_flipLeft()"];
+    }
 }
 
 #pragma mark prepare date
@@ -91,13 +99,13 @@
 
 - (void)updateDataFromMidleView {
     // month year
-    self.labelGregorianDate.text = [_service getMonthYearStringFromDate:self.displayDate];
+    self.labelGregorianDate.text = [_service getMonthYearStringFromDate:self.newerDate];
     // day
-    self.labelGregorianDay.text = [NSString stringWithFormat:@"%d", [_service getDayFromDate:self.displayDate]];
+    self.labelGregorianDay.text = [NSString stringWithFormat:@"%d", [_service getDayFromDate:self.newerDate]];
     // day of week
-    self.labelGregorianWeek.text = [NSString stringWithFormat:@"Thứ %d", [_service getDayOfWeekFromDate:self.displayDate]];
+    self.labelGregorianWeek.text = [NSString stringWithFormat:@"Thứ %d", [_service getDayOfWeekFromDate:self.newerDate]];
     
-    [self.buttonZodiac setTitle:[_service getCungHoangDao:self.displayDate] forState:UIControlStateNormal];
+    [self.buttonZodiac setTitle:[_service getCungHoangDao:self.newerDate] forState:UIControlStateNormal];
     self.labelIdiom.text = [self getIDomsRadom];
 }
 
@@ -105,6 +113,7 @@
     self.viewLunar.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7];
     self.webview.opaque = NO;
     self.webview.backgroundColor = [UIColor clearColor];
+    self.webview.delegate = self;
     NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"www/index" ofType:@"html" inDirectory:nil];
     [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:indexPath]]];
 }
@@ -129,7 +138,7 @@
 }
 
 - (void)horoscopeDetail {
-    NSArray* subString = [[_service getCungHoangDao:self.displayDate] componentsSeparatedByString: @"("];
+    NSArray* subString = [[_service getCungHoangDao:self.newerDate] componentsSeparatedByString: @"("];
     VRHoroscopeController *vc = [[VRHoroscopeController alloc] init];
     vc.horoscope = [_service horoscopeEngFromVi:[[subString objectAtIndex: 0] removeWhitespace]];
     [self.navigationController pushViewController:vc animated:YES];
