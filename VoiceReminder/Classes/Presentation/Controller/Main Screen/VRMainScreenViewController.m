@@ -28,7 +28,7 @@
 {
     NSString *_currentClock;
     NSArray *_clockTickers;
-    NSDate *currentDate; // is date displaying
+//    NSDate *currentDate; // is date displaying
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,7 +37,7 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self configureUI];
     [self configureClockTicker];
-    [self setupGesture];
+//    [self setupGesture];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kSaveShortSoundToDBLocal]) {
         [self saveShortSoundModelToDB];
@@ -59,7 +59,7 @@
         _service = [[VRLunarHelper alloc] init];
     }
     //1.get current date
-    currentDate = [NSDate date];
+//    currentDate = [NSDate date];
     //1. list image background
     self.listImageBackground = [NSMutableArray arrayWithArray:[VREnumDefine listBackgroundImages]];
 }
@@ -91,13 +91,13 @@
 
 - (void)updateDataFromMidleView {
     // month year
-    self.labelGregorianDate.text = [_service getMonthYearStringFromDate:currentDate];
+    self.labelGregorianDate.text = [_service getMonthYearStringFromDate:self.displayDate];
     // day
-    self.labelGregorianDay.text = [NSString stringWithFormat:@"%d", [_service getDayFromDate:currentDate]];
+    self.labelGregorianDay.text = [NSString stringWithFormat:@"%d", [_service getDayFromDate:self.displayDate]];
     // day of week
-    self.labelGregorianWeek.text = [NSString stringWithFormat:@"Thứ %d", [_service getDayOfWeekFromDate:currentDate]];
+    self.labelGregorianWeek.text = [NSString stringWithFormat:@"Thứ %d", [_service getDayOfWeekFromDate:self.displayDate]];
     
-    [self.buttonZodiac setTitle:[_service getCungHoangDao:currentDate] forState:UIControlStateNormal];
+    [self.buttonZodiac setTitle:[_service getCungHoangDao:self.displayDate] forState:UIControlStateNormal];
     self.labelIdiom.text = [self getIDomsRadom];
 }
 
@@ -129,7 +129,7 @@
 }
 
 - (void)horoscopeDetail {
-    NSArray* subString = [[_service getCungHoangDao:currentDate] componentsSeparatedByString: @"("];
+    NSArray* subString = [[_service getCungHoangDao:self.displayDate] componentsSeparatedByString: @"("];
     VRHoroscopeController *vc = [[VRHoroscopeController alloc] init];
     vc.horoscope = [_service horoscopeEngFromVi:[[subString objectAtIndex: 0] removeWhitespace]];
     [self.navigationController pushViewController:vc animated:YES];
@@ -151,43 +151,43 @@
 }
 
 #pragma mark - gesture
-- (void)setupGesture{
-    // Swipe Left detect
-    UISwipeGestureRecognizer *swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(detectSwiped:)];
-    swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.viewOverlay addGestureRecognizer:swipeLeftRecognizer];
-    [swipeLeftRecognizer setDelegate:self];
-    
-    // Swipe Right detect
-    UISwipeGestureRecognizer *swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(detectSwiped:)];
-    swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.viewOverlay addGestureRecognizer:swipeRightRecognizer];
-    [swipeRightRecognizer setDelegate:self];
-}
-
-- (void)detectSwiped:(UISwipeGestureRecognizer *)gesture {
-    if (gesture.direction == UISwipeGestureRecognizerDirectionRight) {
-        NSLog(@"swipe right");
-        //1.setback ground
-        [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
-        //2.update lunarview
-        [self.webview stringByEvaluatingJavaScriptFromString:@"_flipRight()"];
-        //3.previuous date
-        currentDate = [VRCommon minusOneDayFromDate:currentDate];
-        [self updateDataFromMidleView];
-        
-    }
-    else if (gesture.direction == UISwipeGestureRecognizerDirectionLeft){
-        NSLog(@"swipe left");
-        //1. set backgroun
-        [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
-        //2.update lunarview
-        [self.webview stringByEvaluatingJavaScriptFromString:@"_flipLeft()"];
-        //3.next date
-        currentDate =[VRCommon addOneDayToDate:currentDate];
-        [self updateDataFromMidleView];
-    }
-}
+//- (void)setupGesture{
+//    // Swipe Left detect
+//    UISwipeGestureRecognizer *swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(detectSwiped:)];
+//    swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+//    [self.viewOverlay addGestureRecognizer:swipeLeftRecognizer];
+//    [swipeLeftRecognizer setDelegate:self];
+//    
+//    // Swipe Right detect
+//    UISwipeGestureRecognizer *swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(detectSwiped:)];
+//    swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+//    [self.viewOverlay addGestureRecognizer:swipeRightRecognizer];
+//    [swipeRightRecognizer setDelegate:self];
+//}
+//
+//- (void)detectSwiped:(UISwipeGestureRecognizer *)gesture {
+//    if (gesture.direction == UISwipeGestureRecognizerDirectionRight) {
+//        NSLog(@"swipe right");
+//        //1.setback ground
+//        [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
+//        //2.update lunarview
+//        [self.webview stringByEvaluatingJavaScriptFromString:@"_flipRight()"];
+//        //3.previuous date
+//        currentDate = [VRCommon minusOneDayFromDate:self.displayDate];
+//        [self updateDataFromMidleView];
+//        
+//    }
+//    else if (gesture.direction == UISwipeGestureRecognizerDirectionLeft){
+//        NSLog(@"swipe left");
+//        //1. set backgroun
+//        [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
+//        //2.update lunarview
+//        [self.webview stringByEvaluatingJavaScriptFromString:@"_flipLeft()"];
+//        //3.next date
+//        currentDate =[VRCommon addOneDayToDate:currentDate];
+//        [self updateDataFromMidleView];
+//    }
+//}
 
 - (UIImage *)getRandomBackgroundImage {
     UIImage *image = [UIImage imageNamed:[self.listImageBackground objectAtIndex:(arc4random() % self.listImageBackground.count)]];

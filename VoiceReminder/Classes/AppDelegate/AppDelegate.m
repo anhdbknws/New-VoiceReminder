@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "VRMainScreenViewController.h"
+#import "VRMainPageViewController.h"
 #import "VRLocalNotificationController.h"
 #import "VRCommon.h"
 #import "VRAlertView.h"
@@ -49,7 +49,7 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
     self.window.backgroundColor = [UIColor whiteColor];
     UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window = window;
-    VRMainScreenViewController *mainViewController = [[VRMainScreenViewController alloc] initWithNibName:NSStringFromClass([VRMainScreenViewController class]) bundle:nil];
+    VRMainPageViewController *mainViewController = [[VRMainPageViewController alloc] initWithNibName:NSStringFromClass([VRMainPageViewController class]) bundle:nil];
     UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     navi.navigationBar.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = navi;
