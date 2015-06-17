@@ -39,8 +39,8 @@
 
 // font styles
 
-#define VRFontRegular(v) [UIFont fontWithName:@"DroidSans" size:v]
-#define VRFontBold(v) [UIFont fontWithName:@"DroidSans-Bold" size:v]
+#define VRFontRegular(v) [UIFont fontWithName:@"Roboto-Regular" size:v]
+#define VRFontBold(v) [UIFont fontWithName:@"Roboto-Bold" size:v]
 #define VRTitleFont(v) [UIFont fontWithName:@"Berlin Sans FB Demi" size:v]
 
 #define H1_FONT VRFontBold(19)

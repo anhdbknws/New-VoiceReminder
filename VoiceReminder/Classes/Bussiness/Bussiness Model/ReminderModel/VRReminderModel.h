@@ -12,7 +12,7 @@
 #import "VRSoundModel.h"
 #import "VRShortSoundModel.h"
 
-@class VRSoundModel;
+@class VRSoundModel, VRShortSoundModel;
 @interface VRReminderModel : BaseModel <NSCopying>
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) VRSoundModel *soundModel;

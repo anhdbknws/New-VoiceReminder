@@ -28,7 +28,6 @@
 {
     NSString *_currentClock;
     NSArray *_clockTickers;
-    NSDate *currentDate; // is date displaying
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,15 +36,10 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self configureUI];
     [self configureClockTicker];
-    [self setupGesture];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kSaveShortSoundToDBLocal]) {
         [self saveShortSoundModelToDB];
     }
-    
-    
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -58,8 +52,7 @@
     if (!_service) {
         _service = [[VRLunarHelper alloc] init];
     }
-    //1.get current date
-    currentDate = [NSDate date];
+    
     //1. list image background
     self.listImageBackground = [NSMutableArray arrayWithArray:[VREnumDefine listBackgroundImages]];
 }
@@ -73,7 +66,6 @@
     [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
     
     [self setupMidleView];
-    [self setupNearBottomView];
     [self setupBottomView];
 }
 
@@ -83,30 +75,41 @@
     self.buttonZodiac.layer.borderWidth = 2.0f;
     self.buttonZodiac.layer.borderColor = [UIColor redColor].CGColor;
     self.buttonZodiac.backgroundColor = [UIColor clearColor];
-    [self.buttonZodiac setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.buttonZodiac setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.buttonZodiac.titleLabel.font = VRFontRegular(17);
     [self.buttonHoroscope addTarget:self action:@selector(horoscopeDetail) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.labelGregorianDate.font = VRFontRegular(20);
+    self.labelGregorianDate.textColor = [UIColor whiteColor];
+    
+    self.labelGregorianDay.font = VRFontBold(50);
+    self.labelGregorianDay.textColor = [UIColor whiteColor];
+    self.labelGregorianWeek.font = VRFontRegular(20);
+    self.labelGregorianWeek.textColor = [UIColor whiteColor];
+    
+    self.labelIdiom.font = VRFontRegular(17);
+    self.labelIdiom.textColor = [UIColor whiteColor];
     
     [self updateDataFromMidleView];
 }
 
 - (void)updateDataFromMidleView {
     // month year
-    self.labelGregorianDate.text = [_service getMonthYearStringFromDate:currentDate];
+    self.labelGregorianDate.text = [_service getMonthYearStringFromDate:self.displayDate];
     // day
-    self.labelGregorianDay.text = [NSString stringWithFormat:@"%d", [_service getDayFromDate:currentDate]];
+    self.labelGregorianDay.text = [NSString stringWithFormat:@"%d", [_service getDayFromDate:self.displayDate]];
     // day of week
-    self.labelGregorianWeek.text = [NSString stringWithFormat:@"Thứ %d", [_service getDayOfWeekFromDate:currentDate]];
-    
-    [self.buttonZodiac setTitle:[_service getCungHoangDao:currentDate] forState:UIControlStateNormal];
+    int thu = [_service getDayOfWeekFromDate:self.displayDate];
+    if (thu == 1) {
+        self.labelGregorianWeek.text = [NSString stringWithFormat:@"%@", @"Chủ nhật"];
+    }
+    else {
+        self.labelGregorianWeek.text = [NSString stringWithFormat:@"Thứ %d", [_service getDayOfWeekFromDate:self.displayDate]];
+        
+    }
+       
+    [self.buttonZodiac setTitle:[_service getCungHoangDao:self.displayDate] forState:UIControlStateNormal];
     self.labelIdiom.text = [self getIDomsRadom];
-}
-
-- (void)setupNearBottomView {
-    self.viewLunar.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7];
-    self.webview.opaque = NO;
-    self.webview.backgroundColor = [UIColor clearColor];
-    NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"www/index" ofType:@"html" inDirectory:nil];
-    [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:indexPath]]];
 }
 
 - (void)setupBottomView {
@@ -129,7 +132,7 @@
 }
 
 - (void)horoscopeDetail {
-    NSArray* subString = [[_service getCungHoangDao:currentDate] componentsSeparatedByString: @"("];
+    NSArray* subString = [[_service getCungHoangDao:self.displayDate] componentsSeparatedByString: @"("];
     VRHoroscopeController *vc = [[VRHoroscopeController alloc] init];
     vc.horoscope = [_service horoscopeEngFromVi:[[subString objectAtIndex: 0] removeWhitespace]];
     [self.navigationController pushViewController:vc animated:YES];
@@ -148,45 +151,6 @@
     
     for (SBTickerView *ticker in _clockTickers)
         [ticker setFrontView:[SBTickView tickViewWithTitle:@"0" fontSize:30.]];
-}
-
-#pragma mark - gesture
-- (void)setupGesture{
-    // Swipe Left detect
-    UISwipeGestureRecognizer *swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(detectSwiped:)];
-    swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.viewOverlay addGestureRecognizer:swipeLeftRecognizer];
-    [swipeLeftRecognizer setDelegate:self];
-    
-    // Swipe Right detect
-    UISwipeGestureRecognizer *swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(detectSwiped:)];
-    swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.viewOverlay addGestureRecognizer:swipeRightRecognizer];
-    [swipeRightRecognizer setDelegate:self];
-}
-
-- (void)detectSwiped:(UISwipeGestureRecognizer *)gesture {
-    if (gesture.direction == UISwipeGestureRecognizerDirectionRight) {
-        NSLog(@"swipe right");
-        //1.setback ground
-        [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
-        //2.update lunarview
-        [self.webview stringByEvaluatingJavaScriptFromString:@"_flipRight()"];
-        //3.previuous date
-        currentDate = [VRCommon minusOneDayFromDate:currentDate];
-        [self updateDataFromMidleView];
-        
-    }
-    else if (gesture.direction == UISwipeGestureRecognizerDirectionLeft){
-        NSLog(@"swipe left");
-        //1. set backgroun
-        [self.backGroundImageView setImage:[self getRandomBackgroundImage]];
-        //2.update lunarview
-        [self.webview stringByEvaluatingJavaScriptFromString:@"_flipLeft()"];
-        //3.next date
-        currentDate =[VRCommon addOneDayToDate:currentDate];
-        [self updateDataFromMidleView];
-    }
 }
 
 - (UIImage *)getRandomBackgroundImage {
@@ -254,7 +218,6 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSaveShortSoundToDBLocal];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }];
-    
 }
 
 - (void)dealloc {

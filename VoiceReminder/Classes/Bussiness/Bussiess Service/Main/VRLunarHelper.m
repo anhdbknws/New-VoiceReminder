@@ -11,12 +11,14 @@
 @implementation VRLunarHelper
 
 - (BOOL)checkDate:(NSDate *)date from:(NSDate *)startDate to:(NSDate *)endDate {
-    return [date compare:startDate] == NSOrderedDescending &&
-    [date compare:endDate]  == NSOrderedAscending;;
+    return ([date compare:startDate] == NSOrderedDescending || [date compare:startDate] == NSOrderedSame) &&
+    ([date compare:endDate]  == NSOrderedAscending || [date compare:endDate]  == NSOrderedSame);
 }
 
-- (NSString *)getCungHoangDao:(NSDate *)date {
-    int year = [self getYearFromDate:date];
+- (NSString *)getCungHoangDao:(NSDate *)shortDate {
+    NSString *shortDateString = [[VRCommon commonDateFormat] stringFromDate:shortDate];
+    NSDate *date = [[VRCommon commonDateFormat] dateFromString:shortDateString];
+    int year = [self getYearFromDate:shortDate];
     
     NSDate *_Aries = [self creatDateFrom:19 and:2 and:year];
     NSDate *Aries_ = [self creatDateFrom:20 and:3 and:year];
@@ -85,6 +87,8 @@
     return @"";
 }
 
+
+
 - (NSString *)horoscopeEngFromVi:(NSString *)horoscopeVi {
     if ([horoscopeVi isEqualToString:@"Ma Kết"]) {
         return @"capricorn";
@@ -127,6 +131,7 @@
 - (NSDate *)creatDateFrom:(int)day and:(int)month and:(int)year {
     
     NSDateComponents *comps = [[NSDateComponents alloc] init];
+    comps.timeZone = [NSTimeZone localTimeZone];
     [comps setDay:day];
     [comps setMonth:month];
     [comps setYear:year];

@@ -187,6 +187,11 @@
 		82F2A1D31AD483AE006359C8 /* VRRemindersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F2A1D21AD483AE006359C8 /* VRRemindersViewController.m */; };
 		82F2A1D71AD483C2006359C8 /* VRReminderDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F2A1D51AD483C2006359C8 /* VRReminderDetailController.m */; };
 		82F2A1D81AD483C2006359C8 /* VRReminderDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82F2A1D61AD483C2006359C8 /* VRReminderDetailController.xib */; };
+		82F6E6C51B31C34A007F68DB /* VRMainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F6E6C31B31C34A007F68DB /* VRMainPageViewController.m */; };
+		82F6E6C61B31C34A007F68DB /* VRMainPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82F6E6C41B31C34A007F68DB /* VRMainPageViewController.xib */; };
+		82F6E6CD1B31CEB7007F68DB /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 82F6E6CA1B31CE48007F68DB /* Roboto-Bold.ttf */; };
+		82F6E6CE1B31CEB7007F68DB /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 82F6E6CB1B31CE48007F68DB /* Roboto-Medium.ttf */; };
+		82F6E6CF1B31CEB7007F68DB /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 82F6E6CC1B31CE48007F68DB /* Roboto-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -470,6 +475,12 @@
 		82F2A1D41AD483C2006359C8 /* VRReminderDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRReminderDetailController.h; sourceTree = "<group>"; };
 		82F2A1D51AD483C2006359C8 /* VRReminderDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRReminderDetailController.m; sourceTree = "<group>"; };
 		82F2A1D61AD483C2006359C8 /* VRReminderDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VRReminderDetailController.xib; sourceTree = "<group>"; };
+		82F6E6C21B31C34A007F68DB /* VRMainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRMainPageViewController.h; sourceTree = "<group>"; };
+		82F6E6C31B31C34A007F68DB /* VRMainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRMainPageViewController.m; sourceTree = "<group>"; };
+		82F6E6C41B31C34A007F68DB /* VRMainPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VRMainPageViewController.xib; sourceTree = "<group>"; };
+		82F6E6CA1B31CE48007F68DB /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		82F6E6CB1B31CE48007F68DB /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		82F6E6CC1B31CE48007F68DB /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		A0EEC2D302155D15EA1B506F /* libPods-VoiceReminder.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VoiceReminder.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -695,6 +706,9 @@
 				824E76461A7AF91E0035C744 /* VRMainScreenViewController.h */,
 				824E76471A7AF91E0035C744 /* VRMainScreenViewController.m */,
 				824E76481A7AF91E0035C744 /* VRMainScreenViewController.xib */,
+				82F6E6C21B31C34A007F68DB /* VRMainPageViewController.h */,
+				82F6E6C31B31C34A007F68DB /* VRMainPageViewController.m */,
+				82F6E6C41B31C34A007F68DB /* VRMainPageViewController.xib */,
 			);
 			path = "Main Screen";
 			sourceTree = "<group>";
@@ -972,6 +986,7 @@
 		82A716A51A6188AA00829BE5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				82F6E6C91B31CE05007F68DB /* Font */,
 				8277E4D81B2D4865007C7C1A /* lunar date */,
 				82B4CCBB1B22A241008341D3 /* short sound */,
 				823EE3661A6991330077C4B5 /* Images */,
@@ -1267,6 +1282,16 @@
 			path = "Reminder Detail";
 			sourceTree = "<group>";
 		};
+		82F6E6C91B31CE05007F68DB /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				82F6E6CA1B31CE48007F68DB /* Roboto-Bold.ttf */,
+				82F6E6CB1B31CE48007F68DB /* Roboto-Medium.ttf */,
+				82F6E6CC1B31CE48007F68DB /* Roboto-Regular.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		CB4F6116B0C8DF20052C4EC8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1346,6 +1371,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82F6E6CD1B31CEB7007F68DB /* Roboto-Bold.ttf in Resources */,
+				82F6E6CE1B31CEB7007F68DB /* Roboto-Medium.ttf in Resources */,
+				82F6E6CF1B31CEB7007F68DB /* Roboto-Regular.ttf in Resources */,
 				8205BBED1B23F660007C5258 /* alarm.caf in Resources */,
 				8277E4CB1B2D2DE9007C7C1A /* q10.png in Resources */,
 				8205BBEE1B23F660007C5258 /* awesomemorning_alarm.caf in Resources */,
@@ -1419,6 +1447,7 @@
 				8277E4D01B2D2DE9007C7C1A /* q15.png in Resources */,
 				821702061AD0B20800747B39 /* icon_delete_photo@2x.png in Resources */,
 				823EE36D1A6991330077C4B5 /* 3.png in Resources */,
+				82F6E6C61B31C34A007F68DB /* VRMainPageViewController.xib in Resources */,
 				823EE36B1A6991330077C4B5 /* 1.png in Resources */,
 				8217024B1AD0BFAC00747B39 /* bt_done@3x.png in Resources */,
 				8277E4D21B2D2DE9007C7C1A /* q17.png in Resources */,
@@ -1565,6 +1594,7 @@
 				82A0DBE61AB0F8370071F419 /* VRReminderListService.m in Sources */,
 				82C302761A7E939400C854AA /* VRReminderModel.m in Sources */,
 				821702311AD0BD3200747B39 /* ALAssetsGroup+isEqual.m in Sources */,
+				82F6E6C51B31C34A007F68DB /* VRMainPageViewController.m in Sources */,
 				82A8D3471B2EB95B00E19E2B /* CircleShapeLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
