@@ -54,6 +54,8 @@
         
         _modelOringinal.timeReminder = [VRCommon commonFormatFromDateTime:[NSDate date]];
         
+        _modelOringinal.photoList = [NSMutableArray new];
+        
         /* short sound*/
         NSArray *listSound = [ShortSound MR_findAll];
         _modelOringinal.shortSoundModel = [[VRShortSoundModel alloc] initWithEntity:listSound[0]];

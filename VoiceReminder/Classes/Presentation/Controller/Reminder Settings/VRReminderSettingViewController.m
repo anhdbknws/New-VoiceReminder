@@ -43,10 +43,8 @@ const NSInteger kPhotoActionSheetTag = 3249;
 @interface VRReminderSettingViewController ()<UITableViewDataSource, UITableViewDelegate, IQDropDownTextFieldDelegate, UITextFieldDelegate, AVAudioPlayerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, CTAssetsPickerControllerDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong)AVAudioPlayer *audioPlayer;
-@property (nonatomic, strong) VRReminderModel *model;
 @property (nonatomic, assign) BOOL isLoading;
 @property (nonatomic, strong) VRReminderSettingService *service;
-@property (nonatomic, strong) NSMutableArray *listRepeat;
 @end
 
 @implementation VRReminderSettingViewController
@@ -130,7 +128,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
         return REMINDER_SETTING_TYPE_NOTES + 1;
     }
     else
-        return _model.photoList.count > 0 ? 1:0;
+        return _service.modelCopy.photoList.count > 0 ? 1:0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -193,21 +191,21 @@ const NSInteger kPhotoActionSheetTag = 3249;
 - (VRReminderSettingCell *)getNameCellAtIndexPath:(NSIndexPath *)indexPath {
     VRReminderSettingCell *cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderSettingCell class]) forIndexPath:indexPath];
     cell.titleLabel.text = @"Label";
-    cell.textfield.font = H1_FONT;
+    cell.textfield.font = VRFontRegular(17);
     cell.textfield.tag = REMINDER_SETTING_TYPE_NAME;
     cell.textfield.delegate = self;
     [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
-    cell.textfield.text = self.model.name;
+    cell.textfield.text = _service.modelCopy.name;
     return cell;
 }
 
 - (VRReminderSettingCell *)getRepeatCellAtIndexPath:(NSIndexPath *)indexPath {
     VRReminderSettingCell *cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderSettingCell class]) forIndexPath:indexPath];
     cell.titleLabel.text = @"Repeat";
-    cell.textfield.font = H1_FONT;
+    cell.textfield.font = VRFontRegular(17);
     cell.textfield.tag = REMINDER_SETTING_TYPE_REPEAT;
     cell.textfield.delegate = self;
-    cell.textfield.text = [self.service getRepeatStringFrom:_listRepeat];
+    cell.textfield.text = [self.service getRepeatStringFrom:_service.modelCopy.repeats];
     
     [cell.arrowView setImage:[UIImage imageNamed:@"icon_arrow_right"]];
     return cell;
@@ -217,10 +215,10 @@ const NSInteger kPhotoActionSheetTag = 3249;
     VRReminderSettingCell *cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderSettingCell class]) forIndexPath:indexPath];
     
     cell.titleLabel.text = @"Alert";
-    cell.textfield.font = H1_FONT;
+    cell.textfield.font = VRFontRegular(17);
     cell.textfield.tag = REMINDER_SETTING_TYPE_ALERT;
     cell.textfield.delegate = self;
-    cell.textfield.text = [VREnumDefine alertTypeStringFrom:self.model.alertReminder];
+    cell.textfield.text = [VREnumDefine alertTypeStringFrom:_service.modelCopy.alertReminder];
     [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
     
     return cell;
@@ -229,7 +227,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
 - (VRReminderSettingCell *)getsoundCellAtIndexPath:(NSIndexPath *)indexPath {
     VRReminderSettingCell *cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderSettingCell class]) forIndexPath:indexPath];
     cell.titleLabel.text = @"Music/sound";
-    cell.textfield.font = H1_FONT;
+    cell.textfield.font = VRFontRegular(17);
     cell.textfield.tag = REMINDER_SETTING_TYPE_MUSIC_SOUND;
     cell.textfield.delegate = self;
     VRSoundModel *model = _service.modelCopy.soundModel;
@@ -243,7 +241,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     VRReminderSettingCell *cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderSettingCell class]) forIndexPath:indexPath];
     
     cell.titleLabel.text = @"Short sound";
-    cell.textfield.font = H1_FONT;
+    cell.textfield.font = VRFontRegular(17);
     VRShortSoundModel *model = _service.modelCopy.shortSoundModel;
     cell.textfield.text = model.name;
     cell.textfield.tag = REMINDER_SETTING_TYPE_SHORT_SOUND;
@@ -260,21 +258,22 @@ const NSInteger kPhotoActionSheetTag = 3249;
     cell.textViewNotes.delegate = self;
     _noteTextView = (UIPlaceHolderTextView*)cell.textViewNotes;
     cell.textViewNotes.tag = REMINDER_SETTING_TYPE_NOTES;
-    cell.textViewNotes.text = self.model.notes;
+    cell.textViewNotes.text = _service.modelCopy.notes;
+    cell.textViewNotes.font = VRFontRegular(17);
     return cell;
 }
 
 - (VRPhotoListCell *)getPhotoCellAtIndexPath:(NSIndexPath *)indexPath {
     VRPhotoListCell * cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRPhotoListCell class])];
-    cell.photoList = _model.photoList;
+    cell.photoList = _service.modelCopy.photoList;
     cell.editingMode  = YES;
     
     __weak typeof(self)weak = self;
     cell.didDeleteCompletionBlock = ^(NSInteger index){
         __strong typeof(weak)strong = weak;
         if (strong) {
-            [strong.model.photoList removeObjectAtIndex:index];
-            if ([strong.model.photoList count] == 0) {
+            [_service.modelCopy.photoList removeObjectAtIndex:index];
+            if ([_service.modelCopy.photoList count] == 0) {
                 [weak.settingTableview reloadData];
             }
         }
@@ -320,12 +319,12 @@ const NSInteger kPhotoActionSheetTag = 3249;
     }
     
     NSString *errorMessage = nil;
-    BOOL validate = [_service validateModel:_model errorMessage:&errorMessage];
+    BOOL validate = [_service validateModel:_service.modelCopy errorMessage:&errorMessage];
     if (validate) {
         _isLoading = YES;
         __weak typeof (self)weak = self;
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [_service addReminder:_model toDatabaseLocalWithCompletionhandler:^(NSError *error, VRReminderModel *result) {
+        [_service addReminder:_service.modelCopy toDatabaseLocalWithCompletionhandler:^(NSError *error, VRReminderModel *result) {
             __strong typeof (weak)strong = weak;
             if (!strong) {
                 return ;
@@ -386,16 +385,16 @@ const NSInteger kPhotoActionSheetTag = 3249;
 - (void) datePickerDateChanged:(UIDatePicker *)paramDatePicker{
     if ([paramDatePicker isEqual:self.datePicker]){
         NSLog(@"Selected date = %@", paramDatePicker.date);
-        _model.timeReminder = [VRCommon commonFormatFromDateTime:paramDatePicker.date];
+        _service.modelCopy.timeReminder = [VRCommon commonFormatFromDateTime:paramDatePicker.date];
     }
 }
 - (void)chooseName {
     VRNameViewController *Vc = [[VRNameViewController alloc] initWithNibName:NSStringFromClass([VRNameViewController class]) bundle:nil];
-    Vc.nameValue = self.model.name;
+    Vc.nameValue = _service.modelCopy.name;
     __weak typeof (self)weak = self;
     Vc.doneNameCompleted = ^(NSString *name) {
         __strong typeof (weak)strong = weak;
-        strong.model.name = name;
+        strong.service.modelCopy.name = name;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [strong.settingTableview reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -407,13 +406,11 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (void)chooseRepeatType {
     VRRepeatViewController *VC = [[VRRepeatViewController alloc] initWithNibName:NSStringFromClass([VRRepeatViewController class]) bundle:nil];
-    VC.arrayRepeatSelected = [NSMutableArray new];
-    VC.arrayRepeatSelected = self.listRepeat;
+    VC.arrayRepeatSelected = [_service.modelCopy.repeats copy];
     __weak typeof (self)weak = self;
     VC.selectedCompleted = ^(NSMutableArray *listRepeatSelected) {
         __strong typeof (weak)strong = weak;
-        strong.listRepeat = listRepeatSelected;
-        strong.model.repeats = [strong saveListRepeatToModel:listRepeatSelected];
+        strong.service.modelCopy.repeats = [strong saveListRepeatToModel:listRepeatSelected];
         dispatch_async(dispatch_get_main_queue(), ^{
             [strong.settingTableview reloadData];
         });
@@ -445,12 +442,12 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (void)chooseAlertType {
     VRAlertViewController *VC = [[VRAlertViewController alloc] initWithNibName:NSStringFromClass([VRAlertViewController class]) bundle:nil];
-    VC.alertSelected = [VREnumDefine alertTypeStringFrom:self.model.alertReminder];
+    VC.alertSelected = [VREnumDefine alertTypeStringFrom:self.service.modelCopy.alertReminder];
     
     __weak typeof (self)weak = self;
     VC.selectedAlertCompleted = ^(NSString *alert) {
         __strong typeof (weak)strong = weak;
-        strong.model.alertReminder = [VREnumDefine alertTypeIntegerFromString:alert];
+        strong.service.modelCopy.alertReminder = [VREnumDefine alertTypeIntegerFromString:alert];
         dispatch_async(dispatch_get_main_queue(), ^{
             [strong.settingTableview reloadData];
         });
@@ -559,7 +556,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
         [picker dismissViewControllerAnimated:YES completion:^{
             for (ALAsset * asset in picker.selectedAssets) {
                 NSString * url = [VCAssetAccessory saveAssetToDocument:asset];
-                [_model.photoList addObject:url];
+                [_service.modelCopy.photoList addObject:url];
             }
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             [self.settingTableview reloadData];
@@ -603,7 +600,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
         [picker dismissViewControllerAnimated:YES completion:^{
             NSString * url = [VCAssetAccessory saveImageToDocument:img];
             if (url.length) {
-                [_model.photoList addObject:url];
+                [_service.modelCopy.photoList addObject:url];
             }
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             [self.settingTableview reloadData];
@@ -620,7 +617,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (void)showPhotoPageControllerAtIndex:(NSInteger)index
 {
-    VRPhotoPageController * photoPageController = [[VRPhotoPageController alloc] initWithPhotos:_model.photoList];
+    VRPhotoPageController * photoPageController = [[VRPhotoPageController alloc] initWithPhotos:_service.modelCopy.photoList];
     [photoPageController setPageIndex:index];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:photoPageController];
     [[VCUtilities topViewController] presentViewController:navController animated:YES completion:NULL];
@@ -642,7 +639,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (void)setNotesValue {
     VRNotesController *noteVC = [[VRNotesController alloc] initWithNibName:NSStringFromClass([VRNotesController class]) bundle:nil];
-    noteVC.notesValue = self.model.notes;
+    noteVC.notesValue = _service.modelCopy.notes;
     
     __weak typeof (self)weak = self;
     noteVC.doneNotesCompleted = ^(NSString *notes) {
@@ -650,7 +647,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
         if (!strong) {
             return ;
         }
-        strong.model.notes = notes;
+        strong.service.modelCopy.notes = notes;
         
         [strong.settingTableview reloadData];
     };
@@ -665,7 +662,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
         calculationView.font = H6_FONT;
         calculationView.contentInset = UIEdgeInsetsMake(1, -2, 0, 0);
         calculationView.textContainer.maximumNumberOfLines = 0;
-        calculationView.text = self.model.notes;
+        calculationView.text = self.service.modelCopy.notes;
         CGRect frame = calculationView.frame;
         frame.size.width = self.settingTableview.bounds.size.width - 42 - 10;
         calculationView.frame = frame;

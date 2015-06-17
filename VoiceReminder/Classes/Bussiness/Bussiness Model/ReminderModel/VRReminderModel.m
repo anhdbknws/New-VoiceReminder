@@ -72,7 +72,7 @@
     object.name = [self.name copyWithZone:zone];
     object.timeReminder = [self.timeReminder copyWithZone:zone];
     object.repeats = [self.repeats copyWithZone:zone];
-    object.photoList = [self.photoList copyWithZone:zone];
+    object.photoList = [[NSMutableArray alloc] initWithArray:self.photoList copyItems:YES];
     object.isActive = self.isActive;
     object.alertReminder = self.alertReminder;
     object.soundModel = [self.soundModel copyWithZone:zone];
