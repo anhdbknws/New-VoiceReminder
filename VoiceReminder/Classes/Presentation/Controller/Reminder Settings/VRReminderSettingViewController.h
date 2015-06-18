@@ -30,4 +30,6 @@ typedef NS_ENUM(NSInteger, REMINDER_SETTING_TYPE) {
 @property (nonatomic, strong) NSString *uuid;
 
 @property (nonatomic, assign) BOOL isEditMode;
+
+- (instancetype)initWithUUID:(NSString *)uuid;
 @end

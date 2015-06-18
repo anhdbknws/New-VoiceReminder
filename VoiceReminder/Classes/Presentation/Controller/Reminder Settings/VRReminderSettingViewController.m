@@ -42,13 +42,19 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 @interface VRReminderSettingViewController ()<UITableViewDataSource, UITableViewDelegate, IQDropDownTextFieldDelegate, UITextFieldDelegate, AVAudioPlayerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, CTAssetsPickerControllerDelegate, UITextViewDelegate>
 
-@property (nonatomic, strong)AVAudioPlayer *audioPlayer;
 @property (nonatomic, assign) BOOL isLoading;
 @property (nonatomic, strong) VRReminderSettingService *service;
 @end
 
 @implementation VRReminderSettingViewController
-
+- (instancetype)initWithUUID:(NSString *)uuid
+{
+    self = [super initWithNibName:NSStringFromClass([VRReminderSettingViewController class]) bundle:Nil];
+    if (self) {
+        _uuid = uuid;
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;

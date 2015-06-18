@@ -12,10 +12,11 @@
 #import "VRRepeatModel.h"
 #import "VRPhotoListCell.h"
 #import "VRPhotoPageController.h"
+#import "VRReminderSettingViewController.h"
+#import "VRSettingNotesCell.h"
 
-@interface VRReminderDetailController () <AVAudioPlayerDelegate, UITextFieldDelegate>
-@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
-@property (nonatomic, assign) BOOL isPlaying;
+@interface VRReminderDetailController () <AVAudioPlayerDelegate, UITextFieldDelegate, UITextViewDelegate>
+@property (nonatomic, strong) UIPlaceHolderTextView * noteTextView;
 @end
 
 @implementation VRReminderDetailController
@@ -51,6 +52,8 @@
     [self.tableViewDetail registerNib:[UINib nibWithNibName:NSStringFromClass([VRReminderSettingCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([VRReminderSettingCell class])];
     [self.tableViewDetail registerClass:[VRPhotoListCell class] forCellReuseIdentifier:NSStringFromClass([VRPhotoListCell class])];
     
+    [self.tableViewDetail registerClass:[VRSettingNotesCell class] forCellReuseIdentifier:NSStringFromClass([VRSettingNotesCell class])];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -68,6 +71,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
+        if (indexPath.row == REMINDER_DETAIL_ROW_TYPE_NOTES) {
+            return [self getNotesCell];
+        }
         return [self getSettingInforAtIndexPath:indexPath];
     }
     else {
@@ -83,6 +89,18 @@
     cell.textfield.tag = indexPath.row;
     cell.textfield.delegate = self;
     [cell.arrowView setImage:[UIImage imageNamed:@"icon_arrow_right"]];
+    return cell;
+}
+
+- (VRSettingNotesCell *)getNotesCell {
+    VRSettingNotesCell *cell = [self.tableViewDetail dequeueReusableCellWithIdentifier:NSStringFromClass([VRSettingNotesCell class])];
+    cell.labelTitle.text = @"Notes:";
+    cell.arrowView.image = [UIImage imageNamed:@"icon_arrow_right"];
+    cell.textViewNotes.delegate = self;
+    _noteTextView = (UIPlaceHolderTextView*)cell.textViewNotes;
+    cell.textViewNotes.tag = REMINDER_SETTING_TYPE_NOTES;
+    cell.textViewNotes.text = self.model.notes;
+    cell.textViewNotes.font = VRFontRegular(17);
     return cell;
 }
 
@@ -107,6 +125,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
+        if (indexPath.row == REMINDER_DETAIL_ROW_TYPE_NOTES) {
+            return MAX(44, [self caculateHeightOfTextView]);
+            return 44;
+        }
         return 44;
     }
     else {
@@ -117,6 +139,23 @@
             return 0;
         }
     }
+}
+
+- (CGFloat)caculateHeightOfTextView {
+    UIPlaceHolderTextView *calculationView = _noteTextView;
+    if (!calculationView) {
+        calculationView = [[UIPlaceHolderTextView alloc] init];
+        calculationView.font = H6_FONT;
+        calculationView.contentInset = UIEdgeInsetsMake(1, -2, 0, 0);
+        calculationView.textContainer.maximumNumberOfLines = 0;
+        calculationView.text = self.model.notes;
+        CGRect frame = calculationView.frame;
+        frame.size.width = self.tableViewDetail.bounds.size.width - 42 - 10;
+        calculationView.frame = frame;
+    }
+    CGFloat textViewWidth = calculationView.frame.size.width;
+    CGSize size = [calculationView sizeThatFits:CGSizeMake(textViewWidth, FLT_MAX)];
+    return size.height + 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -161,9 +200,6 @@
         case REMINDER_DETAIL_ROW_TYPE_SHORT_SOUND:
             titleString = @"Short sound";
             break;
-        case REMINDER_DETAIL_ROW_TYPE_NOTES:
-            titleString = @"Notes";
-            break;
         case REMINDER_DETAIL_ROW_TYPE_PHOTO:
             titleString = @"Photo";
             break;
@@ -204,9 +240,6 @@
             valueString = model.name;
         }
             break;
-        case REMINDER_DETAIL_ROW_TYPE_NOTES:
-            valueString = _model.notes;
-            break;
         case REMINDER_DETAIL_ROW_TYPE_PHOTO:
             valueString = nil;
             break;
@@ -241,7 +274,9 @@
 
 #pragma mark - Actions
 - (void) editAction:(id)sender {
-    NSLog(@"edit");
+    VRReminderSettingViewController *vc = [[VRReminderSettingViewController alloc] initWithUUID:self.model.uuid];
+    vc.isEditMode = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)dealloc {

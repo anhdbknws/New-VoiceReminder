@@ -26,7 +26,7 @@
     entity.isActive = [NSNumber numberWithBool:YES];
     entity.notes = model.notes;
     
-    entity.sound = [VRSoundMapping entityFromModel:model.soundModel andReminderName:model.name inContext:context];
+    entity.sound = [VRSoundMapping entityFromModel:model.soundModel inContext:context];
     entity.shortSound = [VRShortSoundMapping entityFromModel:model.shortSoundModel inContext:context];
     
     [entity removePhotos:entity.photos];

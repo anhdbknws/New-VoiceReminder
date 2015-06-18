@@ -14,7 +14,6 @@
 
 @interface VRSoundViewController ()<UITableViewDataSource, UITableViewDelegate, MPMediaPickerControllerDelegate, AVAudioPlayerDelegate>
 @property (nonatomic, strong) MPMusicPlayerController *musicPlayer;
-@property (assign) BOOL isPlaying;
 @end
 
 @implementation VRSoundViewController
@@ -187,13 +186,8 @@
     VRReCordViewController *Vc = [[VRReCordViewController alloc] init];
     
     __weak typeof (self)weak = self;
-    Vc.recordCompleted = ^(NSString *fileName) {
-        VRSoundModel *model = [VRSoundModel new];
-        model.name = fileName;
-        model.isRecordSound = YES;
-        model.url = [VRCommon filePathWithName:fileName];
+    Vc.recordCompleted = ^(VRSoundModel *model) {
         [_service.recordSoundArray addObject:model];
-        
         [weak.tableViewSound reloadData];
     };
     [self.navigationController pushViewController:Vc animated:YES];
