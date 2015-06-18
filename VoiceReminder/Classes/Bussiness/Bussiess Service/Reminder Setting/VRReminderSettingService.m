@@ -155,42 +155,49 @@
     for (VRRepeatModel *item in listRepeat) {
         if (item.repeatType == REPEAT_TYPE_MONDAY) {
             [temp addObject:item];
+            break;
         }
     }
     
     for (VRRepeatModel *item in listRepeat) {
         if (item.repeatType == REPEAT_TYPE_TUESDAY) {
             [temp addObject:item];
+            break;
         }
     }
     
     for (VRRepeatModel *item in listRepeat) {
         if (item.repeatType == REPEAT_TYPE_WEDNESDAY) {
             [temp addObject:item];
+            break;
         }
     }
     
     for (VRRepeatModel *item in listRepeat) {
         if (item.repeatType == REPEAT_TYPE_THURSDAY) {
             [temp addObject:item];
+            break;
         }
     }
     
     for (VRRepeatModel *item in listRepeat) {
         if (item.repeatType == REPEAT_TYPE_FRIDAY) {
             [temp addObject:item];
+            break;
         }
     }
     
     for (VRRepeatModel *item in listRepeat) {
         if (item.repeatType == REPEAT_TYPE_SATURDAY) {
             [temp addObject:item];
+            break;
         }
     }
     
     for (VRRepeatModel *item in listRepeat) {
         if (item.repeatType == REPEAT_TYPE_SUNDAY) {
             [temp addObject:item];
+            break;
         }
     }
     

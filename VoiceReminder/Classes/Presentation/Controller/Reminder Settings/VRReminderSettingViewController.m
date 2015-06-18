@@ -207,7 +207,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     cell.textfield.delegate = self;
     cell.textfield.text = [self.service getRepeatStringFrom:_service.modelCopy.repeats];
     
-    [cell.arrowView setImage:[UIImage imageNamed:@"icon_arrow_right"]];
+    [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
     return cell;
 }
 
@@ -218,7 +218,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     cell.textfield.font = VRFontRegular(17);
     cell.textfield.tag = REMINDER_SETTING_TYPE_ALERT;
     cell.textfield.delegate = self;
-    cell.textfield.text = [_service getRepeatStringFrom:_service.modelCopy.repeats];
+    cell.textfield.text = [VREnumDefine alertTypeStringFrom:_service.modelCopy.alertReminder];
     [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
     
     return cell;
@@ -406,11 +406,13 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (void)chooseRepeatType {
     VRRepeatViewController *VC = [[VRRepeatViewController alloc] initWithNibName:NSStringFromClass([VRRepeatViewController class]) bundle:nil];
-    VC.arrayRepeatSelected = _service.modelCopy.repeats;
+    [VC.arrayRepeatSelected removeAllObjects];
+    VC.arrayRepeatSelected = [_service.modelCopy.repeats mutableCopy];
     __weak typeof (self)weak = self;
     VC.selectedCompleted = ^(NSMutableArray *listRepeatSelected) {
         __strong typeof (weak)strong = weak;
-        strong.service.modelCopy.repeats = [strong saveListRepeatToModel:listRepeatSelected];
+        [strong.service.modelCopy.repeats removeAllObjects];
+        [strong saveListRepeatToModel:listRepeatSelected];
         dispatch_async(dispatch_get_main_queue(), ^{
             [strong.settingTableview reloadData];
         });
@@ -419,25 +421,20 @@ const NSInteger kPhotoActionSheetTag = 3249;
     [self.navigationController pushViewController:VC animated:YES];
 }
 
-- (NSMutableArray *)saveListRepeatToModel:(NSMutableArray *)listRepeat {
-    NSMutableArray *listEnum = [NSMutableArray new];
+- (void)saveListRepeatToModel:(NSMutableArray *)listRepeat {
     VRRepeatModel *model = [[VRRepeatModel alloc] init];
     if (listRepeat.count == 7) {
         model.repeatType = REPEAT_TYPE_EVERYDAY;
-        [listEnum addObject:model];
+        [self.service.modelCopy.repeats addObject:model];
     }
     else if (!listRepeat.count) {
         model.repeatType = REPEAT_TYPE_NERER;
-        [listEnum addObject:model];
+        [self.service.modelCopy.repeats addObject:model];
     }
     else {
-        for (NSString *item in listRepeat) {
-            model.repeatType = [VREnumDefine repeatTypeIntegerFromString:item];
-            [listEnum addObject:model];
-        }
+        self.service.modelCopy.repeats = [listRepeat mutableCopy];
     }
-    
-    return listEnum;
+
 }
 
 - (void)chooseAlertType {

@@ -102,7 +102,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [self.repeatTableview deselectRowAtIndexPath:indexPath animated:YES];
     VRRepeatModel *model = [self.arrayRepeat objectAtIndex:indexPath.row];
     
     BOOL found = NO;
@@ -120,6 +119,22 @@
     }
     else {
         [self.arrayRepeatSelected addObject:model];
+        NSInteger index = 0;
+        found = NO;
+        for (VRRepeatModel *object in self.arrayRepeatSelected) {
+            if (self.arrayRepeatSelected.count == 1) {
+                break;
+            }
+            else if (object.repeatType == REPEAT_TYPE_NERER) {
+                index = [self.arrayRepeatSelected indexOfObject:object];
+                found = YES;
+                break;
+            }
+        }
+        
+        if (found) {
+            [self.arrayRepeatSelected removeObjectAtIndex:index];
+        }
     }
     
     [self.repeatTableview reloadData];
