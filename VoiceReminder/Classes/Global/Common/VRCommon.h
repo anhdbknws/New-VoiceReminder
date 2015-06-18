@@ -30,4 +30,9 @@
 + (NSDate *)minusOneDayFromDate:(NSDate *)date;
 + (NSDate *)addOneWeektoDate:(NSDate *)date;
 + (NSDate *)minusOneWeekFromDate:(NSDate *)date;
+
++ (NSString *)documentsDirectory;
++ (NSString *)filePathWithName:(NSString *)fileName;
++ (NSString *)checkDuplicateFileName:(NSString *)fileName;
+
 @end

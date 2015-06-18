@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "VRSettingBaseViewController.h"
+#import "VRSoundService.h"
 
-@class CircleProgressView;
+@class CircleProgressView, VRSoundModel;
 @interface VRReCordViewController : VRSettingBaseViewController
 @property (nonatomic, strong) CircleProgressView *circleView;
 @property (nonatomic, strong) UIButton *startButton;
@@ -18,5 +19,7 @@
 @property (nonatomic, strong) UIButton *playButton;
 
 @property (nonatomic, assign) BOOL isComeFromMainScreen;
+@property (nonatomic, copy) void (^recordCompleted)(VRSoundModel *fileName);
+@property (nonatomic, strong) VRSoundService *soundService;
 
 @end

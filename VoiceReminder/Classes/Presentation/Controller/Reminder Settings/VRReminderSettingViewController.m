@@ -117,9 +117,8 @@ const NSInteger kPhotoActionSheetTag = 3249;
     [_service performFetchReminderWith:_uuid];
     
     _service.modelCopy = [_service.modelOringinal copy];
-    if (_audioRecordingURL) {
-        _service.modelCopy.soundModel.url = [_audioRecordingURL absoluteString];
-        _service.modelCopy.soundModel.isRecordSound = YES;
+    if (_soundModel) {
+        _service.modelCopy.soundModel = _soundModel;
     }
     
 }
@@ -236,8 +235,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     cell.textfield.font = VRFontRegular(17);
     cell.textfield.tag = REMINDER_SETTING_TYPE_MUSIC_SOUND;
     cell.textfield.delegate = self;
-    VRSoundModel *model = _service.modelCopy.soundModel;
-    cell.textfield.text = model.name;
+    cell.textfield.text = _service.modelCopy.soundModel.name;
     [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
     
     return cell;

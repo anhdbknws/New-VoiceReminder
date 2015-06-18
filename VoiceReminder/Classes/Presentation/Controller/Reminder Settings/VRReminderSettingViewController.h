@@ -10,6 +10,7 @@
 #import "CircleProgressView.h"
 #import "UIPlaceHolderTextView.h"
 #import "VRSettingBaseViewController.h"
+#import "VRSoundModel.h"
 
 typedef NS_ENUM(NSInteger, REMINDER_SETTING_TYPE) {
     REMINDER_SETTING_TYPE_NAME          = 0,
@@ -22,7 +23,7 @@ typedef NS_ENUM(NSInteger, REMINDER_SETTING_TYPE) {
 
 @interface VRReminderSettingViewController : VRSettingBaseViewController
 @property (weak, nonatomic) IBOutlet UITableView *settingTableview;
-@property (nonatomic, strong) NSURL *audioRecordingURL;
+@property (nonatomic, strong) VRSoundModel *soundModel;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) UIView * activeField;
 @property (nonatomic, strong) UIPlaceHolderTextView * noteTextView;

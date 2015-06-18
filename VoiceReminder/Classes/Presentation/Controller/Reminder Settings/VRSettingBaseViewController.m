@@ -92,6 +92,14 @@
     self.audioPlayer.numberOfLoops = -1;
 }
 
+- (void)setupPlayRecordSound:(NSString *)recordFileName {
+    NSString *filePath = [VRCommon filePathWithName:recordFileName];
+    NSURL *url = [NSURL URLWithString:filePath];
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+    self.audioPlayer.delegate = self;  // We need this so we can restart after interruptions
+    self.audioPlayer.numberOfLoops = -1;
+}
+
 - (void)playSound {
     if (self.isPlaying) {
         [self.audioPlayer stop];

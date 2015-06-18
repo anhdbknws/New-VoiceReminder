@@ -51,7 +51,7 @@
     self.mp3SoundArray = [NSMutableArray arrayWithArray:tempSongs];
     
     
-    /* record sound */
+    /* record sound*/
     NSArray *tempRecord = [self.recordSoundArray sortedArrayUsingComparator:^NSComparisonResult(VRSoundModel *obj1, VRSoundModel *obj2) {
         return [obj1.name compare:obj2.name];
     }];
@@ -70,4 +70,19 @@
     }
 }
 
+- (void)saveRecordSoundToDB:(VRSoundModel *)model completion:(databaseHandler)completed {
+    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+        [VRSoundMapping entityFromModel:model inContext:localContext];
+    } completion:^(BOOL success, NSError *error) {
+        VRSoundModel *result;
+        Sound *entity = [Sound MR_findFirstByAttribute:@"uuid" withValue:model.uuid];
+        if (entity) {
+            result = [[VRSoundModel alloc] initWithEntity:entity];
+        }
+        
+        if (completed) {
+            completed(nil, result);
+        }
+    }];
+}
 @end

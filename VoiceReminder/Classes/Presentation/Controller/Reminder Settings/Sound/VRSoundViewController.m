@@ -147,6 +147,16 @@
         [self setupAudioPlayerForShortSound:self.soundModel.name];
         [self playSound];
     }
+    
+    if (currentType == SOUND_TYPE_RECORD) {
+        if (self.isPlaying) {
+            [self.audioPlayer stop];
+            self.audioPlayer = nil;
+        }
+        
+        [self setupPlayRecordSound:self.soundModel.name];
+        [self playSound];
+    }
 }
 
 #pragma mark - Actions
@@ -175,6 +185,17 @@
 
 - (void)record {
     VRReCordViewController *Vc = [[VRReCordViewController alloc] init];
+    
+    __weak typeof (self)weak = self;
+    Vc.recordCompleted = ^(NSString *fileName) {
+        VRSoundModel *model = [VRSoundModel new];
+        model.name = fileName;
+        model.isRecordSound = YES;
+        model.url = [VRCommon filePathWithName:fileName];
+        [_service.recordSoundArray addObject:model];
+        
+        [weak.tableViewSound reloadData];
+    };
     [self.navigationController pushViewController:Vc animated:YES];
 }
 

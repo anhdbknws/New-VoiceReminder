@@ -185,5 +185,43 @@ static NSDateFormatter *fm = nil;
     NSDate *oneWeekAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:date options:0];
     return oneWeekAgo;
 }
+
++ (NSString *)documentsDirectory
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    return documentsDirectory;
+}
+
++ (NSString *)filePathWithName:(NSString *)fileName
+{
+    NSString *documentsDirectory = [[self class] documentsDirectory];
+    NSString *newPath = [documentsDirectory stringByAppendingPathComponent:fileName];
+    
+    return newPath;
+}
+
++ (NSString *)checkDuplicateFileName:(NSString *)fileName
+{
+    NSString *tempFileName = fileName;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[[self class] filePathWithName:fileName]]) {
+        NSString * originName = tempFileName;
+        NSString * extension = [tempFileName pathExtension];
+        if (extension.length) {
+            originName = [tempFileName stringByDeletingPathExtension];
+        }
+        NSInteger maxIterations = 99999;
+        for (NSInteger numDuplicates = 1; numDuplicates < maxIterations; numDuplicates++) {
+            tempFileName = [NSString stringWithFormat:@"%@(%ld)",originName,(long)numDuplicates];
+            if (extension.length) {
+                tempFileName = [tempFileName stringByAppendingPathExtension:extension];
+            }
+            if (![[NSFileManager defaultManager] fileExistsAtPath:[[self class] filePathWithName:tempFileName]])
+                break;
+        }
+    }
+    
+    return tempFileName;
+}
 @end
 

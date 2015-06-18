@@ -13,6 +13,7 @@
 #import "Session.h"
 #import "CircleProgressView.h"
 #import "CircleShapeLayer.h"
+#import "VRSoundModel.h"
 
 static NSInteger minutesLimit = 1;
 
@@ -25,6 +26,7 @@ static NSInteger minutesLimit = 1;
 @property (nonatomic, assign) NSTimeInterval durationRecording;
 @property (nonatomic, assign) NSTimeInterval progessTimePlaying;
 @property (nonatomic, strong) NSURL * audioRecordingUrl;
+@property (nonatomic, strong) NSString *fileName;
 @end
 
 @implementation VRReCordViewController
@@ -62,7 +64,7 @@ static NSInteger minutesLimit = 1;
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     if (self.isComeFromMainScreen) {
          [self leftNavigationItem:nil andTitle:@"Back" orImage:nil];
-         [self rightNavigationItem:@selector(settingClick:) andTitle:@"Create alarm" orImage:nil];
+         [self rightNavigationItem:@selector(settingClick:) andTitle:@"Alarm" orImage:nil];
     }
     else {
         [self leftNavigationItem:nil andTitle:@"Cancel" orImage:nil];
@@ -259,12 +261,15 @@ static NSInteger minutesLimit = 1;
 }
 
 - (NSURL*)audioRecordingPath {
-    NSArray *pathComponents = [NSArray arrayWithObjects:
-                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
-                               [NSString stringWithFormat:@"%@.m4a", kNameDefaultAudioRecord],
-                               nil];
+//    NSArray *pathComponents = [NSArray arrayWithObjects:
+//                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
+//                               [NSString stringWithFormat:@"%@.m4a", kNameDefaultAudioRecord],
+//                               nil];
     
-    NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
+    _fileName = [VRCommon checkDuplicateFileName:kNameDefaultAudioRecord];
+    NSString *filePath = [VRCommon filePathWithName:_fileName];
+    
+    NSURL *outputFileURL = [NSURL fileURLWithPath:filePath];
     return outputFileURL;
 }
 
@@ -374,15 +379,50 @@ static NSInteger minutesLimit = 1;
     
     if (![self.audioRecorder isRecording]) {
         VRReminderSettingViewController *reminderSettingViewController = [[VRReminderSettingViewController alloc] initWithNibName:NSStringFromClass([VRReminderSettingViewController class]) bundle:nil];
-        reminderSettingViewController.audioRecordingURL = _audioRecordingUrl;
-        [self.navigationController pushViewController:reminderSettingViewController animated:YES];
+        VRSoundModel *model = [VRSoundModel new];
+        model.isRecordSound = YES;
+        model.name = _fileName;
+        model.url = [VRCommon filePathWithName:_fileName];
+        
+        if (!_soundService) {
+            _soundService = [VRSoundService new];
+        }
+        
+        [_soundService saveRecordSoundToDB:model completion:^(NSError *error, id result) {
+            if (!error) {
+                reminderSettingViewController.soundModel = result;
+            }
+            [self.navigationController pushViewController:reminderSettingViewController animated:YES];
+        }];
+        
+        
     }
 }
 
 - (void)doneAction:(id)sender {
     [self.view endEditing:YES];
+    [self stopRecordingOnAudioRecorder:self.audioRecorder];
     
-    [self.navigationController popViewControllerAnimated:YES];
+    // save audio name to DB
+    if (!_soundService) {
+        _soundService = [[VRSoundService alloc] init];
+    }
+    
+    VRSoundModel *model = [VRSoundModel new];
+    model.isRecordSound = YES;
+    model.name = _fileName;
+    model.url = [VRCommon filePathWithName:_fileName];
+    
+    [_soundService saveRecordSoundToDB:model completion:^(NSError *error, id result) {
+        if (!error) {
+            if (self.recordCompleted) {
+                self.recordCompleted(result);
+            }
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    
 }
 
 - (void)dealloc {

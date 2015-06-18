@@ -16,7 +16,7 @@
 
 
 @implementation VRSoundMapping
-+ (Sound *)entityFromModel:(VRSoundModel *)model andReminderName:(NSString *)reminderName inContext:(NSManagedObjectContext *)context {
++ (Sound *)entityFromModel:(VRSoundModel *)model inContext:(NSManagedObjectContext *)context {
     Sound *entity = [Sound entityWithUuid:model.uuid inContext:context];
     entity.createdDate = model.createdDate;
     if (!entity.createdDate) {
@@ -26,18 +26,12 @@
     entity.isMp3Sound = [NSNumber numberWithBool:model.isMp3Sound];
     entity.isRecordSound = [NSNumber numberWithBool:model.isRecordSound];
     entity.name = model.name;
+    entity.url = model.url;
     
-    if (model.isRecordSound) {
-       entity.url = [self saveAudioToDocumentFolder:model.url withName:reminderName];
-        entity.name = reminderName;
-    }
-    else if (model.isMp3Sound) {
+    if (model.isMp3Sound) {
         entity.url = [self saveMediaItemToDocument:model];
     }
-    else {
-        entity.url = model.url;
-    }
-    
+        
     return entity;
 }
 
@@ -115,6 +109,7 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     return documentsDirectory;
 }
+
 + (NSString *)filePathWithName:(NSString *)fileName
 {
     NSString *documentsDirectory = [[self class] documentsDirectory];

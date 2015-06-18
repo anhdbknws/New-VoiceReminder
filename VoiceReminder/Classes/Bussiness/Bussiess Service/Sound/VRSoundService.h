@@ -18,5 +18,5 @@
 @property (nonatomic, strong) void (^getSoundListCompleted)();
 
 - (void)getListSounds;
-
+- (void)saveRecordSoundToDB:(VRSoundModel *)model completion:(databaseHandler)completed;
 @end
