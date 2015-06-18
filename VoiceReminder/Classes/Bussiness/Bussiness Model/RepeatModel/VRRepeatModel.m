@@ -17,4 +17,11 @@
     
     return self;
 }
+
+- (id)copyWithZone:(NSZone *)zone {
+    VRRepeatModel *object  = [VRRepeatModel new];
+    object.repeatType = self.repeatType;
+    
+    return object;
+}
 @end

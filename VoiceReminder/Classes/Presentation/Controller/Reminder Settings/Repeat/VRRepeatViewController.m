@@ -8,6 +8,7 @@
 
 #import "VRRepeatViewController.h"
 #import "VRRepeatCell.h"
+#import "VRRepeatModel.h"
 
 @interface VRRepeatViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic,strong) NSMutableArray *arrayRepeat;
@@ -42,7 +43,13 @@
 }
 
 - (void)prepareData {
-    self.arrayRepeat = [NSMutableArray arrayWithArray:[VREnumDefine listRepeatType]];
+    self.arrayRepeat = [NSMutableArray new];
+    NSArray *listObject = [NSMutableArray arrayWithArray:[VREnumDefine listRepeatType]];
+    for (NSString *item in listObject) {
+        VRRepeatModel *model = [[VRRepeatModel alloc] init];
+        model.repeatType = [VREnumDefine repeatTypeIntegerFromString:item];
+        [self.arrayRepeat addObject:model];
+    }
 }
 
 #pragma mark - tableview delegate
@@ -61,12 +68,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VRRepeatCell *cell = [self.repeatTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRRepeatCell class]) forIndexPath:indexPath];
-    NSString *repeat = [self.arrayRepeat objectAtIndex:indexPath.row];
-    cell.titleLabel.text = repeat;
+    VRRepeatModel *model = [self.arrayRepeat objectAtIndex:indexPath.row];
+    cell.titleLabel.text = [VREnumDefine repeatTypeStringFrom:model.repeatType];
     
     BOOL found = NO;
-    for (NSString *item in self.arrayRepeatSelected) {
-        if ([item isEqualToString:repeat]) {
+    for (VRRepeatModel *item in self.arrayRepeatSelected) {
+
+        if (item.repeatType == model.repeatType) {
             found = YES;
             break;
         }
@@ -95,12 +103,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 //    [self.repeatTableview deselectRowAtIndexPath:indexPath animated:YES];
-    NSString *repeat = [self.arrayRepeat objectAtIndex:indexPath.row];
+    VRRepeatModel *model = [self.arrayRepeat objectAtIndex:indexPath.row];
     
     BOOL found = NO;
     NSInteger index = 0;
-    for (NSString *item in self.arrayRepeatSelected) {
-        if ([item isEqualToString:repeat]) {
+    for (VRRepeatModel *item in self.arrayRepeatSelected) {
+        if (item.repeatType == model.repeatType) {
             found = YES;
             index = [self.arrayRepeatSelected indexOfObject:item];
             break;
@@ -111,7 +119,7 @@
         [self.arrayRepeatSelected removeObjectAtIndex:index];
     }
     else {
-        [self.arrayRepeatSelected addObject:repeat];
+        [self.arrayRepeatSelected addObject:model];
     }
     
     [self.repeatTableview reloadData];

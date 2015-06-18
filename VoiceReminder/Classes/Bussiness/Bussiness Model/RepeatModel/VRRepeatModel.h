@@ -10,7 +10,7 @@
 #import "BaseModel.h"
 @class Repeat;
 @class VRReminderModel;
-@interface VRRepeatModel : BaseModel
+@interface VRRepeatModel : BaseModel <NSCopying>
 @property (nonatomic, assign) REPEAT_TYPE repeatType;
 @property (nonatomic, strong) VRReminderModel *reminder;
 

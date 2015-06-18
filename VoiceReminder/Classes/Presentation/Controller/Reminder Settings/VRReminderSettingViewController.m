@@ -406,7 +406,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (void)chooseRepeatType {
     VRRepeatViewController *VC = [[VRRepeatViewController alloc] initWithNibName:NSStringFromClass([VRRepeatViewController class]) bundle:nil];
-    VC.arrayRepeatSelected = [_service.modelCopy.repeats mutableCopy];
+    VC.arrayRepeatSelected = _service.modelCopy.repeats;
     __weak typeof (self)weak = self;
     VC.selectedCompleted = ^(NSMutableArray *listRepeatSelected) {
         __strong typeof (weak)strong = weak;
