@@ -127,6 +127,7 @@
 
 - (void)configButton:(UIButton *)button WithTittle:(NSString *)title {
     [button setTitle:title forState:UIControlStateNormal];
+    button.titleLabel.font = VRFontRegular(17);
     [button setBackgroundColor:[UIColor redColor]];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }

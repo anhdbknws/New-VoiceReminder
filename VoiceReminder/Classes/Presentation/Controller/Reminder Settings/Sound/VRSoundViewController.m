@@ -36,11 +36,13 @@
     [self rightNavigationItem:@selector(addAction:) andTitle:nil orImage:[UIImage imageNamed:@"bt_add"]];
     [self configureTableView];
     [self setupSegment];
+    [self getRightBarItem];
+    [self hideAddButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self getRightBarItem];
+    
 }
 
 - (void)setupSegment {
@@ -183,7 +185,7 @@
     switch (selectedSegmentIndex) {
         case SOUND_TYPE_RECORD:
             currentType = SOUND_TYPE_RECORD;
-            [self hideAddButton];
+            [self showAddButton];
             break;
         case SOUND_TYPE_SONG:
             currentType = SOUND_TYPE_SONG;

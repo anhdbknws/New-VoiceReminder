@@ -60,12 +60,13 @@ static NSInteger minutesLimit = 1;
 
 - (void)configureNavigationBar {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    [self leftNavigationItem:nil andTitle:@"Back" orImage:nil];
     if (self.isComeFromMainScreen) {
-        [self rightNavigationItem:@selector(settingClick:) andTitle:@"Create alarm" orImage:nil];
+         [self leftNavigationItem:nil andTitle:@"Back" orImage:nil];
+         [self rightNavigationItem:@selector(settingClick:) andTitle:@"Create alarm" orImage:nil];
     }
     else {
-        self.navigationItem.rightBarButtonItem = nil;
+        [self leftNavigationItem:nil andTitle:@"Cancel" orImage:nil];
+        [self rightNavigationItem:@selector(doneAction:) andTitle:@"Done" orImage:nil];
     }
 }
 
@@ -376,6 +377,12 @@ static NSInteger minutesLimit = 1;
         reminderSettingViewController.audioRecordingURL = _audioRecordingUrl;
         [self.navigationController pushViewController:reminderSettingViewController animated:YES];
     }
+}
+
+- (void)doneAction:(id)sender {
+    [self.view endEditing:YES];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)dealloc {
