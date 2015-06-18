@@ -46,7 +46,15 @@
 - (void)setupSegment {
     [self.segment addTarget:self action:@selector(segmentChanged:) forControlEvents:UIControlEventValueChanged];
     [self.segment setTintColor:[UIColor redColor]];
-    currentType = SOUND_TYPE_RECORD;
+    
+    [self.segment setTitle:@"Short sound" forSegmentAtIndex:0];
+    [self.segment setTitle:@"Songs" forSegmentAtIndex:1];
+    [self.segment setTitle:@"Records" forSegmentAtIndex:2];
+    
+    [self.segment setTitleTextAttributes:@{NSFontAttributeName:VRFontRegular(17),
+                                           NSForegroundColorAttributeName:[UIColor redColor]}
+                                forState:UIControlStateNormal];
+    currentType = SOUND_TYPE_SHORT_SOUND;
 }
 
 - (void)configureTableView {
@@ -100,7 +108,7 @@
     }
     cell.labelTitle.text = model.name;
     [cell.imageV setImage:[UIImage imageNamed:@"icon_sound"]];
-    if ([model.uuid isEqualToString:self.soundModel.uuid]) {
+    if ([model.name isEqualToString:self.soundModel.name]) {
         [cell.arrowImage setImage:[UIImage imageNamed:@"assesory"]];
     }
     else {
@@ -115,18 +123,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableViewSound deselectRowAtIndexPath:indexPath animated:YES];
-    VRSoundModel *model;
     if (currentType == SOUND_TYPE_RECORD) {
-        model = [_service.recordSoundArray objectAtIndex:indexPath.row];
+        self.soundModel = [_service.recordSoundArray objectAtIndex:indexPath.row];
     }
     else if (currentType == SOUND_TYPE_SHORT_SOUND) {
-        model = [_service.shortSoundArray objectAtIndex:indexPath.row];
+        self.soundModel = [_service.shortSoundArray objectAtIndex:indexPath.row];
     }
     else {
-        model = [_service.mp3SoundArray objectAtIndex:indexPath.row];
+        self.soundModel = [_service.mp3SoundArray objectAtIndex:indexPath.row];
     }
     
-    self.soundModel = model;
     [self.tableViewSound reloadData];
     
     /*play audio*/
@@ -136,7 +142,7 @@
             self.audioPlayer = nil;
         }
         
-        [self setupAudioPlayerForShortSound:model.name];
+        [self setupAudioPlayerForShortSound:self.soundModel.name];
         [self playSound];
     }
 }

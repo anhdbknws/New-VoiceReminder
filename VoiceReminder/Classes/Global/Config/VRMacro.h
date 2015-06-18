@@ -68,4 +68,5 @@
 
 typedef void(^databaseHandler)(NSError * error, id result);
 #define kSaveShortSoundToDBLocal @"SaveShortSoundToDBLocal"
+#define kNameDefaultAudioRecord @"Audio record"
 #endif

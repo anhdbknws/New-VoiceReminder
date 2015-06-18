@@ -168,6 +168,7 @@
 #pragma mark - Actions
 - (void)recordAction:(id)sender {
     VRReCordViewController *recordViewController = [[VRReCordViewController alloc] init];
+    recordViewController.isComeFromMainScreen = YES;
     [self.navigationController pushViewController:recordViewController animated:YES];
 }
 

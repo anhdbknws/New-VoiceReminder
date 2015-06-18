@@ -60,19 +60,13 @@ static NSInteger minutesLimit = 1;
 
 - (void)configureNavigationBar {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
-    self.navigationItem.leftBarButtonItem = backButton;
-    
-    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [UIColor redColor],NSForegroundColorAttributeName,
-                                    [UIColor redColor],NSBackgroundColorAttributeName,nil];
-    
-    [backButton setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    
-    UIBarButtonItem *settingButton = [[UIBarButtonItem alloc] initWithTitle:@"Alarm" style:UIBarButtonItemStylePlain target:self action:@selector(settingClick:)];
-    [settingButton setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = settingButton;
-    
+    [self leftNavigationItem:nil andTitle:@"Back" orImage:nil];
+    if (self.isComeFromMainScreen) {
+        [self rightNavigationItem:@selector(settingClick:) andTitle:@"Create alarm" orImage:nil];
+    }
+    else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 }
 
 - (void)viewDidLayoutSubviews {
@@ -266,7 +260,7 @@ static NSInteger minutesLimit = 1;
 - (NSURL*)audioRecordingPath {
     NSArray *pathComponents = [NSArray arrayWithObjects:
                                [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
-                               @"MyAudioMemo.m4a",
+                               [NSString stringWithFormat:@"%@.m4a", kNameDefaultAudioRecord],
                                nil];
     
     NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];

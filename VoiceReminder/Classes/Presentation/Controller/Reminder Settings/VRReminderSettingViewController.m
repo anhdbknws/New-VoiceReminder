@@ -66,7 +66,13 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 #pragma mark - Configure UI
 - (void)configureUI {
-    self.title = @"Reminder Setting " ;
+    if (self.isEditMode) {
+        self.title = @"New Alarm";
+    }
+    else {
+        self.title = @"Edit Alarm" ;
+    }
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.translucent = NO;
     [self leftNavigationItem:nil andTitle:@"Cancel" orImage:nil];

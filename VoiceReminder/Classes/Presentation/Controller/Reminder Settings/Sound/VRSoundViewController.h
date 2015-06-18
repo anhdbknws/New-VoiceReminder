@@ -12,9 +12,9 @@
 
 @class VRSoundModel;
 typedef NS_ENUM(NSInteger, SOUND_TYPE) {
-    SOUND_TYPE_SONG = 1,
-    SOUND_TYPE_SHORT_SOUND = 2,
-    SOUND_TYPE_RECORD = 0
+    SOUND_TYPE_SONG = 2,
+    SOUND_TYPE_SHORT_SOUND = 1,
+    SOUND_TYPE_RECORD = 3
 };
 
 @interface VRSoundViewController : VRSettingBaseViewController

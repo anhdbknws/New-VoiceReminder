@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VRSettingBaseViewController.h"
+
 @class CircleProgressView;
-@interface VRReCordViewController : UIViewController
+@interface VRReCordViewController : VRSettingBaseViewController
 @property (nonatomic, strong) CircleProgressView *circleView;
 @property (nonatomic, strong) UIButton *startButton;
 @property (nonatomic, strong) UIButton *stopButton;
 @property (nonatomic, strong) UIButton *reRecordButton;
 @property (nonatomic, strong) UIButton *playButton;
+
+@property (nonatomic, assign) BOOL isComeFromMainScreen;
 
 @end
