@@ -71,7 +71,7 @@
     VRReminderModel *object = [[VRReminderModel alloc] init];
     object.name = [self.name copyWithZone:zone];
     object.timeReminder = [self.timeReminder copyWithZone:zone];
-    object.repeats = [self.repeats copyWithZone:zone];
+    object.repeats = [[NSMutableArray alloc] initWithArray:self.repeats copyItems:YES];
     object.photoList = [[NSMutableArray alloc] initWithArray:self.photoList copyItems:YES];
     object.isActive = self.isActive;
     object.alertReminder = self.alertReminder;

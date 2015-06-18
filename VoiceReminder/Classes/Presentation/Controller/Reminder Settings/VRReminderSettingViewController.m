@@ -218,7 +218,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     cell.textfield.font = VRFontRegular(17);
     cell.textfield.tag = REMINDER_SETTING_TYPE_ALERT;
     cell.textfield.delegate = self;
-    cell.textfield.text = [VREnumDefine alertTypeStringFrom:_service.modelCopy.alertReminder];
+    cell.textfield.text = [_service getRepeatStringFrom:_service.modelCopy.repeats];
     [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
     
     return cell;
@@ -406,7 +406,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (void)chooseRepeatType {
     VRRepeatViewController *VC = [[VRRepeatViewController alloc] initWithNibName:NSStringFromClass([VRRepeatViewController class]) bundle:nil];
-    VC.arrayRepeatSelected = [_service.modelCopy.repeats copy];
+    VC.arrayRepeatSelected = [_service.modelCopy.repeats mutableCopy];
     __weak typeof (self)weak = self;
     VC.selectedCompleted = ^(NSMutableArray *listRepeatSelected) {
         __strong typeof (weak)strong = weak;

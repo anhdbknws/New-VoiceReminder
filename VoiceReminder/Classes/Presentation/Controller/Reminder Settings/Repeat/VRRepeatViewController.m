@@ -19,6 +19,7 @@
     if (self) {
         self.title = @"Repeat";
         self.view.backgroundColor = [UIColor whiteColor];
+        self.arrayRepeatSelected = [NSMutableArray new];
     }
     
     return self;

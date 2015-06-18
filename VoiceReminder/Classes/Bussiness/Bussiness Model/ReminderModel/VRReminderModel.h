@@ -20,7 +20,7 @@
 @property (nonatomic, strong) NSString *timeReminder;
 @property (nonatomic, strong) NSString *notes;
 @property (nonatomic, strong) NSMutableArray *repeats;
-@property (strong, nonatomic) NSMutableArray * photoList;
+@property (strong, nonatomic) NSMutableArray *photoList;
 @property (nonatomic, assign) ALERT_TYPE alertReminder;
 @property (nonatomic, assign) BOOL isActive;
 @property (nonatomic, strong) Reminder *entity;

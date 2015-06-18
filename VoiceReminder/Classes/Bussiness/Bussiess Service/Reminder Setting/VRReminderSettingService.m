@@ -12,6 +12,7 @@
 #import "VRShortSoundModel.h"
 #import "ShortSound.h"
 #import "Sound.h"
+#import "VRRepeatModel.h"
 
 @interface VRReminderSettingService()<AVAudioPlayerDelegate>
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
@@ -48,7 +49,10 @@
         _modelOringinal.name = @"Name";
         
         _modelOringinal.repeats = [NSMutableArray new];
-        [_modelOringinal.repeats addObject:[[VREnumDefine listRepeatType] firstObject]];
+        
+        VRRepeatModel *model = [[VRRepeatModel alloc] init];
+        model.repeatType = [VREnumDefine repeatTypeIntegerFromString:[[VREnumDefine listRepeatType] firstObject]];
+        [_modelOringinal.repeats addObject:model];
         
         _modelOringinal.alertReminder = ALERT_TYPE_AT_EVENT_TIME;
         
@@ -110,28 +114,29 @@
         fullString = @"Never";
     }
     else if (listRepeat.count == 1) {
-        fullString = [listRepeat objectAtIndex:0];
+        VRRepeatModel *model = [listRepeat objectAtIndex:0];
+        fullString = [VREnumDefine repeatTypeStringFrom:model.repeatType];
     }
     else {
         NSMutableArray *temp = [NSMutableArray new];
         NSMutableArray *tempRepeat = [self sortOrderDayInWeekly:listRepeat];
-        for (NSString *item in tempRepeat) {
-            if ([item isEqualToString:@"Every Monday"]) {
+        for (VRRepeatModel *item in tempRepeat) {
+            if (item.repeatType == REPEAT_TYPE_MONDAY) {
                 [temp addObject:@"Mon"];
             }
-            else if ([item isEqualToString:@"Every Tuesday"]) {
+            else if (item.repeatType == REPEAT_TYPE_TUESDAY) {
                 [temp addObject:@"Tue"];
             }
-            else if ([item isEqualToString:@"Every Wednesday"]) {
+            else if (item.repeatType == REPEAT_TYPE_WEDNESDAY) {
                 [temp addObject:@"Wed"];
             }
-            else if ([item isEqualToString:@"Every Thursday"]) {
+            else if (item.repeatType == REPEAT_TYPE_THURSDAY) {
                 [temp addObject:@"Thu"];
             }
-            else if ([item isEqualToString:@"Every Friday"]) {
+            else if (item.repeatType == REPEAT_TYPE_FRIDAY) {
                 [temp addObject:@"Fri"];
             }
-            else if ([item isEqualToString:@"Every Saturday"]) {
+            else if (item.repeatType == REPEAT_TYPE_SATURDAY) {
                 [temp addObject:@"Sat"];
             }
             else {
@@ -147,44 +152,44 @@
 
 - (NSMutableArray *)sortOrderDayInWeekly:(NSMutableArray *)listRepeat {
     NSMutableArray *temp = [NSMutableArray new];
-    for (NSString *item in listRepeat) {
-        if ([item isEqualToString:@"Every Monday"]) {
+    for (VRRepeatModel *item in listRepeat) {
+        if (item.repeatType == REPEAT_TYPE_MONDAY) {
             [temp addObject:item];
         }
     }
     
-    for (NSString *item in listRepeat) {
-        if ([item isEqualToString:@"Every Tuesday"]) {
+    for (VRRepeatModel *item in listRepeat) {
+        if (item.repeatType == REPEAT_TYPE_TUESDAY) {
             [temp addObject:item];
         }
     }
     
-    for (NSString *item in listRepeat) {
-        if ([item isEqualToString:@"Every Wednesday"]) {
+    for (VRRepeatModel *item in listRepeat) {
+        if (item.repeatType == REPEAT_TYPE_WEDNESDAY) {
             [temp addObject:item];
         }
     }
     
-    for (NSString *item in listRepeat) {
-        if ([item isEqualToString:@"Every Thursday"]) {
+    for (VRRepeatModel *item in listRepeat) {
+        if (item.repeatType == REPEAT_TYPE_THURSDAY) {
             [temp addObject:item];
         }
     }
     
-    for (NSString *item in listRepeat) {
-        if ([item isEqualToString:@"Every Friday"]) {
+    for (VRRepeatModel *item in listRepeat) {
+        if (item.repeatType == REPEAT_TYPE_FRIDAY) {
             [temp addObject:item];
         }
     }
     
-    for (NSString *item in listRepeat) {
-        if ([item isEqualToString:@"Every Saturday"]) {
+    for (VRRepeatModel *item in listRepeat) {
+        if (item.repeatType == REPEAT_TYPE_SATURDAY) {
             [temp addObject:item];
         }
     }
     
-    for (NSString *item in listRepeat) {
-        if ([item isEqualToString:@"Every Sunday"]) {
+    for (VRRepeatModel *item in listRepeat) {
+        if (item.repeatType == REPEAT_TYPE_SUNDAY) {
             [temp addObject:item];
         }
     }
