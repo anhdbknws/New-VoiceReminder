@@ -55,6 +55,16 @@
     return _soundModel;
 }
 
+- (VRShortSoundModel *)shortSoundModel {
+    if (!_shortSoundModel) {
+        if (_entity.shortSound) {
+            _shortSoundModel = [[VRShortSoundModel alloc] initWithEntity:_entity.shortSound];
+        }
+    }
+    
+    return _shortSoundModel;
+}
+
 - (NSMutableArray *)repeats {
     if (!_repeats) {
         _repeats = [NSMutableArray new];

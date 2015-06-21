@@ -36,6 +36,7 @@
 #import "VRShortSoundController.h"
 #import "Sound.h"
 #import "VRShortSoundModel.h"
+#import "VRMainPageViewController.h"
 
 static NSString * const kImageArrow = @"icon_arrow_right";
 const NSInteger kPhotoActionSheetTag = 3249;
@@ -249,7 +250,6 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (VRReminderSettingCell *)configureShortSoundAtIndexPath:(NSIndexPath *)indexPath {
     VRReminderSettingCell *cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderSettingCell class]) forIndexPath:indexPath];
-    
     cell.titleLabel.text = @"Short sound";
     cell.textfield.font = VRFontRegular(17);
     VRShortSoundModel *model = _service.modelCopy.shortSoundModel;
@@ -345,7 +345,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
             }
             
             for (UIViewController *Vc in strong.navigationController.viewControllers) {
-                if ([Vc isKindOfClass:[VRMainScreenViewController class]]) {
+                if ([Vc isKindOfClass:[VRMainPageViewController class]]) {
                     [strong.navigationController popToViewController:Vc animated:YES];
                 }
             }

@@ -39,7 +39,7 @@
                         </constraints>
                     </imageView>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lzf-yj-EYC">
-                        <rect key="frame" x="60" y="3" width="225" height="38"/>
+                        <rect key="frame" x="60" y="3" width="231" height="38"/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
@@ -56,7 +56,7 @@
                     <constraint firstItem="Kki-MK-uZs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="dJ1-s3-F8T"/>
                     <constraint firstAttribute="bottomMargin" secondItem="bon-YC-ruj" secondAttribute="bottom" constant="-8" id="dMQ-LN-VRb"/>
                     <constraint firstItem="Lzf-yj-EYC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-5" id="gnm-Ke-dPs"/>
-                    <constraint firstItem="93K-Us-hn4" firstAttribute="leading" secondItem="Lzf-yj-EYC" secondAttribute="trailing" constant="14" id="h7l-dd-66I"/>
+                    <constraint firstItem="93K-Us-hn4" firstAttribute="leading" secondItem="Lzf-yj-EYC" secondAttribute="trailing" constant="8" id="h7l-dd-66I"/>
                     <constraint firstAttribute="trailingMargin" secondItem="bon-YC-ruj" secondAttribute="trailing" constant="-8" id="kLt-Cw-Prg"/>
                 </constraints>
             </tableViewCellContentView>

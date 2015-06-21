@@ -11,6 +11,11 @@
 @implementation VRSettingNotesCell
 
 - (void)awakeFromNib {
+    self.textViewNotes.textColor = [UIColor grayColor];
+    self.textViewNotes.font = VRFontRegular(15);
+    
+    self.labelTitle.textColor = [UIColor blackColor];
+    self.labelTitle.font = VRFontRegular(15);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

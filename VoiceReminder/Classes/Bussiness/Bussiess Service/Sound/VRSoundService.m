@@ -61,7 +61,10 @@
     /*short sound*/
     NSArray *listShortSound = [ShortSound MR_findAll];
     for (ShortSound *entity in listShortSound) {
-        VRShortSoundModel *model = [[VRShortSoundModel alloc] initWithEntity:entity];
+        VRSoundModel *model = [[VRSoundModel alloc] init];
+        model.name = entity.name;
+        model.isRecordSound = NO;
+        model.isMp3Sound = NO;
         [_shortSoundArray addObject:model];
     }
     

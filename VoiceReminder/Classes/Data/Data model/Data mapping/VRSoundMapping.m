@@ -22,9 +22,21 @@
     if (!entity.createdDate) {
         entity.createdDate = [NSDate date];
     }
+    if (model.isMp3Sound) {
+        entity.isMp3Sound = [NSNumber numberWithBool:model.isMp3Sound];
+    }
+    else {
+        entity.isMp3Sound = [NSNumber numberWithBool:NO];
+    }
     
-    entity.isMp3Sound = [NSNumber numberWithBool:model.isMp3Sound];
-    entity.isRecordSound = [NSNumber numberWithBool:model.isRecordSound];
+    if (model.isRecordSound) {
+        entity.isRecordSound = [NSNumber numberWithBool:model.isRecordSound];
+    }
+    else {
+        entity.isRecordSound = [NSNumber numberWithBool:NO];
+    }
+    
+        
     entity.name = model.name;
     entity.url = model.url;
     

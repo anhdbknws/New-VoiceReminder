@@ -52,7 +52,7 @@
     [self.tableViewDetail registerNib:[UINib nibWithNibName:NSStringFromClass([VRReminderSettingCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([VRReminderSettingCell class])];
     [self.tableViewDetail registerClass:[VRPhotoListCell class] forCellReuseIdentifier:NSStringFromClass([VRPhotoListCell class])];
     
-    [self.tableViewDetail registerClass:[VRSettingNotesCell class] forCellReuseIdentifier:NSStringFromClass([VRSettingNotesCell class])];
+    [self.tableViewDetail registerNib:[UINib nibWithNibName:NSStringFromClass([VRSettingNotesCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([VRSettingNotesCell class])];
     
 }
 
@@ -88,19 +88,21 @@
     cell.textfield.text = [self valueAtIndexPath:indexPath];
     cell.textfield.tag = indexPath.row;
     cell.textfield.delegate = self;
-    [cell.arrowView setImage:[UIImage imageNamed:@"icon_arrow_right"]];
+    cell.arrowView.hidden = YES;
     return cell;
 }
 
 - (VRSettingNotesCell *)getNotesCell {
     VRSettingNotesCell *cell = [self.tableViewDetail dequeueReusableCellWithIdentifier:NSStringFromClass([VRSettingNotesCell class])];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.labelTitle.text = @"Notes:";
-    cell.arrowView.image = [UIImage imageNamed:@"icon_arrow_right"];
     cell.textViewNotes.delegate = self;
     _noteTextView = (UIPlaceHolderTextView*)cell.textViewNotes;
-    cell.textViewNotes.tag = REMINDER_SETTING_TYPE_NOTES;
+    cell.textViewNotes.tag = REMINDER_DETAIL_ROW_TYPE_NOTES;
     cell.textViewNotes.text = self.model.notes;
-    cell.textViewNotes.font = VRFontRegular(17);
+    cell.textViewNotes.font = VRFontRegular(15);
+    cell.arrowView.hidden = YES;
+    cell.textViewNotes.editable = NO;
     return cell;
 }
 
@@ -127,7 +129,6 @@
     if (indexPath.section == 0) {
         if (indexPath.row == REMINDER_DETAIL_ROW_TYPE_NOTES) {
             return MAX(44, [self caculateHeightOfTextView]);
-            return 44;
         }
         return 44;
     }

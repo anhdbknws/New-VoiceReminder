@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self getListSoundFromDBLocal];
-    [self leftNavigationItem:@selector(backAction) andTitle:@"Back" orImage:nil];
+    [self leftNavigationItem:@selector(backAction) andTitle:@"Done" orImage:nil];
     [self rightNavigationItem:@selector(addAction:) andTitle:nil orImage:[UIImage imageNamed:@"bt_add"]];
     [self configureTableView];
     [self setupSegment];
