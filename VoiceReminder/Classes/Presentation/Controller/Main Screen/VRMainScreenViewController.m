@@ -37,7 +37,8 @@
     [self configureUI];
     [self configureClockTicker];
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:kSaveShortSoundToDBLocal]) {
+    NSArray *listObject = [ShortSound MR_findAll];
+    if (!listObject.count) {
         [self saveShortSoundModelToDB];
     }
 }

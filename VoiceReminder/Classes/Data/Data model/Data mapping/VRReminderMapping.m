@@ -9,8 +9,6 @@
 #import "VRReminderMapping.h"
 #import "NSManagedObject+voiceReminder.h"
 #import "VRCommon.h"
-#import "VRRepeatModel.h"
-#import "VRRepeatMapping.h"
 #import "Photo.h"
 #import "VRSoundModel.h"
 #import "VRSoundMapping.h"
@@ -25,7 +23,7 @@
     entity.createdDate = model.createdDate;
     entity.isActive = [NSNumber numberWithBool:YES];
     entity.notes = model.notes;
-    
+    entity.repeatReminder = [NSNumber numberWithInteger:model.repeat];
     entity.sound = [VRSoundMapping entityFromModel:model.soundModel inContext:context];
     entity.shortSound = [VRShortSoundMapping entityFromModel:model.shortSoundModel inContext:context];
     

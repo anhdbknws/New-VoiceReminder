@@ -9,7 +9,6 @@
 #import "VRReminderDetailController.h"
 #import "VRReminderSettingCell.h"
 #import "VRSoundModel.h"
-#import "VRRepeatModel.h"
 #import "VRPhotoListCell.h"
 #import "VRPhotoPageController.h"
 #import "VRReminderSettingViewController.h"
@@ -222,8 +221,7 @@
             break;
         case REMINDER_DETAIL_ROW_TYPE_REPEAT:
         {
-            VRRepeatModel *model = _model.repeats.firstObject;
-            valueString = [VREnumDefine repeatTypeStringFrom:model.repeatType];
+            valueString = [VREnumDefine repeatTypeStringFrom:_model.repeat];
         }
             break;
         case REMINDER_DETAIL_ROW_TYPE_ALERT:

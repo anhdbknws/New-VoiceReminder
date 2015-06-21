@@ -7,6 +7,11 @@
 //
 
 #import "VRLocalNotificationController.h"
+#import "VRReminderModel.h"
+#import "Reminder.h"
+#import "UIAlertView+VR.h"
+#import "VRReminderDetailController.h"
+#import "VRUtilities.h"
 
 @interface VRLocalNotificationController ()
 
@@ -25,9 +30,42 @@
 }
 
 - (void)processNotification:(UILocalNotification *)notification {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Test" message:@"Alarm" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+    NSString *uuid = [notification.userInfo objectForKey:@"uuid"];
+    Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid];
+    VRReminderModel *model = [[VRReminderModel alloc] initWithEntity:entity];
     
-    [alertView show];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:model.name message:model.notes delegate:self cancelButtonTitle:@"Close" otherButtonTitles:@"Detail", nil];
+    [alertView showAlerViewWithHandler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        switch (buttonIndex) {
+            case 0:
+                break;
+            case 1:
+                [self showDetailReminder:model];
+                break;
+            default:
+                break;
+        }
+    }];
+}
+
+- (void)gotoDetail:(UILocalNotification *)notification {
+    NSString *uuid = [notification.userInfo objectForKey:@"uuid"];
+    Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid];
+    VRReminderModel *model = [[VRReminderModel alloc] initWithEntity:entity];
+    [self showDetailReminder:model];
+}
+
+- (void)showDetailReminder:(VRReminderModel *)model {
+    VRReminderDetailController *vc = [[VRReminderDetailController alloc] initWithNibName:NSStringFromClass([VRReminderDetailController class]) bundle:nil];
+    vc.model = model;
+    UIViewController *topviewController = [VRUtilities topViewController];
+    [topviewController.navigationController pushViewController:vc
+                                                      animated:YES];
+}
+
+- (void)removeScheduleFromSystem {
+    
 }
 
 - (void)viewDidLoad {

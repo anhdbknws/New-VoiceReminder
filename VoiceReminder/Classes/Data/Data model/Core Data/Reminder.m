@@ -2,13 +2,12 @@
 //  Reminder.m
 //  VoiceReminder
 //
-//  Created by GemCompany on 6/15/15.
+//  Created by GemCompany on 6/21/15.
 //  Copyright (c) 2015 Owner. All rights reserved.
 //
 
 #import "Reminder.h"
 #import "Photo.h"
-#import "Repeat.h"
 #import "ShortSound.h"
 #import "Sound.h"
 
@@ -22,8 +21,7 @@
 @dynamic repeatReminder;
 @dynamic timeReminder;
 @dynamic photos;
-@dynamic repeats;
-@dynamic sound;
 @dynamic shortSound;
+@dynamic sound;
 
 @end

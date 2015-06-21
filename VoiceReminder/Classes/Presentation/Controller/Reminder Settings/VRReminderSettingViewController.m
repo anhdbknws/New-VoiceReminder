@@ -24,12 +24,11 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "CTAssetsPickerController.h"
 #import "VCAppearanceConfig.h"
-#import "VCUtilities.h"
+#import "VRUtilities.h"
 #import "CTAssetItemViewController.h"
 #import "VCAssetAccessory.h"
 #import "VRPhotoPageController.h"
 #import "VRSoundModel.h"
-#import "VRRepeatModel.h"
 #import "VRSettingNotesCell.h"
 #import "NSString+VR.h"
 #import "VRNotesController.h"
@@ -107,14 +106,6 @@ const NSInteger kPhotoActionSheetTag = 3249;
     [self.settingTableview registerNib:[UINib nibWithNibName:NSStringFromClass([VRSettingNotesCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([VRSettingNotesCell class])];
 }
 
-
-- (void)addTapgestureForDismissKeyboard {
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
-    
-    [self.view addGestureRecognizer:tap];
-}
 
 - (void)prepareData{
     if (!_service) {
@@ -217,7 +208,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     cell.textfield.font = VRFontRegular(17);
     cell.textfield.tag = REMINDER_SETTING_TYPE_REPEAT;
     cell.textfield.delegate = self;
-    cell.textfield.text = [self.service getRepeatStringFrom:_service.modelCopy.repeats];
+    cell.textfield.text = [VREnumDefine repeatTypeStringFrom:_service.modelCopy.repeat];
     
     [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
     return cell;
@@ -416,35 +407,17 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (void)chooseRepeatType {
     VRRepeatViewController *VC = [[VRRepeatViewController alloc] initWithNibName:NSStringFromClass([VRRepeatViewController class]) bundle:nil];
-    [VC.arrayRepeatSelected removeAllObjects];
-    VC.arrayRepeatSelected = [_service.modelCopy.repeats mutableCopy];
+    VC.repeatType = _service.modelCopy.repeat;
     __weak typeof (self)weak = self;
-    VC.selectedCompleted = ^(NSMutableArray *listRepeatSelected) {
+    VC.selectedCompleted = ^(REPEAT_TYPE type) {
         __strong typeof (weak)strong = weak;
-        [strong.service.modelCopy.repeats removeAllObjects];
-        [strong saveListRepeatToModel:listRepeatSelected];
+        _service.modelCopy.repeat = type;
         dispatch_async(dispatch_get_main_queue(), ^{
             [strong.settingTableview reloadData];
         });
     };
     
     [self.navigationController pushViewController:VC animated:YES];
-}
-
-- (void)saveListRepeatToModel:(NSMutableArray *)listRepeat {
-    VRRepeatModel *model = [[VRRepeatModel alloc] init];
-    if (listRepeat.count == 7) {
-        model.repeatType = REPEAT_TYPE_EVERYDAY;
-        [self.service.modelCopy.repeats addObject:model];
-    }
-    else if (!listRepeat.count) {
-        model.repeatType = REPEAT_TYPE_NERER;
-        [self.service.modelCopy.repeats addObject:model];
-    }
-    else {
-        self.service.modelCopy.repeats = [listRepeat mutableCopy];
-    }
-
 }
 
 - (void)chooseAlertType {
@@ -627,12 +600,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     VRPhotoPageController * photoPageController = [[VRPhotoPageController alloc] initWithPhotos:_service.modelCopy.photoList];
     [photoPageController setPageIndex:index];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:photoPageController];
-    [[VCUtilities topViewController] presentViewController:navController animated:YES completion:NULL];
-}
-
-
--(void)dismissKeyboard {
-    [self.view endEditing:YES];
+    [[VRUtilities topViewController] presentViewController:navController animated:YES completion:NULL];
 }
 
 #pragma mark - textview delegate
@@ -646,8 +614,9 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 - (void)setNotesValue {
     VRNotesController *noteVC = [[VRNotesController alloc] initWithNibName:NSStringFromClass([VRNotesController class]) bundle:nil];
-    noteVC.notesValue = _service.modelCopy.notes;
     
+    noteVC.notesValue = _service.modelCopy.notes;
+    noteVC.text = _service.modelCopy.notes;
     __weak typeof (self)weak = self;
     noteVC.doneNotesCompleted = ^(NSString *notes) {
         __strong typeof (weak)strong = weak;

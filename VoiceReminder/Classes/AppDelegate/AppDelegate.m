@@ -32,7 +32,9 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
     
     if (launchOptions[UIApplicationLaunchOptionsLocalNotificationKey] != nil){
         UILocalNotification *notification = launchOptions[UIApplicationLaunchOptionsLocalNotificationKey];
-        [self application:application didReceiveLocalNotification:notification];
+        if (notification) {
+            [self application:application didReceiveLocalNotification:notification];
+        }
     }
     
     //1. setting core data
@@ -79,16 +81,16 @@ static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                    message:@"Handling the local notification"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:@"Cancel", nil];
+    if (application.applicationState == UIApplicationStateActive) {
+        [[VRLocalNotificationController shareInstance] processNotification:notification];
+    }
+    else {
+        [[VRLocalNotificationController shareInstance] gotoDetail:notification];
+    }
+}
+
+- (void)gotoDetailReminder:(UILocalNotification *)notification {
     
-    VRAlertView *view = [[VRAlertView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, 100)];
-    [alert setValue:view forKey:@"accessoryView"];
-    view.backgroundColor = [UIColor redColor];
-    [alert show];
 }
 
 - (void)configureUI {

@@ -11,6 +11,6 @@
 
 @interface VRRepeatViewController : VRSettingBaseViewController
 @property (weak, nonatomic) IBOutlet UITableView *repeatTableview;
-@property (nonatomic,strong) NSMutableArray *arrayRepeatSelected;
-@property (nonatomic,copy) void(^selectedCompleted)(NSMutableArray *selectedArray);
+@property (nonatomic,assign) REPEAT_TYPE repeatType;
+@property (nonatomic,copy) void(^selectedCompleted)(REPEAT_TYPE type);
 @end

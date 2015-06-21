@@ -25,11 +25,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configTextview];
     [self leftNavigationItem:nil andTitle:@"Back" orImage:nil];
     [self rightNavigationItem:@selector(doneAction:) andTitle:@"Done" orImage:nil];
+    [self addTapgestureForDismissKeyboard];
 }
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configTextview];
+}
 - (void)configTextview {
     [self.textViewNotes becomeFirstResponder];
     self.textViewNotes.delegate = self;

@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class VRReminderModel;
 
 @interface VRLocalNotificationController : UIViewController
 + (instancetype)shareInstance;
 - (void)processNotification:(UILocalNotification *)notification;
+
+- (void)gotoDetail:(UILocalNotification *)notification;
+
 @end

@@ -19,7 +19,7 @@
 @property (nonatomic, strong) VRShortSoundModel *shortSoundModel;
 @property (nonatomic, strong) NSString *timeReminder;
 @property (nonatomic, strong) NSString *notes;
-@property (nonatomic, strong) NSMutableArray *repeats;
+@property (nonatomic, assign) REPEAT_TYPE repeat;
 @property (strong, nonatomic) NSMutableArray *photoList;
 @property (nonatomic, assign) ALERT_TYPE alertReminder;
 @property (nonatomic, assign) BOOL isActive;

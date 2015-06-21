@@ -12,13 +12,15 @@
 #import "VRShortSoundModel.h"
 #import "ShortSound.h"
 #import "Sound.h"
-#import "VRRepeatModel.h"
 
 @interface VRReminderSettingService()<AVAudioPlayerDelegate>
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 @end
 
 @implementation VRReminderSettingService
+{
+    NSMutableArray *listNotification;
+}
 - (void)addReminder:(VRReminderModel *)model toDatabaseLocalWithCompletionhandler:(databaseHandler)completion {
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
         [VRReminderMapping entityFromModel:model inContext:localContext];
@@ -27,7 +29,7 @@
         Reminder * entity =  [Reminder MR_findFirstByAttribute:VRUUID withValue:model.uuid];
         if (entity) {
             result = [[VRReminderModel alloc] initWithEntity:entity];
-            [self performSelector:@selector(scheduleLocalNotificationWith:) withObject:result afterDelay:5];
+            [self performSelector:@selector(scheduleLocalNotificationWith:) withObject:result afterDelay:0];
         }
         if (completion) {
             completion(error, result);
@@ -48,12 +50,7 @@
         
         _modelOringinal.name = @"Name";
         
-        _modelOringinal.repeats = [NSMutableArray new];
-        
-        VRRepeatModel *model = [[VRRepeatModel alloc] init];
-        model.repeatType = [VREnumDefine repeatTypeIntegerFromString:[[VREnumDefine listRepeatType] firstObject]];
-        [_modelOringinal.repeats addObject:model];
-        
+        _modelOringinal.repeat = REPEAT_TYPE_NERER;
         _modelOringinal.alertReminder = ALERT_TYPE_AT_EVENT_TIME;
         
         _modelOringinal.timeReminder = [VRCommon commonFormatFromDateTime:[NSDate date]];
@@ -88,119 +85,81 @@
     /* Time and timezone settings */
     notification.fireDate = [[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder];
     notification.timeZone = [NSTimeZone localTimeZone];
-    notification.repeatInterval = 0;
-    notification.alertBody = NSLocalizedString(@"A new item is downloaded.", nil);
-    notification.alertLaunchImage = @"icon_camera";
+    
+    if (model.repeat == REPEAT_TYPE_NERER) {
+        notification.repeatInterval = 0;
+    }
+    else if (model.repeat == REPEAT_TYPE_HOUR) {
+        notification.repeatInterval = NSCalendarUnitHour;
+    }
+    else if (model.repeat == REPEAT_TYPE_WEEK) {
+        notification.repeatInterval = NSCalendarUnitWeekday;
+    }
+    else if (model.repeat == REPEAT_TYPE_DAY) {
+        notification.repeatInterval = NSCalendarUnitDay;
+    }
+    else if (model.repeat == REPEAT_TYPE_MONTH) {
+        notification.repeatInterval = NSCalendarUnitMonth;
+    }
+    else if (model.repeat == REPEAT_TYPE_QUATER) {
+        notification.repeatInterval = NSCalendarUnitQuarter;
+    }
+    else {
+        notification.repeatInterval = NSCalendarUnitYear;
+    }
+    
+    notification.fireDate = [self getFireDate:model];
+    
+    NSString *stringAlertBody = nil;
+    if (model.notes.length) {
+        stringAlertBody = [NSString stringWithFormat:@"(%@) %@",model.timeReminder, model.notes];
+    }
+    else  {
+        stringAlertBody = model.timeReminder;
+    }
+    notification.alertBody = stringAlertBody;
+    notification.alertTitle = model.name;
     /* Action settings */
     notification.hasAction = YES;
-    notification.alertAction = NSLocalizedString(@"View", nil);
+    
     /* Badge settings */
     notification.applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
+    
     /* sound */
-    notification.soundName = model.shortSoundModel.name;
+    notification.soundName = [NSString stringWithFormat:@"%@.%@", model.shortSoundModel.name, @"caf"];
     
     /* Additional information, user info */
-    notification.userInfo = @{model.uuid : @"uuid", @"Alarm": @"VoiceReminder"};
+    notification.userInfo = @{@"uuid" : model.uuid};
     /* Schedule the notification */
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
-- (NSString *)getRepeatStringFrom:(NSMutableArray *)listRepeat {
-    NSString *fullString = nil;
-    if (listRepeat.count == 7) {
-        fullString = @"Every day";
+- (NSDate *)getFireDate:(VRReminderModel *)model {
+    // set fire date
+    NSDate *actuallyFireDate = nil;
+    if (model.alertReminder == ALERT_TYPE_AT_EVENT_TIME) {
+        actuallyFireDate = [[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder];
     }
-    else if (!listRepeat.count) {
-        fullString = @"Never";
+    else if (model.alertReminder == ALERT_TYPE_5_MINUTES_BEFORE) {
+        actuallyFireDate = [VRCommon minusMinutes:5 toDate:[[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder]];
     }
-    else if (listRepeat.count == 1) {
-        VRRepeatModel *model = [listRepeat objectAtIndex:0];
-        fullString = [VREnumDefine repeatTypeStringFrom:model.repeatType];
+    else if (model.alertReminder == ALERT_TYPE_30_MINUTES_BEFORE) {
+        actuallyFireDate = [VRCommon minusMinutes:30 toDate:[[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder]];
+    }
+    else if (model.alertReminder == ALERT_TYPE_2_HOUR_BEFORE) {
+        actuallyFireDate = [VRCommon minusMinutes:120 toDate:[[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder]];
+    }
+    else if (model.alertReminder == ALERT_TYPE_1_HOUR_BEFORE) {
+        actuallyFireDate = [VRCommon minusMinutes:60 toDate:[[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder]];
+    }
+    else if (model.alertReminder == ALERT_TYPE_1_DAY_BEFORE) {
+        actuallyFireDate = [VRCommon minusDays:1 toDate:[[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder]];
     }
     else {
-        NSMutableArray *temp = [NSMutableArray new];
-        NSMutableArray *tempRepeat = [self sortOrderDayInWeekly:listRepeat];
-        for (VRRepeatModel *item in tempRepeat) {
-            if (item.repeatType == REPEAT_TYPE_MONDAY) {
-                [temp addObject:@"Mon"];
-            }
-            else if (item.repeatType == REPEAT_TYPE_TUESDAY) {
-                [temp addObject:@"Tue"];
-            }
-            else if (item.repeatType == REPEAT_TYPE_WEDNESDAY) {
-                [temp addObject:@"Wed"];
-            }
-            else if (item.repeatType == REPEAT_TYPE_THURSDAY) {
-                [temp addObject:@"Thu"];
-            }
-            else if (item.repeatType == REPEAT_TYPE_FRIDAY) {
-                [temp addObject:@"Fri"];
-            }
-            else if (item.repeatType == REPEAT_TYPE_SATURDAY) {
-                [temp addObject:@"Sat"];
-            }
-            else {
-                [temp addObject:@"Sun"];
-            }
-        }
-        
-        fullString = [temp componentsJoinedByString:@" "];
+        actuallyFireDate = [VRCommon minusDays:2 toDate:[[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder]];
     }
     
-    return fullString;
+    return actuallyFireDate;
 }
 
-- (NSMutableArray *)sortOrderDayInWeekly:(NSMutableArray *)listRepeat {
-    NSMutableArray *temp = [NSMutableArray new];
-    for (VRRepeatModel *item in listRepeat) {
-        if (item.repeatType == REPEAT_TYPE_MONDAY) {
-            [temp addObject:item];
-            break;
-        }
-    }
-    
-    for (VRRepeatModel *item in listRepeat) {
-        if (item.repeatType == REPEAT_TYPE_TUESDAY) {
-            [temp addObject:item];
-            break;
-        }
-    }
-    
-    for (VRRepeatModel *item in listRepeat) {
-        if (item.repeatType == REPEAT_TYPE_WEDNESDAY) {
-            [temp addObject:item];
-            break;
-        }
-    }
-    
-    for (VRRepeatModel *item in listRepeat) {
-        if (item.repeatType == REPEAT_TYPE_THURSDAY) {
-            [temp addObject:item];
-            break;
-        }
-    }
-    
-    for (VRRepeatModel *item in listRepeat) {
-        if (item.repeatType == REPEAT_TYPE_FRIDAY) {
-            [temp addObject:item];
-            break;
-        }
-    }
-    
-    for (VRRepeatModel *item in listRepeat) {
-        if (item.repeatType == REPEAT_TYPE_SATURDAY) {
-            [temp addObject:item];
-            break;
-        }
-    }
-    
-    for (VRRepeatModel *item in listRepeat) {
-        if (item.repeatType == REPEAT_TYPE_SUNDAY) {
-            [temp addObject:item];
-            break;
-        }
-    }
-    
-    return temp;
-}
 @end

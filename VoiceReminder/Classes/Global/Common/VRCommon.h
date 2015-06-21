@@ -31,6 +31,12 @@
 + (NSDate *)addOneWeektoDate:(NSDate *)date;
 + (NSDate *)minusOneWeekFromDate:(NSDate *)date;
 
++ (NSDate *)add:(NSInteger)numberMinutes toDate:(NSDate *)date;
++ (NSDate *)minusMinutes:(NSInteger)numberMinutes  toDate:(NSDate *)date;
++ (NSDate *)minusDays:(NSInteger)numberDays toDate:(NSDate *)date;
++ (NSDate *)minusWeeks:(NSInteger)numberWeeks toDate:(NSDate *)date;
++ (NSDate *)minusMonths:(NSInteger)numberMonths toDate:(NSDate *)date;
+
 + (NSString *)documentsDirectory;
 + (NSString *)filePathWithName:(NSString *)fileName;
 + (NSString *)checkDuplicateFileName:(NSString *)fileName;

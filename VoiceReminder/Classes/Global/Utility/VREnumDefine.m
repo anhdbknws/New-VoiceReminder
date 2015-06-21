@@ -29,7 +29,7 @@
 }
 
 + (NSArray *)listRepeatType {
-    NSArray *array = @[@"Never", @"Every Monday", @"Every Tuesday", @"Every Wednesday", @"Every Thursday", @"Every Friday", @"Every Saturday", @"Every Sunday"];
+    NSArray *array = @[@"Never", @"Every Hours", @"Every Days", @"Every Weeks", @"Every Months", @"Every Quater", @"Every Years"];
     return array;
 }
 + (NSString *)repeatTypeStringFrom:(REPEAT_TYPE)type {

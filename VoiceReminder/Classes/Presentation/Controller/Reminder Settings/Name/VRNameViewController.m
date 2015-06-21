@@ -27,7 +27,7 @@
     [self leftNavigationItem:nil andTitle:@"Back" orImage:nil];
     [self rightNavigationItem:@selector(doneAction:) andTitle:@"Done" orImage:nil];
     [self configureTableView];
-    [self addGesture];
+    [self addTapgestureForDismissKeyboard];
 }
 
 - (void)configureTableView {
@@ -36,14 +36,6 @@
     self.nameTableview.dataSource = self;
     self.nameTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.nameTableview registerClass:[VRNameCell class] forCellReuseIdentifier:NSStringFromClass([VRNameCell class])];
-}
-
-- (void)addGesture {
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
-    
-    [self.view addGestureRecognizer:tap];
 }
 
 #pragma mark - tableview datasource, delegate
@@ -104,8 +96,4 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - dismisskeyboard 
-- (void)dismissKeyboard{
-    [self.view endEditing:YES];
-}
 @end

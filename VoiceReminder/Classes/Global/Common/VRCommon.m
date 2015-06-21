@@ -186,6 +186,43 @@ static NSDateFormatter *fm = nil;
     return oneWeekAgo;
 }
 
++ (NSDate *)add:(NSInteger)numberMinutes toDate:(NSDate *)date {
+//    NSDate *datePlusMinute = [date dateByAddingTimeInterval:60*numberMinutes];
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setMinute:numberMinutes];
+    NSDate *datePlusMinute = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:date options:0];
+    return datePlusMinute;
+}
+
++ (NSDate *)minusMinutes:(NSInteger)numberMinutes toDate:(NSDate *)date {
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setMinute:-numberMinutes];
+    NSDate *minutesAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:date options:0];
+    return minutesAgo;
+}
+
++ (NSDate *)minusDays:(NSInteger)numberDays toDate:(NSDate *)date {
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setDay:-numberDays];
+    NSDate *DaysAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:date options:0];
+    return DaysAgo;
+}
+
++ (NSDate *)minusWeeks:(NSInteger)numberWeeks toDate:(NSDate *)date {
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setDay:-7*numberWeeks];
+    NSDate *weeksAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:date options:0];
+    return weeksAgo;
+}
+
++ (NSDate *)minusMonths:(NSInteger)numberMonths toDate:(NSDate *)date {
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setMonth:-numberMonths];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *monthsAgo = [calendar dateByAddingComponents:dateComponents toDate:date options:0];
+    return monthsAgo;
+}
+
 + (NSString *)documentsDirectory
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

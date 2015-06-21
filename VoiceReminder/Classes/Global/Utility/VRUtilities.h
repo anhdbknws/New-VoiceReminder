@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VCUtilities : NSObject
+@interface VRUtilities : NSObject
 + (UIViewController *)topViewController;
 + (UIViewController *)topViewController:(UIViewController *)rootViewController;
 @end

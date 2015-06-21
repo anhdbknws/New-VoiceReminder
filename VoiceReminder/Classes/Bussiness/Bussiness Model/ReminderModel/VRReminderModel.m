@@ -10,8 +10,6 @@
 #import "VRCommon.h"
 #import "Photo.h"
 #import "VRSoundModel.h"
-#import "Repeat.h"
-#import "VRRepeatModel.h"
 
 @implementation VRReminderModel
 
@@ -24,6 +22,7 @@
         self.name           = entity.name;
         self.alertReminder  = [entity.alertReminder integerValue];
         self.timeReminder   = [[VRCommon commonDateTimeFormat] stringFromDate:entity.timeReminder];
+        self.repeat         = [entity.repeatReminder integerValue];
         self.isActive       = entity.isActive.boolValue;
         self.notes          = entity.notes;
     }
@@ -65,23 +64,13 @@
     return _shortSoundModel;
 }
 
-- (NSMutableArray *)repeats {
-    if (!_repeats) {
-        _repeats = [NSMutableArray new];
-        for (Repeat *object in _entity.repeats) {
-            VRRepeatModel *model = [[VRRepeatModel alloc] initWithEntity:object];
-            [_repeats addObject:model];
-        }
-    }
-    
-    return _repeats;
-}
-
 - (id)copyWithZone:(NSZone *)zone {
     VRReminderModel *object = [[VRReminderModel alloc] init];
+    object.uuid = self.uuid;
+    object.createdDate = self.createdDate;
     object.name = [self.name copyWithZone:zone];
     object.timeReminder = [self.timeReminder copyWithZone:zone];
-    object.repeats = [[NSMutableArray alloc] initWithArray:self.repeats copyItems:YES];
+    object.repeat = self.repeat;
     object.photoList = [[NSMutableArray alloc] initWithArray:self.photoList copyItems:YES];
     object.isActive = self.isActive;
     object.alertReminder = self.alertReminder;

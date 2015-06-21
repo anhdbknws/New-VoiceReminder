@@ -23,4 +23,6 @@
 - (void)setupAudioPlayerForShortSound:(NSString *)shortSoundName;
 - (void)setupPlayRecordSound:(NSString *)recordFileName;
 - (void)playSound;
+
+- (void)addTapgestureForDismissKeyboard;
 @end

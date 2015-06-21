@@ -8,10 +8,9 @@
 
 #import "VRRepeatViewController.h"
 #import "VRRepeatCell.h"
-#import "VRRepeatModel.h"
 
 @interface VRRepeatViewController ()<UITableViewDataSource, UITableViewDelegate>
-@property (nonatomic,strong) NSMutableArray *arrayRepeat;
+
 @end
 
 @implementation VRRepeatViewController
@@ -20,7 +19,6 @@
     if (self) {
         self.title = @"Repeat";
         self.view.backgroundColor = [UIColor whiteColor];
-        self.arrayRepeatSelected = [NSMutableArray new];
     }
     
     return self;
@@ -30,7 +28,6 @@
     [self leftNavigationItem:nil andTitle:@"Back" orImage:nil];
     [self rightNavigationItem:@selector(doneAction:) andTitle:@"Done" orImage:nil];
     [self configureTableView];
-    [self prepareData];
 }
 
 - (void)configureTableView {
@@ -42,16 +39,6 @@
     [self.repeatTableview registerClass:[VRRepeatCell class] forCellReuseIdentifier:NSStringFromClass([VRRepeatCell class])];
 }
 
-- (void)prepareData {
-    self.arrayRepeat = [NSMutableArray new];
-    NSArray *listObject = [NSMutableArray arrayWithArray:[VREnumDefine listRepeatType]];
-    for (NSString *item in listObject) {
-        VRRepeatModel *model = [[VRRepeatModel alloc] init];
-        model.repeatType = [VREnumDefine repeatTypeIntegerFromString:item];
-        [self.arrayRepeat addObject:model];
-    }
-}
-
 #pragma mark - tableview delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -59,7 +46,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.arrayRepeat.count;
+    return [VREnumDefine listRepeatType].count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -68,19 +55,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VRRepeatCell *cell = [self.repeatTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRRepeatCell class]) forIndexPath:indexPath];
-    VRRepeatModel *model = [self.arrayRepeat objectAtIndex:indexPath.row];
-    cell.titleLabel.text = [VREnumDefine repeatTypeStringFrom:model.repeatType];
-    
-    BOOL found = NO;
-    for (VRRepeatModel *item in self.arrayRepeatSelected) {
 
-        if (item.repeatType == model.repeatType) {
-            found = YES;
-            break;
-        }
-    }
+    cell.titleLabel.text = [[VREnumDefine listRepeatType] objectAtIndex:indexPath.row];
     
-    if (found) {
+    if (self.repeatType == [VREnumDefine repeatTypeIntegerFromString:cell.titleLabel.text]) {
         cell.imageV.hidden = NO;
         [cell.imageV setImage:[UIImage imageNamed:@"assesory.png"]];
     }
@@ -102,39 +80,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    VRRepeatModel *model = [self.arrayRepeat objectAtIndex:indexPath.row];
-    
-    BOOL found = NO;
-    NSInteger index = 0;
-    for (VRRepeatModel *item in self.arrayRepeatSelected) {
-        if (item.repeatType == model.repeatType) {
-            found = YES;
-            index = [self.arrayRepeatSelected indexOfObject:item];
-            break;
-        }
-    }
-    
-    if (found) {
-        [self.arrayRepeatSelected removeObjectAtIndex:index];
-    }
-    else {
-        [self.arrayRepeatSelected addObject:model];
-        NSInteger index = 0;
-        found = NO;
-        for (VRRepeatModel *object in self.arrayRepeatSelected) {
-            if (self.arrayRepeatSelected.count == 1) {
-                break;
-            }
-            else if (object.repeatType == REPEAT_TYPE_NERER) {
-                index = [self.arrayRepeatSelected indexOfObject:object];
-                found = YES;
-                break;
-            }
-        }
-        
-        if (found) {
-            [self.arrayRepeatSelected removeObjectAtIndex:index];
-        }
+    NSString *repeat = [[VREnumDefine listRepeatType] objectAtIndex:indexPath.row];
+    if (self.repeatType != [VREnumDefine repeatTypeIntegerFromString:repeat]) {
+        self.repeatType = [VREnumDefine repeatTypeIntegerFromString:repeat];
     }
     
     [self.repeatTableview reloadData];
@@ -147,7 +95,7 @@
 #pragma mark - Actions
 - (void)doneAction:(id)sender {
     if (self.selectedCompleted) {
-        self.selectedCompleted (self.arrayRepeatSelected);
+        self.selectedCompleted (self.repeatType);
     }
     
     [self.navigationController popViewControllerAnimated:YES];
