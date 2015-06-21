@@ -19,10 +19,13 @@
 @property (nonatomic, strong) VRShortSoundModel *shortSoundModel;
 @property (nonatomic, strong) NSString *timeReminder;
 @property (nonatomic, strong) NSString *notes;
-@property (nonatomic, assign) REPEAT_TYPE repeat;
+@property (nonatomic, assign) BOOL completed;
 @property (strong, nonatomic) NSMutableArray *photoList;
 @property (nonatomic, assign) ALERT_TYPE alertReminder;
 @property (nonatomic, assign) BOOL isActive;
 @property (nonatomic, strong) Reminder *entity;
+
 - (instancetype)initWithEntity:(Reminder *)entity;
+
+- (BOOL)isEqualModel:(VRReminderModel *)model;
 @end

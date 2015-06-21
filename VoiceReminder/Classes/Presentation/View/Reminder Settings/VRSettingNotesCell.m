@@ -12,10 +12,10 @@
 
 - (void)awakeFromNib {
     self.textViewNotes.textColor = [UIColor grayColor];
-    self.textViewNotes.font = VRFontRegular(15);
+    self.textViewNotes.font = VRFontRegular(17);
     
     self.labelTitle.textColor = [UIColor blackColor];
-    self.labelTitle.font = VRFontRegular(15);
+    self.labelTitle.font = VRFontRegular(17);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

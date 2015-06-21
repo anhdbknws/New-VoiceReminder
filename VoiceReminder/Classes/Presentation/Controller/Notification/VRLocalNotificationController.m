@@ -30,30 +30,51 @@
 }
 
 - (void)processNotification:(UILocalNotification *)notification {
+    // update completed
     NSString *uuid = [notification.userInfo objectForKey:@"uuid"];
-    Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid];
-    VRReminderModel *model = [[VRReminderModel alloc] initWithEntity:entity];
-    
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:model.name message:model.notes delegate:self cancelButtonTitle:@"Close" otherButtonTitles:@"Detail", nil];
-    [alertView showAlerViewWithHandler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-        switch (buttonIndex) {
-            case 0:
-                break;
-            case 1:
-                [self showDetailReminder:model];
-                break;
-            default:
-                break;
+    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+        Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid inContext:localContext];
+        if (entity) {
+            entity.completed = @(YES);
         }
+    } completion:^(BOOL success, NSError *error) {
+        Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid];
+        VRReminderModel *model = nil;
+        if(entity) {
+            model = [[VRReminderModel alloc] initWithEntity:entity];
+        }
+
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:model.name message:model.notes delegate:self cancelButtonTitle:@"Close" otherButtonTitles:@"Detail", nil];
+        [alertView showAlerViewWithHandler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            switch (buttonIndex) {
+                case 0:
+                    break;
+                case 1:
+                    [self showDetailReminder:model];
+                    break;
+                default:
+                    break;
+            }
+        }];
     }];
 }
 
 - (void)gotoDetail:(UILocalNotification *)notification {
     NSString *uuid = [notification.userInfo objectForKey:@"uuid"];
-    Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid];
-    VRReminderModel *model = [[VRReminderModel alloc] initWithEntity:entity];
-    [self showDetailReminder:model];
+    
+    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+        Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid inContext:localContext];
+        if (entity) {
+            entity.completed = @(YES);
+        }
+    } completion:^(BOOL success, NSError *error) {
+        Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid];
+        VRReminderModel *model = nil;
+        if (entity) {
+            model = [[VRReminderModel alloc] initWithEntity:entity];
+        }
+        [self showDetailReminder:model];
+    }];
 }
 
 - (void)showDetailReminder:(VRReminderModel *)model {

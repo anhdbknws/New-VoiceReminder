@@ -40,6 +40,7 @@ NSString *kNotificationName1 = @"testNotification";
     [self createListViewControllers];
     
     [self leftNavigationItem:nil andTitle:@"Back" orImage:nil];
+    
     [self rightNavigationItem:@selector(editAction:) andTitle:@"Edit" orImage:nil];
 }
 
@@ -81,6 +82,7 @@ NSString *kNotificationName1 = @"testNotification";
 }
 
 - (void)setSelectedButton {
+    [self rightNavigationItem:@selector(editAction:) andTitle:@"Edit" orImage:nil];
     UIViewController *selectedVC = nil;
     UIViewController *otherVC = nil;
     if (selectedIndex == 0) {
@@ -108,6 +110,18 @@ NSString *kNotificationName1 = @"testNotification";
     else {
         [_listReminderController editAction];
     }
+    
+    [self rightNavigationItem:@selector(doneAction:) andTitle:@"Done" orImage:nil];
+}
+
+- (void)doneAction:(id)sender {
+    if (selectedIndex == 0) {
+        [_calendarController doneAction];
+    }
+    else {
+        [_listReminderController doneAction];
+    }
+    [self rightNavigationItem:@selector(editAction:) andTitle:@"Edit" orImage:nil];
 }
 
 - (void)dealloc {

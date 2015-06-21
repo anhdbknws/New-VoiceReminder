@@ -188,9 +188,6 @@
         case REMINDER_DETAIL_ROW_TYPE_NAME:
             titleString = @"Name";
             break;
-        case REMINDER_DETAIL_ROW_TYPE_REPEAT:
-            titleString = @"Repeat";
-            break;
         case REMINDER_DETAIL_ROW_TYPE_ALERT:
             titleString = @"Alert";
             break;
@@ -218,11 +215,6 @@
             break;
         case REMINDER_DETAIL_ROW_TYPE_NAME:
             valueString = _model.name;
-            break;
-        case REMINDER_DETAIL_ROW_TYPE_REPEAT:
-        {
-            valueString = [VREnumDefine repeatTypeStringFrom:_model.repeat];
-        }
             break;
         case REMINDER_DETAIL_ROW_TYPE_ALERT:
             valueString = [VREnumDefine alertTypeStringFrom:_model.alertReminder];
@@ -275,6 +267,13 @@
 - (void) editAction:(id)sender {
     VRReminderSettingViewController *vc = [[VRReminderSettingViewController alloc] initWithUUID:self.model.uuid];
     vc.isEditMode = YES;
+    
+    __weak typeof (self)weak = self;
+    vc.editCompleted = ^(id object) {
+        weak.model = object;
+        [weak.tableViewDetail reloadData];
+    };
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 

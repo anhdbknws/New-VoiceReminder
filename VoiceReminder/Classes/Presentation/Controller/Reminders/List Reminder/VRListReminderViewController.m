@@ -41,6 +41,7 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.isEditMode = NO;
     [self getReminderFromDBLocalCompletionHandler:^(NSError *error, id result) {
         [self.listEventTableview reloadData];
     }];
@@ -110,6 +111,9 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VRReminderListCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderListCell class]) forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if (self.isEditMode) {
+        [cell showLeftUtilityButtonsAnimated:YES];
+    }
 
     VRReminderModel *model;
     if (currentSegment == LIST_REMINDER_TYPE_ACTIVE) {
@@ -125,11 +129,29 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
     cell.leftUtilityButtons = [self leftButton];
     cell.name.text = model.name;
     cell.timeReminder.text = model.timeReminder;
-    [cell.switchButton setOn:model.isActive];
+    
+    if (model.completed) {
+        [cell.switchButton setOn:NO];
+        cell.switchButton.userInteractionEnabled = NO;
+    }
+    else {
+        [cell.switchButton setOn:model.isActive];
+        cell.switchButton.userInteractionEnabled = YES;
+    }
     
     __weak typeof (self)weak = self;
     cell.changeSwitch = ^(id sender) {
         [weak updateStatusFor:model CompletionHandler:^(NSError *error, id result) {
+            if (currentSegment == LIST_REMINDER_TYPE_ACTIVE) {
+                [self.service.listReminderActive replaceObjectAtIndex:indexPath.row withObject:result];
+            }
+            else if (currentSegment == LIST_REMINDER_TYPE_ALL) {
+                [self.service.listReminderAll replaceObjectAtIndex:indexPath.row withObject:result];
+            }
+            else {
+                [self.service.listReminderCompleted replaceObjectAtIndex:indexPath.row withObject:result];
+            }
+            
             [weak.listEventTableview reloadData];
         }];
     };
@@ -186,6 +208,7 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
             break;
     }
     
+    self.isEditMode = NO;
     [self.listEventTableview reloadData];
 }
 
@@ -195,6 +218,11 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
 
 #pragma mark - List reminder 
 - (void)editAction {
+    self.isEditMode = !self.isEditMode;
+    [self.listEventTableview reloadData];
+}
+
+- (void)doneAction {
     self.isEditMode = !self.isEditMode;
     [self.listEventTableview reloadData];
 }

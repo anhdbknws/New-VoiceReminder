@@ -17,7 +17,6 @@
 #import "VRReminderSettingService.h"
 #import "VRMainScreenViewController.h"
 #import "VRNameViewController.h"
-#import "VRRepeatViewController.h"
 #import "VRAlertViewController.h"
 #import "VRSoundViewController.h"
 #import "VRPhotoListCell.h"
@@ -36,6 +35,7 @@
 #import "Sound.h"
 #import "VRShortSoundModel.h"
 #import "VRMainPageViewController.h"
+#import "UIAlertView+VR.h"
 
 static NSString * const kImageArrow = @"icon_arrow_right";
 const NSInteger kPhotoActionSheetTag = 3249;
@@ -58,11 +58,11 @@ const NSInteger kPhotoActionSheetTag = 3249;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    [self prepareData];
     [self configureUI];
-    [self configureDatePicker];
     [self configureTableview];
     [self addTapgestureForDismissKeyboard];
-    [self prepareData];
+    [self configureDatePicker];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -90,6 +90,7 @@ const NSInteger kPhotoActionSheetTag = 3249;
     self.datePicker.backgroundColor = [UIColor whiteColor];
     self.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     [self.datePicker addTarget:self action:@selector(datePickerDateChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.datePicker setDate:[[VRCommon commonDateTimeFormat] dateFromString:_service.modelCopy.timeReminder]];
 }
 
 - (void)configureTableview {
@@ -150,9 +151,6 @@ const NSInteger kPhotoActionSheetTag = 3249;
         if (indexPath.row == REMINDER_SETTING_TYPE_NAME) {
             return [self getNameCellAtIndexPath:indexPath];
         }
-        else if (indexPath.row == REMINDER_SETTING_TYPE_REPEAT) {
-            return [self getRepeatCellAtIndexPath:indexPath];
-        }
         else if (indexPath.row == REMINDER_SETTING_TYPE_ALERT) {
             return [self getAlertCellAtIndexPath:indexPath];
         }
@@ -199,18 +197,6 @@ const NSInteger kPhotoActionSheetTag = 3249;
     cell.textfield.delegate = self;
     [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
     cell.textfield.text = _service.modelCopy.name;
-    return cell;
-}
-
-- (VRReminderSettingCell *)getRepeatCellAtIndexPath:(NSIndexPath *)indexPath {
-    VRReminderSettingCell *cell = [self.settingTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderSettingCell class]) forIndexPath:indexPath];
-    cell.titleLabel.text = @"Repeat";
-    cell.textfield.font = VRFontRegular(17);
-    cell.textfield.tag = REMINDER_SETTING_TYPE_REPEAT;
-    cell.textfield.delegate = self;
-    cell.textfield.text = [VREnumDefine repeatTypeStringFrom:_service.modelCopy.repeat];
-    
-    [cell.arrowView setImage:[UIImage imageNamed:kImageArrow]];
     return cell;
 }
 
@@ -310,6 +296,28 @@ const NSInteger kPhotoActionSheetTag = 3249;
 
 #pragma mark - Actions
 - (void)cancelAction:(id)sender {
+    [self.view endEditing:YES];
+    
+    if (![_service.modelOringinal isEqualModel:_service.modelCopy]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"Your change will not be saved" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+        [alertView showAlerViewWithHandler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            switch (buttonIndex) {
+                case 0:
+                    [self handleYesAction];
+                    break;
+                case 1:
+                    break;
+                default:
+                    break;
+            }
+        }];
+    }
+    else {
+        [self handleYesAction];
+    }
+}
+
+- (void)handleYesAction {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -333,6 +341,9 @@ const NSInteger kPhotoActionSheetTag = 3249;
             [MBProgressHUD hideAllHUDsForView:strong.view animated:YES];
             if (!error) {
                 NSLog(@"%@", result.name);
+                if (strong.editCompleted) {
+                    strong.editCompleted(result);
+                }
             }
             
             for (UIViewController *Vc in strong.navigationController.viewControllers) {
@@ -359,10 +370,6 @@ const NSInteger kPhotoActionSheetTag = 3249;
     
     if (textField.tag == REMINDER_SETTING_TYPE_NAME) {
         [self chooseName];
-        return NO;
-    }
-    else if (textField.tag == REMINDER_SETTING_TYPE_REPEAT) {
-        [self chooseRepeatType];
         return NO;
     }
     else if (textField.tag== REMINDER_SETTING_TYPE_ALERT) {
@@ -403,21 +410,6 @@ const NSInteger kPhotoActionSheetTag = 3249;
     };
     
     [self.navigationController pushViewController:Vc animated:YES];
-}
-
-- (void)chooseRepeatType {
-    VRRepeatViewController *VC = [[VRRepeatViewController alloc] initWithNibName:NSStringFromClass([VRRepeatViewController class]) bundle:nil];
-    VC.repeatType = _service.modelCopy.repeat;
-    __weak typeof (self)weak = self;
-    VC.selectedCompleted = ^(REPEAT_TYPE type) {
-        __strong typeof (weak)strong = weak;
-        _service.modelCopy.repeat = type;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [strong.settingTableview reloadData];
-        });
-    };
-    
-    [self.navigationController pushViewController:VC animated:YES];
 }
 
 - (void)chooseAlertType {

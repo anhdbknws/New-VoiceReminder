@@ -11,4 +11,6 @@
 @interface BaseModel : NSObject
 @property (nonatomic, strong) NSString *uuid;
 @property (nonatomic, strong) NSDate *createdDate;
+
+- (NSString *)metadata;
 @end

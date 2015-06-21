@@ -140,6 +140,7 @@
     __weak typeof(self)weak = self;
     cell.changeSwitch = ^(id sender) {
         [weak updateStatusFor:model CompletionHandler:^(NSError *error, id result) {
+            [weak.service.listReminderAll replaceObjectAtIndex:indexPath.row withObject:result];
             [weak.listEventTableview reloadData];
         }];
     };
@@ -297,5 +298,9 @@
 
 - (void)editAction {
     NSLog(@"Edit calendar");
+}
+
+- (void)doneAction {
+    NSLog(@"done calendar");
 }
 @end

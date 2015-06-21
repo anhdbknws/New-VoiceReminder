@@ -22,7 +22,7 @@
         self.name           = entity.name;
         self.alertReminder  = [entity.alertReminder integerValue];
         self.timeReminder   = [[VRCommon commonDateTimeFormat] stringFromDate:entity.timeReminder];
-        self.repeat         = [entity.repeatReminder integerValue];
+        self.completed      = [entity.completed boolValue];
         self.isActive       = entity.isActive.boolValue;
         self.notes          = entity.notes;
     }
@@ -70,13 +70,27 @@
     object.createdDate = self.createdDate;
     object.name = [self.name copyWithZone:zone];
     object.timeReminder = [self.timeReminder copyWithZone:zone];
-    object.repeat = self.repeat;
+    object.completed = self.completed;
     object.photoList = [[NSMutableArray alloc] initWithArray:self.photoList copyItems:YES];
     object.isActive = self.isActive;
     object.alertReminder = self.alertReminder;
     object.soundModel = [self.soundModel copyWithZone:zone];
     object.shortSoundModel = [self.shortSoundModel copyWithZone:zone];
     object.entity = self.entity;
+    object.notes = self.notes;
     return object;
+}
+
+- (NSString *)metadata {
+    NSString *fullString = [NSString stringWithFormat:@"%@%@%d%@%@", self.timeReminder, self.name, self.alertReminder, [self.soundModel metadata], [self.shortSoundModel metadata]];
+    for (id object in self.photoList)
+        if ([object isKindOfClass:[NSString class]]) {
+            fullString = [fullString stringByAppendingString:object];
+        }
+    return fullString;
+}
+
+- (BOOL)isEqualModel:(VRReminderModel *)model {
+    return [[self metadata] isEqualToString:[model metadata]];
 }
 @end

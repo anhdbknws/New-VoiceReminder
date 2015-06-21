@@ -106,8 +106,6 @@
 		82536D101A627F7200F4AA5B /* VRCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 82536D0F1A627F7200F4AA5B /* VRCommon.m */; };
 		8254EB491AC20CEB00D1C2CC /* VRNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8254EB471AC20CEB00D1C2CC /* VRNameViewController.m */; };
 		8254EB4A1AC20CEB00D1C2CC /* VRNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8254EB481AC20CEB00D1C2CC /* VRNameViewController.xib */; };
-		8254EB4E1AC2264600D1C2CC /* VRRepeatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8254EB4C1AC2264600D1C2CC /* VRRepeatViewController.m */; };
-		8254EB4F1AC2264600D1C2CC /* VRRepeatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8254EB4D1AC2264600D1C2CC /* VRRepeatViewController.xib */; };
 		825C4B921AD0557700C22B34 /* VRLocalNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 825C4B911AD0557700C22B34 /* VRLocalNotificationController.m */; };
 		8277E4C11B2D2DE9007C7C1A /* q0.png in Resources */ = {isa = PBXBuildFile; fileRef = 8277E4AA1B2D2DE9007C7C1A /* q0.png */; };
 		8277E4C21B2D2DE9007C7C1A /* q1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8277E4AB1B2D2DE9007C7C1A /* q1.png */; };
@@ -139,7 +137,7 @@
 		829320181A7C2B0C00A3EAE5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 829320171A7C2B0C00A3EAE5 /* AppDelegate.m */; };
 		82A0DBE21AB0F2140071F419 /* VRReminderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A0DBE11AB0F2140071F419 /* VRReminderListCell.m */; };
 		82A0DBE61AB0F8370071F419 /* VRReminderListService.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A0DBE51AB0F8370071F419 /* VRReminderListService.m */; };
-		82A5C57E1B36DFF50020BB43 /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A5C57D1B36DFF50020BB43 /* Reminder.m */; };
+		82A5C5811B3703DF0020BB43 /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A5C5801B3703DF0020BB43 /* Reminder.m */; };
 		82A716A81A6188AA00829BE5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A716A71A6188AA00829BE5 /* main.m */; };
 		82A716AE1A6188AA00829BE5 /* VoiceReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 82A716AC1A6188AA00829BE5 /* VoiceReminder.xcdatamodeld */; };
 		82A716B61A6188AA00829BE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82A716B51A6188AA00829BE5 /* Images.xcassets */; };
@@ -330,9 +328,6 @@
 		8254EB461AC20CEB00D1C2CC /* VRNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRNameViewController.h; sourceTree = "<group>"; };
 		8254EB471AC20CEB00D1C2CC /* VRNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRNameViewController.m; sourceTree = "<group>"; };
 		8254EB481AC20CEB00D1C2CC /* VRNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VRNameViewController.xib; sourceTree = "<group>"; };
-		8254EB4B1AC2264600D1C2CC /* VRRepeatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRRepeatViewController.h; sourceTree = "<group>"; };
-		8254EB4C1AC2264600D1C2CC /* VRRepeatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRRepeatViewController.m; sourceTree = "<group>"; };
-		8254EB4D1AC2264600D1C2CC /* VRRepeatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VRRepeatViewController.xib; sourceTree = "<group>"; };
 		825C4B901AD0557700C22B34 /* VRLocalNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRLocalNotificationController.h; sourceTree = "<group>"; };
 		825C4B911AD0557700C22B34 /* VRLocalNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRLocalNotificationController.m; sourceTree = "<group>"; };
 		8277E4AA1B2D2DE9007C7C1A /* q0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = q0.png; sourceTree = "<group>"; };
@@ -370,8 +365,8 @@
 		82A0DBE11AB0F2140071F419 /* VRReminderListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRReminderListCell.m; sourceTree = "<group>"; };
 		82A0DBE41AB0F8370071F419 /* VRReminderListService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRReminderListService.h; sourceTree = "<group>"; };
 		82A0DBE51AB0F8370071F419 /* VRReminderListService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRReminderListService.m; sourceTree = "<group>"; };
-		82A5C57C1B36DFF50020BB43 /* Reminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reminder.h; sourceTree = "<group>"; };
-		82A5C57D1B36DFF50020BB43 /* Reminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reminder.m; sourceTree = "<group>"; };
+		82A5C57F1B3703DF0020BB43 /* Reminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reminder.h; sourceTree = "<group>"; };
+		82A5C5801B3703DF0020BB43 /* Reminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reminder.m; sourceTree = "<group>"; };
 		82A716A21A6188AA00829BE5 /* VoiceReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A716A61A6188AA00829BE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82A716A71A6188AA00829BE5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -715,7 +710,6 @@
 				82E31F0D1AD13BDD0000B176 /* Photos */,
 				8238C59E1AC36F080088EFE3 /* Alert */,
 				8254EB421AC20CA300D1C2CC /* Name */,
-				8254EB431AC20CA300D1C2CC /* Repeat */,
 				8254EB451AC20CA300D1C2CC /* Sound */,
 				824E764B1A7AF91E0035C744 /* VRReminderSettingViewController.h */,
 				824E764C1A7AF91E0035C744 /* VRReminderSettingViewController.m */,
@@ -821,8 +815,8 @@
 				82A8D14D1B2F28FE00194361 /* Sound.m */,
 				82A8D1491B2F28FD00194361 /* ShortSound.h */,
 				82A8D14A1B2F28FD00194361 /* ShortSound.m */,
-				82A5C57C1B36DFF50020BB43 /* Reminder.h */,
-				82A5C57D1B36DFF50020BB43 /* Reminder.m */,
+				82A5C57F1B3703DF0020BB43 /* Reminder.h */,
+				82A5C5801B3703DF0020BB43 /* Reminder.m */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -876,16 +870,6 @@
 				8254EB481AC20CEB00D1C2CC /* VRNameViewController.xib */,
 			);
 			path = Name;
-			sourceTree = "<group>";
-		};
-		8254EB431AC20CA300D1C2CC /* Repeat */ = {
-			isa = PBXGroup;
-			children = (
-				8254EB4B1AC2264600D1C2CC /* VRRepeatViewController.h */,
-				8254EB4C1AC2264600D1C2CC /* VRRepeatViewController.m */,
-				8254EB4D1AC2264600D1C2CC /* VRRepeatViewController.xib */,
-			);
-			path = Repeat;
 			sourceTree = "<group>";
 		};
 		8254EB451AC20CA300D1C2CC /* Sound */ = {
@@ -1414,7 +1398,6 @@
 				82E64A8F1B20AC9C003886E8 /* icon_add@2x.png in Resources */,
 				8277E4C11B2D2DE9007C7C1A /* q0.png in Resources */,
 				8217024F1AD0BFC400747B39 /* bt_back@3x.png in Resources */,
-				8254EB4F1AC2264600D1C2CC /* VRRepeatViewController.xib in Resources */,
 				8277E4C51B2D2DE9007C7C1A /* q4.png in Resources */,
 				8277E4D71B2D2DE9007C7C1A /* q22.png in Resources */,
 				821701E41AD097E100747B39 /* icon_camera@2x.png in Resources */,
@@ -1523,7 +1506,6 @@
 				825C4B921AD0557700C22B34 /* VRLocalNotificationController.m in Sources */,
 				82C9C9361AD8804A000D77BC /* VRAlertView.m in Sources */,
 				824E765F1A7AF91E0035C744 /* VRMainScreenViewController.m in Sources */,
-				8254EB4E1AC2264600D1C2CC /* VRRepeatViewController.m in Sources */,
 				8217023E1AD0BD3200747B39 /* VCAppearanceConfig.m in Sources */,
 				82B5CF271A6337470061AEF6 /* VREnumDefine.m in Sources */,
 				823814E11AB9AD9700B00A02 /* SBTickView.m in Sources */,
@@ -1575,7 +1557,7 @@
 				821702311AD0BD3200747B39 /* ALAssetsGroup+isEqual.m in Sources */,
 				82F6E6C51B31C34A007F68DB /* VRMainPageViewController.m in Sources */,
 				82A8D3471B2EB95B00E19E2B /* CircleShapeLayer.m in Sources */,
-				82A5C57E1B36DFF50020BB43 /* Reminder.m in Sources */,
+				82A5C5811B3703DF0020BB43 /* Reminder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

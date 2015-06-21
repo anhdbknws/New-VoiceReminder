@@ -50,7 +50,6 @@
         
         _modelOringinal.name = @"Name";
         
-        _modelOringinal.repeat = REPEAT_TYPE_NERER;
         _modelOringinal.alertReminder = ALERT_TYPE_AT_EVENT_TIME;
         
         _modelOringinal.timeReminder = [VRCommon commonFormatFromDateTime:[NSDate date]];
@@ -85,29 +84,7 @@
     /* Time and timezone settings */
     notification.fireDate = [[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder];
     notification.timeZone = [NSTimeZone localTimeZone];
-    
-    if (model.repeat == REPEAT_TYPE_NERER) {
-        notification.repeatInterval = 0;
-    }
-    else if (model.repeat == REPEAT_TYPE_HOUR) {
-        notification.repeatInterval = NSCalendarUnitHour;
-    }
-    else if (model.repeat == REPEAT_TYPE_WEEK) {
-        notification.repeatInterval = NSCalendarUnitWeekday;
-    }
-    else if (model.repeat == REPEAT_TYPE_DAY) {
-        notification.repeatInterval = NSCalendarUnitDay;
-    }
-    else if (model.repeat == REPEAT_TYPE_MONTH) {
-        notification.repeatInterval = NSCalendarUnitMonth;
-    }
-    else if (model.repeat == REPEAT_TYPE_QUATER) {
-        notification.repeatInterval = NSCalendarUnitQuarter;
-    }
-    else {
-        notification.repeatInterval = NSCalendarUnitYear;
-    }
-    
+    notification.repeatInterval = 0;
     notification.fireDate = [self getFireDate:model];
     
     NSString *stringAlertBody = nil;

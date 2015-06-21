@@ -18,8 +18,8 @@
 @dynamic isActive;
 @dynamic name;
 @dynamic notes;
-@dynamic repeatReminder;
 @dynamic timeReminder;
+@dynamic completed;
 @dynamic photos;
 @dynamic shortSound;
 @dynamic sound;

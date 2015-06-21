@@ -18,8 +18,8 @@
 @property (nonatomic, retain) NSNumber * isActive;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSNumber * repeatReminder;
 @property (nonatomic, retain) NSDate * timeReminder;
+@property (nonatomic, retain) NSNumber * completed;
 @property (nonatomic, retain) NSSet *photos;
 @property (nonatomic, retain) ShortSound *shortSound;
 @property (nonatomic, retain) Sound *sound;

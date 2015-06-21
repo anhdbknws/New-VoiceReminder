@@ -27,4 +27,9 @@
     object.name = [self.name copyWithZone:zone];
     return object;
 }
+
+- (NSString *)metadata {
+    NSString *fullString = [NSString stringWithFormat:@"%@", self.name];
+    return fullString;
+}
 @end

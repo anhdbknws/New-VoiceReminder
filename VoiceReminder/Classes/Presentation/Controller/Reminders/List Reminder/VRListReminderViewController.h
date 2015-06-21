@@ -18,5 +18,8 @@ typedef NS_ENUM(NSInteger, LIST_REMINDER_TYPE) {
 @property (nonatomic, strong) UISegmentedControl *segmentControl;
 @property (nonatomic, strong) UITableView *listEventTableview;
 @property (nonatomic, strong) UIViewController *rootViewController;
+
 - (void)editAction;
+
+- (void)doneAction;
 @end

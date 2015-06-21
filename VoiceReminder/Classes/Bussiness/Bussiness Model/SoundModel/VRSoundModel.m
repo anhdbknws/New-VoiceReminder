@@ -34,4 +34,9 @@
     object.isSystemSound = self.isSystemSound;
     return object;
 }
+
+- (NSString *)metadata {
+    NSString *fullString = [NSString stringWithFormat:@"%@%@%@%@%@%@", self.name, self.url, self.mp3Url, @(self.isMp3Sound), @(self.isRecordSound), @(self.isSystemSound)];
+    return fullString;
+}
 @end

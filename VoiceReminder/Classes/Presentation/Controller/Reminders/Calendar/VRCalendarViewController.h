@@ -20,4 +20,6 @@
 @property (nonatomic, strong) UIView *horizontalView;
 
 - (void)editAction;
+
+- (void)doneAction;
 @end

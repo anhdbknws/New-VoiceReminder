@@ -23,7 +23,7 @@
     entity.createdDate = model.createdDate;
     entity.isActive = [NSNumber numberWithBool:YES];
     entity.notes = model.notes;
-    entity.repeatReminder = [NSNumber numberWithInteger:model.repeat];
+    entity.completed = [NSNumber numberWithBool:model.completed];
     entity.sound = [VRSoundMapping entityFromModel:model.soundModel inContext:context];
     entity.shortSound = [VRShortSoundMapping entityFromModel:model.shortSoundModel inContext:context];
     

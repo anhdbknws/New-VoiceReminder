@@ -14,11 +14,10 @@
 
 typedef NS_ENUM(NSInteger, REMINDER_SETTING_TYPE) {
     REMINDER_SETTING_TYPE_NAME          = 0,
-    REMINDER_SETTING_TYPE_REPEAT        = 1,
-    REMINDER_SETTING_TYPE_ALERT         = 2,
-    REMINDER_SETTING_TYPE_MUSIC_SOUND   = 3,
-    REMINDER_SETTING_TYPE_SHORT_SOUND   = 4,
-    REMINDER_SETTING_TYPE_NOTES         = 5
+    REMINDER_SETTING_TYPE_ALERT         = 1,
+    REMINDER_SETTING_TYPE_MUSIC_SOUND   = 2,
+    REMINDER_SETTING_TYPE_SHORT_SOUND   = 3,
+    REMINDER_SETTING_TYPE_NOTES         = 4
 };
 
 @interface VRReminderSettingViewController : VRSettingBaseViewController
@@ -32,4 +31,6 @@ typedef NS_ENUM(NSInteger, REMINDER_SETTING_TYPE) {
 @property (nonatomic, assign) BOOL isEditMode;
 
 - (instancetype)initWithUUID:(NSString *)uuid;
+
+@property (nonatomic, copy) void (^editCompleted)(id object);
 @end

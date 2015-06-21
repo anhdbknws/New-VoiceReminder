@@ -26,8 +26,8 @@
     self.textfield.textColor = [UIColor grayColor];
     self.textfield.backgroundColor = [UIColor whiteColor];
     self.textfield.textAlignment = NSTextAlignmentRight;
-    self.textfield.font = VRFontRegular(15);
-    self.titleLabel.font = VRFontRegular(15);
+    self.textfield.font = VRFontRegular(17);
+    self.titleLabel.font = VRFontRegular(17);
     self.titleLabel.textColor = [UIColor blackColor];
     
     self.contentView.backgroundColor = [UIColor whiteColor];
