@@ -101,6 +101,15 @@
         if (enti) {
             result = [[VRReminderModel alloc] initWithEntity:enti];
         }
+        /* check and remove local notification*/
+        
+        for (UILocalNotification *item in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+            if ([[item.userInfo objectForKey:@"uuid"] isEqualToString:model.uuid]) {
+                [[UIApplication sharedApplication] cancelLocalNotification:item];
+            }
+        }
+        
+        
         if (completion) {
             completion(error, result);
         }
