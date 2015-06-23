@@ -13,9 +13,7 @@
 #import <SWTableViewCell.h>
 #import "VRMacro.h"
 #import "VRReminderDetailController.h"
-
-static NSString * const kImageEditBlue = @"icon_edit_blue";
-static NSString * const kImageDeleteBlue = @"icon_delete_blue";
+#import "VRReminderSettingViewController.h"
 
 @interface VRListReminderViewController ()<UITableViewDataSource, UITableViewDelegate, SWTableViewCellDelegate>
 @property (nonatomic, assign) BOOL isEditMode;
@@ -177,6 +175,7 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
     [self.rootViewController.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - action swipe cell
 - (NSArray *)leftButton{
     NSMutableArray *leftUtilityButtons = [NSMutableArray new];
     [leftUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:45.0f/255.0f green:50.0f/255.0f blue:53.0f/255.0f alpha:1] icon:[UIImage imageNamed:kImageDeleteBlue]];
@@ -185,6 +184,89 @@ static NSString * const kImageDeleteBlue = @"icon_delete_blue";
     
     return leftUtilityButtons;
 }
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index {
+    NSIndexPath *indexPath = [self.listEventTableview indexPathForCell:cell];
+    switch (index) {
+        case 0:
+            [self editAtIndexPath:indexPath];
+            break;
+        case 1:
+            [self deleteAtIndexPath:indexPath];
+            break;
+        default:
+            break;
+    }
+    
+    [cell hideUtilityButtonsAnimated:YES];
+}
+
+- (void)editAtIndexPath:(NSIndexPath *)indexPath {
+    VRReminderModel *model;
+    if (currentSegment == LIST_REMINDER_TYPE_ACTIVE) {
+        model = [self.service.listReminderActive objectAtIndex:indexPath.row];
+    }
+    else if (currentSegment == LIST_REMINDER_TYPE_ALL) {
+        model = [self.service.listReminderAll objectAtIndex:indexPath.row];
+    }
+    else {
+        model = [self.service.listReminderCompleted objectAtIndex:indexPath.row];
+    }
+    
+    VRReminderSettingViewController *vc = [[VRReminderSettingViewController alloc] initWithUUID:model.uuid];
+    vc.isEditMode = YES;
+    
+    __weak typeof (self)weak = self;
+    vc.editCompleted = ^(id object) {
+        if (currentSegment == LIST_REMINDER_TYPE_ACTIVE) {
+            [self.service.listReminderActive replaceObjectAtIndex:indexPath.row withObject:object];
+        }
+        else if (currentSegment == LIST_REMINDER_TYPE_ALL) {
+            [self.service.listReminderAll replaceObjectAtIndex:indexPath.row withObject:object];
+        }
+        else {
+            [self.service.listReminderCompleted replaceObjectAtIndex:indexPath.row withObject:object];
+        }
+        
+        [weak.listEventTableview reloadData];
+    };
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)deleteAtIndexPath:(NSIndexPath *)indexPath {
+    VRReminderModel *model;
+    if (currentSegment == LIST_REMINDER_TYPE_ACTIVE) {
+        model = [self.service.listReminderActive objectAtIndex:indexPath.row];
+    }
+    else if (currentSegment == LIST_REMINDER_TYPE_ALL) {
+        model = [self.service.listReminderAll objectAtIndex:indexPath.row];
+    }
+    else {
+        model = [self.service.listReminderCompleted objectAtIndex:indexPath.row];
+    }
+    
+    if (!self.service) {
+        self.service = [[VRReminderListService alloc] init];
+    }
+    
+    [self.service deleteReminderWithUUID:model.uuid completionHandler:^(NSError *error, id result) {
+        if (!error) {
+            if (currentSegment == LIST_REMINDER_TYPE_ACTIVE) {
+                [self.service.listReminderActive removeObjectAtIndex:indexPath.row];
+            }
+            else if (currentSegment == LIST_REMINDER_TYPE_ALL) {
+                [self.service.listReminderAll removeObjectAtIndex:indexPath.row];
+            }
+            else {
+                [self.service.listReminderCompleted removeObjectAtIndex:indexPath.row];
+            }
+            
+            [self.listEventTableview reloadData];
+        }
+    }];
+}
+
 
 #pragma mark - tableview delegate
 

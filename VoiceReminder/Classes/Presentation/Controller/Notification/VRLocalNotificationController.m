@@ -32,6 +32,14 @@
 - (void)processNotification:(UILocalNotification *)notification {
     // update completed
     NSString *uuid = [notification.userInfo objectForKey:@"uuid"];
+    
+    // remove schedule with system
+    for (UILocalNotification *item in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+        if ([[item.userInfo objectForKey:@"uuid"] isEqualToString:uuid]) {
+            [[UIApplication sharedApplication] cancelLocalNotification:item];
+        }
+    }
+    
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
         Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid inContext:localContext];
         if (entity) {
@@ -61,6 +69,12 @@
 
 - (void)gotoDetail:(UILocalNotification *)notification {
     NSString *uuid = [notification.userInfo objectForKey:@"uuid"];
+    
+    for (UILocalNotification *item in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+        if ([[item.userInfo objectForKey:@"uuid"] isEqualToString:uuid]) {
+            [[UIApplication sharedApplication] cancelLocalNotification:item];
+        }
+    }
     
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
         Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid inContext:localContext];

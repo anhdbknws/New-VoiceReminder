@@ -10,8 +10,9 @@
 #import "JTCalendarAppearance.h"
 #import "VRReminderListCell.h"
 #import "VRReminderModel.h"
+#import "VRReminderSettingViewController.h"
 
-@interface VRCalendarViewController ()<JTCalendarDataSource, UITableViewDataSource, UITableViewDelegate>
+@interface VRCalendarViewController ()<JTCalendarDataSource, UITableViewDataSource, UITableViewDelegate, SWTableViewCellDelegate>
 
 @end
 
@@ -134,7 +135,16 @@
     VRReminderListCell *cell = [self.listEventTableview dequeueReusableCellWithIdentifier:NSStringFromClass([VRReminderListCell class]) forIndexPath:indexPath];
     VRReminderModel *model = [self.service.listReminderAll objectAtIndex:indexPath.row];
     cell.name.text = model.name;
-    [cell.switchButton setOn:model.isActive];
+    
+    if (model.completed) {
+        [cell.switchButton setOn:NO];
+        cell.switchButton.userInteractionEnabled = NO;
+    }
+    else {
+        [cell.switchButton setOn:model.isActive];
+        cell.switchButton.userInteractionEnabled = YES;
+    }
+    
     cell.timeReminder.text = model.timeReminder;
     
     __weak typeof(self)weak = self;
@@ -145,6 +155,9 @@
         }];
     };
     
+    cell.leftUtilityButtons = [self leftButton];
+    cell.delegate = self;
+    
     [cell layoutSubviews];
     return cell;
 }
@@ -152,6 +165,57 @@
 #pragma mark - tableview delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 55;
+}
+
+#pragma mark - tableview swipe delete
+- (NSArray *)leftButton{
+    NSMutableArray *leftUtilityButtons = [NSMutableArray new];
+    [leftUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:34.0f/255.0f green:38.0f/255.0f blue:41.0f/255.0f alpha:1] icon:[UIImage imageNamed:kImageEditBlue]];
+    [leftUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:45.0f/255.0f green:50.0f/255.0f blue:53.0f/255.0f alpha:1] icon:[UIImage imageNamed:kImageDeleteBlue]];
+    return leftUtilityButtons;
+}
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index {
+    NSIndexPath *indexPath = [self.listEventTableview indexPathForCell:cell];
+    switch (index) {
+        case 0:
+            [self editAtIndexPath:indexPath];
+            break;
+        case 1:
+            [self deleteAtIndexPath:indexPath];
+            break;
+        default:
+            break;
+    }
+    
+    [cell hideUtilityButtonsAnimated:YES];
+}
+
+- (void)editAtIndexPath:(NSIndexPath *)indexPath {
+    VRReminderModel *model = [self.service.listReminderAll objectAtIndex:indexPath.row];
+    VRReminderSettingViewController *vc = [[VRReminderSettingViewController alloc] initWithUUID:model.uuid];
+    vc.isEditMode = YES;
+    
+    __weak typeof (self)weak = self;
+    vc.editCompleted = ^(id object) {
+        [weak.service.listReminderAll replaceObjectAtIndex:indexPath.row withObject:object];
+        [weak.listEventTableview reloadData];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)deleteAtIndexPath:(NSIndexPath *)indexPath {
+    VRReminderModel *model = [self.service.listReminderAll objectAtIndex:indexPath.row];
+    if (!self.service) {
+        self.service = [[VRReminderListService alloc] init];
+    }
+    
+    [self.service deleteReminderWithUUID:model.uuid completionHandler:^(NSError *error, id result) {
+        if (!error) {
+            [self.service.listReminderAll removeObject:model];
+            [self.listEventTableview reloadData];
+        }
+    }];
 }
 
 

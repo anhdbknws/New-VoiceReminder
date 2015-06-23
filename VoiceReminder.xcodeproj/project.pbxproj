@@ -196,6 +196,7 @@
 		1318F2431B17319900406E36 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		136202691B15CFF1000FE2E3 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		1362026A1B15CFF1000FE2E3 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		13ECAA891B39971600CF679E /* VRImageConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VRImageConfig.h; sourceTree = "<group>"; };
 		2330FD062FD5F76BDE37B9A8 /* Pods-VoiceReminder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceReminder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VoiceReminder/Pods-VoiceReminder.debug.xcconfig"; sourceTree = "<group>"; };
 		820B47AB1AB6478100B6AD15 /* icon_delete_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_delete_blue@2x.png"; sourceTree = "<group>"; };
 		820B47AC1AB6478100B6AD15 /* icon_delete_blue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_delete_blue@3x.png"; sourceTree = "<group>"; };
@@ -1070,6 +1071,7 @@
 				82B5CF261A6337470061AEF6 /* VREnumDefine.m */,
 				8225D8861B369E7200C6AFB1 /* UIAlertView+VR.h */,
 				8225D8871B369E7300C6AFB1 /* UIAlertView+VR.m */,
+				13ECAA891B39971600CF679E /* VRImageConfig.h */,
 			);
 			path = Utility;
 			sourceTree = "<group>";

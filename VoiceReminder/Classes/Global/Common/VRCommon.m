@@ -260,5 +260,29 @@ static NSDateFormatter *fm = nil;
     
     return tempFileName;
 }
+
++ (BOOL)date:(NSDate *)date1 earlier:(NSDate *)date2 {
+    if ([date1 compare:date2] == NSOrderedAscending) {
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (BOOL)date:(NSDate *)date1 later:(NSDate *)date2 {
+    if ([date1 compare:date2] == NSOrderedDescending) {
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (BOOL)date:(NSDate *)date1 equal:(NSDate *)date2 {
+    if ([date1 compare:date2] == NSOrderedSame) {
+        return YES;
+    }
+    
+    return NO;
+}
 @end
 

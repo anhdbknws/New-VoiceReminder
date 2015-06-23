@@ -12,7 +12,6 @@
 #import "VRMacro.h"
 #import <AVFoundation/AVFoundation.h>
 #import <CoreAudio/CoreAudioTypes.h>
-#import <PureLayout.h>
 #import "VREnumDefine.h"
 #import <MBProgressHUD.h>
 #import <WYPopoverController.h>
@@ -20,5 +19,6 @@
 #import <CoreData/CoreData.h>
 #import <MagicalRecord.h>
 #import <Foundation/Foundation.h>
-
+#import <PureLayout.h>
+#import "VRImageConfig.h"
 #endif

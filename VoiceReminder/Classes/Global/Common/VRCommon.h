@@ -41,4 +41,7 @@
 + (NSString *)filePathWithName:(NSString *)fileName;
 + (NSString *)checkDuplicateFileName:(NSString *)fileName;
 
++ (BOOL)date:(NSDate *)date1 later:(NSDate *)date2;
++ (BOOL)date:(NSDate *)date1 earlier:(NSDate *)date2;
++ (BOOL)date:(NSDate *)date1 equal:(NSDate *)date2;
 @end

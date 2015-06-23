@@ -80,9 +80,10 @@
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
         Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid];
         if (entity) {
-            [entity MR_deleteEntity];
+            [entity MR_deleteEntityInContext:localContext];
         }
     } completion:^(BOOL success, NSError *error) {
+        Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid];
         for (UILocalNotification *item in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
             if ([[item.userInfo objectForKey:@"uuid"] isEqualToString:uuid]) {
                 [[UIApplication sharedApplication] cancelLocalNotification:item];
