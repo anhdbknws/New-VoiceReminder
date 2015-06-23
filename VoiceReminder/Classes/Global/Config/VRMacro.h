@@ -5,6 +5,7 @@
 //  Created by GemCompany on 2/1/15.
 //  Copyright (c) 2015 Owner. All rights reserved.
 //
+#import <Foundation/Foundation.h>
 
 #ifndef VoiceReminder_VRMacro_h
 #define VoiceReminder_VRMacro_h
@@ -67,6 +68,7 @@
 #define H5_COLOR RGBCOLOR(238, 237, 242, 1)
 
 typedef void(^databaseHandler)(NSError * error, id result);
+
 #define kSaveShortSoundToDBLocal @"SaveShortSoundToDBLocal"
 #define kNameDefaultAudioRecord @"Audio record"
 #endif

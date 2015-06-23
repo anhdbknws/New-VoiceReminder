@@ -8,7 +8,7 @@
 
 #ifndef VoiceReminder_VoiceReminder_PrefixHeader_pch
 #define VoiceReminder_VoiceReminder_PrefixHeader_pch
-#import <CoreData+MagicalRecord.h>
+//#import <CoreData+MagicalRecord.h>
 #import "VRMacro.h"
 #import <AVFoundation/AVFoundation.h>
 #import <CoreAudio/CoreAudioTypes.h>
@@ -17,4 +17,8 @@
 #import <MBProgressHUD.h>
 #import <WYPopoverController.h>
 #import "VRCommon.h"
+#import <CoreData/CoreData.h>
+#import <MagicalRecord.h>
+#import <Foundation/Foundation.h>
+
 #endif

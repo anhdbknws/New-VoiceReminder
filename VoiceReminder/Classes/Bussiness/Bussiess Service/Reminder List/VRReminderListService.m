@@ -83,6 +83,12 @@
             [entity MR_deleteEntity];
         }
     } completion:^(BOOL success, NSError *error) {
+        for (UILocalNotification *item in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+            if ([[item.userInfo objectForKey:@"uuid"] isEqualToString:uuid]) {
+                [[UIApplication sharedApplication] cancelLocalNotification:item];
+            }
+        }
+        
         if (completion) {
             completion(error, nil);
         }
@@ -102,11 +108,15 @@
             result = [[VRReminderModel alloc] initWithEntity:enti];
         }
         /* check and remove local notification*/
-        
-        for (UILocalNotification *item in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
-            if ([[item.userInfo objectForKey:@"uuid"] isEqualToString:model.uuid]) {
-                [[UIApplication sharedApplication] cancelLocalNotification:item];
+        if (model.isActive) {
+            for (UILocalNotification *item in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+                if ([[item.userInfo objectForKey:@"uuid"] isEqualToString:model.uuid]) {
+                    [[UIApplication sharedApplication] cancelLocalNotification:item];
+                }
             }
+        }
+        else {
+            [self scheduleLocalNotificationWith:model];
         }
         
         
@@ -114,5 +124,67 @@
             completion(error, result);
         }
     }];
+}
+
+/* register system */
+- (void)scheduleLocalNotificationWith:(VRReminderModel *)model {
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    
+    /* Time and timezone settings */
+    notification.fireDate = [[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder];
+    notification.timeZone = [NSTimeZone localTimeZone];
+    notification.repeatInterval = 0;
+    notification.fireDate = [self getFireDate:model];
+    
+    NSString *stringAlertBody = nil;
+    if (model.notes.length) {
+        stringAlertBody = [NSString stringWithFormat:@"(%@) %@",model.timeReminder, model.notes];
+    }
+    else  {
+        stringAlertBody = model.timeReminder;
+    }
+    notification.alertBody = stringAlertBody;
+    notification.alertTitle = model.name;
+    /* Action settings */
+    notification.hasAction = YES;
+    
+    /* Badge settings */
+    notification.applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
+    
+    /* sound */
+    notification.soundName = [NSString stringWithFormat:@"%@.%@", model.shortSoundModel.name, @"caf"];
+    
+    /* Additional information, user info */
+    notification.userInfo = @{@"uuid" : model.uuid};
+    /* Schedule the notification */
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+}
+
+- (NSDate *)getFireDate:(VRReminderModel *)model {
+    // set fire date
+    NSDate *actuallyFireDate = nil;
+    if (model.alertReminder == ALERT_TYPE_AT_EVENT_TIME) {
+        actuallyFireDate = [[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder];
+    }
+    else if (model.alertReminder == ALERT_TYPE_5_MINUTES_BEFORE) {
+        actuallyFireDate = [VRCommon minusMinutes:5 toDate:[[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder]];
+    }
+    else if (model.alertReminder == ALERT_TYPE_30_MINUTES_BEFORE) {
+        actuallyFireDate = [VRCommon minusMinutes:30 toDate:[[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder]];
+    }
+    else if (model.alertReminder == ALERT_TYPE_2_HOUR_BEFORE) {
+        actuallyFireDate = [VRCommon minusMinutes:120 toDate:[[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder]];
+    }
+    else if (model.alertReminder == ALERT_TYPE_1_HOUR_BEFORE) {
+        actuallyFireDate = [VRCommon minusMinutes:60 toDate:[[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder]];
+    }
+    else if (model.alertReminder == ALERT_TYPE_1_DAY_BEFORE) {
+        actuallyFireDate = [VRCommon minusDays:1 toDate:[[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder]];
+    }
+    else {
+        actuallyFireDate = [VRCommon minusDays:2 toDate:[[VRCommon commonDateTimeFormat] dateFromString:model.timeReminder]];
+    }
+    
+    return actuallyFireDate;
 }
 @end
