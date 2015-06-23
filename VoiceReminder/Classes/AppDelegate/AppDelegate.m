@@ -10,7 +10,6 @@
 #import "VRMainPageViewController.h"
 #import "VRLocalNotificationController.h"
 #import "VRCommon.h"
-#import "VRAlertView.h"
 
 static NSString * kCoreDataFileName = @"VoiceReminder.sqlite";
 @interface AppDelegate ()
