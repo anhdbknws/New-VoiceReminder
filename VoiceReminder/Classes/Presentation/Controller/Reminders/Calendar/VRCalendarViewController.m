@@ -201,7 +201,8 @@
         [weak.service.listReminderAll replaceObjectAtIndex:indexPath.row withObject:object];
         [weak.listEventTableview reloadData];
     };
-    [self.navigationController pushViewController:vc animated:YES];
+
+    [self.rootViewController.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)deleteAtIndexPath:(NSIndexPath *)indexPath {

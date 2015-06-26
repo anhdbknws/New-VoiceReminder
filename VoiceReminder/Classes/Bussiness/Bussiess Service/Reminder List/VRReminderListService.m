@@ -43,10 +43,10 @@
         if ([currentDate compare:dateReminder] == NSOrderedDescending) {
             if (!model.completed) {
                 model.completed = YES;
-                model.isActive = NO;
-                [self updateCompleted:model];
             }
             
+            model.isActive = NO;
+            [self updateCompleted:model];
             [_listReminderCompleted addObject:model];
         }
         
@@ -83,7 +83,6 @@
             [entity MR_deleteEntityInContext:localContext];
         }
     } completion:^(BOOL success, NSError *error) {
-        Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid];
         for (UILocalNotification *item in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
             if ([[item.userInfo objectForKey:@"uuid"] isEqualToString:uuid]) {
                 [[UIApplication sharedApplication] cancelLocalNotification:item];

@@ -178,10 +178,8 @@
 #pragma mark - action swipe cell
 - (NSArray *)leftButton{
     NSMutableArray *leftUtilityButtons = [NSMutableArray new];
-    [leftUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:45.0f/255.0f green:50.0f/255.0f blue:53.0f/255.0f alpha:1] icon:[UIImage imageNamed:kImageDeleteBlue]];
-    
     [leftUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:34.0f/255.0f green:38.0f/255.0f blue:41.0f/255.0f alpha:1] icon:[UIImage imageNamed:kImageEditBlue]];
-    
+    [leftUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:45.0f/255.0f green:50.0f/255.0f blue:53.0f/255.0f alpha:1] icon:[UIImage imageNamed:kImageDeleteBlue]];
     return leftUtilityButtons;
 }
 
@@ -231,7 +229,7 @@
         [weak.listEventTableview reloadData];
     };
     
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.rootViewController.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)deleteAtIndexPath:(NSIndexPath *)indexPath {

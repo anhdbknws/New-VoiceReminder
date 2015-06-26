@@ -53,6 +53,7 @@ NSString *kNotificationName1 = @"testNotification";
     self.arrayViewControllers = [NSMutableArray new];
     _calendarController     = [[VRCalendarViewController alloc] init];
     _calendarController.title = @"Calender";
+    _calendarController.rootViewController = self;
     
     [self.arrayViewControllers addObject:_calendarController];
     

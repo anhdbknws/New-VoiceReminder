@@ -18,7 +18,7 @@
 @property (nonatomic, strong) UITableView *listEventTableview;
 @property (nonatomic, strong) JTCalendar *calendar;
 @property (nonatomic, strong) UIView *horizontalView;
-
+@property (nonatomic, strong) UIViewController *rootViewController;
 - (void)editAction;
 
 - (void)doneAction;

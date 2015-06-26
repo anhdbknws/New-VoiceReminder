@@ -331,6 +331,16 @@ const NSInteger kPhotoActionSheetTag = 3249;
     BOOL validate = [_service validateModel:_service.modelCopy errorMessage:&errorMessage];
     if (validate) {
         _isLoading = YES;
+        
+        // find and remove schedule old reminde
+        if (self.isEditMode) {
+            for (UILocalNotification *noti in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+                if ([[noti.userInfo valueForKey:@"uuid"] isEqualToString:_service.modelCopy.uuid]) {
+                    [[UIApplication sharedApplication] cancelLocalNotification:noti];
+                }
+            }
+        }
+        
         __weak typeof (self)weak = self;
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [_service addReminder:_service.modelCopy toDatabaseLocalWithCompletionhandler:^(NSError *error, VRReminderModel *result) {
@@ -346,9 +356,14 @@ const NSInteger kPhotoActionSheetTag = 3249;
                 }
             }
             
-            for (UIViewController *Vc in strong.navigationController.viewControllers) {
-                if ([Vc isKindOfClass:[VRMainPageViewController class]]) {
-                    [strong.navigationController popToViewController:Vc animated:YES];
+            if (strong.isEditMode) {
+                [strong.navigationController popViewControllerAnimated:YES];
+            }
+            else {
+                for (UIViewController *Vc in strong.navigationController.viewControllers) {
+                    if ([Vc isKindOfClass:[VRMainPageViewController class]]) {
+                        [strong.navigationController popToViewController:Vc animated:YES];
+                    }
                 }
             }
         }];

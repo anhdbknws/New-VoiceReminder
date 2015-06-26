@@ -51,7 +51,9 @@
         if(entity) {
             model = [[VRReminderModel alloc] initWithEntity:entity];
         }
-
+        
+        [self updateDatabase:uuid];
+        
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:model.name message:model.notes delegate:self cancelButtonTitle:@"Close" otherButtonTitles:@"Detail", nil];
         [alertView showAlerViewWithHandler:^(UIAlertView *alertView, NSInteger buttonIndex) {
             switch (buttonIndex) {
@@ -64,6 +66,18 @@
                     break;
             }
         }];
+    }];
+}
+
+- (void)updateDatabase:(NSString *)uuid {
+    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+        Reminder *entity = [Reminder MR_findFirstByAttribute:@"uuid" withValue:uuid inContext:localContext];
+        if (entity) {
+            entity.isActive = [NSNumber numberWithBool:NO];
+            entity.completed = [NSNumber numberWithBool:YES];
+        }
+    } completion:^(BOOL success, NSError *error) {
+        // do something
     }];
 }
 
