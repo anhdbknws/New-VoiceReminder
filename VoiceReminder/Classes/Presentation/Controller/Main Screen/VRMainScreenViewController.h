@@ -23,9 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIView *secondView;
 @property (weak, nonatomic) IBOutlet UIButton *buttonAlarm;
 @property (weak, nonatomic) IBOutlet UIImageView *backGroundImageView;
-
-// view near bottom
-@property (weak, nonatomic) IBOutlet UIView *viewLunar;
+@property (weak, nonatomic) IBOutlet GADBannerView *viewBanner;
 
 // view middle
 @property (weak, nonatomic) IBOutlet UILabel *labelGregorianDate;
@@ -35,9 +33,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonZodiac;
 @property (weak, nonatomic) IBOutlet UILabel *labelIdiom;
 
-// overlay view
-@property (weak, nonatomic) IBOutlet UIView *viewOverlay;
-@property (weak, nonatomic) IBOutlet UIButton *buttonHoroscope;
+// buttom view
+@property (weak, nonatomic) IBOutlet UIView *viewButtom;
+@property (weak, nonatomic) IBOutlet UILabel *labelRecord;
+@property (weak, nonatomic) IBOutlet UILabel *labelAlarm;
+@property (weak, nonatomic) IBOutlet UILabel *labelList;
+@property (weak, nonatomic) IBOutlet UILabel *labelMore;
 
 // data
 @property (nonatomic, strong) NSMutableArray *listImageBackground;

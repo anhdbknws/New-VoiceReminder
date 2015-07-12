@@ -21,4 +21,5 @@
 #import <Foundation/Foundation.h>
 #import <PureLayout.h>
 #import "VRImageConfig.h"
+#import <GoogleMobileAds/GoogleMobileAds.h>
 #endif

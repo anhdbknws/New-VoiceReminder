@@ -8,4 +8,5 @@ pod 'PureLayout', '~> 2.0'
 pod 'MBProgressHUD', '~> 0.9'
 pod 'MagicalRecord', '~> 2.2'
 pod 'WYPopoverController', '~> 0.3'
+pod 'Google-Mobile-Ads-SDK', '~> 7.3'
 end

@@ -46,6 +46,18 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    
+    [self loadRequestGoogleAdmob];
+}
+
+- (void)loadRequestGoogleAdmob {
+    NSLog(@"%@", [GADRequest sdkVersion]);
+    self.viewBanner.adUnitID = @"ca-app-pub-6129859535779602/3162518973";
+    self.viewBanner.rootViewController = self;
+    
+    GADRequest *request = [GADRequest request];
+    request.testDevices = @[@"c39af1be8dab31b1ed7373765e75781f"];
+    [self.viewBanner loadRequest:[GADRequest request]];
 }
 
 #pragma mark prepare date
@@ -78,7 +90,7 @@
     self.buttonZodiac.backgroundColor = [UIColor clearColor];
     [self.buttonZodiac setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.buttonZodiac.titleLabel.font = VRFontRegular(17);
-    [self.buttonHoroscope addTarget:self action:@selector(horoscopeDetail) forControlEvents:UIControlEventTouchUpInside];
+//    [self.buttonHoroscope addTarget:self action:@selector(horoscopeDetail) forControlEvents:UIControlEventTouchUpInside];
     
     self.labelGregorianDate.font = VRFontRegular(20);
     self.labelGregorianDate.textColor = [UIColor whiteColor];
@@ -114,16 +126,30 @@
 }
 
 - (void)setupBottomView {
+    
+    self.labelAlarm.text = @"Alarm";
+    self.labelAlarm.font = VRFontRegular(12);
+    self.labelAlarm.textColor = [UIColor blackColor];
+    
+    self.labelList.text = @"List";
+    self.labelList.textColor = [UIColor blackColor];
+    self.labelList.font = VRFontRegular(12);
+    
+    self.labelRecord.text = @"Record";
+    self.labelRecord.font = VRFontRegular(12);
+    self.labelRecord.textColor = [UIColor blackColor];
+    
+    self.labelMore.text = @"More";
+    self.labelMore.textColor = [UIColor blackColor];
+    self.labelMore.font = VRFontRegular(12);
+    
+    self.viewButtom.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     // button view
-    [self configButton:self.recordButton WithTittle:[@"Record" uppercaseString]];
     [self.recordButton addTarget:self action:@selector(recordAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self configButton:self.remindersButton WithTittle:[@"Reminder" uppercaseString]];
     [self.remindersButton addTarget:self action:@selector(remindersAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self configButton:self.buttonAlarm WithTittle:[@"alarm" uppercaseString]];
+
     [self.buttonAlarm addTarget:self action:@selector(alarmAction:) forControlEvents:UIControlEventTouchUpInside];
-    NSArray *views = @[self.recordButton, self.buttonAlarm, self.remindersButton];
-    [views autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSpacing:0.0 insetSpacing:YES matchedSizes:YES];
 }
 
 - (void)configButton:(UIButton *)button WithTittle:(NSString *)title {
